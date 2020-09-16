@@ -1,0 +1,29 @@
+{
+  "name": "the-playground",
+  "version": "1.0.0",
+  "description": "Website to showcase/test projects",
+  "main": "client/src/index.js",
+  "scripts": {
+    "postinstall": "cd client && npm install && cd ../server && npm install",
+    "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glorisonlai/the-playground.git"
+  },
+  "keywords": [
+    "Playground"
+  ],
+  "author": "Glorison Lai",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/glorisonlai/the-playground/issues"
+  },
+  "homepage": "https://github.com/glorisonlai/the-playground#readme",
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  },
+  "dependencies": {
+    "typescript": "^4.0.2"
+  }
+}
