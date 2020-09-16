@@ -1,4 +1,5 @@
 import Background from './components/backgrounds/bubbs/bubbles';
+import WhoAmI from './components/content/whoami';
 
 console.log(
 '-------------------------------------------------------\n' +
@@ -11,4 +12,4 @@ console.log(
 
 
 
-export { Background };
+export { Background, WhoAmI };

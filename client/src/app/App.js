@@ -1,11 +1,13 @@
 import React from 'react';
-import logo from './../assets/images/logo.svg';
 import './App.css';
-import { Background } from './index.ts';
+import { Background, WhoAmI } from './index.ts';
 
 function App() {
   return (
-    <Background />
+    <div className="App">
+      <Background />
+      <WhoAmI />
+    </div>
   );
 }
 

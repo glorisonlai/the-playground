@@ -1,0 +1,10 @@
+.start {
+  display: block;
+  overflow: hidden;
+}
+
+.whoami {
+  position: relative;
+  align-self: center;
+  align-items: center;
+}
