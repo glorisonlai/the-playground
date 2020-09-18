@@ -1,14 +1,20 @@
-import Background from './components/backgrounds/bubbs/bubbles';
+import React, {useState, useEffect} from 'react';
+import Bubbles from './components/backgrounds/bubbs/bubbles';
 
-console.log(
-'-------------------------------------------------------\n' +
-'|                                                     |\n' +
-'|              Bored of the background?               |\n' +
-'|               Try unlocking some! ;)                |\n' +
-'|                                                     |\n' +
-'-------------------------------------------------------'
-);
-
-
+const Background = () => {
+  
+  useEffect(() => {
+    console.log(
+    '-------------------------------------------------------\n' +
+    '|                                                     |\n' +
+    '|              Bored of the background?               |\n' +
+    '|               Try unlocking some! ;)                |\n' +
+    '|                                                     |\n' +
+    '-------------------------------------------------------'
+    );
+  }, []);
+  
+  return Bubbles()
+}
 
 export { Background };

@@ -5,7 +5,10 @@ import { Background } from './index.ts';
 
 function App() {
   return (
-    <Background />
+    <div className="app">
+      <Background />
+      {/* Portfolio */}
+    </div>
   );
 }
 
