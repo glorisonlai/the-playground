@@ -1,13 +1,16 @@
-import React from 'react';
-import logo from './../assets/images/logo.svg';
+import React, {useState} from 'react';
 import './App.css';
-import { Background } from './index.ts';
+import Background from './index.ts';
 
 function App() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const view = urlParams.get('view');
+
+  const [portfolio, showPortfolio] = useState(!!parseInt(view))
   return (
     <div className="app">
       <Background />
-      {/* Portfolio */}
+      {/* {portfolio ? <Portfolio /> : <Pitch/>} */}
     </div>
   );
 }

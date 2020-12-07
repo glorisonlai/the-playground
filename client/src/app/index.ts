@@ -14,7 +14,7 @@ const Background = () => {
     );
   }, []);
   
-  return Bubbles()
+  return Bubbles();
 }
 
-export { Background };
+export default Background;

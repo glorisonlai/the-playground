@@ -1,19 +1,12 @@
 import React from 'react';
-import Headroom from 'react-headroom';
 
 const NavBar = () => {
-  const selectSvg = () => {
-    return (
-      <use xlink:href=`/assets/img/sprites/${logoId}` />
-    )
-  }
   return (
-    <Headroom>
-      <button class="circle-btn glowy-btn" aria-label="menu">
-        <svg class="bg-sprite">
-          {selectSvg()}
-        </svg>
-      </button>
-    </Headroom>
+      <ul class="nav" aria-label="menu">
+        <li><a className="nav-item">Home</a></li>
+        <li><a className="nav-item">Experience</a></li>
+        <li><a className="nav-item">Projects</a></li>
+        <li><a className="nav-item">Contact Info</a></li>
+      </ul>
   )
 }
