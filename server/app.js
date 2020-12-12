@@ -12,7 +12,7 @@ var app = express();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var port = process.env.REACT_APP_PORT || 1337;
+var port = process.env.REACT_APP_PORT || 1469;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
