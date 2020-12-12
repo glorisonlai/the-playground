@@ -1,0 +1,14 @@
+.circle-btn {
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-color: #0f0f0f00;
+  border-style: solid;
+}
+
+.bg-sprite {
+  height: 100%;
+  width: 100%;
+}

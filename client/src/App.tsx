@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import Background from 'components/backgrounds/background';
+import MenuButton from 'components/nav/menu-button';
+import Menu from 'components/challenges/menu';
 
 
 function App() {
@@ -33,8 +35,8 @@ function App() {
   return (
     <div className="app">
       <Background bg={bgId} />
-      {/* <BgButton icon={bgId}> */}
-      {/* <Menu visible={showMenu} initFocus={bgId} solve={(id) => setBgId(id)} /> */}
+      <MenuButton bg={bgId} />
+      <Menu visible={showMenu} initFocus={bgId} solve={(id) => setBgId(id)} />
       {/* {showPortfolio ? <Portfolio /> : <Pitch/>} */}
     </div>
   );
