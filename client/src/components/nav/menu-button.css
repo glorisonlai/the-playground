@@ -1,3 +1,5 @@
+/*TODO: Animation is a bit shoddy, ideall make the circle compress into centre, cross regress out from centre, vice versa*/ 
+
 .btn {
   grid-column: 1;
   grid-row: 1;
@@ -8,13 +10,12 @@
   border-color: #0f0f0f00;
   border-style: solid;
   z-index: 9;
-  justify-content: center;
   background: none;
   cursor: pointer;
 }
 
 .menu-btn {
-  background: white;
+  background: black;
   border-radius: 50%;
   width: 4em;
   height: 4em;
@@ -67,9 +68,10 @@
   width: 100%;
 }
 
-.btn:active {
+/* TESTING PURPOSES */
+/* .btn:active {
   background-color: orange;
-}
+} */
 
 .flyout {
   transition: transform 1s 

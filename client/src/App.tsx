@@ -24,7 +24,7 @@ function App() {
   const [showPortfolio, setShowPortfolio] = useState(!!view ? 1 : 0);
   console.log(showPortfolio);
 
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
 
   const getBgId = (): number => {
     const id: number = Number(localStorage.getItem('bgId'));
@@ -37,7 +37,6 @@ function App() {
     <div className="app">
       <Background bg={bgId} />
       <Menu visible={showMenu} initFocus={bgId} unlock={(id) => setBgId(id)} />
-      <MenuButton shape={showMenu} bg={bgId} onClick={() => setShowMenu(!showMenu)} />
       {/* {showPortfolio ? <Portfolio /> : <Pitch/>} */}
     </div>
   );

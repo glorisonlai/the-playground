@@ -16,10 +16,12 @@ const Lines = () => {
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
-const [dimensions, setDimensions] = useState({
-    width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-    height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-  });
+  const getScreenDimensions = () => ({
+      width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+      height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+    });
+
+  const [dimensions, setDimensions] = useState(getScreenDimensions());
 
   useEffect(() => {
     generator.init();
@@ -27,10 +29,7 @@ const [dimensions, setDimensions] = useState({
 
   
   const handleWindowResize = () => {
-    setDimensions({
-      width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-      height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-    })
+    setDimensions(getScreenDimensions());
   };
 
   const NoSupport = () => (

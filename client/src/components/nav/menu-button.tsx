@@ -2,12 +2,18 @@ import React from 'react';
 import './menu-button.css';
 import classNames from 'classnames';
 
-const MenuButton = ({shape, bg, onClick}: {shape: boolean, bg: number, onClick: void}) => {
-    // const selectSvg = (logoId: Number) => {
-    //   return (
-      //   <use xlink:href=`{/assets/img/sprites/${logoId}` />
-    //   );
-  // }
+const MenuButton = ({shape, bg, setVis}: {shape: boolean, bg: number, setVis: VoidFunction}) => {
+    const Svg = (logoId: number) => {
+      const icons: Array<string> = [
+        'bubbs',
+        'logo',
+      ];
+      
+      return (
+        <img className="bg-sprite" src={require(`assets/sprites/${icons[logoId]}.svg`)} alt="" />
+      );
+  }
+
   const shapeStyle = {'cross': shape};
   const buttonPos = shape ? {'right': true} : {'left': true};
 
@@ -16,11 +22,9 @@ const MenuButton = ({shape, bg, onClick}: {shape: boolean, bg: number, onClick: 
   console.log(menuClass);
   
   return (
-    <button className={buttonClass} aria-label="menu" onClick={() => {onClick()}}>
+    <button className={buttonClass} aria-label="menu" onClick={() => {setVis()}}>
       <div className={menuClass}>
-        {/* {!shape && <svg className="bg-sprite">
-          {/* {selectSvg(bg)} */}
-        {/* </svg>} */}
+        {!shape && Svg(bg)}
       </div>
     </button>
   )
