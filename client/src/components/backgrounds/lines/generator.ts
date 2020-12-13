@@ -241,7 +241,7 @@ const generator = {
 			if (_this.lineNumber > numPoints-1) {
 				clearInterval(timer);
 				_this.timer = null;
-				console.log('hello');
+				console.log('Finished animating');
 				break;
 			};
 		};

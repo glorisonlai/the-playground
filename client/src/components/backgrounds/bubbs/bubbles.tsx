@@ -15,7 +15,7 @@ const Bubbles = () => {
   const bubbleArray = (seed: Number) => {
     if (seed < 0) return null;
     if (seed > 100) return null;
-    return Array(seed).fill(0).map(() => <li style={randomCss()} />);
+    return Array(seed).fill(0).map((e, i) => <li key={i} style={randomCss()} />);
   }
 
   return (

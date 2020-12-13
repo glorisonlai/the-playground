@@ -7,13 +7,14 @@ import Menu from 'components/challenges/menu';
 
 function App() {
   useEffect(() => {
-    console.log(
+    console.log('%c'+
     '-------------------------------------------------------\n' +
     '|                                                     |\n' +
-    '|              Bored of the background?               |\n' +
+    '|              Tired of the background?               |\n' +
     '|               Try unlocking some! ;)                |\n' +
     '|                                                     |\n' +
-    '-------------------------------------------------------'
+    '-------------------------------------------------------',
+    'background: #222; color: #bada55'
     );
   }, []);
 
@@ -35,8 +36,8 @@ function App() {
   return (
     <div className="app">
       <Background bg={bgId} />
-      <MenuButton bg={bgId} />
-      <Menu visible={showMenu} initFocus={bgId} solve={(id) => setBgId(id)} />
+      <Menu visible={showMenu} initFocus={bgId} unlock={(id) => setBgId(id)} />
+      <MenuButton shape={showMenu} bg={bgId} onClick={() => setShowMenu(!showMenu)} />
       {/* {showPortfolio ? <Portfolio /> : <Pitch/>} */}
     </div>
   );
