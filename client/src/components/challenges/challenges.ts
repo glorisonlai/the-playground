@@ -29,6 +29,10 @@ class Challenges {
 
   unlocked: Array<number> = [0];
 
+  constructor() {
+    console.log('Challenges - construction');
+  }
+
   getAllChallenges () {
     return this.challenges;
   }

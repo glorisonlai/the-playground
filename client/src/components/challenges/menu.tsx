@@ -5,28 +5,24 @@ import Challenges from './challenges';
 import MenuButton from '../nav/menu-button';
 
 const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
-	console.log('bgId', bgId);
-	const handleWidthResize = () => {
+	useEffect(() => {
+		const handleWidthResize = () => {
 			setWidth(getWidth());
 		}
 
-	useEffect(() => {
     window.addEventListener('resize', handleWidthResize);
     return () => window.removeEventListener('resize', handleWidthResize);
-	}, [handleWidthResize]);
+	}, []);
 
 	const getWidth = () => window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; 
 	
 
 	const [width, setWidth] = useState(getWidth());
-	const [visible, setVisible] = useState(true);
+	const [visible, setVisible] = useState(false);
 	const [focussedId, setFocussedId] = useState(bgId);
 
-	const showState = visible ? {'visible': true} : {'hidden': true};
-	const menuClass = classNames('cover', 'flyout', {...showState});
-	const flagState = width <= 404 ? {'bottom': true} : {'side': true};
-	const flagClass = classNames('flag', 'flag-form', {...flagState});
-	const menuWidth = width > 404 ? Math.floor(width / 200) - 1 : 2;
+	const showState = visible ? 'visible' : 'hidden';
+	const menuClass = classNames('cover', 'flyout', showState);
 
 	const handler = (id: number) => {
 		Challenges.isUnlockedFromId(id) ? 
@@ -79,7 +75,7 @@ const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
 
 	const Flag = ({title, desc, unlocked}: {title: string, desc: string, unlocked: boolean}) => {
 		return ( 
-			<form className={flagClass} style={{width: width/2}}>
+			<form className='flag-form' style={{width: width/2}}>
 				<label className="flag flag-label" htmlFor="flag"><strong>{title}</strong></label>
 				<p>{desc}</p><br/>
 				{!unlocked &&

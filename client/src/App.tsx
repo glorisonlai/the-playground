@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import Background from 'components/backgrounds/background';
 import Menu from 'components/challenges/menu';
+import Challenges from 'components/challenges/challenges';
 
 function App() {
   useEffect(() => {
@@ -23,7 +24,7 @@ function App() {
 
   const getBgId = (): number => {
     const id: number = Number(localStorage.getItem('bgId'));
-    return !!id ? id : 0;
+    return Challenges.isUnlockedFromId(id) ? id : 0;
   };
 
   const [bgId, setBgId] = useState(getBgId());
