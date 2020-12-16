@@ -40,7 +40,7 @@ type Nullable<T> = T | null;
 const generator = {
 	height: window.screen.height as number,
 	width: window.screen.width as number,
-	context: <CanvasRenderingContext2D>{},
+	context: {} as CanvasRenderingContext2D,
 	constants: {} as Constants,
 	circles: [] as Array<Circle>,
 	colors: [] as Array<string>,
@@ -48,7 +48,8 @@ const generator = {
 	lineNumber: 0 as number,
 
 	init() {
-		this.context = (<HTMLCanvasElement> document.getElementById('screen')).getContext('2d') as CanvasRenderingContext2D;
+		const canvas = document.getElementById('screen') as HTMLCanvasElement;
+		this.context = canvas.getContext('2d') as CanvasRenderingContext2D;
 		this.initConstants(this.constants);
 		this.circles = this.setCircles(this.circles, this.constants);
 		this.colors = this.setColors(this.colors, this.constants);
@@ -137,7 +138,7 @@ const generator = {
 			
 			var newCircle: Circle = {
 				centerX: constants.minX + i/(constants.numCircles-1)*(constants.maxX - constants.minX),
-				centerY: constants. minY + i/(constants.numCircles-1)*(constants.maxY - constants.minY),
+				centerY: constants.minY + i/(constants.numCircles-1)*(constants.maxY - constants.minY),
 				maxRad : maxR,
 				minRad : minR,
 				phase : i/(constants.numCircles-1)*constants.twistAmount,

@@ -21,3 +21,53 @@
 .visible {
   transform: translate3d(0vw, 0, 0);
 }
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.table,
+.flag-form {
+  display: flex;
+  text-align: center;
+}
+
+.challenge {
+  padding: 2em;
+  text-align: center;
+}
+
+.table {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.flag-form {
+  flex-direction: column;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.focussed {
+  border: solid blue;
+  border-radius: 50%;
+}
+
+.unfocussed {
+  border: solid transparent;
+}
+
+.locked {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.challenge-text {
+  background-color: black;
+  color: white;
+  width: 130px;
+}

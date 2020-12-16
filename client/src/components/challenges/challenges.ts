@@ -1,5 +1,3 @@
-import { xdomainrequest } from "modernizr";
-
 interface Challenge {
   id: number;
   title: string;
@@ -19,17 +17,17 @@ class Challenges {
       id: 1,
       title: 'Lines of Communication',
       logo: require('assets/sprites/logo.svg'),
-      desc: `Please fuzz our FAQ page for more information`,
+      desc: `Please fuzz for our FAQ page for more information`,
     },
     {
       id: 2,
-      title: `WHY. WON'T. THIS. GO. IN?!`,
+      title: `WHY. WON'T. THIS. POST?!`,
       logo: require('assets/sprites/logo.svg'),
       desc: `FLAG{TH1S_15_TH3_FL4G}`,
     },
   ];
 
-  unlocked: Array<number> = [0, 1];
+  unlocked: Array<number> = [0];
 
   getAllChallenges () {
     return this.challenges;

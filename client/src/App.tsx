@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import Background from 'components/backgrounds/background';
-import MenuButton from 'components/nav/menu-button';
 import Menu from 'components/challenges/menu';
-
 
 function App() {
   useEffect(() => {
@@ -22,9 +20,6 @@ function App() {
   const view = urlParams.get('view');
 
   const [showPortfolio, setShowPortfolio] = useState(!!view ? 1 : 0);
-  console.log(showPortfolio);
-
-  const [showMenu, setShowMenu] = useState(true);
 
   const getBgId = (): number => {
     const id: number = Number(localStorage.getItem('bgId'));
@@ -36,7 +31,7 @@ function App() {
   return (
     <div className="app">
       <Background bg={bgId} />
-      <Menu visible={showMenu} initFocus={bgId} unlock={(id) => setBgId(id)} />
+      <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
       {/* {showPortfolio ? <Portfolio /> : <Pitch/>} */}
     </div>
   );

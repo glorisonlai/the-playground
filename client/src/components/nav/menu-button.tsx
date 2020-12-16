@@ -19,7 +19,6 @@ const MenuButton = ({shape, bg, setVis}: {shape: boolean, bg: number, setVis: Vo
 
   const buttonClass = classNames('btn', 'flyout', {...buttonPos});
 	const menuClass = classNames('glowy', 'menu-btn', {...shapeStyle});
-  console.log(menuClass);
   
   return (
     <button className={buttonClass} aria-label="menu" onClick={() => {setVis()}}>

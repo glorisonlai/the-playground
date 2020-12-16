@@ -6,11 +6,15 @@ import generator from './generator';
 // import Generator from './generator';
 
 const Lines = () => {
-  // const supportsCanvas = () => (
+    // const supportsCanvas = () => (
   //   Modernizr.canvas
   // )
   useEffect(() => {
     // if (supportsCanvas) 
+    const handleWindowResize = () => {
+      setDimensions(getScreenDimensions());
+    };
+
     window.addEventListener('resize', handleWindowResize);
     generator.init();
     return () => window.removeEventListener('resize', handleWindowResize);
@@ -27,20 +31,13 @@ const Lines = () => {
     generator.init();
   }, [dimensions]);
 
-  
-  const handleWindowResize = () => {
-    setDimensions(getScreenDimensions());
-  };
-
-  const NoSupport = () => (
-    <div className = {"bg"}>
-      <h1 style={{alignContent: 'center'}}>Sorry!<br/>Canvas not Supported in this Browser!</h1>
-    </div>
-  );
-
   const Canvas = () => (
     <canvas width={dimensions.width} height={dimensions.height} id={"screen"}>
-      Your browser does not support HTML5 canvas.
+      <div className = {"bg"}>
+        <h1 style={{alignContent: 'center'}}>
+          Sorry!<br/>Canvas not Supported in this Browser!
+        </h1>
+      </div>
     </canvas> 
   )
 

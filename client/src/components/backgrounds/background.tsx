@@ -1,8 +1,6 @@
 import React, {lazy, Suspense} from 'react';
-import Bubbles from './bubbs/bubbles';
-import Lines from './lines/lines';
 
-const Background = ({bg}) => {
+const Background = ({ bg }: {bg: number}) => {
   const BubbleBg = lazy(() => import('./bubbs/bubbles'));
   const LinesBg = lazy(() => import('./lines/lines'));
   
