@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 interface Constants {
 	numCircles: number;
 	maxMaxRad: number;
@@ -178,14 +180,14 @@ const generator = {
 		return colors;
 	},
 
-	generate(context: CanvasRenderingContext2D, constants: Constants, circles: Array<Circle>, colors: Array<string>, timer: number) {
+	generate(context: CanvasRenderingContext2D, constants: Constants, circles: Array<Circle>, colors: Array<string>, timer: Nullable<number>) {
 		if (!!timer) clearInterval(timer);
 		const _this = this;
 		this.timer = window.setInterval(this.draw, 1, _this, context, constants, circles, colors);
 		console.log('Finished');
 	},
 
-	draw( _this, context: CanvasRenderingContext2D, {numCircles, drawsPerFrame, numPoints, fullTurn, lineWidth, stepsPerSegment}: Constants, circles: Array<Circle>, colors: Array<string>) {
+	draw( _this: Object, context: CanvasRenderingContext2D, {numCircles, drawsPerFrame, numPoints, fullTurn, lineWidth, stepsPerSegment}: Constants, circles: Array<Circle>, colors: Array<string>) {
 		const xSqueeze = 0.75;
 		const {lineNumber, timer} = _this;
 		

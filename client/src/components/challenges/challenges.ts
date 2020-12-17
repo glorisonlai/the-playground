@@ -1,7 +1,7 @@
 interface Challenge {
   id: number;
   title: string;
-  logo: NodeRequire;
+  logo: string;
   desc: string;
 }
 
@@ -10,19 +10,19 @@ class Challenges {
     {
       id: 0,
       title: 'Bubbles',
-      logo: require('assets/sprites/bubbs.svg'),
+      logo: 'assets/sprites/bubbs.svg',
       desc: 'The journey begins!',
     },
     {
       id: 1,
       title: 'Lines of Communication',
-      logo: require('assets/sprites/logo.svg'),
+      logo: 'assets/sprites/logo.svg',
       desc: `Please fuzz for our FAQ page for more information`,
     },
     {
       id: 2,
       title: `WHY. WON'T. THIS. POST?!`,
-      logo: require('assets/sprites/logo.svg'),
+      logo: 'assets/sprites/logo.svg',
       desc: `FLAG{TH1S_15_TH3_FL4G}`,
     },
   ];
