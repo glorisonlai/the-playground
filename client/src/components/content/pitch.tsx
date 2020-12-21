@@ -1,16 +1,11 @@
 import React from 'react';
+import './content.css';
 
-const Pitch = () => {
-  const noUnlockedBGs = () => {
-    const 
-    return 
-  }
-
-  const solved, total = noUnlockedBGs();
+const Pitch = ({unlocked, locked}: {unlocked: number, locked: number}) => {
   return (
-    <div className={"heading"}>
+    <div className="main">
       <h1>The Playground</h1>
-      <h3>{solved} solved of {total}</h3>
+      <h3>{unlocked} solved of {locked}!</h3>
     </div>
   );
 }

@@ -51,7 +51,7 @@ const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
 
 			return (
 				<div className={'challenge'} key={id} onClick={() => handler(id)} style={{height: '50px', width: 'auto'}} >
-					<img className={imgClass} src={require(logo)} alt="" style={{width: '50px'}} />
+					<img className={imgClass} src={logo} alt="" style={{width: '50px'}} />
 					<div className="challenge-text">{title}</div>
 				</div>
 			)

@@ -3,6 +3,7 @@ import './App.css';
 import Background from 'components/backgrounds/background';
 import Menu from 'components/challenges/menu';
 import Challenges from 'components/challenges/challenges';
+import Pitch from 'components/content/pitch';
 
 function App() {
   useEffect(() => {
@@ -33,7 +34,8 @@ function App() {
     <div className="app">
       <Background bg={bgId} />
       <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
-      {/* {showPortfolio ? <Portfolio /> : <Pitch/>} */}
+      <Pitch unlocked={Challenges.getAllChallenges.length} locked={Challenges.getAllChallenges.length} />
+      {/* {showPortfolio ? <Portfolio /> : <Pitch unlocked={Challenges.} locked={}/>} */}
     </div>
   );
 }

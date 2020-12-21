@@ -10,19 +10,19 @@ class Challenges {
     {
       id: 0,
       title: 'Bubbles',
-      logo: 'assets/sprites/bubbs.svg',
+      logo: require('assets/sprites/bubbs.svg'),
       desc: 'The journey begins!',
     },
     {
       id: 1,
       title: 'Lines of Communication',
-      logo: 'assets/sprites/logo.svg',
+      logo: require('assets/sprites/logo.svg'),
       desc: `Please fuzz for our FAQ page for more information`,
     },
     {
       id: 2,
       title: `WHY. WON'T. THIS. POST?!`,
-      logo: 'assets/sprites/logo.svg',
+      logo: require('assets/sprites/logo.svg'),
       desc: `FLAG{TH1S_15_TH3_FL4G}`,
     },
   ];
@@ -35,6 +35,10 @@ class Challenges {
 
   getAllChallenges () {
     return this.challenges;
+  }
+
+  getUnlockedChallenges () {
+    return this.unlocked;
   }
 
   getChallengeFromId (id: number) {

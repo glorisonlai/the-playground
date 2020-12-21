@@ -7,7 +7,7 @@ const Bubbles = () => {
     return {
     width: `${seed * 50 + 10}px`,
     height: `${seed * 50 + 10}px`,
-    left: `${(Math.random() * 100)}%`,
+    left: `${(Math.random() * 105)-5}%`,
     animationDuration: `${seed * 15 + 7}s`,
     animationDelay: `${Math.random() * 30}s`,
   }};
