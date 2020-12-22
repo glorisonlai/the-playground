@@ -253,7 +253,6 @@ const generateLines = () => {
 			context.stroke();
 
 			screenConstants.lineNumber++;
-			console.log(screenConstants.lineNumber, lineNumber, numPoints-1);
 		};
 		
 		if (screenConstants.lineNumber > numPoints-1) {
