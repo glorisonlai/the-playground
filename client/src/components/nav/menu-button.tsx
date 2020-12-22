@@ -7,7 +7,6 @@ const MenuButton = ({shape, bgId, setVis}: {shape: boolean, bgId: number, setVis
   const Svg = (bgId: number) => {
     const challenge = Challenges.getChallengeFromId(bgId);
     if (!challenge) return;
-    console.log('assets/sprites/logo.svg' == challenge.logo);
 
     return ( 
       <img className="bg-sprite" src={require(`assets/sprites/${challenge.logo}`)} alt="" />

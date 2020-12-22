@@ -167,7 +167,6 @@ const generateLines = () => {
 			circles.push(newCircle);
 		}
 
-		console.log(circles);
 		return circles;
 	};
 
