@@ -1,16 +1,16 @@
 import React from 'react';
 import './menu-button.css';
 import classNames from 'classnames';
+import Challenges from '../challenges/challenges';
 
-const MenuButton = ({shape, bg, setVis}: {shape: boolean, bg: number, setVis: VoidFunction}) => {
-    const Svg = (logoId: number) => {
-      const icons: Array<string> = [
-        'bubbs',
-        'logo',
-      ];
-      
-      return (
-        <img className="bg-sprite" src={require(`assets/sprites/${icons[logoId]}.svg`)} alt="" />
+const MenuButton = ({shape, bgId, setVis}: {shape: boolean, bgId: number, setVis: () => void}) => {
+  const Svg = (bgId: number) => {
+    const challenge = Challenges.getChallengeFromId(bgId);
+    if (!challenge) return;
+    console.log('assets/sprites/logo.svg' == challenge.logo);
+
+    return ( 
+      <img className="bg-sprite" src={require(`assets/sprites/${challenge.logo}`)} alt="" />
       );
   }
 
@@ -23,7 +23,7 @@ const MenuButton = ({shape, bg, setVis}: {shape: boolean, bg: number, setVis: Vo
   return (
     <button className={buttonClass} aria-label="menu" onClick={() => {setVis()}}>
       <div className={menuClass}>
-        {!shape && Svg(bg)}
+        {!shape && Svg(bgId)}
       </div>
     </button>
   )

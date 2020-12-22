@@ -17,6 +17,18 @@ interface Constants {
 	minColorValue: number;
 	lineAlpha: number;
 	lineWidth: number;
+	xSqueeze: number;
+};
+
+interface ScreenConstants {
+	height: number,
+	width: number,
+	context: CanvasRenderingContext2D,
+	constants: Constants,
+	circles: Array<Circle>,
+	colors: Array<string>,
+	timer: Undefinable<number>,
+	lineNumber: number,
 };
 
 interface Coord {
@@ -35,56 +47,62 @@ interface Circle {
 	pointArray: Array<number>;
 };
 
-type Nullable<T> = T | null;
+type Undefinable<T> = T | undefined;
 
-const generator = {
-	height: window.screen.height as number,
-	width: window.screen.width as number,
-	context: {} as CanvasRenderingContext2D,
-	constants: {} as Constants,
-	circles: [] as Array<Circle>,
-	colors: [] as Array<string>,
-	timer: null as Nullable<number>,
-	lineNumber: 0 as number,
+const generateLines = () => {
+	const screenConstants: ScreenConstants = {
+		height: window.screen.height,
+		width: window.screen.width,
+		context: {} as CanvasRenderingContext2D,
+		constants: {} as Constants,
+		circles: [],
+		colors: [],
+		timer: undefined,
+		lineNumber: 0,
+	};
 
-	init() {
+	const init = ( screenConstants: ScreenConstants ): void => {
 		const canvas = document.getElementById('screen') as HTMLCanvasElement;
-		this.context = canvas.getContext('2d') as CanvasRenderingContext2D;
-		this.initConstants(this.constants);
-		this.circles = this.setCircles(this.circles, this.constants);
-		this.colors = this.setColors(this.colors, this.constants);
-		this.resetCanvas(this.context);
-		this.generate(this.context, this.constants, this.circles, this.colors, this.timer);
-	},
+		screenConstants.context = canvas.getContext('2d') as CanvasRenderingContext2D;
+		screenConstants.constants = initConstants();
+		screenConstants.circles = setCircles(screenConstants.constants);
+		screenConstants.colors = setColors(screenConstants.constants);
+		resetCanvas(screenConstants);
+		generate(screenConstants);
+	};
 
-	initConstants(constants: Constants) {
-		constants.numCircles = 15;
-		constants.maxMaxRad = 10;
-		constants.minMaxRad = 10;
+	const initConstants = (): Constants => {
+		const constants = {} as Constants;
+		constants.numCircles = Math.floor(8 + Math.random() * 7);
+		constants.maxMaxRad = 8;
+		constants.minMaxRad = 5;
 		constants.minRadFactor = 0.9;
 		constants.iterations = 11;
 		constants.numPoints = Math.pow(2, constants.iterations)+1;
-		constants.drawsPerFrame = 4;
+		constants.drawsPerFrame = 3;
 		constants.fullTurn = Math.PI * 2 * constants.numPoints / (5+constants.numPoints);
 		constants.minX = -constants.maxMaxRad;
-		constants.maxX = this.width + constants.maxMaxRad;
-		constants.minY = this.height/2 - 80;
-		constants.maxY = this.height/2 + 80;
-		constants.twistAmount = 0.67*Math.PI*2;
-		constants.stepsPerSegment = Math.floor(300 / constants.numCircles);
-		constants.maxColorValue = 80;
-		constants.minColorValue = 20;
-		constants.lineAlpha = 0.02;
-		constants.lineWidth = 1.9;
-	},
+		constants.maxX = screenConstants.width + constants.maxMaxRad;
+		constants.minY = screenConstants.height/2 - 100;
+		constants.maxY = screenConstants.height * 7/8;
+		constants.twistAmount = 1.3 * Math.PI;
+		constants.stepsPerSegment = Math.floor(600 / constants.numCircles);
+		constants.maxColorValue = 1000;
+		constants.minColorValue = 0;
+		constants.lineAlpha = 0.01;
+		constants.lineWidth = 2;
+		constants.xSqueeze = 1;
 
-	resetCanvas(context: CanvasRenderingContext2D) {
-		this.lineNumber = 0;
-		context.setTransform(1,0,0,1,0,0);
-		context.clearRect(0, 0, this.width, this.height);
-	},
+		return constants;
+	};
 
-	setLinePoints (iterations: number) {
+	const resetCanvas = (screenConstants: ScreenConstants): void => {
+		screenConstants.lineNumber = 0;
+		screenConstants.context.setTransform(1,0,0,1,0,0);
+		screenConstants.context.clearRect(0, 0, screenConstants.width, screenConstants.height);
+	};
+
+	const setLinePoints = (iterations: number) => {
 		const pointList= {} as Coord;
 		const pointArray = [] as Array<number>;
 		pointList.first = {x:0, y:1} as Coord;
@@ -127,31 +145,32 @@ const generator = {
 		};
 				
 		return pointArray;		
-	},
+	};
 
-	setCircles(circles: Array<Circle>, constants: Constants) {
-		circles = [];
+	const setCircles = (constants: Constants) => {
+		const circles = [];
 		
 		for (let i = 0; i < constants.numCircles; i++) {
 			const maxR = constants.minMaxRad + Math.random() * (constants.maxMaxRad - constants.minMaxRad);
 			const minR = constants.minRadFactor * maxR;
 			
 			var newCircle: Circle = {
-				centerX: constants.minX + i/(constants.numCircles-1)*(constants.maxX - constants.minX),
-				centerY: constants.minY + i/(constants.numCircles-1)*(constants.maxY - constants.minY),
+				centerX: constants.minX + (i * constants.maxX - constants.minX)/(constants.numCircles-1),
+				centerY: constants.minY + Math.floor((Math.random() * constants.maxX - constants.minX))/(constants.numCircles-1),
 				maxRad : maxR,
 				minRad : minR,
 				phase : i/(constants.numCircles-1)*constants.twistAmount,
-				pointArray : this.setLinePoints(constants.iterations)
+				pointArray : setLinePoints(constants.iterations)
 				};
 			circles.push(newCircle);
 		}
 
+		console.log(circles);
 		return circles;
-	},
+	};
 
-	setColors(colors: Array<string>, { minColorValue, maxColorValue, lineAlpha, iterations }: Constants) {
-		colors = [];
+	const setColors = ({ minColorValue, maxColorValue, lineAlpha, iterations }: Constants) => {
+		const colors = [];
 		
 		const r0: number = minColorValue + Math.random()*(maxColorValue-minColorValue);
 		const g0: number = minColorValue + Math.random()*(maxColorValue-minColorValue);
@@ -161,7 +180,7 @@ const generator = {
 		const g1: number = minColorValue + Math.random()*(maxColorValue-minColorValue);
 		const b1: number = minColorValue + Math.random()*(maxColorValue-minColorValue);
 		
-		var colorParamArray: Array<number> = this.setLinePoints(iterations);
+		var colorParamArray: Array<number> = setLinePoints(iterations);
 		
 		for (let i = 0; i < colorParamArray.length; i++) {
 			const param = colorParamArray[i];
@@ -176,22 +195,21 @@ const generator = {
 		}
 		
 		return colors;
-	},
+	};
 
-	generate(context: CanvasRenderingContext2D, constants: Constants, circles: Array<Circle>, colors: Array<string>, timer: number) {
-		if (!!timer) clearInterval(timer);
-		const _this = this;
-		this.timer = window.setInterval(this.draw, 1, _this, context, constants, circles, colors);
-		console.log('Finished');
-	},
+	const generate = (screenConstants: ScreenConstants) => {
+		if (!!screenConstants.timer) clearInterval(screenConstants.timer);
+		console.time('Drawing')
+		screenConstants.timer = window.setInterval(draw, 1, screenConstants);
+	};
 
-	draw( _this, context: CanvasRenderingContext2D, {numCircles, drawsPerFrame, numPoints, fullTurn, lineWidth, stepsPerSegment}: Constants, circles: Array<Circle>, colors: Array<string>) {
-		const xSqueeze = 0.75;
-		const {lineNumber, timer} = _this;
+	const draw = ( screenConstants: ScreenConstants) => {
+		const {context, constants, circles, colors} = screenConstants;
+		const {numCircles, drawsPerFrame, numPoints, fullTurn, lineWidth, stepsPerSegment, xSqueeze} = constants;
 		
 		for (let k = 0; k < drawsPerFrame; k++) {
+			const lineNumber = screenConstants.lineNumber;
 			const theta: number = lineNumber / (numPoints-1) * fullTurn;
-			
 			context.globalCompositeOperation = "lighter";
 			context.lineJoin = "miter";
 			
@@ -233,20 +251,24 @@ const generator = {
 					const y0 = centerY + rad*Math.sin(theta + phase);
 					
 					context.lineTo(x0,y0);
-				}
-			}
+				};
+			};
 			
 			context.stroke();
 
-			_this.lineNumber++;
-			if (_this.lineNumber > numPoints-1) {
-				clearInterval(timer);
-				_this.timer = null;
+			screenConstants.lineNumber++;
+			if (screenConstants.lineNumber > numPoints-1) {
+				clearInterval(screenConstants.timer);
+				screenConstants.timer = undefined;
+				console.timeEnd('Drawing');
 				console.log('Finished animating');
 				break;
 			};
 		};
-	},
+		
+	};
+
+	init(screenConstants);
 };
 
-export default generator;
+export default generateLines;

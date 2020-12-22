@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './lines.css';
-import generator from './generator';
+import generateLines from './generator';
 // TODO: GET MODERNIZR WORKING
 // import Modernizr from 'modernizr';
 // import Generator from './generator';
@@ -16,7 +16,6 @@ const Lines = () => {
     };
 
     window.addEventListener('resize', handleWindowResize);
-    generator.init();
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
@@ -28,7 +27,7 @@ const Lines = () => {
   const [dimensions, setDimensions] = useState(getScreenDimensions());
 
   useEffect(() => {
-    generator.init();
+    generateLines();
   }, [dimensions]);
 
   const Canvas = () => (
