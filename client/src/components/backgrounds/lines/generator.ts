@@ -29,7 +29,6 @@ interface ScreenConstants {
 	constants: Constants,
 	circles: Array<Circle>,
 	colors: Array<string>,
-	timer: Undefinable<number>,
 	lineNumber: number,
 };
 
@@ -49,8 +48,6 @@ interface Circle {
 	pointArray: Array<number>;
 };
 
-type Undefinable<T> = T | undefined;
-
 const generateLines = () => {
 	const screenConstants: ScreenConstants = {
 		height: window.screen.height,
@@ -59,7 +56,6 @@ const generateLines = () => {
 		constants: {} as Constants,
 		circles: [],
 		colors: [],
-		timer: undefined,
 		lineNumber: 0,
 	};
 
@@ -81,7 +77,7 @@ const generateLines = () => {
 		constants.minRadFactor = 0.9;
 		constants.iterations = 11;
 		constants.numPoints = Math.pow(2, constants.iterations)+1;
-		constants.drawsPerFrame = 3;
+		constants.drawsPerFrame = 6;
 		constants.fullTurn = Math.PI * 2 * constants.numPoints / (5+constants.numPoints);
 		constants.minX = -constants.maxMaxRad;
 		constants.maxX = screenConstants.width + constants.maxMaxRad;
@@ -92,7 +88,7 @@ const generateLines = () => {
 		constants.maxColorValue = 1000;
 		constants.minColorValue = 0;
 		constants.lineAlpha = 0.01;
-		constants.lineWidth = 2;
+		constants.lineWidth = 2.5;
 		constants.xSqueeze = 1;
 
 		return constants;
@@ -199,12 +195,11 @@ const generateLines = () => {
 	};
 
 	const generate = (screenConstants: ScreenConstants) => {
-		if (!!screenConstants.timer) clearInterval(screenConstants.timer);
-		console.time('Drawing')
-		screenConstants.timer = window.setInterval(draw, 1, screenConstants);
+		console.time('Drawing');
+		draw();
 	};
 
-	const draw = ( screenConstants: ScreenConstants) => {
+	const draw = () => {
 		const {context, constants, circles, colors} = screenConstants;
 		const {numCircles, drawsPerFrame, numPoints, fullTurn, lineWidth, stepsPerSegment, xSqueeze} = constants;
 		
@@ -258,14 +253,15 @@ const generateLines = () => {
 			context.stroke();
 
 			screenConstants.lineNumber++;
-			if (screenConstants.lineNumber > numPoints-1) {
-				clearInterval(screenConstants.timer);
-				screenConstants.timer = undefined;
-				console.timeEnd('Drawing');
-				console.log('Finished animating');
-				break;
-			};
+			console.log(screenConstants.lineNumber, lineNumber, numPoints-1);
 		};
+		
+		if (screenConstants.lineNumber > numPoints-1) {
+			console.timeEnd('Drawing');
+			console.log('Finished animating');
+			return;
+		};
+		window.requestAnimationFrame(draw);
 		
 	};
 

@@ -16,7 +16,7 @@ class Challenges {
     {
       id: 1,
       title: 'Lines of Communication',
-      logo: 'logo.svg',
+      logo: 'lines.png',
       desc: `Please fuzz for our FAQ page for more information`,
     },
     {
