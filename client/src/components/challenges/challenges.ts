@@ -10,28 +10,24 @@ class Challenges {
     {
       id: 0,
       title: 'Bubbles',
-      logo: 'assets/sprites/bubbs.svg',
+      logo: 'bubbs.svg',
       desc: 'The journey begins!',
     },
     {
       id: 1,
       title: 'Lines of Communication',
-      logo: 'assets/sprites/logo.svg',
+      logo: 'logo.svg',
       desc: `Please fuzz for our FAQ page for more information`,
     },
     {
       id: 2,
       title: `WHY. WON'T. THIS. POST?!`,
-      logo: 'assets/sprites/logo.svg',
+      logo: 'logo.svg',
       desc: `FLAG{TH1S_15_TH3_FL4G}`,
     },
   ];
 
-  unlocked: Array<number> = [0];
-
-  constructor() {
-    console.log('Challenges - construction');
-  }
+  unlocked: Array<number> = [0, 1, 2];
 
   getAllChallenges () {
     return this.challenges;

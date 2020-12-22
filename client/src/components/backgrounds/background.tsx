@@ -1,17 +1,17 @@
-import React, {lazy, ReactComponentElement, ReactFragment, Suspense} from 'react';
+import React, {lazy, Suspense} from 'react';
+
+const BubbleBg = lazy(() => import('./bubbs/bubbles'));
+const LinesBg = lazy(() => import('./lines/lines'));
+
+const Backgrounds = [
+  <BubbleBg />,
+  <LinesBg />
+];
 
 const Background = ({ bg }: {bg: number}) => {
-  const BubbleBg = lazy(() => import('./bubbs/bubbles'));
-  const LinesBg = lazy(() => import('./lines/lines'));
-  
-  const bgs = [ 
-    <BubbleBg />,
-    <LinesBg />,
-  ];
-
   return (
     <Suspense fallback={<div className="bg"></div>}>
-      { bgs[bg] as JSX.Element}
+      { Backgrounds[bg] }
     </Suspense>
   )
 }

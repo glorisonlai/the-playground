@@ -7,10 +7,10 @@ import MenuButton from '../nav/menu-button';
 const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
 	useEffect(() => {
 		const handleWidthResize = () => {
-			setWidth(getWidth());
-		}
+				setWidth(getWidth());
+			};
 
-    window.addEventListener('resize', handleWidthResize);
+		window.addEventListener('resize', handleWidthResize);
     return () => window.removeEventListener('resize', handleWidthResize);
 	}, []);
 
@@ -51,11 +51,11 @@ const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
 
 			return (
 				<div className={'challenge'} key={id} onClick={() => handler(id)} style={{height: '50px', width: 'auto'}} >
-					<img className={imgClass} src={require(logo)} alt="" style={{width: '50px'}} />
+					<img className={imgClass} src={require(`assets/sprites/${logo}`)} alt="" style={{width: '50px'}} />
 					<div className="challenge-text">{title}</div>
 				</div>
-			)
-		})
+			);
+		});
 
 		return (
 			<div className="menu">
@@ -70,8 +70,8 @@ const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
 					/>
 				}
 			</div>
-		)
-	}
+		);
+	};
 
 	const Flag = ({title, desc, unlocked}: {title: string, desc: string, unlocked: boolean}) => {
 		return ( 
@@ -94,7 +94,7 @@ const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
 				<h1>Backgrounds</h1>
 				{visible && <ChallengeMenu />}
 			</div>
-			<MenuButton shape={visible} bg={bgId} setVis={() => setVisible(prevVisible => !prevVisible)} />
+			<MenuButton shape={visible} bgId={bgId} setVis={() => setVisible(prevVisible => !prevVisible)} />
 		</>
 	)
 }
