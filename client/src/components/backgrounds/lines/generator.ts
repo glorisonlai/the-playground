@@ -37,7 +37,7 @@ interface Circle {
 	pointArray: Array<number>;
 };
 
-type Nullable<T> = T | null;
+type Nullable<T> = null | T;
 
 const generator = {
 	height: window.screen.height as number,
@@ -243,7 +243,7 @@ const generator = {
 			_this.lineNumber++;
 			if (_this.lineNumber > numPoints-1) {
 				clearInterval(timer);
-				_this.timer = null;
+				_this.timer = 0;
 				console.log('Finished animating');
 				break;
 			};
