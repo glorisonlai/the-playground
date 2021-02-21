@@ -11,7 +11,9 @@ const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
 			};
 
 		window.addEventListener('resize', handleWidthResize);
-    return () => window.removeEventListener('resize', handleWidthResize);
+    return () => {
+			window.removeEventListener('resize', handleWidthResize);
+		}
 	}, []);
 
 	const getWidth = () => window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; 

@@ -95,6 +95,7 @@ const generateLines = () => {
 	};
 
 	const resetCanvas = (screenConstants: ScreenConstants): void => {
+		window.cancelAnimationFrame(draw);
 		screenConstants.lineNumber = 0;
 		screenConstants.context.setTransform(1,0,0,1,0,0);
 		screenConstants.context.clearRect(0, 0, screenConstants.width, screenConstants.height);

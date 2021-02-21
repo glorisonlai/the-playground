@@ -16,7 +16,7 @@ function App() {
     'background: #222; color: #bada55'
     );
   }, []);
-
+  
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get('view');
 
@@ -27,12 +27,18 @@ function App() {
     return Challenges.isUnlockedFromId(id) ? id : 0;
   };
 
+  const changeBgId = (id: number) => {
+    setBgId(id);
+    window.localStorage.setItem('bgId', id.toString());
+  }
+
   const [bgId, setBgId] = useState(getBgId());
+  console.log(bgId);
 
   return (
     <div className="app">
       <Background bg={bgId} />
-      <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
+      <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
       {/* {showPortfolio ? <Portfolio /> : <Pitch/>} */}
     </div>
   );
