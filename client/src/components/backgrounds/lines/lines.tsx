@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './lines.css';
-import generateLines from './generator';
+import {screenConstants, init, draw} from './generator';
 // TODO: GET MODERNIZR WORKING
 // import Modernizr from 'modernizr';
 // import Generator from './generator';
@@ -11,27 +11,21 @@ const Lines = () => {
   // )
   useEffect(() => {
     // if (supportsCanvas) 
-    const handleWindowResize = () => {
-      setDimensions(getScreenDimensions());
+    const redrawLines = () => {
+      screenConstants.constants?.drawingQueue?.forEach((id) => window.cancelAnimationFrame(id));
+      screenConstants.constants.drawingQueue = [];
+      init(screenConstants);
+      console.time('Drawing');
+      window.requestAnimationFrame(draw);
     };
 
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
+    window.addEventListener('resize', redrawLines);
+    redrawLines();
+    return () => window.removeEventListener('resize', redrawLines);
   }, []);
 
-  const getScreenDimensions = () => ({
-      width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-      height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-    });
-
-  const [dimensions, setDimensions] = useState(getScreenDimensions());
-
-  useEffect(() => {
-    generateLines();
-  }, [dimensions]);
-
   const Canvas = () => (
-    <canvas width={dimensions.width} height={dimensions.height} id={"screen"}>
+    <canvas width={screenConstants.width} height={screenConstants.height} id={"screen"}>
       <div className = {"bg"}>
         <h1 style={{alignContent: 'center'}}>
           Sorry!<br/>Canvas not Supported in this Browser!
