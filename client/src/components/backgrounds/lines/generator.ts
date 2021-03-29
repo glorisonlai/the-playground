@@ -48,8 +48,8 @@ interface Circle {
 };
 
 const screenConstants: ScreenConstants = {
-	width: window.screen.width || window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-  height: window.screen.height || window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+	width: window.innerWidth || window.screen.width || document.documentElement.clientWidth || document.body.clientWidth,
+  height: window.innerHeight ||window.screen.height || document.documentElement.clientHeight || document.body.clientHeight,
 	context: {} as CanvasRenderingContext2D,
 	constants: {} as Constants,
 	circles: [],
@@ -60,10 +60,10 @@ const screenConstants: ScreenConstants = {
 const init = ( screenConstants: ScreenConstants ): ScreenConstants => {
 	const canvas = document.getElementById('screen') as HTMLCanvasElement;
 	screenConstants.context = canvas.getContext('2d') as CanvasRenderingContext2D;
+	resetCanvas(screenConstants);
 	screenConstants.constants = initConstants();
 	screenConstants.circles = setCircles(screenConstants.constants);
 	screenConstants.colors = setColors(screenConstants.constants);
-	resetCanvas(screenConstants);
 	return screenConstants;
 };
 
@@ -94,6 +94,8 @@ const initConstants = (): Constants => {
 };
 
 const resetCanvas = (screenConstants: ScreenConstants): void => {
+	screenConstants.constants?.drawingQueue?.forEach((id) => window.cancelAnimationFrame(id));
+  screenConstants.constants.drawingQueue = [];
 	screenConstants.lineNumber = 0;
 	screenConstants.context.setTransform(1,0,0,1,0,0);
 	screenConstants.context.clearRect(0, 0, screenConstants.width, screenConstants.height);
@@ -191,11 +193,6 @@ const setColors = ({ minColorValue, maxColorValue, lineAlpha, iterations }: Cons
 	}
 	
 	return colors;
-};
-
-const generate = (screenConstants: ScreenConstants) => {
-	console.time('Drawing');
-	return draw();
 };
 
 const draw = () => {

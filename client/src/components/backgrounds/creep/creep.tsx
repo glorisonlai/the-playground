@@ -2,7 +2,7 @@ import React from 'react';
 import './creep.css';
 
 const Eyes = () => {
-  const Eye = () => {
+  const Eye = ( {className} : {className: string}) => {
     const styles = {
       margin: '0 auto',
       width: '300px',
@@ -10,10 +10,11 @@ const Eyes = () => {
       borderRadius: '100$ 0px',
       transform: '45',
       color: 'white',
+      zIndex: 99
     };
 
     return(
-      <div style={styles}/>
+      <div className={className} style={styles}/>
       );
   }
 

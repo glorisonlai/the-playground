@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './lines.css';
 import {screenConstants, init, draw} from './generator';
 // TODO: GET MODERNIZR WORKING
@@ -12,9 +12,8 @@ const Lines = () => {
   useEffect(() => {
     // if (supportsCanvas) 
     const redrawLines = () => {
-      screenConstants.constants?.drawingQueue?.forEach((id) => window.cancelAnimationFrame(id));
-      screenConstants.constants.drawingQueue = [];
       init(screenConstants);
+      console.log(screenConstants.width)
       console.time('Drawing');
       window.requestAnimationFrame(draw);
     };
