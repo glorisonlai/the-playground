@@ -1,102 +1,128 @@
-import React, {useState, useEffect} from 'react';
-import './menu.css';
-import classNames from 'classnames';
-import Challenges from './challenges';
-import MenuButton from '../nav/menu-button';
+import React, { useState, useEffect, ChangeEvent } from "react";
+import "./menu.css";
+import classNames from "classnames";
+import Challenges from "./challenges";
+import MenuButton from "../nav/menu-button";
+import Flag from "./challenge-comp/flag";
 
-const Menu = ({bgId, unlock} : { bgId: number, unlock: Function }) => {
-	useEffect(() => {
-		const handleWidthResize = () => {
-				setWidth(getWidth());
-			};
+const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
+  useEffect(() => {
+    const handleWidthResize = () => {
+      setWidth(getWidth());
+    };
 
-		window.addEventListener('resize', handleWidthResize);
-    return () => window.removeEventListener('resize', handleWidthResize);
-	}, []);
+    window.addEventListener("resize", handleWidthResize);
+    return () => {
+      window.removeEventListener("resize", handleWidthResize);
+    };
+  }, []);
 
-	const getWidth = () => window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; 
-	
+  const getWidth = () =>
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
 
-	const [width, setWidth] = useState(getWidth());
-	const [visible, setVisible] = useState(false);
-	const [focussedId, setFocussedId] = useState(bgId);
+  const [width, setWidth] = useState(getWidth());
+  const [visible, setVisible] = useState(true);
+  const [focussedId, setFocussedId] = useState(bgId);
 
-	const showState = visible ? 'visible' : 'hidden';
-	const menuClass = classNames('cover', 'flyout', showState);
+  const showState = visible ? "visible" : "hidden";
+  const menuClass = classNames("cover", "flyout", showState);
 
-	const handler = (id: number) => {
-		Challenges.isUnlockedFromId(id) ? 
-			switchBackground(id) :
-			focusOnChallenge(id);
-	}
+  const switchBgHandler = (id: number) => {
+    Challenges.isUnlockedFromId(id)
+      ? switchBackground(id)
+      : focusOnChallenge(id);
+  };
 
-	const switchBackground = (id: number) => {
-		unlock(id);
-		setFocussedId(id);
-	}
+  const switchBackground = (id: number) => {
+    unlock(id);
+    setFocussedId(id);
+  };
 
-	const focusOnChallenge = (id: number) => {
-		setFocussedId(id);
-	}
+  const focusOnChallenge = (id: number) => {
+    setFocussedId(id);
+  };
 
-	const ChallengeMenu = () => {
-		const challenges = Challenges.getAllChallenges();
-		const focussedBg = Challenges.getChallengeFromId(focussedId);
-		const focussedBgIsUnlocked = Challenges.isUnlockedFromId(focussedId);
+  const getChalDesc = (id: number, desc: string) => {
+    if (id > 1 && !Challenges.isFaqUnlocked()) {
+      return "Please finish Ground rules first";
+    }
+    return desc;
+  };
 
-		const challengeArr = challenges.map(({id, title, logo}) => {
-			const unlocked = Challenges.isUnlockedFromId(id) ? 'unlocked' : 'locked';
-			const focussed = id === bgId? 'focussed' : 'unfocussed';
-			const imgClass = classNames(unlocked, focussed)
+  const isChalUnlocked = (id: number) => {
+    return (
+      id === 0 ||
+      (id === 1 && Challenges.isUnlockedFromId(id)) ||
+      (id > 1 &&
+        (!Challenges.isFaqUnlocked() || Challenges.isUnlockedFromId(id)))
+    );
+  };
 
-			return (
-				<div className={'challenge'} key={id} onClick={() => handler(id)} style={{height: '50px', width: 'auto'}} >
-					<img className={imgClass} src={require(`assets/sprites/${logo}`)} alt="" style={{width: '50px'}} />
-					<div className="challenge-text">{title}</div>
-				</div>
-			);
-		});
+  const ChallengeMenu = () => {
+    const challenges = Challenges.getAllChallenges();
+    const focussedBg = Challenges.getChallengeFromId(focussedId);
 
-		return (
-			<div className="menu">
-				<div className="table" style={{width: width/2}}>
-					{challengeArr}
-				</div>
-				{focussedBg && 
-					<Flag 
-						title={focussedBg.title} 
-						desc={focussedBg.desc} 
-						unlocked={focussedBgIsUnlocked}
-					/>
-				}
-			</div>
-		);
-	};
+    const challengeArr = challenges.map(
+      ({ id, title, logo }: { id: number; title: string; logo: string }) => {
+        const unlocked = Challenges.isUnlockedFromId(id)
+          ? "unlocked"
+          : "locked";
+        const focussed = id === focussedId ? "focussed" : "unfocussed";
+        const imgClass = classNames(unlocked, focussed);
 
-	const Flag = ({title, desc, unlocked}: {title: string, desc: string, unlocked: boolean}) => {
-		return ( 
-			<form className='flag-form' style={{width: width/2}}>
-				<label className="flag flag-label" htmlFor="flag"><strong>{title}</strong></label>
-				<p>{desc}</p><br/>
-				{!unlocked &&
-				<>
-					<input className='flag' type="text" id="flag" name="flag" placeholder="FLAG{ ... }" /><br/>
-					<input className='flag' type="submit" value="Submit" />
-				</>
-				}
-			</form>
-		);
-	};
+        return (
+          <div
+            className={"challenge"}
+            key={id}
+            onClick={() => switchBgHandler(id)}
+            style={{ height: "50px", width: "auto" }}
+          >
+            <img
+              className={imgClass}
+              src={require(`assets/sprites/${logo}`)}
+              alt=""
+              style={{ width: "50px" }}
+            />
+            <div className="challenge-text">{title}</div>
+          </div>
+        );
+      }
+    );
+    console.log(focussedBg);
 
-	return (
-		<>
-			<div className={menuClass}>
-				<h1>Backgrounds</h1>
-				{visible && <ChallengeMenu />}
-			</div>
-			<MenuButton shape={visible} bgId={bgId} setVis={() => setVisible(prevVisible => !prevVisible)} />
-		</>
-	)
-}
+    return (
+      <div className="menu">
+        <div className="table" style={{ width: width / 2 }}>
+          {challengeArr}
+        </div>
+        {focussedBg && (
+          <Flag
+            id={focussedBg.id}
+            title={focussedBg.title}
+            desc={getChalDesc(focussedBg.id, focussedBg.desc)}
+            unlocked={isChalUnlocked(focussedBg.id)}
+            callBack={(id: number) => switchBackground(id)}
+          />
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div className={menuClass}>
+        <h1>Backgrounds</h1>
+        {visible && <ChallengeMenu />}
+      </div>
+      <MenuButton
+        shape={visible}
+        bgId={bgId}
+        setVis={() => setVisible((prevVisible) => !prevVisible)}
+      />
+    </>
+  );
+};
 
 export default Menu;

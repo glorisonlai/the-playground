@@ -4,12 +4,22 @@ const BubbleBg = lazy(() => import("./bubbs/bubbles"));
 const LinesBg = lazy(() => import("./lines/lines"));
 const BirdsBg = lazy(() => import("./boids/boids"));
 const EyesBg = lazy(() => import("./eyes/eyes"));
+const MissingBg = lazy(() => import("./missing/missing"));
 
-const Backgrounds = [<BubbleBg />, <LinesBg />, <BirdsBg />, <EyesBg />];
+const renderBg = (bg: number) => {
+  switch (bg) {
+    case 0:
+      return <BubbleBg />;
+    case 1:
+      return <LinesBg />;
+    default:
+      return <MissingBg />;
+  }
+};
 
 const Background = ({ bg }: { bg: number }) => {
   return (
-    <Suspense fallback={<div className="bg"></div>}>{Backgrounds[bg]}</Suspense>
+    <Suspense fallback={<div className="bg"></div>}>{renderBg(bg)}</Suspense>
   );
 };
 
