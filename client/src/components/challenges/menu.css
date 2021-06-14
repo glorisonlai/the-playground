@@ -53,7 +53,7 @@
 }
 
 .focussed {
-  border: solid blue;
+  border: solid rgb(95, 107, 72);
   border-radius: 50%;
 }
 
