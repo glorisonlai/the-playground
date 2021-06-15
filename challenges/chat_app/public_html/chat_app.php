@@ -7,6 +7,7 @@ class SupportChat {
 	public string $msg;
 
 	public function __construct(string $msg) {
+		echo $msg;
 		$this->msg = $msg;
 	}
 
