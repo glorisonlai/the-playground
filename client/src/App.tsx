@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import './App.css';
-import Background from 'components/backgrounds/background';
-import Menu from 'components/challenges/menu';
-import Challenges from 'components/challenges/challenges';
-import Pitch from 'components/content/pitch';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Background from "components/backgrounds/background";
+import Menu from "components/challenges/menu";
+import Challenges from "components/challenges/challenges";
+import Pitch from "components/content/pitch";
 
 function App() {
   useEffect(() => {
@@ -41,14 +41,12 @@ function App() {
   return (
     <div className="app">
       <Background bg={bgId} />
-<<<<<<< HEAD
-      <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
-      <Pitch unlocked={Challenges.getAllChallenges.length} locked={Challenges.getAllChallenges.length} />
-      {/* {showPortfolio ? <Portfolio /> : <Pitch unlocked={Challenges.} locked={}/>} */}
-=======
       <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
-      {/* {showPortfolio ? <Portfolio /> : <Pitch/>} */}
->>>>>>> master
+      {showPortfolio ? (
+        <Portfolio />
+      ) : (
+        <Pitch unlocked={Challenges.getAllChallenges().length} />
+      )}
     </div>
   );
 }

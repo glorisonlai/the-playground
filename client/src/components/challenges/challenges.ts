@@ -5,7 +5,7 @@ interface Challenges {
   unlocked: Set<number>;
   initialUnlock: Function;
   isFaqUnlocked: Function;
-  getAllChallenges: Function;
+  getAllChallenges: () => Challenge[];
   getChallengeFromId: Function;
   isUnlockedFromId: Function;
   checkFlag: Function;
@@ -22,16 +22,6 @@ const Challenges: Challenges = {
   challenges: [
     {
       id: 0,
-<<<<<<< HEAD
-      title: 'Bubbles',
-      logo: require('assets/sprites/bubbs.svg'),
-      desc: 'The journey begins!',
-    },
-    {
-      id: 1,
-      title: 'Lines of Communication',
-      logo: require('assets/sprites/logo.svg'),
-=======
       title: "Boring. Default. Gross.",
       logo: "bubbs.svg",
       desc: "The journey begins!",
@@ -40,16 +30,11 @@ const Challenges: Challenges = {
       id: 1,
       title: "Ground rules",
       logo: "lines.webp",
->>>>>>> master
       desc: `Please fuzz for our FAQ page for more information`,
     },
     {
       id: 2,
       title: `WHY. WON'T. THIS. POST?!`,
-<<<<<<< HEAD
-      logo: require('assets/sprites/logo.svg'),
-      desc: `FLAG{TH1S_15_TH3_FL4G}`,
-=======
       logo: "logo.svg",
       desc: `FLAG{TH1S15TH3FL4G}`,
     },
@@ -58,7 +43,6 @@ const Challenges: Challenges = {
       title: "Support Desk",
       logo: "logo.svg",
       desc: "hello",
->>>>>>> master
     },
   ],
 
