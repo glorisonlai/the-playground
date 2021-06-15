@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 
 const MissingSubmit = ({ callBack }: { callBack: Function }) => {
   const [flag, setFlag] = useState("");
 
-  const handleChange = (event: ChangeEvent<HTMLFormElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFlag(event.target.value);
   };
 
@@ -16,7 +16,7 @@ const MissingSubmit = ({ callBack }: { callBack: Function }) => {
         name="flag"
         placeholder="FLAG{ ... }"
         value={flag}
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
       />
       <br />
     </form>

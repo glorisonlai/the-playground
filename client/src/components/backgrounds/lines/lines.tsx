@@ -11,11 +11,10 @@ const Lines = () => {
   //   Modernizr.canvas
   // )
   useEffect(() => {
-    // if (supportsCanvas)
+    // TODO: if (supportsCanvas)
     const redrawLines = () => {
-      // generator.init;
-      // console.time("Drawing");
-      // window.requestAnimationFrame(draw);
+      generator();
+      console.time("Drawing");
     };
 
     window.addEventListener("resize", redrawLines);

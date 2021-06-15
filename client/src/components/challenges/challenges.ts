@@ -1,8 +1,8 @@
 import axios from "axios";
 
 interface Challenges {
-  challenges: Array<Challenge>;
-  unlocked: Array<number>;
+  challenges: Challenge[];
+  unlocked: Set<number>;
   initialUnlock: Function;
   isFaqUnlocked: Function;
   getAllChallenges: Function;
@@ -46,22 +46,20 @@ const Challenges: Challenges = {
     },
   ],
 
-  unlocked: [0],
+  unlocked: new Set([0]),
 
-  async initialUnlock() {
-    const { data } = await axios.get("http://localhost:1469/api/check_bg", {
-      withCredentials: true,
-    });
-    console.log(data);
-    for (const key of Object.keys(data)) {
-      if (data[key]) {
-        this.unlocked.push(parseInt(key));
+  initialUnlock() {
+    this.challenges.forEach(({ id }) => {
+      if (
+        localStorage.getItem(`BG${id}`) === process.env[`REACT_APP_BG_${id}`]
+      ) {
+        this.unlocked.add(id);
       }
-    }
+    });
   },
 
   isFaqUnlocked() {
-    return this.unlocked.includes(1);
+    return this.unlocked.has(1);
   },
 
   getAllChallenges(): Challenge[] {
@@ -74,23 +72,21 @@ const Challenges: Challenges = {
   },
 
   isUnlockedFromId(id: number) {
-    return this.unlocked.includes(id);
+    return this.unlocked.has(id);
   },
 
   async checkFlag(id: number, flag: string) {
     const { data } = await axios.post(
-      "http://localhost:1469/api/check_flag",
+      process.env.REACT_APP_API_URL + "/api/check_flag",
       {
         id: id,
         msg: flag,
-      },
-      {
-        withCredentials: true,
       }
     );
     console.log(data);
-    if (data.success) {
-      this.unlocked.push(id);
+    if (!!data.success && data.secret === process.env[`REACT_APP_BG_${id}`]) {
+      localStorage.setItem(`BG${id}`, data.secret);
+      this.unlocked.add(id);
     }
     return data.success;
   },

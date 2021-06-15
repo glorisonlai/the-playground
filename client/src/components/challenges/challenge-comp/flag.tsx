@@ -1,9 +1,9 @@
-import React, { lazy, Suspense, useState, ChangeEvent } from "react";
+import React, { lazy, Suspense } from "react";
 import Challenges from "../challenges";
 
 const NormalFlag = lazy(() => import("./normal_form"));
 const MissingSubmit = lazy(() => import("./missing_submit"));
-const ChatApp = lazy(() => import("./chat_app"));
+const ChatApp = lazy(() => import("./chat_app/chat_app"));
 
 const Flag = ({
   id,

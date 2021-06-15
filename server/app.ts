@@ -12,14 +12,15 @@ if (!process.env.NODE_ENV) require("dotenv").config();
 
 console.log(`Mode: ${process.env.NODE_ENV}`);
 const port = process.env.REACT_APP_PORT;
+console.log(process.env.FRONTEND_URL);
 
 const app = express();
 
 // Setup CORS
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    credentials: true,
+    origin: process.env.FRONTEND_URL,
+    credentials: false,
   })
 );
 

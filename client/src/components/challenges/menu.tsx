@@ -27,7 +27,6 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   const [focussedId, setFocussedId] = useState(bgId);
 
   const showState = visible ? "visible" : "hidden";
-  const menuClass = classNames("cover", "flyout", showState);
 
   const switchBgHandler = (id: number) => {
     Challenges.isUnlockedFromId(id)
@@ -70,7 +69,6 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
           ? "unlocked"
           : "locked";
         const focussed = id === focussedId ? "focussed" : "unfocussed";
-        const imgClass = classNames(unlocked, focussed);
 
         return (
           <div
@@ -80,7 +78,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
             style={{ height: "50px", width: "auto" }}
           >
             <img
-              className={imgClass}
+              className={`${unlocked} ${focussed}`}
               src={require(`assets/sprites/${logo}`)}
               alt=""
               style={{ width: "50px" }}
@@ -112,7 +110,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
   return (
     <>
-      <div className={menuClass}>
+      <div className={`cover flyout ${showState}`}>
         <h1>Backgrounds</h1>
         {visible && <ChallengeMenu />}
       </div>

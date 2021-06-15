@@ -1,4 +1,3 @@
-import { generators } from "modernizr";
 import { ScreenConstants } from "../background";
 
 interface Constants {
@@ -63,7 +62,7 @@ const generateLines = () => {
     lastDraw: 0,
   };
 
-  const init: VoidFunction = (): void => {
+  const init = (): void => {
     const canvas = document.getElementById("screen") as HTMLCanvasElement;
     screenConstants.context = canvas.getContext(
       "2d"
@@ -311,6 +310,7 @@ const generateLines = () => {
     }
     screenConstants.lastDraw = window.requestAnimationFrame(draw);
   };
+  init();
 };
 
 export default generateLines;

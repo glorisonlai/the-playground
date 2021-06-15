@@ -1,5 +1,6 @@
 import React from "react";
 import "./boids.css";
+import generator from "./generator";
 import { ScreenConstants } from "../background";
 
 const Boids = () => {
