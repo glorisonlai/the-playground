@@ -1,3 +1,8 @@
+:root {
+  --top-diff: 2em;
+  --chall-padding: 2em;
+}
+
 .cover {
   grid-column: 1;
   grid-row: 1;
@@ -22,27 +27,26 @@
   transform: translate3d(0vw, 0, 0);
 }
 
-.menu {
+.challengeMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
-.table,
-.flag-form {
-  display: flex;
-  text-align: center;
-}
-
 .challenge {
-  padding: 2em;
-  text-align: center;
+  padding: var(--chall-padding);
 }
 
 .table {
+  width: 50vw;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.flag-col {
+  padding-top: var(--chall-padding);
 }
 
 .flag-form {

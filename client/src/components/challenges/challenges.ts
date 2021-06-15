@@ -1,12 +1,9 @@
-import React from "react";
-import ChatApp from "./challenge-comp/chat_app";
 import axios from "axios";
 
 interface Challenges {
   challenges: Array<Challenge>;
   unlocked: Array<number>;
   initialUnlock: Function;
-  getUnlockedChallenges: Function;
   isFaqUnlocked: Function;
   getAllChallenges: Function;
   getChallengeFromId: Function;
@@ -25,11 +22,7 @@ const Challenges: Challenges = {
   challenges: [
     {
       id: 0,
-<<<<<<< HEAD
-      title: "Bubbles",
-=======
       title: "Boring. Default. Gross.",
->>>>>>> master
       logo: "bubbs.svg",
       desc: "The journey begins!",
     },
@@ -65,10 +58,6 @@ const Challenges: Challenges = {
         this.unlocked.push(parseInt(key));
       }
     }
-  },
-
-  getUnlockedChallenges() {
-    console.log("hello");
   },
 
   isFaqUnlocked() {

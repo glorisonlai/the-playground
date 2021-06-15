@@ -31,7 +31,7 @@ const Flag = ({
     }
   };
   return (
-    <>
+    <div className="flag-col">
       <label className="flag flag-label" htmlFor="flag">
         <strong>{title}</strong>
       </label>
@@ -40,7 +40,7 @@ const Flag = ({
       <Suspense fallback={<div className="bg"></div>}>
         {!unlocked && renderFlag(id)}
       </Suspense>
-    </>
+    </div>
   );
 };
 

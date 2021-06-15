@@ -93,19 +93,19 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     console.log(focussedBg);
 
     return (
-      <div className="menu">
-        <div className="table" style={{ width: width / 2 }}>
-          {challengeArr}
+      <div className="challengeMenu">
+        <div className="table">{challengeArr}</div>
+        <div className="table">
+          {focussedBg && (
+            <Flag
+              id={focussedBg.id}
+              title={focussedBg.title}
+              desc={getChalDesc(focussedBg.id, focussedBg.desc)}
+              unlocked={isChalUnlocked(focussedBg.id)}
+              callBack={(id: number) => switchBackground(id)}
+            />
+          )}
         </div>
-        {focussedBg && (
-          <Flag
-            id={focussedBg.id}
-            title={focussedBg.title}
-            desc={getChalDesc(focussedBg.id, focussedBg.desc)}
-            unlocked={isChalUnlocked(focussedBg.id)}
-            callBack={(id: number) => switchBackground(id)}
-          />
-        )}
       </div>
     );
   };

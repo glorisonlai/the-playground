@@ -8,7 +8,7 @@ const MissingSubmit = ({ callBack }: { callBack: Function }) => {
   };
 
   return (
-    <form className="flag-form" onSubmit={(e) => e.preventDefault()}>
+    <form className="" onSubmit={(e) => e.preventDefault()}>
       <input
         className="flag"
         type="text"

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./lines.css";
-import { screenConstants, init, draw } from "./generator";
+import generator from "./generator";
+import { ScreenConstants } from "../background";
 // TODO: GET MODERNIZR WORKING
 // import Modernizr from 'modernizr';
 // import Generator from './generator';
@@ -12,9 +13,9 @@ const Lines = () => {
   useEffect(() => {
     // if (supportsCanvas)
     const redrawLines = () => {
-      init(screenConstants);
-      console.time("Drawing");
-      window.requestAnimationFrame(draw);
+      // generator.init;
+      // console.time("Drawing");
+      // window.requestAnimationFrame(draw);
     };
 
     window.addEventListener("resize", redrawLines);
@@ -24,8 +25,8 @@ const Lines = () => {
 
   const Canvas = () => (
     <canvas
-      width={screenConstants.width}
-      height={screenConstants.height}
+      width={ScreenConstants.width}
+      height={ScreenConstants.height}
       id={"screen"}
     >
       <div className={"bg"}>
