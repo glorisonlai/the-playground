@@ -1,3 +1,8 @@
+:root {
+  --title-size: 2.5rem;
+  --footer-size: 2rem;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -11,4 +16,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  color: rgb(129, 24, 129)
 }

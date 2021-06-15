@@ -4,6 +4,7 @@ import Background from "components/backgrounds/background";
 import Menu from "components/challenges/menu";
 import Challenges from "components/challenges/challenges";
 import Pitch from "components/content/pitch";
+import Portfolio from "components/content/portfolio";
 
 function App() {
   useEffect(() => {
@@ -45,7 +46,10 @@ function App() {
       {showPortfolio ? (
         <Portfolio />
       ) : (
-        <Pitch unlocked={Challenges.getAllChallenges().length} />
+        <Pitch
+          unlocked={Challenges.getUnlocked()}
+          total={Challenges.getAllChallenges().length}
+        />
       )}
     </div>
   );

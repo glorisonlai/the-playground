@@ -3,12 +3,13 @@ import axios from "axios";
 interface Challenges {
   challenges: Challenge[];
   unlocked: Set<number>;
-  initialUnlock: Function;
-  isFaqUnlocked: Function;
+  initialUnlock: () => void;
+  isFaqUnlocked: () => boolean;
   getAllChallenges: () => Challenge[];
-  getChallengeFromId: Function;
-  isUnlockedFromId: Function;
-  checkFlag: Function;
+  getUnlocked: () => number;
+  getChallengeFromId: (id: number) => Challenge | void;
+  isUnlockedFromId: (id: number) => boolean;
+  checkFlag: (id: number, flag: string) => Promise<boolean>;
 }
 
 interface Challenge {
@@ -64,6 +65,10 @@ const Challenges: Challenges = {
 
   getAllChallenges(): Challenge[] {
     return this.challenges;
+  },
+
+  getUnlocked(): number {
+    return this.unlocked.size;
   },
 
   getChallengeFromId(id: number): Challenge | void {

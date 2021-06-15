@@ -1,6 +1,7 @@
 /*TODO: Animation is a bit shoddy, ideall make the circle compress into centre, cross regress out from centre, vice versa*/ 
 
 .btn {
+  position: fixed;
   grid-column: 1;
   grid-row: 1;
   margin-left: 30px;
