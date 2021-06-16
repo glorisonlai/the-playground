@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
-const MissingSubmit = ({ callBack }: { callBack: Function }) => {
-  const [flag, setFlag] = useState("");
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFlag(event.target.value);
-  };
-
+/**
+ * Form that doesn't do anything. Requires user to manually send request
+ * @returns Useless form
+ */
+const MissingSubmit = () => {
   return (
     <form className="" onSubmit={(e) => e.preventDefault()}>
       <input
@@ -15,8 +13,6 @@ const MissingSubmit = ({ callBack }: { callBack: Function }) => {
         id="flag"
         name="flag"
         placeholder="FLAG{ ... }"
-        value={flag}
-        onChange={handleChange}
       />
       <br />
     </form>

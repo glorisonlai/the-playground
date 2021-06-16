@@ -1,6 +1,12 @@
 import React from "react";
 import "./content.css";
 
+/**
+ * Main CTF website view
+ * @param unlocked Total number of challenges solved
+ * @param total Total number of challenges
+ * @returns CTF view
+ */
 const Pitch = ({ unlocked, total }: { unlocked: number; total: number }) => {
   const email = "lai.glorison@gmail.com";
   return (

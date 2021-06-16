@@ -2,12 +2,13 @@ import axios from "axios";
 
 interface Challenges {
   challenges: Challenge[];
+  firstLoad: boolean;
   unlocked: Set<number>;
   initialUnlock: () => void;
   isFaqUnlocked: () => boolean;
   getAllChallenges: () => Challenge[];
   getUnlocked: () => number;
-  getChallengeFromId: (id: number) => Challenge | void;
+  getChallengeFromId: (id: number) => Challenge | undefined;
   isUnlockedFromId: (id: number) => boolean;
   checkFlag: (id: number, flag: string) => Promise<boolean>;
 }
@@ -31,7 +32,7 @@ const Challenges: Challenges = {
       id: 1,
       title: "Ground rules",
       logo: "lines.webp",
-      desc: `Please fuzz for our FAQ page for more information`,
+      desc: `Please fuzz for our Rules page for more information`,
     },
     {
       id: 2,
@@ -46,6 +47,8 @@ const Challenges: Challenges = {
       desc: "hello",
     },
   ],
+
+  firstLoad: true,
 
   unlocked: new Set([0]),
 
@@ -71,12 +74,15 @@ const Challenges: Challenges = {
     return this.unlocked.size;
   },
 
-  getChallengeFromId(id: number): Challenge | void {
-    if (id >= this.challenges.length) return;
+  getChallengeFromId(id: number): Challenge | undefined {
     return this.challenges.find((challenge) => challenge.id === id);
   },
 
   isUnlockedFromId(id: number) {
+    if (this.firstLoad) {
+      this.firstLoad = false;
+      this.initialUnlock();
+    }
     return this.unlocked.has(id);
   },
 

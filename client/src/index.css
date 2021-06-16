@@ -1,6 +1,7 @@
 :root {
   --title-size: 2.5rem;
   --footer-size: 2rem;
+  color: whitesmoke;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* overflow-x: hidden; */
 }
 
 code {
@@ -20,4 +22,34 @@ code {
 
 a {
   color: rgb(129, 24, 129)
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/*
+Source: http: //www.java2s.com/example/html-css/css-animation/jumping-dots-animation.html
+*/
+.loadingDots {
+  position: relative;
+  animation: jump 1s infinite;
+}
+
+.loadingDots:nth-of-type(3) {
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms;
+}
+
+.loadingDots:nth-of-type(4) {
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+}
+
+@keyframes jump {
+  0% {bottom: 0rem;}
+  20% {bottom: 0.2rem;}
+  40% {bottom: 0rem;}
 }

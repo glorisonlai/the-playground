@@ -5,10 +5,15 @@ import Menu from "components/challenges/menu";
 import Challenges from "components/challenges/challenges";
 import Pitch from "components/content/pitch";
 import Portfolio from "components/content/portfolio";
+import Start from "components/content/start";
+import Content from "components/content/content";
 
+/**
+ * Landing page, performs background checks before serving
+ * @returns Loading animation, then portolio/website
+ */
 function App() {
   useEffect(() => {
-    Challenges.initialUnlock();
     console.log(
       "%c" +
         "-------------------------------------------------------\n" +
@@ -17,25 +22,33 @@ function App() {
         "|               Try unlocking some! ;)                |\n" +
         "|                                                     |\n" +
         "-------------------------------------------------------",
-      "background: #222; color: #bada55"
+      "background: #000; color: #bada55"
     );
   }, []);
 
+  // Check if user wants to see portfolio, or CTF
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get("view");
 
-  const [showPortfolio, setShowPortfolio] = useState(!!view ? 1 : 0);
+  // Switch website view from portfolio, to CTF
+  const [showPortfolio, setShowPortfolio] = useState(!!view ? true : false);
 
+  // Tells loading screen to stop
+  const [loading, setLoading] = useState(0);
+
+  // Get initial background from localStorage
   const getBgId = (): number => {
     const id: number = Number(localStorage.getItem("bgId"));
     return Challenges.isUnlockedFromId(id) ? id : 0;
   };
 
+  // Change background image, and save to localStorage
   const changeBgId = (id: number) => {
     setBgId(id);
     window.localStorage.setItem("bgId", id.toString());
   };
 
+  // Current background to show
   const [bgId, setBgId] = useState(getBgId());
   console.log(bgId);
 
@@ -43,14 +56,11 @@ function App() {
     <div className="app">
       <Background bg={bgId} />
       <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
-      {showPortfolio ? (
-        <Portfolio />
-      ) : (
-        <Pitch
-          unlocked={Challenges.getUnlocked()}
-          total={Challenges.getAllChallenges().length}
-        />
-      )}
+      <Content
+        initScreen={showPortfolio}
+        unlocked={Challenges.getUnlocked()}
+        total={Challenges.getAllChallenges().length}
+      />
     </div>
   );
 }

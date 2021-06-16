@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 
 const BubbleBg = lazy(() => import("./bubbs/bubbles"));
 const LinesBg = lazy(() => import("./lines/lines"));
@@ -6,6 +6,11 @@ const BirdsBg = lazy(() => import("./boids/boids"));
 const EyesBg = lazy(() => import("./eyes/eyes"));
 const MissingBg = lazy(() => import("./missing/missing"));
 
+/**
+ * Current available backgrounds. Will be updated!
+ * @param bg Background ID
+ * @returns Background
+ */
 const renderBg = (bg: number) => {
   switch (bg) {
     case 0:
@@ -17,12 +22,24 @@ const renderBg = (bg: number) => {
   }
 };
 
-const Background = ({ bg }: { bg: number }) => {
+/**
+ * Suspended background. Not sure if worth it
+ * @param bg Background ID
+ * @returns Background
+ */
+const Background = ({
+  bg,
+  callBack,
+}: {
+  bg: number;
+  callBack: VoidFunction;
+}) => {
   return (
     <Suspense fallback={<div className="bg"></div>}>{renderBg(bg)}</Suspense>
   );
 };
 
+// Current screen dimensions, to be accessed by backgrounds if needed
 const ScreenConstants = {
   width:
     window.innerWidth ||

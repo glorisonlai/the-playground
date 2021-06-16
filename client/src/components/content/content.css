@@ -1,5 +1,8 @@
 :root {
     --content-top: 25vh;
+    --train-width: 0.5rem * 100;
+    --animation-length: 4s;
+    --animation-style: ease-in-out;
 }
 
 .main {
@@ -18,4 +21,37 @@
     position: relative;
     margin: auto 0;
     font-size: var(--footer-size);
+}
+
+/*Transform values are hardcoded, otherwise won't shift*/
+#train {
+    text-align: left;
+    animation: shiftTrain var(--animation-length) var(--animation-style);
+    transform: translateX(calc(0.5rem * -100));
+}
+
+#content {
+    width: 100vw;
+    position: fixed;
+    animation: shiftContent var(--animation-length) var(--animation-style);
+}
+
+#start {
+   transform: translateX(calc(0.5rem * -100 - 100vw));
+   animation: shiftCode var(--animation-length) var(--animation-style);
+}
+
+@keyframes shiftCode {
+    from {transform: translateX(0);}
+    to {transform: translateX(calc(0.5rem * -100 - 100vw));}
+}
+
+@keyframes shiftTrain {
+    from {transform: translateX(100vw);}
+    to {transform: translateX(calc(0.5rem * -100))}
+}
+
+@keyframes shiftContent {
+    from {transform: translateX(calc(100vw + var(--train-width)));}
+    to {transform: translateX(0)}
 }

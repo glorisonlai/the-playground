@@ -3,6 +3,7 @@
   --chall-padding: 2em;
 }
 
+/*Sets filter for menu screen*/
 .cover {
   grid-column: 1;
   grid-row: 1;
@@ -13,44 +14,64 @@
   overflow: hidden;   
 }
 
+/*Quick flyout animation for screen, menu button*/
 .flyout {
   transition: transform 1s 
     cubic-bezier(0.1, 0.52, 0, 1);
   z-index: 8;
 }
 
+/*
+Shifts menu screen out of view
+position is fixed here bc it screws everything else up
+*/
 .hidden {
   position: fixed;
   transform: translate3d(-100vw, 0, 0);
 }
 
+/*Shifts menu screen into view*/
 .visible {
   position: fixed;
   transform: translate3d(0vw, 0, 0);
 }
 
+/* Div containing both icons and flag*/
 .challengeMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  color: black;
 }
 
+/* Set immediate children width to be the same*/
+.challengeMenu > div {
+  width: 50vw;
+}
+
+
+/*Pads icons from each other*/
 .challenge {
   padding: var(--chall-padding);
 }
 
+/*
+icons div, and flag div.
+Splits screen space in half
+*/
 .table {
-  width: 50vw;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: start;
 }
 
+/*Pads top of flag div. Honestly shouldn't be here*/
 .flag-col {
   padding-top: var(--chall-padding);
 }
 
+/*Flag div styling*/
 .flag-form {
   flex-direction: column;
   height: 60vh;
@@ -58,20 +79,24 @@
   justify-content: center;
 }
 
+/*Sets border for focussed icons*/
 .focussed {
   border: solid rgb(95, 107, 72);
   border-radius: 50%;
 }
 
+/*Removes border from unfocussed icons*/
 .unfocussed {
   border: solid transparent;
 }
 
+/*Make locked icons grayscale*/
 .locked {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
 
+/*Text underneath each challenge icon*/
 .challenge-text {
   background-color: black;
   color: white;
