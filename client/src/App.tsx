@@ -12,7 +12,13 @@ import Content from "components/content/content";
  * Landing page, performs background checks before serving
  * @returns Loading animation, then portolio/website
  */
-function App({ chalLoadedCallback, bgLoadedCallback }) {
+function App({
+  chalLoadedCallback,
+  bgLoadedCallback,
+}: {
+  chalLoadedCallback: React.Dispatch<React.SetStateAction<boolean>>;
+  bgLoadedCallback: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   useEffect(() => {
     console.log(
       "%c" +
@@ -33,9 +39,6 @@ function App({ chalLoadedCallback, bgLoadedCallback }) {
   // Switch website view from portfolio, to CTF
   const [showPortfolio, setShowPortfolio] = useState(!!view ? true : false);
 
-  // Tells loading screen to stop
-  const [loading, setLoading] = useState(0);
-
   // Get initial background from localStorage
   const getBgId = (): number => {
     const id: number = Number(localStorage.getItem("bgId"));
@@ -51,10 +54,9 @@ function App({ chalLoadedCallback, bgLoadedCallback }) {
 
   // Current background to show
   const [bgId, setBgId] = useState(getBgId());
-  console.log(bgId);
   return (
     <div className="app">
-      <Background bg={bgId} />
+      <Background bg={bgId} bgCallback={bgLoadedCallback} />
       <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
       <Content
         initScreen={showPortfolio}

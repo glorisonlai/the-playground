@@ -11,7 +11,7 @@ const MissingBg = lazy(() => import("./missing/missing"));
  * @param bg Background ID
  * @returns Background
  */
-const renderBg = (bg: number) => {
+const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
       return <BubbleBg />;
@@ -27,9 +27,17 @@ const renderBg = (bg: number) => {
  * @param bg Background ID
  * @returns Background
  */
-const Background = ({ bg }: { bg: number }) => {
+const Background = ({
+  bg,
+  bgCallback,
+}: {
+  bg: number;
+  bgCallback: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const background = renderBg(bg);
+  bgCallback(true);
   return (
-    <Suspense fallback={<div className="bg"></div>}>{renderBg(bg)}</Suspense>
+    <Suspense fallback={<div className="bg"></div>}>{background}</Suspense>
   );
 };
 

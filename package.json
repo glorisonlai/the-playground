@@ -5,7 +5,8 @@
   "main": "client/src/index.js",
   "scripts": {
     "postinstall": "cd client && npm install && cd ../server && npm install",
-    "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm run dev\""
+    "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm run dev\"",
+    "prod": "npm install && cd client && npm run build"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 import React from "react";
 import "./split-pane.css";
 
-const SplitPane = ({ children }) => {
+const SplitPane = ({ children }: { children: JSX.Element[] }) => {
   console.log(children);
   return (
     <div className="split">
