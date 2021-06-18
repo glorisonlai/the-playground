@@ -1,14 +1,14 @@
 :root {
   --top-diff: 2em;
-  --chall-padding: 2em;
+  --chall-padding: 0.2em;
+  --icon-width: 75px;
 }
 
 /*Sets filter for menu screen*/
 .cover {
   grid-column: 1;
   grid-row: 1;
-  opacity: 45%;
-  background-color: antiquewhite;
+  background-color: rgb(0,0,0,0.3);
   height: 100vh;
   width: 100vw;
   overflow: hidden;   
@@ -42,18 +42,21 @@ position is fixed here bc it screws everything else up
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  color: black;
 }
 
 /* Set immediate children width to be the same*/
 .challengeMenu > div {
-  width: 50vw;
+  width: 45vw;
 }
 
 
 /*Pads icons from each other*/
 .challenge {
   padding: var(--chall-padding);
+  width: 75px;
+  height: 75px;
+  margin: 1rem;
+  box-shadow: #fff 0.5em;
 }
 
 /*
@@ -61,9 +64,11 @@ icons div, and flag div.
 Splits screen space in half
 */
 .table {
+  height: 50vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+  text-align: center;
 }
 
 /*Pads top of flag div. Honestly shouldn't be here*/
@@ -81,7 +86,7 @@ Splits screen space in half
 
 /*Sets border for focussed icons*/
 .focussed {
-  border: solid rgb(95, 107, 72);
+  border: solid rgb(255, 255, 255);
   border-radius: 50%;
 }
 
@@ -97,8 +102,15 @@ Splits screen space in half
 }
 
 /*Text underneath each challenge icon*/
+@media only screen and (max-width: 700px){
+  .challenge-text {
+    visibility: hidden;
+  }
+}
+
 .challenge-text {
-  background-color: black;
+  align-self: center;
   color: white;
-  width: 130px;
+  width: calc(1.5 * var(--icon-width));
+  font-size: 1.2rem;
 }

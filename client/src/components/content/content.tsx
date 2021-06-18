@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pitch from "./pitch";
 import Portfolio from "./portfolio";
 import Start from "./start";
@@ -13,10 +13,19 @@ const Content = ({
   total: number;
 }) => {
   const [screen, setScreen] = useState(initScreen);
+  const [showAnimation, setShowAnimation] = useState(true);
+  const animateClass = showAnimation ? "animate" : "";
+
+  useEffect(() => {
+    showAnimation &&
+      setTimeout(() => {
+        setShowAnimation(false);
+      }, 3900);
+  }, []);
 
   const View = () => {
     return (
-      <div id="content">
+      <div id="content" className={animateClass}>
         {screen ? <Portfolio /> : <Pitch unlocked={unlocked} total={total} />}
       </div>
     );
@@ -59,8 +68,12 @@ const Content = ({
 
   return (
     <>
-      <Start chalLoaded={true} bgLoaded={true} />
-      <Train />
+      {showAnimation && (
+        <>
+          <Start chalLoaded={true} bgLoaded={true} />
+          <Train />
+        </>
+      )}
       <View />
     </>
   );

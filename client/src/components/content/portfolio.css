@@ -1,0 +1,112 @@
+/* FontAwesome icons */
+.icons svg {
+	height: 4rem;
+	width: 4rem;
+	padding-right: 1.5rem;
+}
+
+img {
+	width: 20vw;
+	height: 20vh;
+}
+
+h6 {
+	padding: 0;
+	margin: 0;
+}
+
+footer {
+	position: absolute;
+	height: 10vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	top: 88vh;
+}
+
+footer:hover {
+	cursor: pointer;
+	transform: translateY(0);
+	animation: bounceDown 1s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+	50% {
+		transform: translateY(15px)
+	}
+}
+
+@keyframes bounceUp {
+	0% {
+		transform: translateY(0)
+	}
+
+	50% {
+		transform: translateY(-10px)
+	}
+
+	100% {
+		transform: translateY(0)
+	}
+}
+
+.label {
+	position: absolute;
+}
+
+#labelup {
+	top: 35px;
+}
+
+header {
+	position: absolute;
+	height: 10vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	top: 100vh;
+	transform: all 250ms ease-in-out;
+	transition: transform 50ms ease;
+}
+
+header:hover {
+	cursor: pointer;
+	animation: bounceUp 1s ease-in-out infinite;
+}
+
+.arrow {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	background: transparent;
+	text-indent: -9999px;
+	border-top: 2px solid #bfbfbf;
+	border-left: 2px solid #bfbfbf;
+	text-decoration: none;
+	color: transparent;
+}
+
+.down {
+	transform: rotate(225deg)
+}
+
+.up {
+	transform: rotate(45deg)
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.row {
+	width: 80vw;
+	padding-bottom: 5rem;
+}
+
+p {
+	font-size: var(--normal-text);
+}
+
+#experience {
+	top: 110vh;
+}

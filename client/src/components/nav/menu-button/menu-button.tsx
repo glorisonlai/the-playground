@@ -1,7 +1,7 @@
 import React from "react";
 import "./menu-button.css";
 import classNames from "classnames";
-import Challenges from "../challenges/challenges";
+import Challenges from "../../challenges/challenges";
 
 const MenuButton = ({
   shape,

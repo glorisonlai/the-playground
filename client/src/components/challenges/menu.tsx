@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import "./menu.css";
 import Challenges from "./challenges";
-import MenuButton from "../nav/menu-button";
+import MenuButton from "../nav/menu-button/menu-button";
 import Flag from "./challenge-comp/flag";
 
 /**
@@ -100,10 +100,9 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
             style={{ height: "50px", width: "auto" }}
           >
             <img
-              className={`${unlocked} ${focussed}`}
+              className={`challenge ${unlocked} ${focussed}`}
               src={require(`assets/sprites/${logo}`)}
               alt=""
-              style={{ width: "50px" }}
             />
             <div className="challenge-text">{title}</div>
           </div>
@@ -130,7 +129,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   return (
     <>
       <div className={`cover flyout ${showState}`}>
-        <h1>Backgrounds</h1>
+        <h2>Backgrounds</h2>
         {visible && <ChallengeMenu />}
       </div>
       <MenuButton

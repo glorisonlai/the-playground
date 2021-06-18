@@ -44,7 +44,7 @@ const Challenges: Challenges = {
       id: 3,
       title: "Support Desk",
       logo: "logo.svg",
-      desc: "hello",
+      desc: "Contact Support for the flag",
     },
   ],
 

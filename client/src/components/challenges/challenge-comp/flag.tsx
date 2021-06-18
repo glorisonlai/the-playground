@@ -43,11 +43,13 @@ const Flag = ({
 
   return (
     <div className="flag-col">
-      <label className="flag flag-label" htmlFor="flag">
-        <strong>{title}</strong>
+      <label className="flag title" htmlFor="flag">
+        <h2>
+          <strong>{title}</strong>
+        </h2>
       </label>
-      <p>{desc}</p>
-      <br />
+      <code>{desc}</code>
+      <div>&nbsp;</div>
       {!unlocked && (
         <Suspense fallback={<div className="bg"></div>}>
           {renderFlag(id)}

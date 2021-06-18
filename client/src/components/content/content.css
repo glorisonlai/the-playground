@@ -8,7 +8,7 @@
 .main {
     position: absolute;
     top: var(--content-top);
-    left: 10vw;
+    padding-left: 10vw;
     align-content: left;
     text-align: left;
     font-family: 'KaiTi', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -17,37 +17,36 @@
     overflow: auto;
 }
 
-.footer {
-    position: relative;
-    margin: auto 0;
-    font-size: var(--footer-size);
-}
-
 /*Transform values are hardcoded, otherwise won't shift*/
 #train {
     text-align: left;
     animation: shiftTrain var(--animation-length) var(--animation-style);
     transform: translateX(calc(0.5rem * -100));
+    /* transform: translateX(2rem); */
 }
 
-#content {
-    width: 100vw;
+#content.animate {
     position: fixed;
+    width: 100vw;
     animation: shiftContent var(--animation-length) var(--animation-style);
 }
 
 #start {
-   transform: translateX(calc(0.5rem * -100 - 100vw));
+   /* transform: translateX(calc(0.5rem * -100 - 100vw)); */
+   transform: translateX(2rem);
    animation: shiftCode var(--animation-length) var(--animation-style);
 }
 
 @keyframes shiftCode {
     from {transform: translateX(0);}
     to {transform: translateX(calc(0.5rem * -100 - 100vw));}
+    /* to {
+        transform: translateX(2rem);
+    } */
 }
 
 @keyframes shiftTrain {
-    from {transform: translateX(100vw);}
+    from {transform: translateX(101vw);}
     to {transform: translateX(calc(0.5rem * -100))}
 }
 

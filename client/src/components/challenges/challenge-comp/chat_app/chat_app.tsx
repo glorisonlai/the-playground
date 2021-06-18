@@ -3,6 +3,8 @@ import NormalForm from "../normal_form";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import "./chat_app.css";
+import { SupportUser } from "assets/fontawesome";
+import SplitPane from "components/nav/split-pane/split-pane";
 
 /**
  * Renders support chat app.
@@ -30,11 +32,12 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
   // Append message to support chat div, and sends message to server
   const sendMsg = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (loading) return;
+    // if (loading) return;
     if (!msg) return;
     setLoading(true);
     const el = document.createElement("div");
     el.innerHTML = msg;
+    el.className = "talk-bubble user";
     document.querySelector("#support-chat")!.appendChild(el);
     setMsg("");
     const { data } = await axios.post(
@@ -51,30 +54,32 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
   const createMsg = (msg: string) => <li>{DOMPurify.sanitize(msg)}</li>;
 
   return (
-    <div className="splitPane">
-      <div className="panel">
-        <div className="support-pane">
-          <ul id="support-chat">
-            <div className="talk-bubble tri-right left-top">
-              Hi! How can I help you? afeeahjsfgjeaskhfiesahgfaeshfiasufhoiase
-            </div>
-          </ul>
+    <SplitPane>
+      <div id="support-pane" className="support">
+        {/* Blue header */}
+        <div id="support-header">
+          <SupportUser />
+          <>Tech Support</>
         </div>
-        <form onSubmit={sendMsg}>
+        {/* Chat pane */}
+        <ul id="support-chat">
+          <div className="talk-bubble admin">Hi! How can I help?</div>
+        </ul>
+        {/* Text Input */}
+        <form id="support-msg" onSubmit={sendMsg}>
           <input
-            className="flag"
             type="text"
-            id="flag"
+            id="support-msg-text"
             name="flag"
-            placeholder=""
+            placeholder="Type here..."
             value={msg}
             onChange={handleChange}
           />
-          <input className="flag" type="submit" value="Send" />
+          <input id="support-msg-submit" type="submit" value="Send" />
         </form>
       </div>
       <NormalForm id={id} callBack={callBack} />
-    </div>
+    </SplitPane>
   );
 };
 

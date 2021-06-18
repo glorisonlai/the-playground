@@ -12,7 +12,7 @@ import Content from "components/content/content";
  * Landing page, performs background checks before serving
  * @returns Loading animation, then portolio/website
  */
-function App() {
+function App({ chalLoadedCallback, bgLoadedCallback }) {
   useEffect(() => {
     console.log(
       "%c" +
@@ -46,12 +46,12 @@ function App() {
   const changeBgId = (id: number) => {
     setBgId(id);
     window.localStorage.setItem("bgId", id.toString());
+    chalLoadedCallback(true);
   };
 
   // Current background to show
   const [bgId, setBgId] = useState(getBgId());
   console.log(bgId);
-
   return (
     <div className="app">
       <Background bg={bgId} />

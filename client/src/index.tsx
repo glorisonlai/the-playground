@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState, Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import Start from "./components/content/start";
+import App from "./App";
+// const App = lazy(() => import("./App"));
+
+const Index = () => {
+  const [chalsLoaded, setChalsLoaded] = useState(false);
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  return (
+    <Suspense fallback={<Start chalLoaded={chalsLoaded} bgLoaded={bgLoaded} />}>
+      <App chalLoadedCallback={setChalsLoaded} bgLoadedCallback={setBgLoaded} />
+    </Suspense>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Index />
   </React.StrictMode>,
   document.getElementById("root")
 );

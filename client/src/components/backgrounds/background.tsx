@@ -27,13 +27,7 @@ const renderBg = (bg: number) => {
  * @param bg Background ID
  * @returns Background
  */
-const Background = ({
-  bg,
-  callBack,
-}: {
-  bg: number;
-  callBack: VoidFunction;
-}) => {
+const Background = ({ bg }: { bg: number }) => {
   return (
     <Suspense fallback={<div className="bg"></div>}>{renderBg(bg)}</Suspense>
   );
