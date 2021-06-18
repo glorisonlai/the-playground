@@ -15,8 +15,6 @@ interface Constants {
   maxY: number;
   twistAmount: number;
   stepsPerSegment: number;
-  maxColorValue: number;
-  minColorValue: number;
   lineAlpha: number;
   lineWidth: number;
   xSqueeze: number;
@@ -71,6 +69,8 @@ const generateLines = () => {
     screenConstants.constants = initConstants();
     screenConstants.circles = setCircles(screenConstants.constants);
     screenConstants.colors = setColors(screenConstants.constants);
+    console.time("Drawing");
+    draw();
   };
 
   const initConstants = (): Constants => {
@@ -90,8 +90,6 @@ const generateLines = () => {
     constants.maxY = (screenConstants.height * 7) / 8;
     constants.twistAmount = 1.3 * Math.PI;
     constants.stepsPerSegment = Math.floor(600 / constants.numCircles);
-    constants.maxColorValue = 1000;
-    constants.minColorValue = 0;
     constants.lineAlpha = 0.01;
     constants.lineWidth = 2.5;
     constants.xSqueeze = 1;
@@ -186,38 +184,15 @@ const generateLines = () => {
     return circles;
   };
 
-  const setColors = ({
-    minColorValue,
-    maxColorValue,
-    lineAlpha,
-    iterations,
-  }: Constants) => {
+  const setColors = ({ lineAlpha, iterations }: Constants) => {
     const colors = [];
-
-    const r0: number =
-      minColorValue + Math.random() * (maxColorValue - minColorValue);
-    const g0: number =
-      minColorValue + Math.random() * (maxColorValue - minColorValue);
-    const b0: number =
-      minColorValue + Math.random() * (maxColorValue - minColorValue);
-
-    const r1: number =
-      minColorValue + Math.random() * (maxColorValue - minColorValue);
-    const g1: number =
-      minColorValue + Math.random() * (maxColorValue - minColorValue);
-    const b1: number =
-      minColorValue + Math.random() * (maxColorValue - minColorValue);
-
     var colorParamArray: Array<number> = setLinePoints(iterations);
 
     for (let i = 0; i < colorParamArray.length; i++) {
       const param = colorParamArray[i];
+      const random = Math.random() * 200 + param;
 
-      const r: number = Math.floor(r0 + param * (r1 - r0));
-      const g: number = Math.floor(g0 + param * (g1 - g0));
-      const b: number = Math.floor(b0 + param * (b1 - b0));
-
-      const newColor = `rgba(${r},${g},${b},${lineAlpha})`;
+      const newColor = `rgba(${random},${random},${random},${lineAlpha})`;
 
       colors.push(newColor);
     }
@@ -226,7 +201,6 @@ const generateLines = () => {
   };
 
   const draw = () => {
-    console.time("Drawing");
     const { context, constants, circles, colors } = screenConstants;
     const {
       numCircles,

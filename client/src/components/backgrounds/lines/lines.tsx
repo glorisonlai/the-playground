@@ -12,9 +12,9 @@ const Lines = () => {
   // )
   useEffect(() => {
     // TODO: if (supportsCanvas)
+    console.log("hello");
     const redrawLines = () => {
       generator();
-      console.time("Drawing");
     };
 
     window.addEventListener("resize", redrawLines);
