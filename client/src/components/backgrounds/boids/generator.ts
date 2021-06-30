@@ -8,15 +8,24 @@ interface CanvasConstantsInterface {
   lastDraw: number;
 }
 
+/**
+ * Function to start drawing boids onto canvas
+ */
 const boidGenerator = () => {
+  /**
+   * Instantiate canvas context
+   */
   const canvasConstants: CanvasConstantsInterface = {
     canvas: document.getElementById("boidCanvas") as HTMLCanvasElement,
     context: {} as CanvasRenderingContext2D,
     boidsArr: [],
     lastDraw: 0,
   };
+
+  // Number of boids on canvas
   const NUMBOIDS = 20;
 
+  //Reset canvas, instantiate boids, and start drawing
   const init = (): void => {
     reset();
     canvasConstants.context = canvasConstants.canvas.getContext("2d")!;
@@ -24,6 +33,7 @@ const boidGenerator = () => {
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
   };
 
+  //Cancels current drawing frame, and resets boid array
   const reset = () => {
     window.cancelAnimationFrame(canvasConstants.lastDraw);
     canvasConstants.lastDraw = 0;
@@ -32,12 +42,17 @@ const boidGenerator = () => {
 
   /**
    * Returns random number between bounds
-   * No arguments supplied defaults to boolean expression
+   * If no arguments are supplied function picks between 0 and 1
    * @param bound Largest bound. Defaults to 0-1
    * @returns Random integer from 0-(bound-1)
    */
   const randNum = (bound: number = 2) => Math.floor(Math.random() * bound);
 
+  /**
+   * Instantiates boids into array
+   * @param numBoids Number of boids to create
+   * @returns Array of boids
+   */
   const createBoids = (numBoids: number): Boid[] => {
     const boidsArr = [];
     for (let id = 0; id < numBoids; id++) {
@@ -49,6 +64,10 @@ const boidGenerator = () => {
     return boidsArr;
   };
 
+  /**
+   * Draws to canvas
+   * Every frame, clear the canvas, update and draw each boid onto canvas
+   */
   const draw = () => {
     const ctx = canvasConstants.context;
     ctx.clearRect(

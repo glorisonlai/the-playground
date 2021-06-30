@@ -1,6 +1,13 @@
 import React from "react";
 import "./content.css";
 
+/**
+ * Barebones loading screen
+ * @param chalLoaded Check if all challenge routes have been verified
+ * @param bgLoaded Check if background has been loaded
+ * @param className CSS to trigger animation
+ * @returns
+ */
 const Start = ({
   chalLoaded,
   bgLoaded,

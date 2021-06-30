@@ -9,16 +9,28 @@ interface vector2dMethods {
   reverse(vector: vector2dInterface): vector2dInterface;
   extend(vector: vector2dInterface, extension: number): vector2dInterface;
   resolveDegreesToUnitVector(degrees: number): vector2dInterface;
-  resolveUnitVectorToRadians(vector: vector2dInterface): number;
+  resolveVectorToRadians(vector: vector2dInterface): number;
   resolveRadiansToUnitVector(radians: number): vector2dInterface;
   dotProd(v1: vector2dInterface, v2: vector2dInterface): number;
 }
 
+// Helper functions to work with 2d vectors
 const vector2d: vector2dMethods = {
+  /**
+   * Creates new vector off of coordinates
+   * @param x x component
+   * @param y y component
+   * @returns Vector
+   */
   create(x, y) {
     return { x, y };
   },
 
+  /**
+   * Adds vectors to each other
+   * @param vectors Array of vectors
+   * @returns Sum of vectors
+   */
   add(vectors) {
     const vector = this.create(0, 0);
     for (const arg of vectors) {
@@ -28,6 +40,11 @@ const vector2d: vector2dMethods = {
     return vector;
   },
 
+  /**
+   * Creates new vector pointing away from vector
+   * @param vector Vector
+   * @returns Flipped vector
+   */
   reverse(vector) {
     return {
       x: -vector.x,
@@ -35,6 +52,12 @@ const vector2d: vector2dMethods = {
     };
   },
 
+  /**
+   * Multiply vector by magnitude
+   * @param vector Vector
+   * @param extension Magnitude
+   * @returns Extended vector
+   */
   extend(vector, extension) {
     return {
       x: vector.x * extension,
@@ -55,14 +78,30 @@ const vector2d: vector2dMethods = {
     return { x, y };
   },
 
-  resolveUnitVectorToRadians(vector) {
+  /**
+   * Convert vector into radians
+   * @param vector Vector
+   * @returns Radians
+   */
+  resolveVectorToRadians(vector) {
     return Math.atan2(vector.y, vector.x);
   },
 
+  /**
+   * Convert radians into unit vector
+   * @param radians Radians
+   * @returns Unit vector
+   */
   resolveRadiansToUnitVector(radians) {
     return { x: Math.cos(radians), y: Math.sin(radians) };
   },
 
+  /**
+   * Calculates projection of v1 onto v2
+   * @param v1 Vector
+   * @param v2 Vector
+   * @returns Dot product of v1 and v2
+   */
   dotProd(v1, v2) {
     return v1.x * v2.x + v1.y * v2.y;
   },

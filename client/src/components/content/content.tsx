@@ -3,6 +3,14 @@ import Pitch from "./pitch";
 import Portfolio from "./portfolio";
 import Start from "./start";
 
+/**
+ * Wrapper component for display screen
+ * Animates the 'sl' train on load
+ * @param initScreen Display CTF/Portfolio screen
+ * @param unlocked Number of unlocked backgrounds
+ * @param total Number of all challenges
+ * @returns
+ */
 const Content = ({
   initScreen,
   unlocked,

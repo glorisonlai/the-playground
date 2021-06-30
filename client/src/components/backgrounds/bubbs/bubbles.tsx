@@ -1,7 +1,16 @@
 import React from "react";
-require("./bubbles.css");
+import "./bubbles.css";
 
+/**
+ * Floating bubbles animation
+ * @returns Bubbles background
+ */
 const Bubbles = () => {
+  /**
+   * Assigns random position and size to bubble
+   * Animation time scales with bubble size
+   * @returns CSS styling for individual bubble
+   */
   const randomCss = () => {
     const seed = Math.random();
     return {
@@ -13,14 +22,18 @@ const Bubbles = () => {
     };
   };
 
-  const bubbleArray = (seed: Number) => {
-    if (seed < 0) return null;
-    if (seed > 100) return null;
-    return Array(seed)
+  /**
+   * Creates array of bubbles with random CSS
+   * @param bubbles How many bubbles to render
+   * @returns array of list elements with bubble CSS
+   */
+  const bubbleArray = (bubbles: Number) => {
+    if (bubbles < 0) return null;
+    if (bubbles > 100) return null;
+    return Array(bubbles)
       .fill(0)
       .map((e, i) => <li key={i} style={randomCss()} />);
   };
-  console.log("loadingbg");
   return (
     <div className="bg">
       <ul id="bubbles">{bubbleArray(100)}</ul>

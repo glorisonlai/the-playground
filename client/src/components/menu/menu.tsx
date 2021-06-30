@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./menu.css";
-import Challenges from "./challenges";
+import Challenges from "../challenges/challenges";
 import ChallengeIcon from "./challengeIcon";
-import MenuButton from "../nav/menu-button/menu-button";
-import Flag from "./challenge-comp/flag";
+import MenuButton from "./menu-button/menu-button";
+import Flag from "../challenges/challenge-comp/flag";
 
 /**
- * Hidden-ish menu to access challenges. All challenges found in *challenges.ts*.
+ * Hidden menu to access challenges.
  * @param bgId Current Background ID, mapping to challenge
  * @param unlock Callback function to switch background
  * @returns Challenge menu Component
@@ -76,10 +76,10 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     );
   };
 
-  /* 
-  Renders the challenge menu.
-  All styling done in menu.css
-  */
+  /**
+   * Renders the challenge menu.
+   * All styling done in menu.css
+   */
   const ChallengeMenu = () => {
     const challenges = Challenges.getAllChallenges();
     const focussedBg = Challenges.getChallengeFromId(focussedId);

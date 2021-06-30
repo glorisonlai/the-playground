@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Background from "components/backgrounds/background";
-import Menu from "components/challenges/menu";
+import Menu from "components/menu/menu";
 import Challenges from "components/challenges/challenges";
 import Content from "components/content/content";
 
@@ -66,7 +66,7 @@ function App({
     return (
       <>
         <Background bg={bgId} bgCallback={bgLoadedCallback} />
-        {/* <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} /> */}
+        <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
       </>
     );
   };
@@ -74,11 +74,11 @@ function App({
   return (
     <div className="app">
       <BackgoundMenu />
-      {/* <Content
+      <Content
         initScreen={showPortfolio}
         unlocked={Challenges.getUnlocked()}
         total={Challenges.getAllChallenges().length}
-      /> */}
+      />
     </div>
   );
 }

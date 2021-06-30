@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * Main CTF website view
+ * CTF website view
  * @param unlocked Total number of challenges solved
  * @param total Total number of challenges
  * @returns CTF view

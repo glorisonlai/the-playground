@@ -1,7 +1,9 @@
 import React from "react";
 
-const MissingBg = () => {
-  return <></>;
-};
+/**
+ * Fallback background if background id doesn't exist
+ * @returns Default background
+ */
+const MissingBg = () => <></>;
 
 export default MissingBg;

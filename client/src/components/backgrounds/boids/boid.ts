@@ -1,9 +1,5 @@
 import vector2d, { vector2dInterface } from "../../classes/vector2d";
 
-/**
- * File Stores state of boid, and steering logic
- */
-
 // Constants to change steering bias
 const boidConstants = {
   SPEED: 5,
@@ -19,8 +15,11 @@ const boidConstants = {
 };
 
 /**
- * Class to simulate boid and flocking behaviour
- * Source: https://gamedevelopment.tutsplus.com/tutorials/3-simple-rules-of-flocking-behaviors-alignment-cohesion-and-separation--gamedev-3444
+ * Class to simulate boid and flocking behaviour, via alignment, cohesion, and avoidance logic
+ * Alignment - Point this boid to direction of other boids
+ * Cohesion - Steer towards other boids
+ * Avoidance - Steer clear of other boids
+ *
  * TODO: Boids like to go to top-left corner and stay there. Something to do with cohesion/avoidance logic
  */
 class Boid {
@@ -44,7 +43,10 @@ class Boid {
     this.direction = vector2d.resolveDegreesToUnitVector(force);
   }
 
-  // Draw boid onto canvas
+  /**
+   * Draws boid shape onto canvas
+   * @param ctx Canvas Context
+   */
   draw = (ctx: CanvasRenderingContext2D) => {
     const centre = vector2d.add([
       this.head,
@@ -52,12 +54,15 @@ class Boid {
         vector2d.extend(this.direction, boidConstants.BIRD_LENGTH)
       ),
     ]);
+    // Get 'tail' of boid, rotate left and right to get wing tips
+    // TODO: Can be optimised to avoid expensive radian conversion
     const reverseRadians =
-      vector2d.resolveUnitVectorToRadians(this.direction) - Math.PI;
+      vector2d.resolveVectorToRadians(this.direction) - Math.PI;
     const tailRightRadian = reverseRadians + boidConstants.STEERING_LIMIT,
       tailLeftRadian = reverseRadians - boidConstants.STEERING_LIMIT;
     const tailRight = vector2d.resolveRadiansToUnitVector(tailRightRadian);
     const tailLeft = vector2d.resolveRadiansToUnitVector(tailLeftRadian);
+
     ctx.beginPath();
     ctx.moveTo(this.head.x, this.head.y);
     ctx.lineTo(
@@ -75,11 +80,16 @@ class Boid {
     ctx.fill();
   };
 
+  /**
+   * Calculates squared distance from this, to other boid
+   * @param head Location of other boid
+   * @returns Squared distance
+   */
   squaredDist = ({ head }: Boid) =>
     (this.head.x - head.x) ** 2 + (this.head.y - head.y) ** 2;
 
   /**
-   * Simulates view cone of 180deg in front of boid
+   * Simulates view cone of 200-ish degrees in front of boid
    * @param radius Radius of view cone
    * @param otherBoid Target boid
    * @returns True if in radius
@@ -95,6 +105,12 @@ class Boid {
     return projection >= -0.2 && projection <= radius ** 2;
   };
 
+  /**
+   * Logic to figure out whether steeringRadian is closer to left of current directionRadian
+   * @param steeringRadian Destination vector
+   * @param directionRadian Current vector
+   * @returns True if should turn anti-clockwise
+   */
   turnLeft = (steeringRadian: number, directionRadian: number): boolean =>
     directionRadian >= 0
       ? steeringRadian >= directionRadian ||
@@ -121,12 +137,11 @@ class Boid {
       vector2d.extend(cohesionVector, boidConstants.COHESION_WEIGHT),
       vector2d.extend(avoidanceVector, boidConstants.AVOIDANCE_WEIGHT),
     ]);
-    const steeringRadians = vector2d.resolveUnitVectorToRadians(steeringVector);
-    const currVectorRadians = vector2d.resolveUnitVectorToRadians(
-      this.direction
-    );
+    const steeringRadians = vector2d.resolveVectorToRadians(steeringVector);
+    const currVectorRadians = vector2d.resolveVectorToRadians(this.direction);
     if (this.turnLeft(steeringRadians, currVectorRadians)) {
       // Go left
+      // TODO: Messy logic
       if (
         currVectorRadians + boidConstants.STEERING_LIMIT > Math.PI &&
         steeringRadians < 0
@@ -179,6 +194,7 @@ class Boid {
       if (this.inView(boidConstants.VIEWDIST, otherBoid)) {
         // Align direction with nearby boids
         alignmentVector = vector2d.add([alignmentVector, otherBoid.direction]);
+
         // Aim towards other boids
         cohesionVector = vector2d.add([
           cohesionVector,
@@ -212,6 +228,8 @@ class Boid {
       avoidanceVector.x += boidConstants.WALL_WEIGHT * this.direction.x;
       avoidanceVector.y -= (boidConstants.WALL_WEIGHT * boundary.y) / 2;
     }
+
+    // If cannot avoid wall, teleport to opposite wall
     if (this.head.x < -10) {
       this.head.x = boundary.x + 10;
     } else if (this.head.x > boundary.x + 10) {
@@ -224,7 +242,6 @@ class Boid {
     }
 
     // Steer boid
-    // debugger;
     const steeringVector = vector2d.resolveRadiansToUnitVector(
       this.steer(alignmentVector, cohesionVector, avoidanceVector)
     );

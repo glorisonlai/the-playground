@@ -11,7 +11,7 @@ import "./content.css";
 import { ScreenConstants } from "components/backgrounds/background";
 
 /**
- * Main CTF website view
+ * Portfolio website view
  * Contains main page, personal projects
  * @returns Portfolio view
  */
@@ -80,15 +80,37 @@ const Portfolio = () => {
         <h1>Glorison Lai</h1>
         {/** Icon row */}
         <div className="icons">
-          <div className="icon">
-            <a href="https://www.github.com" target="_blank" rel="noreferrer">
-              <GithubIcon />
-              <div className="line" />
-              <div className="tag">GitHub</div>
-            </a>
-          </div>
-          {/* <TwitterIcon /> */}
-          {/* <BlogIcon /> */}
+          {/* Github Icon */}
+          <a
+            href="https://www.github.com/glorisonlai"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GithubIcon />
+            <div className="line" />
+            <div className="tag">GitHub</div>
+          </a>
+          {/* <Twitter Icon /> */}
+          {/* <a
+            href="https://twitter.com/Glorison3"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <TwitterIcon />
+            <div className="line" />
+            <div className="tag">Twitter</div>
+          </a> */}
+          {/* <Blog Icon /> */}
+          {/* <a
+            href="https://dev.to/glorisonlai"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <TwitterIcon />
+            <div className="line" />
+            <div className="tag">Blog Posts</div>
+          </a> */}
+          {/* Resume Icon */}
           <a
             href="resume.pdf"
             download="Glorison_Lai_2021_Resume.pdf"
@@ -99,6 +121,7 @@ const Portfolio = () => {
             <div className="line" />
             <div className="tag">Resume</div>
           </a>
+          {/* Email Icon */}
           <a
             href="mailto:lai.glorison@gmail.com"
             target="_blank"

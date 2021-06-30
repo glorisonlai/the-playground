@@ -4,7 +4,7 @@ import axios from "axios";
 import DOMPurify from "dompurify";
 import "./chat_app.css";
 import { SupportUser } from "assets/fontawesome";
-import SplitPane from "components/nav/split-pane/split-pane";
+import SplitPane from "components/split-pane/split-pane";
 
 /**
  * Renders support chat app.

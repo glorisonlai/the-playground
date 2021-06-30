@@ -26,7 +26,11 @@ const Flag = ({
   unlocked: boolean;
   callBack: Function;
 }) => {
-  // Chooses which flag form to render
+  /**
+   * Chooses which flag form to render
+   * @param id Challenge ID
+   * @returns Challenge form component
+   */
   const renderFlag = (id: number) => {
     switch (id) {
       case 1:

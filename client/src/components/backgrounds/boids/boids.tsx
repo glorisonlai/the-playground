@@ -1,18 +1,25 @@
 import React, { useEffect } from "react";
-import "./boids.css";
 import generator from "./generator";
 import { ScreenConstants } from "../background";
 
+/**
+ * Background to simulate boid flocking behaviour
+ * Inspired by Sebastian Lague's animations
+ * TODO: Make fallback background
+ * @returns Boids background
+ */
 const Boids = () => {
   useEffect(() => {
     generator();
   }, []);
+
   const Canvas = () => (
     <canvas
       width={ScreenConstants.width}
       height={ScreenConstants.height}
       id={"boidCanvas"}
     >
+      {/* Fallback message */}
       <h1 style={{ alignContent: "center" }}>
         Sorry!
         <br />

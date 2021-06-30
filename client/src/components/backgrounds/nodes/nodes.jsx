@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import "particles.js/particles";
 
+/**
+ * Uses particles.js script to create THE developer background
+ * TODO: Write own generator
+ * @returns Nodes background
+ */
 const Nodes = () => {
   useEffect(() => {
     const particlesJS = window.particlesJS;

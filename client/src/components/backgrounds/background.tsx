@@ -1,12 +1,14 @@
 import React, { lazy, Suspense } from "react";
 
-const BubbleBg = lazy(() => import("./bubbs/bubbles"));
-const LinesBg = lazy(() => import("./lines/lines"));
-const BoidsBg = lazy(() => import("./boids/boids"));
-const EyesBg = lazy(() => import("./eyes/eyes"));
-const MountainBg = lazy(() => import("./mountains/mountains"));
-const MissingBg = lazy(() => import("./missing/missing"));
-const NodesBg = lazy(() => import("./nodes/nodes"));
+// Challenges: 4
+// Backgrounds: 3
+const BubbleBg = lazy(() => import("./bubbs/bubbles")); // DONE
+const LinesBg = lazy(() => import("./lines/lines")); // DONE
+const BoidsBg = lazy(() => import("./boids/boids")); // DONE
+const EyesBg = lazy(() => import("./eyes/eyes")); // INCOMPLETE
+const MountainBg = lazy(() => import("./mountains/mountains")); // INCOMPLETE
+const NodesBg = lazy(() => import("./nodes/nodes")); // INCOMPLETE
+const MissingBg = lazy(() => import("./missing/missing")); // DONE
 
 /**
  * Current available backgrounds. Will be updated!

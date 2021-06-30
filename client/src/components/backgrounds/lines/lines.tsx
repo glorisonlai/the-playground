@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-import "./lines.css";
 import generator from "./generator";
 import { ScreenConstants } from "../background";
-// TODO: GET MODERNIZR WORKING
-// import Modernizr from 'modernizr';
-// import Generator from './generator';
 
+/**
+ * Animates drawing lines based on sine waves
+ * TODO: Implement fallback background if Canvas/JS not supported
+ * @returns Lines background
+ */
 const Lines = () => {
-  // const supportsCanvas = () => (
-  //   Modernizr.canvas
-  // )
   useEffect(generator, []);
 
   const Canvas = () => (
@@ -18,6 +16,7 @@ const Lines = () => {
       height={ScreenConstants.height}
       id={"canvas"}
     >
+      {/* Fallback message */}
       <h1 style={{ alignContent: "center" }}>
         Sorry!
         <br />

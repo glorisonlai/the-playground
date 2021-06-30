@@ -11,9 +11,10 @@ const NormalForm = ({ id, callBack }: { id: number; callBack: Function }) => {
   // Prevent user from spamming submit button
   const [loading, setLoading] = useState(false);
 
-  // Updates flag text
+  // Flag text
   const [flag, setFlag] = useState("");
 
+  // Updates flag text
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFlag(event.target.value);
   };
