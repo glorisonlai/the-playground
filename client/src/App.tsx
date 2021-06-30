@@ -29,8 +29,6 @@ function App({
     );
   }, []);
 
-  console.log("hello");
-
   // Check if user wants to see portfolio, or CTF
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get("view");
@@ -74,11 +72,11 @@ function App({
   return (
     <div className="app">
       <BackgoundMenu />
-      <Content
+      {/* <Content
         initScreen={showPortfolio}
         unlocked={Challenges.getUnlocked()}
         total={Challenges.getAllChallenges().length}
-      />
+      /> */}
     </div>
   );
 }

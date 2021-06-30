@@ -1,14 +1,15 @@
 import React, { lazy, Suspense } from "react";
 
 // Challenges: 4
-// Backgrounds: 3
-const BubbleBg = lazy(() => import("./bubbs/bubbles")); // DONE
-const LinesBg = lazy(() => import("./lines/lines")); // DONE
-const BoidsBg = lazy(() => import("./boids/boids")); // DONE
-const EyesBg = lazy(() => import("./eyes/eyes")); // INCOMPLETE
-const MountainBg = lazy(() => import("./mountains/mountains")); // INCOMPLETE
-const NodesBg = lazy(() => import("./nodes/nodes")); // INCOMPLETE
-const MissingBg = lazy(() => import("./missing/missing")); // DONE
+// Backgrounds: 4
+const BubbleBg = lazy(() => import("./bubbs/bubblesbg")); // DONE
+const LinesBg = lazy(() => import("./lines/linesbg")); // DONE
+const BoidsBg = lazy(() => import("./boids/boidsbg")); // DONE
+const EyesBg = lazy(() => import("./eyes/eyesbg")); // INCOMPLETE
+const MountainBg = lazy(() => import("./mountains/mountainsbg")); // INCOMPLETE
+const NodesBg = lazy(() => import("./nodes/nodesbg")); // DONE
+const SlimeBg = lazy(() => import("./slime/slimebg")); // INCOMPLETE
+const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 
 /**
  * Current available backgrounds. Will be updated!
@@ -18,9 +19,13 @@ const MissingBg = lazy(() => import("./missing/missing")); // DONE
 const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
-      return <BoidsBg />;
+      return <NodesBg />;
     case 1:
       return <LinesBg />;
+    case 2:
+      return <NodesBg />;
+    case 3:
+      return <BoidsBg />;
     default:
       return <MissingBg />;
   }
