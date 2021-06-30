@@ -1,6 +1,5 @@
 import React from "react";
 import "./menu-button.css";
-import classNames from "classnames";
 import Challenges from "../../challenges/challenges";
 
 const MenuButton = ({
@@ -25,21 +24,19 @@ const MenuButton = ({
     );
   };
 
-  const shapeStyle = { cross: shape };
-  const buttonPos = shape ? { right: true } : { left: true };
+  const buttonClass = shape ? "right" : "left";
 
-  const buttonClass = classNames("btn", "flyout", { ...buttonPos });
-  const menuClass = classNames("glowy", "menu-btn", { ...shapeStyle });
+  const menuClass = shape ? "cross" : "";
 
   return (
     <button
-      className={buttonClass}
+      className={`btn flyout ${buttonClass}`}
       aria-label="menu"
       onClick={() => {
         setVis();
       }}
     >
-      <div className={menuClass}>{!shape && Svg(bgId)}</div>
+      <div className={`glowy menu-btn ${menuClass}`}>{!shape && Svg(bgId)}</div>
     </button>
   );
 };

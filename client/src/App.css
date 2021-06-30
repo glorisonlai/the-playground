@@ -5,6 +5,19 @@
 
 .screen {
   position: absolute;
-  height: 100vh;
+}
+
+.bg {
+  position: relative;
+  background: rgb(49, 53, 53);
+  color: #333333;
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }

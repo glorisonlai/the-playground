@@ -1,15 +1,3 @@
-.bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgb(49, 53, 53);
-  z-index: -1;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
 #bubbles {
   z-index: -9;
   transform: translateZ(-1);

@@ -3,9 +3,6 @@ import "./App.css";
 import Background from "components/backgrounds/background";
 import Menu from "components/challenges/menu";
 import Challenges from "components/challenges/challenges";
-import Pitch from "components/content/pitch";
-import Portfolio from "components/content/portfolio";
-import Start from "components/content/start";
 import Content from "components/content/content";
 
 /**
@@ -16,8 +13,8 @@ function App({
   chalLoadedCallback,
   bgLoadedCallback,
 }: {
-  chalLoadedCallback: React.Dispatch<React.SetStateAction<boolean>>;
-  bgLoadedCallback: React.Dispatch<React.SetStateAction<boolean>>;
+  chalLoadedCallback: (loaded: boolean) => void;
+  bgLoadedCallback: (loaded: boolean) => void;
 }) {
   useEffect(() => {
     console.log(
@@ -32,6 +29,8 @@ function App({
     );
   }, []);
 
+  console.log("hello");
+
   // Check if user wants to see portfolio, or CTF
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get("view");
@@ -39,30 +38,47 @@ function App({
   // Switch website view from portfolio, to CTF
   const [showPortfolio, setShowPortfolio] = useState(!!view ? true : false);
 
+  // Load all challenges
+  Challenges.initialUnlock();
+  chalLoadedCallback(true);
+
   // Get initial background from localStorage
   const getBgId = (): number => {
     const id: number = Number(localStorage.getItem("bgId"));
     return Challenges.isUnlockedFromId(id) ? id : 0;
   };
 
-  // Change background image, and save to localStorage
-  const changeBgId = (id: number) => {
-    setBgId(id);
-    window.localStorage.setItem("bgId", id.toString());
-    chalLoadedCallback(true);
+  /**
+   * Component that handles background state
+   * Separated from Content component that should only render once
+   * @returns Background, Menu, and Menu Button components
+   */
+  const BackgoundMenu = () => {
+    // Initial background image
+    const [bgId, setBgId] = useState(getBgId());
+
+    // Change background image callback, and save to localStorage
+    const changeBgId = (id: number) => {
+      setBgId(id);
+      window.localStorage.setItem("bgId", id.toString());
+    };
+
+    return (
+      <>
+        <Background bg={bgId} bgCallback={bgLoadedCallback} />
+        {/* <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} /> */}
+      </>
+    );
   };
 
-  // Current background to show
-  const [bgId, setBgId] = useState(getBgId());
   return (
     <div className="app">
-      <Background bg={bgId} bgCallback={bgLoadedCallback} />
-      <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
-      <Content
+      <BackgoundMenu />
+      {/* <Content
         initScreen={showPortfolio}
         unlocked={Challenges.getUnlocked()}
         total={Challenges.getAllChallenges().length}
-      />
+      /> */}
     </div>
   );
 }

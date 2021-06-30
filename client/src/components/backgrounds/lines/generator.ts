@@ -21,7 +21,8 @@ interface Constants {
   drawingQueue: Array<number>;
 }
 
-interface ScreenConstants {
+interface ScreenConstantsInterface {
+  canvas: HTMLCanvasElement;
   height: number;
   width: number;
   context: CanvasRenderingContext2D;
@@ -49,7 +50,8 @@ interface Circle {
 }
 
 const generateLines = () => {
-  const screenConstants: ScreenConstants = {
+  const screenConstants: ScreenConstantsInterface = {
+    canvas: document.getElementById("canvas") as HTMLCanvasElement,
     height: ScreenConstants.height,
     width: ScreenConstants.width,
     context: {} as CanvasRenderingContext2D,
@@ -61,8 +63,7 @@ const generateLines = () => {
   };
 
   const init = (): void => {
-    const canvas = document.getElementById("screen") as HTMLCanvasElement;
-    screenConstants.context = canvas.getContext(
+    screenConstants.context = screenConstants.canvas.getContext(
       "2d"
     ) as CanvasRenderingContext2D;
     resetCanvas();
@@ -190,7 +191,7 @@ const generateLines = () => {
 
     for (let i = 0; i < colorParamArray.length; i++) {
       const param = colorParamArray[i];
-      const random = Math.random() * 200 + param;
+      const random = Math.random() * 130 + param;
 
       const newColor = `rgba(${random},${random},${random},${lineAlpha})`;
 

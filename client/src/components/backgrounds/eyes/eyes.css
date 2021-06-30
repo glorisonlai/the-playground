@@ -3,18 +3,6 @@
   --small-size: 9em;
 }
 
-.bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgb(30, 31, 31);
-  z-index: -1;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
 .eye {
   margin: 0 auto;
   border-radius: 100% 0px;

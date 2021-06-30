@@ -1,10 +1,12 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 
 const BubbleBg = lazy(() => import("./bubbs/bubbles"));
 const LinesBg = lazy(() => import("./lines/lines"));
-const BirdsBg = lazy(() => import("./boids/boids"));
+const BoidsBg = lazy(() => import("./boids/boids"));
 const EyesBg = lazy(() => import("./eyes/eyes"));
+const MountainBg = lazy(() => import("./mountains/mountains"));
 const MissingBg = lazy(() => import("./missing/missing"));
+const NodesBg = lazy(() => import("./nodes/nodes"));
 
 /**
  * Current available backgrounds. Will be updated!
@@ -14,7 +16,7 @@ const MissingBg = lazy(() => import("./missing/missing"));
 const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
-      return <BubbleBg />;
+      return <BoidsBg />;
     case 1:
       return <LinesBg />;
     default:
@@ -32,16 +34,25 @@ const Background = ({
   bgCallback,
 }: {
   bg: number;
-  bgCallback: React.Dispatch<React.SetStateAction<boolean>>;
+  bgCallback: (loaded: boolean) => void;
 }) => {
-  const background = renderBg(bg);
-  bgCallback(true);
+  // Load background, call Callback function, then render
+  const BackgroundLoader = () => {
+    const background = renderBg(bg);
+    bgCallback(true);
+    return background;
+  };
+
   return (
-    <Suspense fallback={<div className="bg"></div>}>{background}</Suspense>
+    <Suspense fallback={<div className="bg" />}>{BackgroundLoader()}</Suspense>
   );
 };
 
-// Current screen dimensions, to be accessed by backgrounds if needed
+/**
+ * Current screen dimensions, to be accessed by backgrounds if needed
+ * Adds resizing event listener to rerender backgrounds
+ * @returns Current Screen Consants
+ */
 const ScreenConstants = {
   width:
     window.innerWidth ||

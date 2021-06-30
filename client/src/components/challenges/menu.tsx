@@ -1,6 +1,7 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect } from "react";
 import "./menu.css";
 import Challenges from "./challenges";
+import ChallengeIcon from "./challengeIcon";
 import MenuButton from "../nav/menu-button/menu-button";
 import Flag from "./challenge-comp/flag";
 
@@ -94,16 +95,12 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
         return (
           <div
-            className={"challenge"}
+            className={`challenge ${unlocked} ${focussed}`}
             key={id}
             onClick={() => switchBgHandler(id)}
             style={{ height: "50px", width: "auto" }}
           >
-            <img
-              className={`challenge ${unlocked} ${focussed}`}
-              src={require(`assets/sprites/${logo}`)}
-              alt=""
-            />
+            <ChallengeIcon imgStr={logo} />
             <div className="challenge-text">{title}</div>
           </div>
         );

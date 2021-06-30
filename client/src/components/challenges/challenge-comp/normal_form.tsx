@@ -1,4 +1,3 @@
-import { stylescoped } from "modernizr";
 import React, { useState, ChangeEvent } from "react";
 import Challenges from "../challenges";
 

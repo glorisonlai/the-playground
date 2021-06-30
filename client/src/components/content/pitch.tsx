@@ -1,5 +1,4 @@
 import React from "react";
-import "./content.css";
 
 /**
  * Main CTF website view
@@ -22,7 +21,9 @@ const Pitch = ({ unlocked, total }: { unlocked: number; total: number }) => {
         If you have any ideas for backgrounds/challenges: <br />
         Please contact me! 📬 <br />
         &gt;&nbsp;
-        <a href={`mailto:${email}`}>{email}</a>
+        <a id="email" href={`mailto:${email}`}>
+          {email}
+        </a>
       </p>
     </div>
   );

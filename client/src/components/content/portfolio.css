@@ -1,8 +1,42 @@
 /* FontAwesome icons */
 .icons svg {
-	height: 4rem;
-	width: 4rem;
-	padding-right: 1.5rem;
+	border-radius: 1rem;
+	padding: 1rem;
+	font-size: 4rem;
+}
+
+.icons {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.icons a {
+	position: relative;
+	color: white;
+}
+
+.icons a:hover .tag{
+	opacity: 100%;
+}
+
+.tag {
+	text-align: center;
+	opacity: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+	.tag {
+		opacity: 0%;
+		transition: opacity 0.5s ease-out
+	}
+}
+
+.line {
+	position: absolute;
+	left: 15%;
+	height: 2px;
+	width: 70%;
+	background-color: white;
 }
 
 img {
@@ -15,13 +49,17 @@ h6 {
 	margin: 0;
 }
 
+#portfolio {
+	position: relative;
+}
+
 footer {
 	position: absolute;
 	height: 10vh;
 	width: 100vw;
 	display: flex;
 	justify-content: center;
-	top: 88vh;
+	top: 85vh;
 }
 
 footer:hover {
@@ -98,9 +136,11 @@ header:hover {
 	visibility: hidden;
 }
 
-.row {
-	width: 80vw;
-	padding-bottom: 5rem;
+.nav-row {
+	margin: 2vw;
+	padding: 2vw;
+	background-color: rgb(0, 0, 0, 0.5);
+	border-radius: 2rem;
 }
 
 p {
@@ -108,5 +148,6 @@ p {
 }
 
 #experience {
-	top: 110vh;
+	position: relative;
+	top: 100vh;
 }

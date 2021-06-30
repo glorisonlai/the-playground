@@ -11,18 +11,20 @@
     padding-left: 10vw;
     align-content: left;
     text-align: left;
-    font-family: 'KaiTi', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: whitesmoke;
-    font-size: var(--title-size);
     overflow: auto;
+}
+
+#email {
+    color: var(--text-color);
 }
 
 /*Transform values are hardcoded, otherwise won't shift*/
 #train {
+    position: fixed;
+    top: 20vh;
     text-align: left;
     animation: shiftTrain var(--animation-length) var(--animation-style);
     transform: translateX(calc(0.5rem * -100));
-    /* transform: translateX(2rem); */
 }
 
 #content.animate {
@@ -31,23 +33,17 @@
     animation: shiftContent var(--animation-length) var(--animation-style);
 }
 
-#start {
-   /* transform: translateX(calc(0.5rem * -100 - 100vw)); */
-   transform: translateX(2rem);
-   animation: shiftCode var(--animation-length) var(--animation-style);
+#start.animate {
+    animation: shiftCode var(--animation-length) var(--animation-style);
 }
 
 @keyframes shiftCode {
-    from {transform: translateX(0);}
+    from {transform: translateX(0)}
     to {transform: translateX(calc(0.5rem * -100 - 100vw));}
-    /* to {
-        transform: translateX(2rem);
-    } */
 }
 
 @keyframes shiftTrain {
     from {transform: translateX(101vw);}
-    to {transform: translateX(calc(0.5rem * -100))}
 }
 
 @keyframes shiftContent {

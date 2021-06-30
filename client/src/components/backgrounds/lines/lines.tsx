@@ -10,31 +10,19 @@ const Lines = () => {
   // const supportsCanvas = () => (
   //   Modernizr.canvas
   // )
-  useEffect(() => {
-    // TODO: if (supportsCanvas)
-    console.log("hello");
-    const redrawLines = () => {
-      generator();
-    };
-
-    window.addEventListener("resize", redrawLines);
-    redrawLines();
-    return () => window.removeEventListener("resize", redrawLines);
-  }, []);
+  useEffect(generator, []);
 
   const Canvas = () => (
     <canvas
       width={ScreenConstants.width}
       height={ScreenConstants.height}
-      id={"screen"}
+      id={"canvas"}
     >
-      <div className={"bg"}>
-        <h1 style={{ alignContent: "center" }}>
-          Sorry!
-          <br />
-          Canvas not Supported in this Browser!
-        </h1>
-      </div>
+      <h1 style={{ alignContent: "center" }}>
+        Sorry!
+        <br />
+        Canvas not Supported in this Browser!
+      </h1>
     </canvas>
   );
 

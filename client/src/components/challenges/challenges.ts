@@ -1,7 +1,7 @@
 import axios from "axios";
 
-interface Challenges {
-  challenges: Challenge[];
+interface ChallengeInterface {
+  challengeArr: Challenge[];
   firstLoad: boolean;
   unlocked: Set<number>;
   initialUnlock: () => void;
@@ -16,12 +16,12 @@ interface Challenges {
 interface Challenge {
   id: number;
   title: string;
-  logo: string;
-  desc: any;
+  logo: any;
+  desc: string;
 }
 
-const Challenges: Challenges = {
-  challenges: [
+const Challenges: ChallengeInterface = {
+  challengeArr: [
     {
       id: 0,
       title: "Boring. Default. Gross.",
@@ -53,7 +53,7 @@ const Challenges: Challenges = {
   unlocked: new Set([0]),
 
   initialUnlock() {
-    this.challenges.forEach(({ id }) => {
+    this.challengeArr.forEach(({ id }) => {
       if (
         localStorage.getItem(`BG${id}`) === process.env[`REACT_APP_BG_${id}`]
       ) {
@@ -67,7 +67,7 @@ const Challenges: Challenges = {
   },
 
   getAllChallenges(): Challenge[] {
-    return this.challenges;
+    return this.challengeArr;
   },
 
   getUnlocked(): number {
@@ -75,14 +75,10 @@ const Challenges: Challenges = {
   },
 
   getChallengeFromId(id: number): Challenge | undefined {
-    return this.challenges.find((challenge) => challenge.id === id);
+    return this.challengeArr.find((challenge) => challenge.id === id);
   },
 
   isUnlockedFromId(id: number) {
-    if (this.firstLoad) {
-      this.firstLoad = false;
-      this.initialUnlock();
-    }
     return this.unlocked.has(id);
   },
 

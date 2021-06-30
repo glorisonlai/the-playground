@@ -19,9 +19,6 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
   // Prevent user from spamming submit
   const [loading, setLoading] = useState(false);
 
-  // Switch screen to submit form
-  const [screen, setScreen] = useState(0);
-
   // Updates form message
   const [msg, setMsg] = useState("");
 
@@ -32,7 +29,7 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
   // Append message to support chat div, and sends message to server
   const sendMsg = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // if (loading) return;
+    if (loading) return;
     if (!msg) return;
     setLoading(true);
     const el = document.createElement("div");

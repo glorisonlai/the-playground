@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   GithubIcon,
   ResumeIcon,
-  TwitterIcon,
-  BlogIcon,
+  // TwitterIcon,
+  // BlogIcon,
   MailIcon,
 } from "../../assets/fontawesome";
 import "./portfolio.css";
@@ -17,13 +17,13 @@ import { ScreenConstants } from "components/backgrounds/background";
  */
 const Portfolio = () => {
   // Following code appropriately renders nav arrow between screens
-  const [screen, setScreen] = useState(true);
-  const downArrowClass = screen ? "" : "hidden";
-  const upArrowClass = screen ? "hidden" : "";
+  // const [screen, setScreen] = useState(true);
+  // const downArrowClass = screen ? "" : "hidden";
+  // const upArrowClass = screen ? "hidden" : "";
 
   const scrollTo = (scrollTo: number) => {
     window.scrollTo(0, scrollTo);
-    setScreen((screen) => !screen);
+    // setScreen((screen) => !screen);
   };
 
   /**
@@ -32,12 +32,15 @@ const Portfolio = () => {
    * @returns Experience component
    */
   const Experience = () => (
-    <div id="experience" className={"main"}>
+    <div id="experience">
       {/* Python password generator */}
-      <div className={"row"}>
-        <img src={require("assets/sprites/logo.svg")} />
+      <div className={"nav-row"}>
+        <img
+          src={require("assets/sprites/logo.svg")}
+          alt="Password Generator"
+        />
         <div>
-          <h6>Password Wordlist/Generator</h6>
+          <h4>Password Wordlist/Generator</h4>
           <p>
             A Python script that generates pronouneable passwords. Intended for
             bruteforcing the weirder passwords. Includes ruleset for including
@@ -46,10 +49,10 @@ const Portfolio = () => {
         </div>
       </div>
       {/* Weather app */}
-      <div className={"row"}>
-        <img src={require("assets/sprites/logo.svg")} />
+      <div className={"nav-row"}>
+        <img src={require("assets/sprites/logo.svg")} alt="Weather App" />
         <div>
-          <h6>Weather Display</h6>
+          <h4>Weather Display</h4>
           <p>
             Weather web app that fetches data from OpenWeatherMap. Includes
             search and autocomplete for any region listed in OpenWeather.
@@ -57,10 +60,10 @@ const Portfolio = () => {
         </div>
       </div>
       {/* Chat app */}
-      <div className={"row"}>
-        <img src={require("assets/sprites/logo.svg")} />
+      <div className={"nav-row"}>
+        <img src={require("assets/sprites/logo.svg")} alt="Chat App" />
         <div>
-          <h6>Secure Chat app</h6>
+          <h4>Secure Chat app</h4>
           <p>
             Chat application utilising Diffie Hellman key exchange and public
             key cryptography to securely store encrypted messages visible only
@@ -77,31 +80,52 @@ const Portfolio = () => {
         <h1>Glorison Lai</h1>
         {/** Icon row */}
         <div className="icons">
-          <a href="https://www.github.com" target="_blank">
-            <GithubIcon />
-          </a>
-          <TwitterIcon />
+          <div className="icon">
+            <a href="https://www.github.com" target="_blank" rel="noreferrer">
+              <GithubIcon />
+              <div className="line" />
+              <div className="tag">GitHub</div>
+            </a>
+          </div>
+          {/* <TwitterIcon /> */}
           {/* <BlogIcon /> */}
-          <ResumeIcon />
-          <MailIcon />
+          <a
+            href="resume.pdf"
+            download="Glorison_Lai_2021_Resume.pdf"
+            target="this"
+            rel="noreferrer"
+          >
+            <ResumeIcon />
+            <div className="line" />
+            <div className="tag">Resume</div>
+          </a>
+          <a
+            href="mailto:lai.glorison@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MailIcon />
+            <div className="line" />
+            <div className="tag">Contact</div>
+          </a>
         </div>
       </div>
       {/** Scroll down button */}
       <footer
         id="footer-button"
-        className={downArrowClass}
+        // className={downArrowClass}
         onClick={() => scrollTo(ScreenConstants.height)}
       >
-        <code className="label">Experiences</code>
+        <code className="label">Projects</code>
         <div className={`arrow down`} />
       </footer>
       {/** Scroll up button */}
-      <header className={upArrowClass} onClick={() => scrollTo(0)}>
+      {/* <header className={upArrowClass} onClick={() => scrollTo(0)}>
         <div className={`arrow up `} />
         <code id="labelup" className="label">
           Home
         </code>
-      </header>
+      </header> */}
       <Experience />
     </div>
   );

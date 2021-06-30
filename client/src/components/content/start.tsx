@@ -4,39 +4,45 @@ import "./content.css";
 const Start = ({
   chalLoaded,
   bgLoaded,
+  className,
 }: {
   chalLoaded: boolean;
   bgLoaded: boolean;
+  className: string;
 }) => {
-  const Loading = ({}) => {
+  const Loading = () => {
     console.log(chalLoaded);
     return (
-      <code id="start">
+      <code id="start" className={className}>
         <div className="row">
-          <p>Checking challenges</p>
+          <code>Checking challenges</code>
           {!chalLoaded ? (
             <>
-              <p className="loadingDots">.</p>
-              <p className="loadingDots">.</p>
-              <p className="loadingDots">.</p>
+              <code className="loadingDots">.</code>
+              <code className="loadingDots">.</code>
+              <code className="loadingDots">.</code>
             </>
           ) : (
-            <p>... DONE</p>
+            <>
+              <code>...DONE</code>
+            </>
           )}
         </div>
         <div className="row">
-          <p>Checking backgrounds</p>
+          <code>Checking backgrounds</code>
           {!bgLoaded ? (
             <>
-              <p className="loadingDots">.</p>
-              <p className="loadingDots">.</p>
-              <p className="loadingDots">.</p>
+              <code className="loadingDots">.</code>
+              <code className="loadingDots">.</code>
+              <code className="loadingDots">.</code>
             </>
           ) : (
-            <p>... DONE</p>
+            <>
+              <code>...DONE</code>
+            </>
           )}
         </div>
-        {bgLoaded && chalLoaded && <p>sl</p>}
+        {bgLoaded && chalLoaded && <code className="row">sl</code>}
       </code>
     );
   };
