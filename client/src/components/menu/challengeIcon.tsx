@@ -5,12 +5,18 @@ import React from "react";
  * @param imgStr Image path
  * @returns Icon for challenge
  */
-const ChallengeIcon = ({ imgStr }: { imgStr: string }) => {
+const ChallengeIcon = ({
+  imgStr,
+  className,
+}: {
+  imgStr: string;
+  className: string;
+}) => {
   return (
     <img
-      className="challenge"
+      className={className}
       alt={imgStr}
-      src={require(`assets/sprites/${imgStr}`)}
+      src={require(`assets/sprites/${imgStr}`).default}
     />
   );
 };

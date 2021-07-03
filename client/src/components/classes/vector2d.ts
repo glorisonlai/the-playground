@@ -7,6 +7,7 @@ interface vector2dMethods {
   create(x: number, y: number): vector2dInterface;
   add(vectors: vector2dInterface[]): vector2dInterface;
   reverse(vector: vector2dInterface): vector2dInterface;
+  normalize(vector: vector2dInterface): vector2dInterface;
   extend(vector: vector2dInterface, extension: number): vector2dInterface;
   resolveDegreesToUnitVector(degrees: number): vector2dInterface;
   resolveVectorToRadians(vector: vector2dInterface): number;
@@ -38,6 +39,11 @@ const vector2d: vector2dMethods = {
       vector.y += arg.y;
     }
     return vector;
+  },
+
+  normalize(vector) {
+    const mag = Math.sqrt(vector.x ** 2 + vector.y ** 2);
+    return { x: vector.x / mag, y: vector.y / mag };
   },
 
   /**

@@ -32,9 +32,12 @@ function App({
   // Check if user wants to see portfolio, or CTF
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get("view");
+  console.log(view);
 
   // Switch website view from portfolio, to CTF
-  const [showPortfolio, setShowPortfolio] = useState(!!view ? true : false);
+  const [showPortfolio, setShowPortfolio] = useState(
+    view === "portfolio" ? true : false
+  );
 
   // Load all challenges
   Challenges.initialUnlock();

@@ -42,9 +42,9 @@ const Portfolio = () => {
         <div>
           <h4>Password Wordlist/Generator</h4>
           <p>
-            A Python script that generates pronouneable passwords. Intended for
-            bruteforcing the weirder passwords. Includes ruleset for including
-            numbers at the end of syllables.
+            A Python script that generates pronouneable passwords with Markov
+            chains. Intended for bruteforcing the weirder passwords. Includes
+            ruleset for including numbers at the end of syllables.
           </p>
         </div>
       </div>
@@ -61,13 +61,13 @@ const Portfolio = () => {
       </div>
       {/* Chat app */}
       <div className={"nav-row"}>
-        <img src={require("assets/sprites/logo.svg")} alt="Chat App" />
+        <img src={require("assets/sprites/logo.svg").default} alt="Chat App" />
         <div>
           <h4>Secure Chat app</h4>
           <p>
             Chat application utilising Diffie Hellman key exchange and public
-            key cryptography to securely store encrypted messages visible only
-            to group chat members. WIP
+            key cryptography to securely store encrypted messages that are
+            visible only to group chat members. WIP
           </p>
         </div>
       </div>

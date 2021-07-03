@@ -102,15 +102,19 @@ Splits screen space in half
 }
 
 /*Text underneath each challenge icon*/
-@media only screen and (max-width: 700px){
-  .challenge-text {
-    visibility: hidden;
-  }
-}
-
 .challenge-text {
   align-self: center;
   color: white;
   width: calc(1.5 * var(--icon-width));
   font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 702px){
+  .challenge-text {
+    visibility: hidden;
+  }
+
+  #menu-title {
+    visibility: hidden;
+  }
 }

@@ -18,7 +18,7 @@ const MenuButton = ({
     return (
       <img
         className="bg-sprite"
-        src={require(`assets/sprites/${challenge.logo}`)}
+        src={require(`assets/sprites/${challenge.logo}`).default} // .default fixes webpack bug not referencing img
         alt=""
       />
     );

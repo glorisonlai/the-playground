@@ -1,5 +1,7 @@
 <?php
+require __DIR__.'/vendor/autoload.php';
 header("Access-Control-Allow-Origin: http://localhost:3000");
+
 
 // Job Automation
 class SupportChat {
@@ -16,14 +18,17 @@ class SupportChat {
 			echo 'NO';
 			exit(403);
 		} else {
-			$f_contents = file(__DIR__ . '\\..\\' . $this->contents . '.txt');
+			$f_contents = file(__DIR__ . '\\' . $this->contents . '.txt');
 			echo $f_contents[array_rand($f_contents)];
 			return $f_contents[array_rand($f_contents)];
 		}
 	}
 }
 
-$msg = unserialize($_GET['msg'] ?? '');
-$ban = new SupportChat(strval($msg));
+// $msg = unserialize($_GET['msg'] ?? '');
+// $ban = new SupportChat(strval($msg));
+return lambda(function ($event) {
+ return 'Hello world';
+});
 
 ?>

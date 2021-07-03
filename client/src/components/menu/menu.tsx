@@ -83,7 +83,6 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   const ChallengeMenu = () => {
     const challenges = Challenges.getAllChallenges();
     const focussedBg = Challenges.getChallengeFromId(focussedId);
-    console.log(focussedBg);
 
     // Renders all available challenges into tiles
     const challengeArr = challenges.map(
@@ -95,12 +94,12 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
         return (
           <div
-            className={`challenge ${unlocked} ${focussed}`}
+            className={`challenge ${unlocked}`}
             key={id}
             onClick={() => switchBgHandler(id)}
             style={{ height: "50px", width: "auto" }}
           >
-            <ChallengeIcon imgStr={logo} />
+            <ChallengeIcon className={`challenge ${focussed}`} imgStr={logo} />
             <div className="challenge-text">{title}</div>
           </div>
         );
@@ -126,7 +125,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   return (
     <>
       <div className={`cover flyout ${showState}`}>
-        <h2>Backgrounds</h2>
+        <h2 id="menu-title">Backgrounds</h2>
         {visible && <ChallengeMenu />}
       </div>
       <MenuButton

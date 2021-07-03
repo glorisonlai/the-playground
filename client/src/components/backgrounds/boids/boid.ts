@@ -3,13 +3,15 @@ import vector2d, { vector2dInterface } from "../../classes/vector2d";
 // Constants to change steering bias
 const boidConstants = {
   SPEED: 5,
-  VIEWDIST: 40,
-  AVOIDDIST: 20,
-  STEERING_LIMIT: Math.PI / 16,
-  AVOIDANCE_WEIGHT: 0,
-  COHESION_WEIGHT: 9,
-  ALIGNMENT_WEIGHT: 5,
-  WALL_WEIGHT: 100,
+  VIEWDIST: 120,
+  AVOIDDIST: 50,
+  AVOIDWALL: 200,
+  STEERING_LIMIT: Math.PI / 45, // Keep between 45-50 to avoid jittering
+  BOID_SHAPE_ANGLE: Math.PI / 16,
+  AVOIDANCE_WEIGHT: 12,
+  COHESION_WEIGHT: 8,
+  ALIGNMENT_WEIGHT: 12,
+  WALL_WEIGHT: 500,
   BIRD_LENGTH: 21,
   BIRD_WING: 30,
 };
@@ -58,8 +60,8 @@ class Boid {
     // TODO: Can be optimised to avoid expensive radian conversion
     const reverseRadians =
       vector2d.resolveVectorToRadians(this.direction) - Math.PI;
-    const tailRightRadian = reverseRadians + boidConstants.STEERING_LIMIT,
-      tailLeftRadian = reverseRadians - boidConstants.STEERING_LIMIT;
+    const tailRightRadian = reverseRadians + boidConstants.BOID_SHAPE_ANGLE,
+      tailLeftRadian = reverseRadians - boidConstants.BOID_SHAPE_ANGLE;
     const tailRight = vector2d.resolveRadiansToUnitVector(tailRightRadian);
     const tailLeft = vector2d.resolveRadiansToUnitVector(tailLeftRadian);
 
@@ -186,10 +188,6 @@ class Boid {
     let alignmentVector = { x: 0, y: 0 };
     let cohesionVector = { x: 0, y: 0 };
     let avoidanceVector = { x: 0, y: 0 };
-    const nextVector = vector2d.add([
-      this.head,
-      vector2d.extend(this.direction, boidConstants.AVOIDDIST),
-    ]);
     for (const otherBoid of boidArr) {
       if (this.inView(boidConstants.VIEWDIST, otherBoid)) {
         // Align direction with nearby boids
@@ -198,20 +196,30 @@ class Boid {
         // Aim towards other boids
         cohesionVector = vector2d.add([
           cohesionVector,
-          vector2d.extend(otherBoid.direction, boidConstants.SPEED),
-          vector2d.reverse(this.head),
+          vector2d.normalize(
+            vector2d.add([
+              vector2d.extend(otherBoid.direction, boidConstants.SPEED),
+              vector2d.reverse(this.head),
+            ])
+          ),
         ]);
         // Avoid collisions
         if (this.inView(boidConstants.AVOIDDIST, otherBoid)) {
           avoidanceVector = vector2d.add([
             avoidanceVector,
-            vector2d.reverse(otherBoid.head),
-            this.head,
+            vector2d.normalize(
+              vector2d.add([vector2d.reverse(otherBoid.head), this.head])
+            ),
           ]);
         }
       }
     }
-    // Avoid walls
+
+    // Wall Collision detection - Ideally would integrated with collision detection above
+    const nextVector = vector2d.add([
+      this.head,
+      vector2d.extend(this.direction, boidConstants.AVOIDWALL),
+    ]);
     if (nextVector.x <= 0) {
       // debugger;
       avoidanceVector.x += (boidConstants.WALL_WEIGHT * boundary.x) / 2;
@@ -229,17 +237,17 @@ class Boid {
       avoidanceVector.y -= (boidConstants.WALL_WEIGHT * boundary.y) / 2;
     }
 
-    // If cannot avoid wall, teleport to opposite wall
-    if (this.head.x < -10) {
-      this.head.x = boundary.x + 10;
-    } else if (this.head.x > boundary.x + 10) {
-      this.head.x = -10;
-    }
-    if (this.head.y < -10) {
-      this.head.y = boundary.y + 10;
-    } else if (this.head.y > boundary.y + 10) {
-      this.head.y = -10;
-    }
+    // Teleportation code - If boid goes out of bound, draw on other side of screen
+    // if (this.head.x < -10) {
+    //   this.head.x = boundary.x + 10;
+    // } else if (this.head.x > boundary.x + 10) {
+    //   this.head.x = -10;
+    // }
+    // if (this.head.y < -10) {
+    //   this.head.y = boundary.y + 10;
+    // } else if (this.head.y > boundary.y + 10) {
+    //   this.head.y = -10;
+    // }
 
     // Steer boid
     const steeringVector = vector2d.resolveRadiansToUnitVector(

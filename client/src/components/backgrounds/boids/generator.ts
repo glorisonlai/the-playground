@@ -23,7 +23,7 @@ const boidGenerator = () => {
   };
 
   // Number of boids on canvas
-  const NUMBOIDS = 20;
+  const NUMBOIDS = 50;
 
   //Reset canvas, instantiate boids, and start drawing
   const init = (): void => {

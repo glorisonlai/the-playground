@@ -5,9 +5,7 @@
   grid-column: 1;
   grid-row: 1;
   margin-left: 30px;
-  margin-top: 20px;
-  width: 5em;
-  height: 5em;
+  margin-top: 39.84px;
   border-color: #0f0f0f00;
   border-style: solid;
   z-index: 9;
@@ -18,8 +16,8 @@
 .menu-btn {
   position: fixed;
   border-radius: 50%;
-  width: calc(10vw / 2);
-  height: calc(10vw / 2);
+  width: 5vw;
+  height: auto;
   min-width: 4rem;
   min-height: 4rem;
   max-width: 6vw;
@@ -46,7 +44,7 @@
 
 .cross {
   position: fixed;
-  transform: translateX(2em) translateY(-2em);
+  transform: translateX(-2rem);
 }
 
 .cross::before,
@@ -85,5 +83,5 @@
 }
 
 .right {
-  transform: translateX(calc(90vw - 4em));
+  transform: translateX(calc(90vw - 3rem));
 }

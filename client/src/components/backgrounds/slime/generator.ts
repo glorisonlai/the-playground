@@ -97,7 +97,6 @@ const slimeGenerator = () => {
       canvasConstants.canvas.height
     );
     canvasConstants.slimeArr.forEach((slime) => {
-      console.log("shouldnt run");
       // slime.update(canvasConstants.slimeArr, {
       //   x: canvasConstants.canvas.width,
       //   y: canvasConstants.canvas.height,

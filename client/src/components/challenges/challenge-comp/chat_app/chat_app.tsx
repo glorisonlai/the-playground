@@ -32,23 +32,26 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
     if (loading) return;
     if (!msg) return;
     setLoading(true);
-    const el = document.createElement("div");
-    el.innerHTML = msg;
-    el.className = "talk-bubble user";
-    document.querySelector("#support-chat")!.appendChild(el);
+    const chat_box = document.getElementById("support-chat");
+    const el = createMsg(msg, "user");
+    chat_box!.appendChild(el);
     setMsg("");
     const { data } = await axios.post(
       process.env.REACT_APP_API_URL + "/api/c3/chat",
       { msg: msg }
     );
-    const response = document.createElement("li");
-    response.innerHTML = data;
-    document.querySelector("#support")!.appendChild(response);
+    const response = createMsg(data, "admin");
+    chat_box!.appendChild(response);
     setLoading(false);
   };
 
   // Securely creates new message component
-  const createMsg = (msg: string) => <li>{DOMPurify.sanitize(msg)}</li>;
+  const createMsg = (msg: string, className: string) => {
+    const chat_bubble = document.createElement("div");
+    chat_bubble.innerHTML = DOMPurify.sanitize(msg);
+    chat_bubble.className = `talk-bubble ${className}`;
+    return chat_bubble;
+  };
 
   return (
     <SplitPane>

@@ -27,6 +27,8 @@ body {
   overflow-x: hidden;
   /* overflow-y: hidden; TODO: Ideally user should be able to scroll */
   background: var(--bg-color);
+  user-select: none;
+  -ms-user-select: none;
 }
 
 code {

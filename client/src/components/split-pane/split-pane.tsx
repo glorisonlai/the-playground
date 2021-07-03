@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./split-pane.css";
 
 const SplitPane = ({ children }: { children: JSX.Element[] }) => {
-  console.log(children);
+  const [screen, setScreen] = useState(0);
   return (
     <div className="split">
-      {children.map((element) => {
-        return <div className="panel">{element}</div>;
-      })}
+      {screen > 0 && (
+        <button
+          className="prev"
+          onClick={() => setScreen((screen) => screen - 1)}
+        />
+      )}
+      {<div className="panel">{children[screen]}</div>}
+      {screen < children.length - 1 && (
+        <button
+          className="next"
+          onClick={() => setScreen((screen) => screen + 1)}
+        />
+      )}
     </div>
   );
 };
