@@ -5,7 +5,11 @@ interface vector2dInterface {
 
 interface vector2dMethods {
   create(x: number, y: number): vector2dInterface;
-  add(vectors: vector2dInterface[]): vector2dInterface;
+  addArray(vectors: vector2dInterface[]): vector2dInterface;
+  add(
+    vector1: vector2dInterface,
+    vector2: vector2dInterface
+  ): vector2dInterface;
   reverse(vector: vector2dInterface): vector2dInterface;
   normalize(vector: vector2dInterface): vector2dInterface;
   extend(vector: vector2dInterface, extension: number): vector2dInterface;
@@ -28,17 +32,29 @@ const vector2d: vector2dMethods = {
   },
 
   /**
-   * Adds vectors to each other
+   * Adds array of vectors to each other
    * @param vectors Array of vectors
    * @returns Sum of vectors
    */
-  add(vectors) {
+  addArray(vectors: vector2dInterface[]) {
     const vector = this.create(0, 0);
     for (const arg of vectors) {
       vector.x += arg.x;
       vector.y += arg.y;
     }
     return vector;
+  },
+
+  /**
+   * Adds 2 vectors together
+   * @param vectors Array of vectors
+   * @returns Sum of vectors
+   */
+  add(vector1, vector2) {
+    return {
+      x: vector1.x + vector2.x,
+      y: vector1.y + vector2.y,
+    };
   },
 
   normalize(vector) {

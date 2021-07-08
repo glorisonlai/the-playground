@@ -1,14 +1,15 @@
 import React, { lazy, Suspense } from "react";
 
 // Challenges: 4
-// Backgrounds: 4
+// Backgrounds: 5
 const BubbleBg = lazy(() => import("./bubbs/bubblesbg")); // DONE
 const LinesBg = lazy(() => import("./lines/linesbg")); // DONE
 const BoidsBg = lazy(() => import("./boids/boidsbg")); // DONE
 const EyesBg = lazy(() => import("./eyes/eyesbg")); // INCOMPLETE
 const MountainBg = lazy(() => import("./mountains/mountainsbg")); // INCOMPLETE
 const NodesBg = lazy(() => import("./nodes/nodesbg")); // DONE
-const SlimeBg = lazy(() => import("./slime/slimebg")); // INCOMPLETE
+// const SlimeBg = lazy(() => import("./slime/slimebg")); // INCOMPLETE
+const OrbitBg = lazy(() => import("./orbit/orbitbg")); // DONE
 const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 
 /**
@@ -19,7 +20,7 @@ const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
-      return <BoidsBg />;
+      return <OrbitBg />;
     case 1:
       return <LinesBg />;
     case 2:

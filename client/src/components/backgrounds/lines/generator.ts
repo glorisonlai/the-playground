@@ -1,6 +1,7 @@
 import { ScreenConstants } from "../background";
+import { CanvasInterface } from "../helper-functions/background";
 
-interface Constants {
+interface CircleConstants {
   numCircles: number;
   maxMaxRad: number;
   minMaxRad: number;
@@ -21,16 +22,13 @@ interface Constants {
   drawingQueue: Array<number>;
 }
 
-interface ScreenConstantsInterface {
-  canvas: HTMLCanvasElement;
+interface ScreenConstantsInterface extends CanvasInterface {
   height: number;
   width: number;
-  context: CanvasRenderingContext2D;
-  constants: Constants;
+  constants: CircleConstants;
   circles: Array<Circle>;
   colors: Array<string>;
   lineNumber: number;
-  lastDraw: number;
 }
 
 interface Coord {
@@ -55,7 +53,7 @@ const generateLines = () => {
     height: ScreenConstants.height,
     width: ScreenConstants.width,
     context: {} as CanvasRenderingContext2D,
-    constants: {} as Constants,
+    constants: {} as CircleConstants,
     circles: [],
     colors: [],
     lineNumber: 0,
@@ -74,8 +72,8 @@ const generateLines = () => {
     draw();
   };
 
-  const initConstants = (): Constants => {
-    const constants = {} as Constants;
+  const initConstants = (): CircleConstants => {
+    const constants = {} as CircleConstants;
     constants.numCircles = Math.floor(8 + Math.random() * 7);
     constants.maxMaxRad = 8;
     constants.minMaxRad = 5;
@@ -157,7 +155,7 @@ const generateLines = () => {
     return pointArray;
   };
 
-  const setCircles = (constants: Constants) => {
+  const setCircles = (constants: CircleConstants) => {
     const circles = [];
 
     for (let i = 0; i < constants.numCircles; i++) {
@@ -185,7 +183,7 @@ const generateLines = () => {
     return circles;
   };
 
-  const setColors = ({ lineAlpha, iterations }: Constants) => {
+  const setColors = ({ lineAlpha, iterations }: CircleConstants) => {
     const colors = [];
     var colorParamArray: Array<number> = setLinePoints(iterations);
 

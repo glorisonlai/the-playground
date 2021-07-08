@@ -7,10 +7,10 @@
   position: absolute;
 }
 
+/* Background properties */
 .bg {
   position: relative;
-  background: rgb(49, 53, 53);
-  color: #333333;
+  background: var(--bg-color);
   z-index: 0;
   position: fixed;
   top: 0;

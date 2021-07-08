@@ -1,5 +1,6 @@
 import React from "react";
 import Particles from "react-particles-js";
+import { ScreenConstants } from "../background";
 
 /**
  * Uses particles.js script to create THE developer background

@@ -32,7 +32,6 @@ function App({
   // Check if user wants to see portfolio, or CTF
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get("view");
-  console.log(view);
 
   // Switch website view from portfolio, to CTF
   const [showPortfolio, setShowPortfolio] = useState(
@@ -67,7 +66,7 @@ function App({
     return (
       <>
         <Background bg={bgId} bgCallback={bgLoadedCallback} />
-        <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
+        {/* <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} /> */}
       </>
     );
   };

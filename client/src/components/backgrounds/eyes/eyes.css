@@ -1,28 +1,43 @@
-:root {
-  --med-size: 12em;
-  --small-size: 9em;
+.eye {
+  position: relative;
+  margin: 0 auto;
+  border-radius: 100% 5px;
+  transform: rotate(45deg);
+  background-color: black;
+  overflow: hidden;
 }
 
-.eye {
-  margin: 0 auto;
-  border-radius: 100% 0px;
-  transform: rotate(45deg);
-  background-color: white;
+.eyelid {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  /* transform: rotate(-45deg); */
+  background: rgb(34, 34, 34);
+  border-radius: 0 0 100% 0;
+  transition: 0.4s all;
+  z-index: 2;
+}
+
+.eyelid.blink {
+  animation: blink 0.8s;
+}
+
+@keyframes blink {
+  50% {
+    width: 110%; 
+    height: 110%
+  }
 }
 
 .pupil {
+  position: absolute;
   border-radius: 50%;
   background-color: black;
-  width: var(--small-size);
-  height: var(--small-size);
+  top: 100%;
+  left: 100%;
+  transition: 0.4s all;
 }
 
-.med {
-  width: var(--med-size);
-  height: var(--med-size);
-}
-
-.small {
-  width: var(--small-size);
-  height: var(--small-size);
+.pupil.track {
+  transition: 0.2s all;
 }

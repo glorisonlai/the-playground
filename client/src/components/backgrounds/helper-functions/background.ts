@@ -4,7 +4,8 @@ export interface BackgroundInterface {
 }
 
 // Interface for cavas backgrounds
-export interface CanvasInterface extends BackgroundInterface {
+export interface CanvasInterface {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
+  lastDraw: number;
 }

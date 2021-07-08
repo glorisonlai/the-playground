@@ -1,5 +1,6 @@
 import React from "react";
 import "./bubbles.css";
+import * as CSS from "csstype";
 
 /**
  * Floating bubbles animation
@@ -11,8 +12,7 @@ const Bubbles = () => {
    * Animation time scales with bubble size
    * @returns CSS styling for individual bubble
    */
-  const randomCss = () => {
-    const seed = Math.random();
+  const randomCss = (seed: number = Math.random()): CSS.Properties => {
     return {
       width: `${seed * 50 + 10}px`,
       height: `${seed * 50 + 10}px`,

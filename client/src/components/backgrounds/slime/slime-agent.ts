@@ -1,18 +1,36 @@
-import vector2d, { vector2dInterface } from "components/classes/vector2d";
+import vector2d, {
+  vector2dInterface,
+} from "components/backgrounds/helper-functions/vector2d";
 
-type slimeVector = -1 | 0 | 1;
+const SlimeConstants = {
+  sampleRadian: Math.PI / 16,
+};
 
 class agent {
   pos: vector2dInterface;
-  direction: vector2dInterface;
-  vision = [-1, 0, 1];
+  direction: number;
 
-  constructor(x: number, y: number, vx: slimeVector, vy: slimeVector) {
+  constructor(x: number, y: number, radian: number) {
     this.pos = vector2d.create(x, y);
-    this.direction = vector2d.create(vx, vy);
+    this.direction = radian;
   }
 
-  draw = (ctx: CanvasRenderingContext2D) => {};
+  update = (boundary: vector2dInterface) => {
+    // Flip view direction if it is inside a wall
+    if (this.pos.x < 0 || this.pos.x > boundary.x) {
+      this.direction = (this.direction + Math.PI) % Math.PI;
+    }
+    if (this.pos.y < 0 || this.pos.y > boundary.y) {
+      this.direction = -this.direction;
+      console.log(this.direction);
+    }
+    const newpos = vector2d.add(
+      this.pos,
+      vector2d.extend(vector2d.resolveRadiansToUnitVector(this.direction), 1)
+    );
+    this.pos.x = Math.floor(newpos.x);
+    this.pos.y = Math.floor(newpos.y);
+  };
 }
 
 export default agent;

@@ -1,11 +1,9 @@
 import Boid from "./boid";
 import { ScreenConstants } from "../background";
+import { CanvasInterface } from "../helper-functions/background";
 
-interface CanvasConstantsInterface {
-  canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
+interface BoidInterface extends CanvasInterface {
   boidsArr: Boid[];
-  lastDraw: number;
 }
 
 /**
@@ -15,7 +13,7 @@ const boidGenerator = () => {
   /**
    * Instantiate canvas context
    */
-  const canvasConstants: CanvasConstantsInterface = {
+  const canvasConstants: BoidInterface = {
     canvas: document.getElementById("boidCanvas") as HTMLCanvasElement,
     context: {} as CanvasRenderingContext2D,
     boidsArr: [],
@@ -69,19 +67,14 @@ const boidGenerator = () => {
    * Every frame, clear the canvas, update and draw each boid onto canvas
    */
   const draw = () => {
-    const ctx = canvasConstants.context;
-    ctx.clearRect(
-      0,
-      0,
-      canvasConstants.canvas.width,
-      canvasConstants.canvas.height
-    );
-    canvasConstants.boidsArr.forEach((boid: Boid) => {
-      boid.update(canvasConstants.boidsArr, {
-        x: canvasConstants.canvas.width,
-        y: canvasConstants.canvas.height,
+    const { context, canvas, boidsArr } = canvasConstants;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    boidsArr.forEach((boid: Boid) => {
+      boid.update(boidsArr, {
+        x: canvas.width,
+        y: canvas.height,
       });
-      boid.draw(ctx);
+      boid.draw(context);
     });
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
   };

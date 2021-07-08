@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^2.2.2",
-    "@types/modernizr": "^3.5.3"
+    "@types/modernizr": "^3.5.3",
+    "csstype": "^3.0.8"
   }
 }
