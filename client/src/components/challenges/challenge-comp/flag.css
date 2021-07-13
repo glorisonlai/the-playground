@@ -1,0 +1,20 @@
+#flag-form {
+	display: flex;
+}
+#flag-input {
+	background-color: gray;
+	color: var(--text-color);
+	
+}
+
+#flag-input::placeholder {
+	color: var(--text-color);
+	opacity: 1;
+}
+
+#flag-submit {
+	background: transparent;
+	color: var(--text-color);
+	border: 2px solid var(--text-color);
+	margin-left: 1em;
+}

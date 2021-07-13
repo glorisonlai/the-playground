@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import generator from "./generator";
-import { ScreenConstants } from "../background";
+import { useScreenSize } from "../background";
 
 /**
  * Background to simulate boid flocking behaviour
@@ -9,24 +9,22 @@ import { ScreenConstants } from "../background";
  * @returns Boids background
  */
 const Boids = () => {
-  useEffect(() => {
-    generator();
-  }, []);
-
-  const Canvas = () => (
-    <canvas
-      width={ScreenConstants.width}
-      height={ScreenConstants.height}
-      id={"boidCanvas"}
-    >
-      {/* Fallback message */}
-      <h1 style={{ alignContent: "center" }}>
-        Sorry!
-        <br />
-        Canvas not Supported in this Browser!
-      </h1>
-    </canvas>
-  );
+  const Canvas = () => {
+    const { width, height } = useScreenSize();
+    useEffect(() => {
+      generator(width, height);
+    }, [width, height]);
+    return (
+      <canvas width={width} height={height} id={"boidCanvas"}>
+        {/* Fallback message */}
+        <h1 style={{ alignContent: "center" }}>
+          Sorry!
+          <br />
+          Canvas not Supported in this Browser!
+        </h1>
+      </canvas>
+    );
+  };
 
   return (
     <div className="bg">

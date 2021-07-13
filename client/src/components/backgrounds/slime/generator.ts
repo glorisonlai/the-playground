@@ -1,4 +1,3 @@
-import { ScreenConstants } from "../background";
 import Agent from "./slime-agent";
 
 interface CanvasConstantsInterface {
@@ -15,7 +14,7 @@ interface CanvasConstantsInterface {
  * TODO: Find a way to make calculations in parallel
  * Function to iterate over canvas pixels and simulate slime movement
  */
-const slimeGenerator = () => {
+const slimeGenerator = (width: number, height: number) => {
   /**
    * Instantiate canvas context
    */

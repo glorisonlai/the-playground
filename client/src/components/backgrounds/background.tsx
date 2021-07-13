@@ -1,4 +1,10 @@
-import React, { lazy, Suspense } from "react";
+import React, {
+  lazy,
+  Suspense,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 // Challenges: 4
 // Backgrounds: 5
@@ -8,7 +14,7 @@ const BoidsBg = lazy(() => import("./boids/boidsbg")); // DONE
 const EyesBg = lazy(() => import("./eyes/eyesbg")); // INCOMPLETE
 const MountainBg = lazy(() => import("./mountains/mountainsbg")); // INCOMPLETE
 const NodesBg = lazy(() => import("./nodes/nodesbg")); // DONE
-// const SlimeBg = lazy(() => import("./slime/slimebg")); // INCOMPLETE
+const SlimeBg = lazy(() => import("./slime/slimebg")); // INCOMPLETE
 const OrbitBg = lazy(() => import("./orbit/orbitbg")); // DONE
 const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 
@@ -20,11 +26,11 @@ const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
-      return <OrbitBg />;
+      return <NodesBg />;
     case 1:
       return <LinesBg />;
     case 2:
-      return <NodesBg />;
+      return <OrbitBg />;
     case 3:
       return <BoidsBg />;
     default:
@@ -58,22 +64,44 @@ const Background = ({
 
 /**
  * Current screen dimensions, to be accessed by backgrounds if needed
- * Adds resizing event listener to rerender backgrounds
+ * Add resizing event listener to rerender backgrounds
  * @returns Current Screen Consants
  */
-const ScreenConstants = {
-  width:
-    window.innerWidth ||
-    window.screen.width ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth,
-  height:
-    window.innerHeight ||
-    window.screen.height ||
-    document.documentElement.clientHeight ||
-    document.body.clientHeight,
+const useScreenSize = () => {
+  const [screenSize, setScreenSize] = useState({
+    width:
+      window.innerWidth ||
+      window.screen.width ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth,
+    height:
+      window.innerHeight ||
+      window.screen.height ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight,
+  });
+  useLayoutEffect(() => {
+    const updateSize = () => {
+      setScreenSize({
+        width:
+          window.innerWidth ||
+          window.screen.width ||
+          document.documentElement.clientWidth ||
+          document.body.clientWidth,
+        height:
+          window.innerHeight ||
+          window.screen.height ||
+          document.documentElement.clientHeight ||
+          document.body.clientHeight,
+      });
+    };
+
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return screenSize;
 };
 
-export { ScreenConstants };
+export { useScreenSize };
 
 export default Background;

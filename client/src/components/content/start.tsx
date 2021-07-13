@@ -18,7 +18,6 @@ const Start = ({
   className: string;
 }) => {
   const Loading = () => {
-    console.log(chalLoaded);
     return (
       <code id="start" className={className}>
         <div className="row">

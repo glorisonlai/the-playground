@@ -1,5 +1,6 @@
 .split {
 	width: 100%;
+	display: flex;
 }
 
 .panel {

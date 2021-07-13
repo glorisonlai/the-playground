@@ -4,7 +4,7 @@
   --normal-text: 1.2rem;
   --sub-heading: 2rem;
   --text-color: whitesmoke;
-  --bg-color: rgb(49, 53, 53);
+  --bg-color: rgb(31, 31, 31);
   color: var(--text-color);
   scroll-behavior: smooth;
   text-shadow: -1px 0 black,

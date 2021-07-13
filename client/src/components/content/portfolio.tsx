@@ -8,11 +8,12 @@ import {
 } from "../../assets/fontawesome";
 import "./portfolio.css";
 import "./content.css";
-import { ScreenConstants } from "components/backgrounds/background";
+import { Divider } from "components/common/divider";
 
 /**
  * Portfolio website view
  * Contains main page, personal projects
+ * TODO: Rewrite its a mess
  * @returns Portfolio view
  */
 const Portfolio = () => {
@@ -36,7 +37,7 @@ const Portfolio = () => {
       {/* Python password generator */}
       <div className={"nav-row"}>
         <img
-          src={require("assets/sprites/logo.svg")}
+          src={require("assets/sprites/logo.svg").default}
           alt="Password Generator"
         />
         <div>
@@ -50,7 +51,10 @@ const Portfolio = () => {
       </div>
       {/* Weather app */}
       <div className={"nav-row"}>
-        <img src={require("assets/sprites/logo.svg")} alt="Weather App" />
+        <img
+          src={require("assets/sprites/logo.svg").default}
+          alt="Weather App"
+        />
         <div>
           <h4>Weather Display</h4>
           <p>
@@ -77,7 +81,9 @@ const Portfolio = () => {
   return (
     <div id="portfolio">
       <div className="main screen">
-        <h1>Glorison Lai</h1>
+        <h1 style={{ margin: 0 }}>Glorison Lai</h1>
+        <code>Cyber-Security; Web Development;</code>
+        <Divider />
         {/** Icon row */}
         <div className="icons">
           {/* Github Icon */}
@@ -137,7 +143,7 @@ const Portfolio = () => {
       <footer
         id="footer-button"
         // className={downArrowClass}
-        onClick={() => scrollTo(ScreenConstants.height)}
+        onClick={() => window.scrollTo(0, window.innerHeight)}
       >
         <code className="label">Projects</code>
         <div className={`arrow down`} />

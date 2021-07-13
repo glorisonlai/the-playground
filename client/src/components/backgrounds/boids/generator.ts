@@ -1,5 +1,4 @@
 import Boid from "./boid";
-import { ScreenConstants } from "../background";
 import { CanvasInterface } from "../helper-functions/background";
 
 interface BoidInterface extends CanvasInterface {
@@ -9,7 +8,7 @@ interface BoidInterface extends CanvasInterface {
 /**
  * Function to start drawing boids onto canvas
  */
-const boidGenerator = () => {
+const boidGenerator = (width: number, height: number) => {
   /**
    * Instantiate canvas context
    */
@@ -54,8 +53,8 @@ const boidGenerator = () => {
   const createBoids = (numBoids: number): Boid[] => {
     const boidsArr = [];
     for (let id = 0; id < numBoids; id++) {
-      const x = randNum(ScreenConstants.width);
-      const y = randNum(ScreenConstants.height);
+      const x = randNum(width);
+      const y = randNum(height);
       const force = randNum(360);
       boidsArr.push(new Boid({ id, x, y, force }));
     }

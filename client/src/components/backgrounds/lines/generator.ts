@@ -1,6 +1,9 @@
-import { ScreenConstants } from "../background";
 import { CanvasInterface } from "../helper-functions/background";
-
+/**
+ * Generative lines bg
+ * Based off of: https://codepen.io/tjoen/pen/iCgfj
+ * Blog: http://rectangleworld.com/blog/archives/462
+ */
 interface CircleConstants {
   numCircles: number;
   maxMaxRad: number;
@@ -47,11 +50,14 @@ interface Circle {
   pointArray: Array<number>;
 }
 
-const generateLines = () => {
+/**
+ * Based off of stacking noisy circles and drawing smooth lines between each circle center
+ */
+const generateLines = (width: number, height: number) => {
   const screenConstants: ScreenConstantsInterface = {
     canvas: document.getElementById("canvas") as HTMLCanvasElement,
-    height: ScreenConstants.height,
-    width: ScreenConstants.width,
+    height: height,
+    width: width,
     context: {} as CanvasRenderingContext2D,
     constants: {} as CircleConstants,
     circles: [],
@@ -111,7 +117,7 @@ const generateLines = () => {
 
   const setLinePoints = (iterations: number) => {
     const pointList = {} as Coord;
-    const pointArray = [] as Array<number>;
+    const pointArray = [] as number[];
     pointList.first = { x: 0, y: 1 } as Coord;
     const lastPoint = { x: 1, y: 1 } as Coord;
     let minY: number = 1;
@@ -189,7 +195,7 @@ const generateLines = () => {
 
     for (let i = 0; i < colorParamArray.length; i++) {
       const param = colorParamArray[i];
-      const random = Math.random() * 130 + param;
+      const random = Math.random() * 50 + param;
 
       const newColor = `rgba(${random},${random},${random},${lineAlpha})`;
 

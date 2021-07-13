@@ -126,7 +126,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     <>
       <div className={`cover flyout ${showState}`}>
         <h2 id="menu-title">Backgrounds</h2>
-        {visible && <ChallengeMenu />}
+        <ChallengeMenu />
       </div>
       <MenuButton
         shape={visible}

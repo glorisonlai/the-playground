@@ -1,6 +1,5 @@
 import React from "react";
 import Particles from "react-particles-js";
-import { ScreenConstants } from "../background";
 
 /**
  * Uses particles.js script to create THE developer background
@@ -8,15 +7,9 @@ import { ScreenConstants } from "../background";
  * @returns Nodes background
  */
 const Nodes = () => {
-  // useEffect(() => {
-  //   const particlesJS = window.particlesJS;
-  //   particlesJS.load("particles-js", "./particles.json", () => {
-  //     console.log("callback-particles.js config loaded");
-  //   });
-  // }, []);
   return (
     <div className="bg">
-      <Particles />
+      <Particles height="100vh" width="100vw" />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import generator from "./generator";
-import { ScreenConstants } from "../background";
+import { useScreenSize } from "../background";
 
 /**
  * Animates drawing lines based on sine waves
@@ -8,22 +8,22 @@ import { ScreenConstants } from "../background";
  * @returns Lines background
  */
 const Lines = () => {
-  useEffect(generator, []);
+  const Canvas = () => {
+    const { width, height } = useScreenSize();
 
-  const Canvas = () => (
-    <canvas
-      width={ScreenConstants.width}
-      height={ScreenConstants.height}
-      id={"canvas"}
-    >
-      {/* Fallback message */}
-      <h1 style={{ alignContent: "center" }}>
-        Sorry!
-        <br />
-        Canvas not Supported in this Browser!
-      </h1>
-    </canvas>
-  );
+    useEffect(() => generator(width, height), [width, height]);
+
+    return (
+      <canvas width={width} height={height} id={"canvas"}>
+        {/* Fallback message */}
+        <h1 style={{ alignContent: "center" }}>
+          Sorry!
+          <br />
+          Canvas not Supported in this Browser!
+        </h1>
+      </canvas>
+    );
+  };
 
   return (
     <div className="bg">

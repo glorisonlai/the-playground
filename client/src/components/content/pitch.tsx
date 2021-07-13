@@ -10,9 +10,7 @@ const Pitch = ({ unlocked, total }: { unlocked: number; total: number }) => {
   const email = "lai.glorison@gmail.com";
   return (
     <div className="main">
-      <h1>
-        <code>The Playground</code>
-      </h1>
+      <h2>The Playground</h2>
       <h3>
         {/* Remove 1 from total to exclude initial bg */}
         {unlocked - 1} solved of {total - 1}{" "}

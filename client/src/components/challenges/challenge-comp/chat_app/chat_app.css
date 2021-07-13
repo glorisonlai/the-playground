@@ -13,8 +13,19 @@
 	background: var(--user-colour);
 }
 
+.justify-right {
+	justify-content: flex-end;
+	padding-bottom: 0;
+}
+
+.justify-left {
+	padding-bottom: 0;
+	padding-left: 2rem;
+	width: auto;
+}
+
 #support-chat {
-	height: 20rem;
+	max-height: 100%;
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
@@ -65,7 +76,6 @@
 
 .admin {
 	margin-right: 40px;
-	align-self: flex-end;
 	background-color: var(--admin-colour);
 }
 

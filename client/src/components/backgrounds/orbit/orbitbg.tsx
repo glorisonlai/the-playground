@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./orbit.css";
 import generator from "./generator";
-import { ScreenConstants } from "../background";
+import { useScreenSize } from "../background";
 
 /**
  * Spinning background
@@ -10,13 +10,11 @@ import { ScreenConstants } from "../background";
  */
 const Orbit = () => {
   const Canvas = () => {
-    useEffect(generator, []);
+    const { width, height } = useScreenSize();
+
+    useEffect(() => generator(width, height), [width, height]);
     return (
-      <canvas
-        width={ScreenConstants.width}
-        height={ScreenConstants.height}
-        id="orbitCanvas"
-      >
+      <canvas width={width} height={height} id="orbitCanvas">
         Sorry, Canvas is not supported in this browser
       </canvas>
     );

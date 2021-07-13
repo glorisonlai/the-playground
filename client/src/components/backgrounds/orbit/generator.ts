@@ -1,4 +1,3 @@
-import { ScreenConstants } from "../background";
 import { CanvasInterface } from "../helper-functions/background";
 
 // Properties of an arc
@@ -17,15 +16,15 @@ interface OrbitCanvasInterface extends CanvasInterface {
 
 // Weights to modify orbitting behaviour
 const orbitConstants = {
-  centerX: 300,
-  centerY: 40, // Origin point
-  orbitSpeed: 0.006, // base rotational speed
-  arcLength: 0.2, // angle of arc drawn
-  lengthRandomnessWeight: 50, // How similar arc length should be
-  speedRandomnessWeight: 200, // How similar arc speed should be
+  CENTERX: 300,
+  CENTERY: 40, // Origin point
+  ORBITSPEED: 0.006, // base rotational speed
+  ARCLENGTH: 0.2, // angle of arc drawn
+  LENGTHRANDOMNESSWEIGHT: 50, // How similar arc length should be
+  SPEEDRANDOMNESSWEIGHT: 200, // How similar arc speed should be
 };
 
-const generator = () => {
+const generator = (width: number, height: number) => {
   // Initialize canvas
   const canvasConstants: OrbitCanvasInterface = {
     canvas: document.getElementById("orbitCanvas") as HTMLCanvasElement,
@@ -61,16 +60,13 @@ const generator = () => {
    */
   const generateArcs = (numArcs: number): Arc[] => {
     const arcArr = [];
-    const maxRadius =
-      Math.max(ScreenConstants.width, ScreenConstants.height) -
-      orbitConstants.centerX -
-      5; // arbitrary value to force orbits closer to center
+    const maxRadius = Math.max(width, height) - orbitConstants.CENTERY - 40; // arbitrary value to force orbits closer to center
     for (let i = 0; i < numArcs; i++) {
       const radius = Math.random() * maxRadius + 10;
       const startRadian = Math.random() * 2 * Math.PI;
       const strokeWidth = Math.random();
-      const lengthNoise = Math.random() / orbitConstants.lengthRandomnessWeight;
-      const speedNoise = Math.random() / orbitConstants.speedRandomnessWeight;
+      const lengthNoise = Math.random() / orbitConstants.LENGTHRANDOMNESSWEIGHT;
+      const speedNoise = Math.random() / orbitConstants.SPEEDRANDOMNESSWEIGHT;
       arcArr.push({
         radius,
         startRadian,
@@ -92,20 +88,20 @@ const generator = () => {
     const { context, canvas, orbitArr } = canvasConstants;
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    context.fillRect(orbitConstants.centerX, orbitConstants.centerY, 3, 2);
+    context.fillRect(orbitConstants.CENTERX, orbitConstants.CENTERY, 3, 2);
 
     orbitArr.forEach((arc: Arc) => {
       arc.startRadian =
-        (arc.startRadian + orbitConstants.orbitSpeed + arc.speedNoise) %
+        (arc.startRadian + orbitConstants.ORBITSPEED + arc.speedNoise) %
         (2 * Math.PI);
       context.beginPath();
       context.lineWidth = arc.strokeWidth;
       context.arc(
-        orbitConstants.centerX,
-        orbitConstants.centerY,
+        orbitConstants.CENTERX,
+        orbitConstants.CENTERY,
         arc.radius,
         arc.startRadian,
-        arc.startRadian + orbitConstants.arcLength + arc.lengthNoise
+        arc.startRadian + orbitConstants.ARCLENGTH + arc.lengthNoise
       );
       context.stroke();
       context.closePath();

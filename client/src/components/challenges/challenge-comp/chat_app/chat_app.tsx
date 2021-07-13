@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NormalForm from "../normal_form";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import "./chat_app.css";
 import { SupportUser } from "assets/fontawesome";
-import SplitPane from "components/split-pane/split-pane";
+import SplitPane from "components/common/split-pane/split-pane";
 
 /**
  * Renders support chat app.
@@ -21,6 +21,12 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
 
   // Updates form message
   const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    const chat_box = document.getElementById("support-chat");
+    const el = createMsg("Hi! How can I help?", "admin");
+    chat_box!.appendChild(el);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMsg(event.target.value);
@@ -46,11 +52,14 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
   };
 
   // Securely creates new message component
-  const createMsg = (msg: string, className: string) => {
+  const createMsg = (msg: string, user: string) => {
+    const chat_row = document.createElement("div");
+    chat_row.className = `row justify-${user === "admin" ? "right" : "left"}`;
     const chat_bubble = document.createElement("div");
     chat_bubble.innerHTML = DOMPurify.sanitize(msg);
-    chat_bubble.className = `talk-bubble ${className}`;
-    return chat_bubble;
+    chat_bubble.className = `talk-bubble ${user}`;
+    chat_row.appendChild(chat_bubble);
+    return chat_row;
   };
 
   return (
@@ -62,9 +71,7 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
           <>Tech Support</>
         </div>
         {/* Chat pane */}
-        <ul id="support-chat">
-          <div className="talk-bubble admin">Hi! How can I help?</div>
-        </ul>
+        <div id="support-chat" />
         {/* Text Input */}
         <form id="support-msg" onSubmit={sendMsg}>
           <input

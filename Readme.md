@@ -4,7 +4,6 @@
 
 #### TODO:
 
-- Make it not ugly
 - Host to AWS
 - Add portfolio elements
 - Add more challenges
