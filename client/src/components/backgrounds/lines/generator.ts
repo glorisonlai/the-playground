@@ -170,7 +170,7 @@ const generateLines = (width: number, height: number) => {
         Math.random() * (constants.maxMaxRad - constants.minMaxRad);
       const minR = constants.minRadFactor * maxR;
 
-      var newCircle: Circle = {
+      const newCircle: Circle = {
         centerX:
           constants.minX +
           (i * constants.maxX - constants.minX) / (constants.numCircles - 1),
@@ -191,7 +191,7 @@ const generateLines = (width: number, height: number) => {
 
   const setColors = ({ lineAlpha, iterations }: CircleConstants) => {
     const colors = [];
-    var colorParamArray: Array<number> = setLinePoints(iterations);
+    const colorParamArray = setLinePoints(iterations);
 
     for (let i = 0; i < colorParamArray.length; i++) {
       const param = colorParamArray[i];

@@ -20,7 +20,7 @@ const boidGenerator = (width: number, height: number) => {
   };
 
   // Number of boids on canvas
-  const NUMBOIDS = 50;
+  const NUMBOIDS = 2;
 
   //Reset canvas, instantiate boids, and start drawing
   const init = (): void => {
@@ -51,14 +51,21 @@ const boidGenerator = (width: number, height: number) => {
    * @returns Array of boids
    */
   const createBoids = (numBoids: number): Boid[] => {
-    const boidsArr = [];
-    for (let id = 0; id < numBoids; id++) {
-      const x = randNum(width);
-      const y = randNum(height);
-      const force = randNum(360);
-      boidsArr.push(new Boid({ id, x, y, force }));
-    }
-    return boidsArr;
+    let id_counter = 0;
+    const boidArr = Array.from(
+      {
+        length: numBoids,
+      },
+      () => {
+        const id = id_counter++;
+        const x = randNum(width);
+        const y = randNum(height);
+        const force = randNum(360);
+        return new Boid({ id, x, y, force });
+      }
+    );
+    console.log(id_counter);
+    return boidArr;
   };
 
   /**

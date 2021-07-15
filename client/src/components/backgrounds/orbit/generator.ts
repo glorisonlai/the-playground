@@ -59,22 +59,27 @@ const generator = (width: number, height: number) => {
    * @returns Array of arcs
    */
   const generateArcs = (numArcs: number): Arc[] => {
-    const arcArr = [];
     const maxRadius = Math.max(width, height) - orbitConstants.CENTERY - 40; // arbitrary value to force orbits closer to center
-    for (let i = 0; i < numArcs; i++) {
-      const radius = Math.random() * maxRadius + 10;
-      const startRadian = Math.random() * 2 * Math.PI;
-      const strokeWidth = Math.random();
-      const lengthNoise = Math.random() / orbitConstants.LENGTHRANDOMNESSWEIGHT;
-      const speedNoise = Math.random() / orbitConstants.SPEEDRANDOMNESSWEIGHT;
-      arcArr.push({
-        radius,
-        startRadian,
-        strokeWidth: strokeWidth > 0.5 ? 0.2 : strokeWidth,
-        lengthNoise,
-        speedNoise,
-      } as Arc);
-    }
+    const arcArr = Array.from(
+      {
+        length: numArcs,
+      },
+      () => {
+        const radius = Math.random() * maxRadius + 10;
+        const startRadian = Math.random() * 2 * Math.PI;
+        const strokeWidth = Math.random();
+        const lengthNoise =
+          Math.random() / orbitConstants.LENGTHRANDOMNESSWEIGHT;
+        const speedNoise = Math.random() / orbitConstants.SPEEDRANDOMNESSWEIGHT;
+        return {
+          radius,
+          startRadian,
+          strokeWidth: strokeWidth > 0.5 ? 0.2 : strokeWidth,
+          lengthNoise,
+          speedNoise,
+        } as Arc;
+      }
+    );
     return arcArr;
   };
 

@@ -133,7 +133,8 @@ class Boid {
     cohesionVector: vector2dInterface,
     avoidanceVector: vector2dInterface
   ) => {
-    const steeringVector = vector2d.addArray([
+    const steeringVector = vector2d.create(0, 0);
+    vector2d.accum(steeringVector, [
       this.direction,
       vector2d.extend(alignmentVector, boidConstants.ALIGNMENT_WEIGHT),
       vector2d.extend(cohesionVector, boidConstants.COHESION_WEIGHT),
@@ -185,32 +186,30 @@ class Boid {
    * @param boundary Screen dimensions
    */
   update = (boidArr: Boid[], boundary: vector2dInterface) => {
-    let alignmentVector = { x: 0, y: 0 };
-    let cohesionVector = { x: 0, y: 0 };
-    let avoidanceVector = { x: 0, y: 0 };
+    const alignmentVector = { x: 0, y: 0 };
+    const cohesionVector = { x: 0, y: 0 };
+    const avoidanceVector = { x: 0, y: 0 };
     for (const otherBoid of boidArr) {
       if (this.inView(boidConstants.VIEWDIST, otherBoid)) {
         // Align direction with nearby boids
-        alignmentVector = vector2d.add(alignmentVector, otherBoid.direction);
+        vector2d.accum(alignmentVector, [otherBoid.direction]);
 
         // Aim towards other boids
-        cohesionVector = vector2d.add(
-          cohesionVector,
+        vector2d.accum(cohesionVector, [
           vector2d.normalize(
             vector2d.add(
               vector2d.extend(otherBoid.direction, boidConstants.SPEED),
               vector2d.reverse(this.head)
             )
-          )
-        );
+          ),
+        ]);
         // Avoid collisions
         if (this.inView(boidConstants.AVOIDDIST, otherBoid)) {
-          avoidanceVector = vector2d.add(
-            avoidanceVector,
+          vector2d.accum(avoidanceVector, [
             vector2d.normalize(
               vector2d.add(vector2d.reverse(otherBoid.head), this.head)
-            )
-          );
+            ),
+          ]);
         }
       }
     }

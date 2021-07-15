@@ -26,7 +26,7 @@ const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
-      return <NodesBg />;
+      return <BoidsBg />;
     case 1:
       return <LinesBg />;
     case 2:

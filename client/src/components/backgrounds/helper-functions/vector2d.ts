@@ -5,11 +5,11 @@ interface vector2dInterface {
 
 interface vector2dMethods {
   create(x: number, y: number): vector2dInterface;
-  addArray(vectors: vector2dInterface[]): vector2dInterface;
   add(
     vector1: vector2dInterface,
     vector2: vector2dInterface
   ): vector2dInterface;
+  accum(vector1: vector2dInterface, vectors: vector2dInterface[]): void;
   reverse(vector: vector2dInterface): vector2dInterface;
   normalize(vector: vector2dInterface): vector2dInterface;
   extend(vector: vector2dInterface, extension: number): vector2dInterface;
@@ -32,20 +32,6 @@ const vector2d: vector2dMethods = {
   },
 
   /**
-   * Adds array of vectors to each other
-   * @param vectors Array of vectors
-   * @returns Sum of vectors
-   */
-  addArray(vectors: vector2dInterface[]) {
-    const vector = this.create(0, 0);
-    for (const arg of vectors) {
-      vector.x += arg.x;
-      vector.y += arg.y;
-    }
-    return vector;
-  },
-
-  /**
    * Adds 2 vectors together
    * @param vectors Array of vectors
    * @returns Sum of vectors
@@ -57,6 +43,23 @@ const vector2d: vector2dMethods = {
     };
   },
 
+  /**
+   * Appends values of vectors array to accumulated vector
+   * @param vector1 Accumulated vector
+   * @param vectors Array of vectors
+   */
+  accum(vector1, vectors) {
+    for (const vector of vectors) {
+      vector1.x += vector.x;
+      vector1.y += vector.y;
+    }
+  },
+
+  /**
+   * Returns unit vector in the same direction
+   * @param vector
+   * @returns
+   */
   normalize(vector) {
     const mag = Math.sqrt(vector.x ** 2 + vector.y ** 2);
     return { x: vector.x / mag, y: vector.y / mag };

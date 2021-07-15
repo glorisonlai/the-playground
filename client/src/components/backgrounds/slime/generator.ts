@@ -27,7 +27,7 @@ const slimeGenerator = (width: number, height: number) => {
     blurPixels: [],
   };
 
-  // Number of boids on canvas
+  // Number of slime agents on canvas
   const NUMAGENTS = 1;
   var i = 0;
 
@@ -62,19 +62,22 @@ const slimeGenerator = (width: number, height: number) => {
     floor ? Math.floor(Math.random() * bound) : Math.random() * bound;
 
   /**
-   * Instantiates boids into array
-   * @param numSlime Number of boids to create
-   * @returns Array of boids
+   * Instantiates slimes into array
+   * @param numSlime Number of slimes to create
+   * @returns Array of slimes
    */
   const createSlime = (numAgents: number): Agent[] => {
-    const slimeArr: Agent[] = [];
-    for (let id = 0; id < numAgents; id++) {
-      const x = randNum(100);
-      const y = randNum(100);
-      const direction = randNum(2 * Math.PI, false) - Math.PI; // TODO: Make getting random direction not so inefficent
-      console.log(direction);
-      slimeArr.push(new Agent(x, y, direction));
-    }
+    const slimeArr = Array.from(
+      {
+        length: numAgents,
+      },
+      () => {
+        const x = randNum(100);
+        const y = randNum(100);
+        const direction = randNum(2 * Math.PI, false) - Math.PI; // TODO: Make getting random direction not so inefficent
+        return new Agent(x, y, direction);
+      }
+    );
     return slimeArr;
   };
 
