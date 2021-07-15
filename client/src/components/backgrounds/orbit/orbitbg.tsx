@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./orbit.css";
 import generator from "./generator";
 import { useScreenSize } from "../background";
 
@@ -21,7 +20,7 @@ const Orbit = () => {
   };
 
   return (
-    <div className="bg gradient">
+    <div className="bg">
       <Canvas />
     </div>
   );

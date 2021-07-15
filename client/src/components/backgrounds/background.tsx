@@ -16,6 +16,7 @@ const MountainBg = lazy(() => import("./mountains/mountainsbg")); // INCOMPLETE
 const NodesBg = lazy(() => import("./nodes/nodesbg")); // DONE
 const SlimeBg = lazy(() => import("./slime/slimebg")); // INCOMPLETE
 const OrbitBg = lazy(() => import("./orbit/orbitbg")); // DONE
+const SnowflakeBg = lazy(() => import("./snowflakes/snowflakebg")); // INCOMPLETE
 const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 
 /**
