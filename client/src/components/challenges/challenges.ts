@@ -84,18 +84,17 @@ const Challenges: ChallengeInterface = {
 
   async checkFlag(id: number, flag: string) {
     const { data } = await axios.post(
-      process.env.REACT_APP_API_URL + "/api/check_flag",
+      process.env.REACT_APP_API_URL + "/check",
       {
         id: id,
         msg: flag,
       }
     );
-    console.log(data);
-    if (!!data.success && data.secret === process.env[`REACT_APP_BG_${id}`]) {
+    if (!!data.code && data.data === process.env[`REACT_APP_BG_${id}`]) {
       localStorage.setItem(`BG${id}`, data.secret);
       this.unlocked.add(id);
     }
-    return data.success;
+    return data.code;
   },
 };
 

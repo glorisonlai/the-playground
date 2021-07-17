@@ -4,6 +4,6 @@
 
 #### TODO:
 
-- Host to AWS
+- Host multiple runtimes (https://www.serverless.com/blog/building-mutliple-runtimes)
 - Add portfolio elements
 - Add more challenges
