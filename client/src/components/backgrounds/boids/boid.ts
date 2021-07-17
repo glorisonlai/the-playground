@@ -186,9 +186,9 @@ class Boid {
    * @param boundary Screen dimensions
    */
   update = (boidArr: Boid[], boundary: vector2dInterface) => {
-    const alignmentVector = { x: 0, y: 0 };
-    const cohesionVector = { x: 0, y: 0 };
-    const avoidanceVector = { x: 0, y: 0 };
+    const alignmentVector = vector2d.create(0,0);
+    const cohesionVector = vector2d.create(0,0);
+    const avoidanceVector = vector2d.create(0,0);
     for (const otherBoid of boidArr) {
       if (this.inView(boidConstants.VIEWDIST, otherBoid)) {
         // Align direction with nearby boids
