@@ -162,9 +162,8 @@ const generateLines = (width: number, height: number) => {
   };
 
   const setCircles = (constants: CircleConstants) => {
-    const circles = [];
-
-    for (let i = 0; i < constants.numCircles; i++) {
+    let circle_index = 0;
+    const circles = Array.from({ length: constants.numCircles }, () => {
       const maxR =
         constants.minMaxRad +
         Math.random() * (constants.maxMaxRad - constants.minMaxRad);
@@ -173,34 +172,30 @@ const generateLines = (width: number, height: number) => {
       const newCircle: Circle = {
         centerX:
           constants.minX +
-          (i * constants.maxX - constants.minX) / (constants.numCircles - 1),
+          (circle_index * constants.maxX - constants.minX) /
+            (constants.numCircles - 1),
         centerY:
           constants.minY +
           Math.floor(Math.random() * constants.maxX - constants.minX) /
             (constants.numCircles - 1),
         maxRad: maxR,
         minRad: minR,
-        phase: (i / (constants.numCircles - 1)) * constants.twistAmount,
+        phase:
+          (circle_index / (constants.numCircles - 1)) * constants.twistAmount,
         pointArray: setLinePoints(constants.iterations),
       };
-      circles.push(newCircle);
-    }
-
+      circle_index++;
+      return newCircle;
+    });
     return circles;
   };
 
   const setColors = ({ lineAlpha, iterations }: CircleConstants) => {
-    const colors = [];
     const colorParamArray = setLinePoints(iterations);
-
-    for (let i = 0; i < colorParamArray.length; i++) {
-      const param = colorParamArray[i];
-      const random = Math.random() * 50 + param;
-
-      const newColor = `rgba(${random},${random},${random},${lineAlpha})`;
-
-      colors.push(newColor);
-    }
+    const colors = colorParamArray.map((weight) => {
+      const shade = Math.random() * 50 + weight;
+      return `rgba(${shade},${shade},${shade},${lineAlpha})`;
+    });
 
     return colors;
   };
