@@ -1,5 +1,5 @@
-import { Model } from 'mongoose';
-import { CreateBookDTO } from '../model/dto/createBookDTO';
+import { Model } from "mongoose";
+import { CreateBookDTO } from "../model/createBookDTO";
 
 export class BooksService {
   private books: Model<any>;
@@ -11,7 +11,7 @@ export class BooksService {
    * Create book
    * @param params
    */
-  protected async createBook (params: CreateBookDTO): Promise<object> {
+  protected async createBook(params: CreateBookDTO): Promise<object> {
     try {
       const result = await this.books.create({
         name: params.name,
@@ -31,18 +31,14 @@ export class BooksService {
    * @param id
    * @param data
    */
-  protected updateBooks (id: number, data: object) {
-    return this.books.findOneAndUpdate(
-      { id },
-      { $set: data },
-      { new: true },
-    );
+  protected updateBooks(id: number, data: object) {
+    return this.books.findOneAndUpdate({ id }, { $set: data }, { new: true });
   }
 
   /**
    * Find books
    */
-  protected findBooks () {
+  protected findBooks() {
     return this.books.find();
   }
 
@@ -50,7 +46,7 @@ export class BooksService {
    * Query book by id
    * @param id
    */
-  protected findOneBookById (id: number) {
+  protected findOneBookById(id: number) {
     return this.books.findOne({ id });
   }
 
@@ -58,7 +54,7 @@ export class BooksService {
    * Delete book by id
    * @param id
    */
-  protected deleteOneBookById (id: number) {
+  protected deleteOneBookById(id: number) {
     return this.books.deleteOne({ id });
   }
 }

@@ -9,8 +9,12 @@ provider:
     NODE_ENV: dev
 
 plugins:
-  - serverless-plugin-typescript 
+  - serverless-plugin-typescript
   - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 9000
 
 package:
   exclude:
@@ -20,34 +24,41 @@ package:
     - config/.env.dev
 
 functions:
-  create:
-    handler: app/handler.create
+  checkFlag:
+    handler: app/handler.check
     events:
       - http:
-          path: books
-          method: post
-  update:
-    handler: app/handler.update
-    events:
-      - http:
-          path: books/{id}
-          method: put
-  find:
-    handler: app/handler.find
-    events:
-      - http:
-          path: books
-          method: get
-  findOne:
-    handler: app/handler.findOne
-    events:
-      - http:
-          path: books/{id}
-          method: get
+          method: POST
+          path: /check
 
-  deleteOne:
-    handler: app/handler.deleteOne
-    events:
-      - http:
-          path: books/{id}
-          method: delete
+  # create:
+  #   handler: app/handler.create
+  #   events:
+  #     - http:
+  #       path: books
+  #       method: post
+  # update:
+  #   handler: app/handler.update
+  #   events:
+  #     - http:
+  #       path: books/{id}
+  #       method: put
+  # find:
+  #   handler: app/handler.find
+  #   events:
+  #     - http:
+  #       path: books
+  #       method: get
+  # findOne:
+  #   handler: app/handler.findOne
+  #   events:
+  #     - http:
+  #       path: books/{id}
+  #       method: get
+
+  # deleteOne:
+  #   handler: app/handler.deleteOne
+  #   events:
+  #     - http:
+  #         path: books/{id}
+  #         method: delete
