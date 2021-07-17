@@ -1,6 +1,6 @@
 import { Context } from "aws-lambda";
 import { Model } from "mongoose";
-import { MessageUtil } from "../../utils/message";
+import { MessageUtil } from "../../../utils/message";
 import { BooksService } from "../service/books";
 import { CreateBookDTO } from "../model/createBookDTO";
 

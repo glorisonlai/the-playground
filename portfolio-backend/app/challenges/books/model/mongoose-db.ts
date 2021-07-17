@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 export default mongoose.connect(process.env.DB_URL, {
-  dbName: process.env.DB_NAME,
+  dbName: process.env.BOOK_DB_NAME,
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });

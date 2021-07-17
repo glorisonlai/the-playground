@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "dotenv": "^8.2.0",
-    "mongoose": "^5.9.10"
+    "mongoose": "^5.13.3"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.79",

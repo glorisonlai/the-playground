@@ -2,7 +2,7 @@ import lambdaTester from "lambda-tester";
 import { expect } from "chai";
 import { findOne, find, create, update, deleteOne } from "../app/handler";
 import * as booksMock from "./books.mock";
-import { books as BooksModel } from "../app/books/model/books";
+import { books as BooksModel } from "../app/challenges/books/model/books";
 import sinon from "sinon";
 
 describe("FindOne [GET]", () => {
