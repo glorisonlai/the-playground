@@ -18,6 +18,10 @@
     color: var(--text-color);
 }
 
+#content {
+    overflow: overlay;
+}
+
 /*Transform values are hardcoded, otherwise won't shift*/
 #train {
     position: fixed;

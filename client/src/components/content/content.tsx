@@ -134,6 +134,7 @@ const Content = ({
         </>
       )}
       <View />
+      <div id="footer">©️{new Date().getFullYear()} Glorison Lai</div>
     </>
   );
 };
