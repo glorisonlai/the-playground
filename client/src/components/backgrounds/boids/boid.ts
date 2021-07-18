@@ -29,17 +29,7 @@ class Boid {
   head: vector2dInterface;
   direction: vector2dInterface;
 
-  constructor({
-    id,
-    x,
-    y,
-    force,
-  }: {
-    id: number;
-    x: number;
-    y: number;
-    force: number;
-  }) {
+  constructor(id: number, x: number, y: number, force: number) {
     this.id = id;
     this.head = vector2d.create(x, y);
     this.direction = vector2d.resolveDegreesToUnitVector(force);
@@ -186,9 +176,9 @@ class Boid {
    * @param boundary Screen dimensions
    */
   update = (boidArr: Boid[], boundary: vector2dInterface) => {
-    const alignmentVector = vector2d.create(0,0);
-    const cohesionVector = vector2d.create(0,0);
-    const avoidanceVector = vector2d.create(0,0);
+    const alignmentVector = vector2d.create(0, 0);
+    const cohesionVector = vector2d.create(0, 0);
+    const avoidanceVector = vector2d.create(0, 0);
     for (const otherBoid of boidArr) {
       if (this.inView(boidConstants.VIEWDIST, otherBoid)) {
         // Align direction with nearby boids

@@ -8,12 +8,20 @@ import "./flag.css";
  * @param callBack Handler for challenge solve
  * @returns Normal flag form
  */
-const NormalForm = ({ id, callBack }: { id: number; callBack: Function }) => {
+const NormalForm = ({
+  id,
+  callBack,
+  initialVal = "",
+}: {
+  id: number;
+  callBack: Function;
+  initialVal?: string;
+}) => {
   // Prevent user from spamming submit button
   const [loading, setLoading] = useState(false);
 
   // Flag text
-  const [flag, setFlag] = useState("");
+  const [flag, setFlag] = useState(initialVal);
 
   // Updates flag text
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +41,7 @@ const NormalForm = ({ id, callBack }: { id: number; callBack: Function }) => {
     if (await Challenges.checkFlag(id, flag)) {
       callBack(id);
     }
-    setFlag("");
+    setFlag(initialVal);
     setLoading(false);
   };
 

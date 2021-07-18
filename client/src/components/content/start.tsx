@@ -23,11 +23,11 @@ const Start = ({
         <div className="row">
           <code>Checking challenges</code>
           {!chalLoaded ? (
-            <>
+            <code id="loadingChal">
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
-            </>
+            </code>
           ) : (
             <>
               <code>...DONE</code>
@@ -37,11 +37,11 @@ const Start = ({
         <div className="row">
           <code>Checking backgrounds</code>
           {!bgLoaded ? (
-            <>
+            <code id="loadingBg">
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
-            </>
+            </code>
           ) : (
             <>
               <code>...DONE</code>

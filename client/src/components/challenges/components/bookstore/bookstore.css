@@ -1,0 +1,66 @@
+#storefront {
+	position: relative;
+	width: 80%;
+	height: 40vh;
+	background-color: whitesmoke;
+}
+
+.categories {
+	padding: 0.2em;
+	justify-content: space-evenly;
+}
+
+.categories button {
+	outline: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+#book-logo {
+	font-size: 1.5em;
+	font-weight: bolder;
+	color: black;
+	margin: auto;
+	text-shadow: none;
+}
+
+#book-search {
+	margin-top: 0.5em;
+	display: flex;
+	/* justify-content: flex-end; */
+}
+
+#book-search-text {
+	width: 50%;
+	background: lightgray;
+	/* border-radius: 15px; */
+	border: none;
+	padding: 1em;
+}
+
+#book-search-submit {
+	width: 20%;
+	max-width: 100px;
+	padding: calc(1em);
+	border: none;
+	background: red;
+	/* outline: none; */
+	cursor: pointer;
+	color: white;
+	font-weight: bolder;
+	margin-right: 1em;
+}
+
+#error {
+	background-color: rgb(253, 76, 63);
+	border: red;
+}
+
+.book-list {
+	color: black;
+	text-shadow: none;
+	max-height: 20vh;
+	text-overflow: ellipsis;
+	overflow-y: scroll;
+}

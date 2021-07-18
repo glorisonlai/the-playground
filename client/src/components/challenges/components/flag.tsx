@@ -1,8 +1,10 @@
 import React, { lazy, Suspense } from "react";
+import SplitPane from "components/common/split-pane/split-pane";
 
 const NormalFlag = lazy(() => import("./normal_form"));
 const MissingSubmit = lazy(() => import("./missing_submit"));
-const ChatApp = lazy(() => import("./chat_app/chat_app"));
+const ChatApp = lazy(() => import("./chatApp/chatApp"));
+const BookStore = lazy(() => import("./bookstore/bookstore"));
 
 /**
  * Renders appropriate flag form. If challenge is locked, form will not appear
@@ -33,12 +35,32 @@ const Flag = ({
    */
   const renderFlag = (id: number) => {
     switch (id) {
+      case 0:
+        return (
+          <NormalFlag
+            id={0}
+            callBack={callBack}
+            initialVal={"FLAG{HelloWorld!}"}
+          />
+        );
       case 1:
         return <NormalFlag id={1} callBack={callBack} />;
       case 2:
         return <MissingSubmit />;
       case 3:
-        return <ChatApp id={3} callBack={callBack} />;
+        return (
+          <SplitPane>
+            <ChatApp />
+            <NormalFlag id={3} callBack={callBack} />
+          </SplitPane>
+        );
+      case 4:
+        return (
+          <SplitPane>
+            <BookStore />
+            <NormalFlag id={4} callBack={callBack} />
+          </SplitPane>
+        );
       default:
         console.error("No associated flag form");
         return;

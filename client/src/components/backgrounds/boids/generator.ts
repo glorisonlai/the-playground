@@ -61,10 +61,9 @@ const boidGenerator = (width: number, height: number) => {
         const x = randNum(width);
         const y = randNum(height);
         const force = randNum(360);
-        return new Boid({ id, x, y, force });
+        return new Boid(id, x, y, force);
       }
     );
-    console.log(id_counter);
     return boidArr;
   };
 

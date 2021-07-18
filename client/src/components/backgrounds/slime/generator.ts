@@ -29,7 +29,7 @@ const slimeGenerator = (width: number, height: number) => {
 
   // Number of slime agents on canvas
   const NUMAGENTS = 1;
-  var i = 0;
+  let i = 0;
 
   //Reset canvas, instantiate boids, and start drawing
   const init = (): void => {

@@ -22,10 +22,10 @@ const Portfolio = () => {
   // const downArrowClass = screen ? "" : "hidden";
   // const upArrowClass = screen ? "hidden" : "";
 
-  const scrollTo = (scrollTo: number) => {
-    window.scrollTo(0, scrollTo);
-    // setScreen((screen) => !screen);
-  };
+  // const scrollTo = (scrollTo: number) => {
+  //   window.scrollTo(0, scrollTo);
+  //   setScreen((screen) => !screen);
+  // };
 
   /**
    * Lists experiences
