@@ -1,14 +1,3 @@
-import { CreateBookDTO } from "../model/createBookDTO";
-import {Client} from 'pg';
-
-class BooksClient  {
-  private client = null;
-  async newClient = () => {
-    this.client = new Client({
-
-    })
-  }
-
 
 export const BooksService = {
   private books: Model<any>;
