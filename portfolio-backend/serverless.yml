@@ -24,41 +24,28 @@ package:
     - config/.env.dev
 
 functions:
+  # Main flag checking function
   checkFlag:
-    handler: app/handler.check
+    handler: app/handler.checkFlag
     events:
       - http:
           method: POST
           path: /check
 
-  # create:
-  #   handler: app/handler.create
-  #   events:
-  #     - http:
-  #       path: books
-  #       method: post
-  # update:
-  #   handler: app/handler.update
-  #   events:
-  #     - http:
-  #       path: books/{id}
-  #       method: put
-  # find:
-  #   handler: app/handler.find
-  #   events:
-  #     - http:
-  #       path: books
-  #       method: get
-  # findOne:
-  #   handler: app/handler.findOne
-  #   events:
-  #     - http:
-  #       path: books/{id}
-  #       method: get
+  # Book Challenge functions
 
-  # deleteOne:
-  #   handler: app/handler.deleteOne
-  #   events:
-  #     - http:
-  #         path: books/{id}
-  #         method: delete
+  # Search book by name
+  searchBookByName:
+    handler: app/handler.searchBookName
+    events:
+      - http:
+          method: POST
+          path: /c4/searchbook
+
+  # Search book by category
+  searchBookByCategory:
+    handler: app/handler.searchBookCategory
+    events:
+      - http:
+          method: POST
+          path: /c4/searchcat

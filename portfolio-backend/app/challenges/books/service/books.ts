@@ -1,7 +1,16 @@
-import { Model } from "mongoose";
 import { CreateBookDTO } from "../model/createBookDTO";
+import {Client} from 'pg';
 
-export class BooksService {
+class BooksClient  {
+  private client = null;
+  async newClient = () => {
+    this.client = new Client({
+
+    })
+  }
+
+
+export const BooksService = {
   private books: Model<any>;
   constructor(books: Model<any>) {
     this.books = books;

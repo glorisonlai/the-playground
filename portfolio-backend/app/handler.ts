@@ -13,7 +13,14 @@ dotenv.config({
 import { FlagsController } from "./flags/controller/flags";
 import { BooksController } from "./challenges/books/controller/books";
 
-export const check: Handler = (event: any) => FlagsController.checkFlag(event);
+// Main function
+export const checkFlag: Handler = (event: any) =>
+  FlagsController.checkFlag(event);
+
+// Book functions
+export const searchBookName: Handler = (event: any) => BooksController.searchBookName;
+
+export const searchBookCategory: Handler = (event: any) => 
 
 // import { books } from "./books/model";
 // import { BooksController } from "./books/controller/books";
