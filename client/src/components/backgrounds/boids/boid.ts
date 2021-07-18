@@ -49,7 +49,7 @@ class Boid {
    * Draws boid shape onto canvas
    * @param ctx Canvas Context
    */
-  draw = (ctx: CanvasRenderingContext2D) => {
+  draw(ctx: CanvasRenderingContext2D) {
     const centre = vector2d.add(
       this.head,
       vector2d.reverse(
@@ -80,15 +80,16 @@ class Boid {
     ctx.closePath();
     ctx.fillStyle = "#FFFFFF";
     ctx.fill();
-  };
+  }
 
   /**
    * Calculates squared distance from this, to other boid
    * @param head Location of other boid
    * @returns Squared distance
    */
-  squaredDist = ({ head }: Boid) =>
-    (this.head.x - head.x) ** 2 + (this.head.y - head.y) ** 2;
+  squaredDist({ head }: Boid) {
+    return (this.head.x - head.x) ** 2 + (this.head.y - head.y) ** 2;
+  }
 
   /**
    * Simulates view cone of 200-ish degrees in front of boid
@@ -96,7 +97,7 @@ class Boid {
    * @param otherBoid Target boid
    * @returns True if in radius
    */
-  inView = (radius: number, otherBoid: Boid) => {
+  inView(radius: number, otherBoid: Boid) {
     if (otherBoid.id === this.id) return false;
     if (this.squaredDist(otherBoid) >= radius ** 2) return false;
     const toOtherBoidVector = vector2d.add(
@@ -105,7 +106,7 @@ class Boid {
     );
     const projection = vector2d.dotProd(this.direction, toOtherBoidVector);
     return projection >= -0.2 && projection <= radius ** 2;
-  };
+  }
 
   /**
    * Logic to figure out whether steeringRadian is closer to left of current directionRadian
@@ -113,12 +114,13 @@ class Boid {
    * @param directionRadian Current vector
    * @returns True if should turn anti-clockwise
    */
-  turnLeft = (steeringRadian: number, directionRadian: number): boolean =>
-    directionRadian >= 0
+  shouldTurnLeft(steeringRadian: number, directionRadian: number): boolean {
+    return directionRadian >= 0
       ? steeringRadian >= directionRadian ||
-        steeringRadian <= directionRadian - Math.PI
+          steeringRadian <= directionRadian - Math.PI
       : steeringRadian <= directionRadian + Math.PI &&
-        steeringRadian >= directionRadian;
+          steeringRadian >= directionRadian;
+  }
 
   /**
    * Return radians to steer boid after adjusting for boid behaviour
@@ -128,11 +130,11 @@ class Boid {
    * @param avoidanceVector How far to steer away from collision
    * @returns Steering radians
    */
-  steer = (
+  steer(
     alignmentVector: vector2dInterface,
     cohesionVector: vector2dInterface,
     avoidanceVector: vector2dInterface
-  ) => {
+  ) {
     const steeringVector = vector2d.create(0, 0);
     vector2d.accum(steeringVector, [
       this.direction,
@@ -142,7 +144,7 @@ class Boid {
     ]);
     const steeringRadians = vector2d.resolveVectorToRadians(steeringVector);
     const currVectorRadians = vector2d.resolveVectorToRadians(this.direction);
-    if (this.turnLeft(steeringRadians, currVectorRadians)) {
+    if (this.shouldTurnLeft(steeringRadians, currVectorRadians)) {
       // Go left
       // TODO: Messy logic
       if (
@@ -178,14 +180,14 @@ class Boid {
           : currVectorRadians - boidConstants.STEERING_LIMIT;
       }
     }
-  };
+  }
 
   /**
    * Looks at surroundings and updates direction and position
    * @param boidArr Every boid
    * @param boundary Screen dimensions
    */
-  update = (boidArr: Boid[], boundary: vector2dInterface) => {
+  update(boidArr: Boid[], boundary: vector2dInterface) {
     const alignmentVector = { x: 0, y: 0 };
     const cohesionVector = { x: 0, y: 0 };
     const avoidanceVector = { x: 0, y: 0 };
@@ -258,7 +260,7 @@ class Boid {
       this.head,
       vector2d.extend(this.direction, boidConstants.SPEED)
     );
-  };
+  }
 }
 
 export default Boid;
