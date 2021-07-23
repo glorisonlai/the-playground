@@ -2,6 +2,7 @@
 .icons svg {
 	border-radius: 1rem;
 	padding: 1rem;
+	padding-bottom: 0.5rem;
 	font-size: 4rem;
 }
 
@@ -20,6 +21,7 @@
 }
 
 .tag {
+	margin-top: 0.5rem;
 	text-align: center;
 	opacity: 100%;
 }
@@ -37,6 +39,11 @@
 	height: 2px;
 	width: 70%;
 	background-color: white;
+	border: 0.5px solid black;
+}
+
+.scroll {
+	-webkit-overflow-scrolling: touch;
 }
 
 img {
@@ -49,7 +56,7 @@ h6 {
 	margin: 0;
 }
 
-#portfolio {
+#main {
 	position: relative;
 }
 
@@ -132,49 +139,56 @@ header:hover {
 	transform: rotate(45deg)
 }
 
-.hidden {
-	visibility: hidden;
-}
-
 .nav-row {
 	position: relative;
 	margin: 2vw;
 	padding: 2vw;
-	background-color: rgb(27, 27, 27);
-	border-radius: 2rem;
+	background-color: rgb(27, 27, 27, 0.5);
+	border-radius: 0.3rem;
 	display: grid;
 	height: 20vh;
-	grid-template-columns: 30% 50% 20%;
+	grid-template-columns: 25% 65% 10%;
 }
 
-p {
+.proj-text {
+	padding: 1rem;
 	font-size: var(--normal-text);
+	overflow-y: auto;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	text-align: left;
+	border-right: 2px solid #4e4e4e;
+	border-left: 2px solid #4e4e4e;
 }
 
 #experience {
 	position: relative;
 	top: 100vh;
-	
+	min-height: 100vh;	
 }
 
 .placeholder {
 	filter: blur(5px);
-	transform: scale(1.1);
+	overflow: clip;
 	transition: visibility 0ms ease 400ms;
 }
 
 .full {
 	transition: opacity 400ms ease 0ms;
+	border: 1px solid #f5f5f5;
+	border-radius: 5px;
+}
+
+.image-container {
+	position: relative;
 }
 
 .img {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 30%;
-	height: 90%;
 }
 
-.proj-text {
-	text-align: left;
+.links {
+	text-overflow: clip;
 }

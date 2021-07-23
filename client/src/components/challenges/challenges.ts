@@ -26,7 +26,7 @@ const Challenges: ChallengeInterface = {
       id: 0,
       title: "Boring. Normie. Gross.",
       logo: "bubbs.svg",
-      unsolvedDesc: "Seriously, stop using this background",
+      unsolvedDesc: `Seriously, stop using this background it's uncreative and unoriginal. And I know what you're thinking, "You're using it as well; you're just as bad as the rest of us." And that's true but-`,
       solvedDesc: "The journey begins!",
     },
     {

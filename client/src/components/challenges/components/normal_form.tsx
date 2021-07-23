@@ -57,7 +57,6 @@ const NormalForm = ({
         value={flag}
         onChange={handleChange}
       />
-      <br />
       <input id="flag-submit" className="flag" type="submit" value="Submit" />
     </form>
   );

@@ -5,6 +5,11 @@
     --animation-style: ease-in-out;
 }
 
+/* Used when menu screen is flipped up*/
+#view {
+    transition: transform 1s cubic-bezier(0.1, 0.52, 0, 1);
+}
+
 .main {
     position: absolute;
     top: var(--content-top);
@@ -12,10 +17,6 @@
     align-content: left;
     text-align: left;
     overflow: auto;
-}
-
-#email {
-    color: var(--text-color);
 }
 
 #container {
@@ -37,6 +38,7 @@
     top: 20vh;
     text-align: left;
     animation: shiftTrain var(--animation-length) var(--animation-style);
+    -webkit-animation: shiftTrain var(--animation-length) var(--animation-style);
     transform: translateX(calc(0.5rem * -100));
 }
 
@@ -44,10 +46,12 @@
     position: fixed;
     width: 100vw;
     animation: shiftContent var(--animation-length) var(--animation-style);
+    -webkit-animation: shiftContent var(--animation-length) var(--animation-style);
 }
 
 #start.animate {
     animation: shiftCode var(--animation-length) var(--animation-style);
+    -webkit-animation: shiftCode var(--animation-length) var(--animation-style);
 }
 
 @keyframes shiftCode {
@@ -62,4 +66,30 @@
 @keyframes shiftContent {
     from {transform: translateX(calc(100vw + var(--train-width)));}
     to {transform: translateX(0)}
+}
+
+@-webkit-keyframes shiftCode {
+    from {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(calc(0.5rem * -100 - 100vw));
+    }
+}
+
+@-webkit-keyframes shiftTrain {
+    from {
+        transform: translateX(101vw);
+    }
+}
+
+@-webkit-keyframes shiftContent {
+    from {
+        transform: translateX(calc(100vw + var(--train-width)));
+    }
+
+    to {
+        transform: translateX(0)
+    }
 }

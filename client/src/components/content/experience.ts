@@ -1,4 +1,4 @@
-export interface experienceTextInterface {
+interface experienceTextInterface {
   title: string;
   desc: string;
   placeholderImgIcon: string;
@@ -7,6 +7,7 @@ export interface experienceTextInterface {
   placeholderImg: string;
   img: string;
   imgAlt: string;
+  githubLink?: string;
   url?: string;
 }
 
@@ -21,6 +22,7 @@ export const experienceText: experienceTextInterface[] = [
     placeholderImg: "logo.svg",
     img: "logo.svg",
     imgAlt: "Portfolio",
+    githubLink: "https://github.com/glorisonlai/the-playground",
   },
   // {
   //   title: "Password Wordlist/Generator",
@@ -37,12 +39,14 @@ export const experienceText: experienceTextInterface[] = [
     title: "Weather Display",
     desc:
       "Web application fetching and displaying data from OpenWeather. Includes search and autocomplete for any region listed in OpenWeather.",
-    placeholderImgIcon: "logo.svg",
-    imgIcon: "logo.svg",
+    placeholderImgIcon: "weather-placeholder.webp",
+    imgIcon: "weather.webp",
     imgIconAlt: "Weather Icon",
     placeholderImg: "logo.svg",
     img: "logo.svg",
     imgAlt: "Weather",
+    url: "https://weather-app-458.herokuapp.com/",
+    githubLink: "https://github.com/glorisonlai/weatherapp",
   },
   // {
   //   title: "Secure Chat App",
@@ -58,12 +62,13 @@ export const experienceText: experienceTextInterface[] = [
   {
     title: "Penetration testing methodology notes",
     desc:
-      "A collection of notes taken during preparation for the OSCP exam, designed as a general methodology/checklist when approaching a target. Publicly available for anyone interested.",
+      "A collection of notes taken during preparation for the OSCP exam, designed as a general methodology when approaching a target. Publicly available for anyone interested.",
     placeholderImgIcon: "pen-test-placeholder.webp",
-    imgIcon: "2021-07-21 22_43_18-Window.png",
+    imgIcon: "pen-test.webp",
     imgIconAlt: "Notes Icon",
     placeholderImg: "logo.svg",
     img: "logo.svg",
     imgAlt: "Notes",
+    githubLink: "https://github.com/glorisonlai/pentesting-methodology",
   },
 ];

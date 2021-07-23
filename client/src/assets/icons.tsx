@@ -10,9 +10,16 @@ import {
   faEnvelope,
   faUserCircle,
 } from "@fortawesome/free-regular-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
-export const GithubLink = ({ children }: { children?: React.ReactNode }) => (
-  <a href="https://www.github.com/glorisonlai" target="_blank" rel="noreferrer">
+export const GithubLink = ({
+  link,
+  children,
+}: {
+  link: string;
+  children?: React.ReactNode;
+}) => (
+  <a href={link} target="_blank" rel="noreferrer">
     <FontAwesomeIcon icon={faGithub} />
     {children}
   </a>
@@ -51,6 +58,11 @@ export const MailLink = ({ children }: { children?: React.ReactNode }) => (
   </a>
 );
 
-export const SupportUser = ({ children }: { children?: React.ReactNode }) => (
-  <FontAwesomeIcon icon={faUserCircle} />
+export const ExtLink = ({ link }: { link: string }) => (
+  <a href={link} target="_blank" rel="noreferrer">
+    <FontAwesomeIcon icon={faSignOutAlt} />
+    App
+  </a>
 );
+
+export const SupportUser = () => <FontAwesomeIcon icon={faUserCircle} />;

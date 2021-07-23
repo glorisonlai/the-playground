@@ -138,7 +138,7 @@ const Content = ({
         </React.Fragment>
       )}
       <View />
-      <div id="footer">©️{new Date().getFullYear()} Glorison Lai</div>
+      {/* <div id="footer">©️{new Date().getFullYear()} Glorison Lai</div> */}
     </div>
   );
 };

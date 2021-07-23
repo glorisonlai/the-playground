@@ -11,7 +11,8 @@
   display: block;
   background-color: transparent;
   bottom: -100px;
-  animation: square 30s infinite;
+  animation: float 30s infinite;
+  -webkit-animation: float 30s infinite;
   transition-timing-function: linear;
   border-radius: 50%;
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
@@ -32,11 +33,23 @@
 }
 
 /* Floating up animation */
-@keyframes square {
+@keyframes float {
   0% {
     -webkit-transform: translateY(0);
     transform: translateY(0);
   }
+  100% {
+    -webkit-transform: translateY(-150vh);
+    transform: translateY(-150vh);
+  }
+}
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
   100% {
     -webkit-transform: translateY(-150vh);
     transform: translateY(-150vh);

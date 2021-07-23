@@ -9,7 +9,7 @@ import React from "react";
 const Pitch = ({ unlocked, total }: { unlocked: number; total: number }) => {
   const email = "lai.glorison@gmail.com";
   return (
-    <div className="main">
+    <div id="view">
       <h2>The Playground</h2>
       <h3>
         {/* Remove 1 from total to exclude initial bg */}

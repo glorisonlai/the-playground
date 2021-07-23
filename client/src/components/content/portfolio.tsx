@@ -1,13 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   GithubLink,
   ResumeLink,
   // TwitterLink,
   // BlogLink,
   MailLink,
-  TwitterLink,
   MediumLink,
-} from "../../assets/fontawesome";
+  ExtLink,
+} from "../../assets/icons";
 import "./portfolio.css";
 import "./content.css";
 import { experienceText } from "./experience";
@@ -15,7 +15,7 @@ import { Divider } from "components/common/divider";
 
 /**
  * Portfolio website view
- * Contains main page, personal projectsaaaaba
+ * Contains main page, personal projects
  * @returns Portfolio view
  */
 const Portfolio = () => {
@@ -47,19 +47,22 @@ const Portfolio = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     return (
-      <div>
+      <div className="image-container">
         <img
           className="img thumb placeholder"
           alt={alt}
           src={require(`assets/sprites/${placeholderIcon}`).default}
-          style={{ visibility: isLoaded ? "hidden" : "visible" }}
+          style={{
+            visibility: isLoaded ? "hidden" : "visible",
+            height: "100%",
+          }}
         />
         <img
           className="img thumb full"
           alt={alt}
           src={require(`assets/sprites/${icon}`).default}
           onLoad={() => setIsLoaded(true)}
-          style={{ opacity: isLoaded ? 1 : 0 }}
+          style={{ opacity: isLoaded ? 1 : 0, height: "100%" }}
         />
       </div>
     );
@@ -69,8 +72,8 @@ const Portfolio = () => {
     return (
       <div id="experience">
         {/* Python password generator */}
-        {experienceText.map((e) => (
-          <div className="nav-row">
+        {experienceText.map((e, key) => (
+          <div className="nav-row" key={key}>
             <ProgressiveImageContainer
               placeholderIcon={e.placeholderImgIcon}
               icon={e.imgIcon}
@@ -80,7 +83,15 @@ const Portfolio = () => {
               <h4>{e.title}</h4>
               <p>{e.desc}</p>
             </div>
-            <a href="www.github.com">Github</a>
+            <div className="links">
+              {!!e.githubLink && (
+                <GithubLink link={e.githubLink}>
+                  GitHub
+                  <Divider />
+                </GithubLink>
+              )}
+              {!!e.url && <ExtLink link={e.url} />}
+            </div>
           </div>
         ))}
       </div>
@@ -88,14 +99,14 @@ const Portfolio = () => {
   };
 
   return (
-    <div id="portfolio">
+    <div id="view">
       <div className="main screen">
         <h1 style={{ margin: 0 }}>Glorison Lai</h1>
         <code>Cyber-Security; Web Development;</code>
         <Divider />
         {/** Icon row */}
         <div className="icons">
-          <GithubLink>
+          <GithubLink link="https://www.github.com/glorisonlai">
             <div className="line" />
             <div className="tag">GitHub</div>
           </GithubLink>
@@ -120,7 +131,7 @@ const Portfolio = () => {
       {/** Scroll down button */}
       <footer
         id="footer-button"
-        // className={downArrowClass}
+        className={"scroll"}
         onClick={() => window.scrollTo(0, window.innerHeight)}
       >
         <code className="label">Projects</code>

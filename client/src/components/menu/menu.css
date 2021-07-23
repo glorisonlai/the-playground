@@ -12,13 +12,13 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;   
+  position: fixed;
 }
 
 /*Quick flyout animation for screen, menu button*/
 .flyout {
-  transition: transform 1s 
-    cubic-bezier(0.1, 0.52, 0, 1);
   z-index: 8;
+  transition: transform 1s smooth; /* Change content.css container as well */
 }
 
 /*
@@ -26,26 +26,25 @@ Shifts menu screen out of view
 position is fixed here bc it screws everything else up
 */
 .hidden {
-  position: fixed;
-  transform: translate3d(-100vw, 0, 0);
+  transform: translateX(-100vw);
 }
 
 /*Shifts menu screen into view*/
 .visible {
-  position: fixed;
-  transform: translate3d(0vw, 0, 0);
+  transform: translateX(0vw);
 }
 
 /* Div containing both icons and flag*/
-.challengeMenu {
+#challengeMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  overflow: hidden;
 }
 
 /* Set immediate children width to be the same*/
-.challengeMenu > div {
+#challengeMenu > div {
   width: 45vw;
 }
 
@@ -69,6 +68,7 @@ Splits screen space in half
   flex-wrap: wrap;
   justify-content: flex-start;
   text-align: center;
+  overflow-y: auto;
 }
 
 /*Pads top of flag div. Honestly shouldn't be here*/
@@ -109,7 +109,7 @@ Splits screen space in half
   font-size: 1.2rem;
 }
 
-@media only screen and (max-width: 702px){
+@media only screen and (max-width: 701px){
   .challenge-text {
     visibility: hidden;
   }

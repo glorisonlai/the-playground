@@ -20,11 +20,19 @@
 
 .eyelid.blink {
   animation: blink 0.8s;
+  -webkit-animation: blink 0.8s;
 }
 
 @keyframes blink {
   50% {
     width: 110%; 
+    height: 110%
+  }
+}
+
+@-webkit-keyframes blink {
+  50% {
+    width: 110%;
     height: 110%
   }
 }

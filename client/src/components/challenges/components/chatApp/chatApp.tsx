@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import "./chatApp.css";
-import { SupportUser } from "assets/fontawesome";
-import { getDefaultNormalizer } from "@testing-library/react";
+import { SupportUser } from "assets/icons";
 
 /**
  * Renders support chat app.

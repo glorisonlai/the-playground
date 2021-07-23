@@ -13,7 +13,9 @@ const Slime = () => {
     const { width, height } = useScreenSize();
     useEffect(() => {
       generator(width, height);
-    }, [width, height]);
+      // Disable height checks since IOS has the flippy toolbar messing with width/height
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [width]);
     return (
       <canvas width={width} height={height} id={"boidCanvas"}>
         {/* Fallback message */}

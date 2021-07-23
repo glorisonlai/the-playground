@@ -74,7 +74,6 @@ const generateLines = (width: number, height: number) => {
     screenConstants.constants = initConstants();
     screenConstants.circles = setCircles(screenConstants.constants);
     screenConstants.colors = setColors(screenConstants.constants);
-    console.time("Drawing");
     draw();
     return resetCanvas;
   };
@@ -278,12 +277,9 @@ const generateLines = (width: number, height: number) => {
       screenConstants.lineNumber++;
     }
 
-    if (screenConstants.lineNumber > numPoints - 1) {
-      console.timeEnd("Drawing");
-      console.log("Finished animating");
-      return;
+    if (screenConstants.lineNumber < numPoints) {
+      screenConstants.lastDraw = window.requestAnimationFrame(draw);
     }
-    screenConstants.lastDraw = window.requestAnimationFrame(draw);
   };
 
   return init();

@@ -22,7 +22,6 @@
    rgba(70, 68, 92, 0.6) 45%, 
    var(--bg-color) 100%); */
 
-  z-index: 0;
   position: fixed;
   top: 0;
   left: 0;

@@ -57,6 +57,15 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     );
   };
 
+  const toggleMenu = () => {
+    // I am so sorry ;;
+    var view = document.getElementById("view");
+    if (view) {
+      view!.style.transform = visible ? "translateX(0)" : "translateX(100vw)";
+    }
+    setVisible((visible) => !visible);
+  };
+
   /**
    * Renders the challenge menu.
    * All styling done in menu.css
@@ -88,7 +97,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     );
 
     return (
-      <div className="challengeMenu">
+      <div id="challengeMenu">
         <div className="table">{challengeArr}</div>
         {!!focussedBg && (
           <Flag
@@ -113,11 +122,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
         <h2 id="menu-title">Backgrounds</h2>
         <ChallengeMenu />
       </div>
-      <MenuButton
-        shape={visible}
-        bgId={bgId}
-        setVis={() => setVisible((prevVisible) => !prevVisible)}
-      />
+      <MenuButton shape={visible} bgId={bgId} setVis={toggleMenu} />
     </React.Fragment>
   );
 };
