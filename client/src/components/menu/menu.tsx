@@ -108,7 +108,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <div className={`cover flyout ${showState}`}>
         <h2 id="menu-title">Backgrounds</h2>
         <ChallengeMenu />
@@ -118,7 +118,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
         bgId={bgId}
         setVis={() => setVisible((prevVisible) => !prevVisible)}
       />
-    </>
+    </React.Fragment>
   );
 };
 

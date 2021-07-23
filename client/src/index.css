@@ -25,11 +25,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden; /* Hack fix to force parent content div to encapsulate children divs*/
-  overflow-y: hidden;
   /* overflow-y: hidden; TODO: Ideally user should be able to scroll */
   background: var(--bg-color);
   user-select: none;
   -ms-user-select: none;
+  min-height: 100vh;
 }
 
 code {

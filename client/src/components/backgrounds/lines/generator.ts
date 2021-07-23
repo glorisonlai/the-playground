@@ -66,7 +66,7 @@ const generateLines = (width: number, height: number) => {
     lastDraw: 0,
   };
 
-  const init = (): void => {
+  const init = () => {
     screenConstants.context = screenConstants.canvas.getContext(
       "2d"
     ) as CanvasRenderingContext2D;
@@ -76,6 +76,7 @@ const generateLines = (width: number, height: number) => {
     screenConstants.colors = setColors(screenConstants.constants);
     console.time("Drawing");
     draw();
+    return resetCanvas;
   };
 
   const initConstants = (): CircleConstants => {
@@ -284,7 +285,8 @@ const generateLines = (width: number, height: number) => {
     }
     screenConstants.lastDraw = window.requestAnimationFrame(draw);
   };
-  init();
+
+  return init();
 };
 
 export default generateLines;

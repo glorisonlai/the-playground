@@ -212,7 +212,6 @@ class Boid {
       vector2d.extend(this.direction, boidConstants.AVOIDWALL)
     );
     if (nextVector.x <= 0) {
-      // debugger;
       avoidanceVector.x += (boidConstants.WALL_WEIGHT * boundary.x) / 2;
       avoidanceVector.y += this.direction.y;
     } else if (nextVector.x >= boundary.x) {
@@ -220,11 +219,10 @@ class Boid {
       avoidanceVector.y += this.direction.y;
     }
     if (nextVector.y <= 0) {
-      // debugger;
       avoidanceVector.x += this.direction.x;
       avoidanceVector.y += (boidConstants.WALL_WEIGHT * boundary.y) / 2;
     } else if (nextVector.y >= boundary.y) {
-      avoidanceVector.x += boidConstants.WALL_WEIGHT * this.direction.x;
+      avoidanceVector.x += this.direction.x;
       avoidanceVector.y -= (boidConstants.WALL_WEIGHT * boundary.y) / 2;
     }
 

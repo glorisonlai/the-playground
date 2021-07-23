@@ -23,6 +23,7 @@
 .justify-right {
 	justify-content: flex-end;
 	padding-bottom: 0;
+	text-align: right;
 }
 
 .justify-left {
@@ -107,8 +108,8 @@
 	position: absolute;
 	width: 0;
 	height: 0;
-	left: calc(90% - 1px);
-	right: 0;
+	right: calc(-1em + 1px);
+	left: auto;
 	top: 0px;
 	bottom: auto;
 	border: 1em solid;

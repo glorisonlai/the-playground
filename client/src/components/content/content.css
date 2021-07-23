@@ -18,8 +18,17 @@
     color: var(--text-color);
 }
 
+#container {
+    display: flex;
+    flex-direction: column;
+}
+
 #content {
-    overflow: overlay;
+    clear: auto;
+}
+
+#footer {
+    margin-top: auto;
 }
 
 /*Transform values are hardcoded, otherwise won't shift*/

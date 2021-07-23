@@ -65,10 +65,10 @@ function App({
     };
 
     return (
-      <>
+      <React.Fragment>
         <Background bg={bgId} bgCallback={loadedCallback} />
         <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
-      </>
+      </React.Fragment>
     );
   };
 
@@ -76,7 +76,7 @@ function App({
     <div className="app">
       <BackgoundMenu />
       <Content
-        initScreen={showPortfolio}
+        showPortfolio={showPortfolio}
         unlocked={Challenges.getUnlocked()}
         total={Challenges.getAllChallenges().length}
       />

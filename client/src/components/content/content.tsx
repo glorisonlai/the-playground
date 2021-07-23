@@ -6,17 +6,17 @@ import Start from "./start";
 /**
  * Wrapper component for display screen
  * Animates the 'sl' train on load
- * @param initScreen Display CTF/Portfolio screen
+ * @param showPortfolio CTF/Portfolio screen
  * @param unlocked Number of unlocked backgrounds
  * @param total Number of all challenges
  * @returns
  */
 const Content = ({
-  initScreen,
+  showPortfolio,
   unlocked,
   total,
 }: {
-  initScreen: boolean;
+  showPortfolio: boolean;
   unlocked: number;
   total: number;
 }) => {
@@ -121,21 +121,25 @@ const Content = ({
 
   const View = () => (
     <div id="content" className={animateClass}>
-      {initScreen ? <Portfolio /> : <Pitch unlocked={unlocked} total={total} />}
+      {showPortfolio ? (
+        <Portfolio />
+      ) : (
+        <Pitch unlocked={unlocked} total={total} />
+      )}
     </div>
   );
 
   return (
-    <>
+    <div id="container">
       {showAnimation && (
-        <>
+        <React.Fragment>
           <Start className={animateClass} chalLoaded={true} bgLoaded={true} />
           <div id={trainId} />
-        </>
+        </React.Fragment>
       )}
       <View />
       <div id="footer">©️{new Date().getFullYear()} Glorison Lai</div>
-    </>
+    </div>
   );
 };
 

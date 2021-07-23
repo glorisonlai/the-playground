@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
-  GithubIcon,
-  ResumeIcon,
-  // TwitterIcon,
-  // BlogIcon,
-  MailIcon,
+  GithubLink,
+  ResumeLink,
+  // TwitterLink,
+  // BlogLink,
+  MailLink,
+  TwitterLink,
+  MediumLink,
 } from "../../assets/fontawesome";
 import "./portfolio.css";
 import "./content.css";
+import { experienceText } from "./experience";
 import { Divider } from "components/common/divider";
 
 /**
  * Portfolio website view
- * Contains main page, personal projects
- * TODO: Rewrite its a mess
+ * Contains main page, personal projectsaaaaba
  * @returns Portfolio view
  */
 const Portfolio = () => {
@@ -32,51 +34,58 @@ const Portfolio = () => {
    * Image right side, text, left side
    * @returns Experience component
    */
-  const Experience = () => (
-    <div id="experience">
-      {/* Python password generator */}
-      <div className={"nav-row"}>
+
+  const ProgressiveImageContainer = ({
+    icon,
+    placeholderIcon,
+    alt,
+  }: {
+    icon: string;
+    placeholderIcon: string;
+    alt: string;
+  }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    return (
+      <div>
         <img
-          src={require("assets/sprites/logo.svg").default}
-          alt="Password Generator"
+          className="img thumb placeholder"
+          alt={alt}
+          src={require(`assets/sprites/${placeholderIcon}`).default}
+          style={{ visibility: isLoaded ? "hidden" : "visible" }}
         />
-        <div>
-          <h4>Password Wordlist/Generator</h4>
-          <p>
-            A Python script that generates pronouneable passwords with Markov
-            chains. Intended for bruteforcing the weirder passwords. Includes
-            ruleset for including numbers at the end of syllables.
-          </p>
-        </div>
-      </div>
-      {/* Weather app */}
-      <div className={"nav-row"}>
         <img
-          src={require("assets/sprites/logo.svg").default}
-          alt="Weather App"
+          className="img thumb full"
+          alt={alt}
+          src={require(`assets/sprites/${icon}`).default}
+          onLoad={() => setIsLoaded(true)}
+          style={{ opacity: isLoaded ? 1 : 0 }}
         />
-        <div>
-          <h4>Weather Display</h4>
-          <p>
-            Weather web app that fetches data from OpenWeatherMap. Includes
-            search and autocomplete for any region listed in OpenWeather.
-          </p>
-        </div>
       </div>
-      {/* Chat app */}
-      <div className={"nav-row"}>
-        <img src={require("assets/sprites/logo.svg").default} alt="Chat App" />
-        <div>
-          <h4>Secure Chat app</h4>
-          <p>
-            Chat application utilising Diffie Hellman key exchange and public
-            key cryptography to securely store encrypted messages that are
-            visible only to group chat members. WIP
-          </p>
-        </div>
+    );
+  };
+
+  const Experience = () => {
+    return (
+      <div id="experience">
+        {/* Python password generator */}
+        {experienceText.map((e) => (
+          <div className="nav-row">
+            <ProgressiveImageContainer
+              placeholderIcon={e.placeholderImgIcon}
+              icon={e.imgIcon}
+              alt={e.imgIconAlt}
+            />
+            <div className="proj-text">
+              <h4>{e.title}</h4>
+              <p>{e.desc}</p>
+            </div>
+            <a href="www.github.com">Github</a>
+          </div>
+        ))}
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div id="portfolio">
@@ -86,57 +95,26 @@ const Portfolio = () => {
         <Divider />
         {/** Icon row */}
         <div className="icons">
-          {/* Github Icon */}
-          <a
-            href="https://www.github.com/glorisonlai"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <GithubIcon />
+          <GithubLink>
             <div className="line" />
             <div className="tag">GitHub</div>
-          </a>
-          {/* <Twitter Icon /> */}
-          {/* <a
-            href="https://twitter.com/Glorison3"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <TwitterIcon />
+          </GithubLink>
+          {/* <TwitterLink>
             <div className="line" />
             <div className="tag">Twitter</div>
-          </a> */}
-          {/* <Blog Icon /> */}
-          {/* <a
-            href="https://dev.to/glorisonlai"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <TwitterIcon />
+          </TwitterLink> */}
+          <MediumLink>
             <div className="line" />
-            <div className="tag">Blog Posts</div>
-          </a> */}
-          {/* Resume Icon */}
-          <a
-            href="resume.pdf"
-            download="Glorison_Lai_2021_Resume.pdf"
-            target="this"
-            rel="noreferrer"
-          >
-            <ResumeIcon />
+            <div className="tag">Posts</div>
+          </MediumLink>
+          <ResumeLink>
             <div className="line" />
             <div className="tag">Resume</div>
-          </a>
-          {/* Email Icon */}
-          <a
-            href="mailto:lai.glorison@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MailIcon />
+          </ResumeLink>
+          <MailLink>
             <div className="line" />
             <div className="tag">Contact</div>
-          </a>
+          </MailLink>
         </div>
       </div>
       {/** Scroll down button */}

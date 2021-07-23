@@ -11,7 +11,10 @@ const Lines = () => {
   const Canvas = () => {
     const { width, height } = useScreenSize();
 
-    useEffect(() => generator(width, height), [width, height]);
+    useEffect(() => {
+      const reset = generator(width, height);
+      return () => reset();
+    }, [width, height]);
 
     return (
       <canvas width={width} height={height} id={"canvas"}>

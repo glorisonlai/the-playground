@@ -29,9 +29,9 @@ const Start = ({
               <code className="loadingDots">.</code>
             </code>
           ) : (
-            <>
+            <React.Fragment>
               <code>...DONE</code>
-            </>
+            </React.Fragment>
           )}
         </div>
         <div className="row">
@@ -43,9 +43,9 @@ const Start = ({
               <code className="loadingDots">.</code>
             </code>
           ) : (
-            <>
+            <React.Fragment>
               <code>...DONE</code>
-            </>
+            </React.Fragment>
           )}
         </div>
         {bgLoaded && chalLoaded && <code className="row">sl</code>}
