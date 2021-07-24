@@ -79,6 +79,7 @@ Splits screen space in half
 .flag-col {
   padding-top: var(--chall-padding);
   padding-right: 10px;
+  overflow-y: auto;
 }
 
 /*Flag div styling*/

@@ -41,7 +41,7 @@ const Challenges: ChallengeInterface = {
       title: `WHY. WON'T. THIS. WORK?!`,
       logo: "boids.svg",
       unsolvedDesc: `FLAG{TH1S15TH3FL4G}`,
-      solvedDesc: "We thank StackOverflow",
+      solvedDesc: "Here's a business proposal: Postmates, but for dogs..?",
     },
     {
       id: 3,

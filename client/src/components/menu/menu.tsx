@@ -57,11 +57,24 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     );
   };
 
+  /**
+   * I am so sorry ;;
+   * Code toggles visibility state, which changes button shape
+   * Also removes scrolling for phones, and shifts view div rightward
+   * Will be fixed later when there are enough challenges to require scrolling lol
+   */
   const toggleMenu = () => {
-    // I am so sorry ;;
     var view = document.getElementById("view");
+    var menu = document.getElementById("chal-menu");
     if (view) {
       view!.style.transform = visible ? "translateX(0)" : "translateX(100vw)";
+      visible
+        ? menu!.removeEventListener("touchmove", (e) => {
+            e.preventDefault();
+          })
+        : menu!.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+          });
     }
     setVisible((visible) => !visible);
   };
@@ -120,7 +133,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
   return (
     <React.Fragment>
-      <div className={`cover flyout ${showState}`}>
+      <div id="chal-menu" className={`cover flyout ${showState}`}>
         <h2 id="menu-title">Backgrounds</h2>
         <ChallengeMenu />
       </div>

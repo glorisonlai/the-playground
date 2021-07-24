@@ -25,14 +25,22 @@
 	text-shadow: none;
 }
 
+@media only screen and (max-width: 1025px) {
+	#book-logo {
+		display: none;
+	}
+}
+
+
 #book-search {
+	margin-left: 5px;
 	margin-top: 0.5em;
 	display: flex;
 	/* justify-content: flex-end; */
 }
 
 #book-search-text {
-	width: 50%;
+	width: 80%;
 	background: lightgray;
 	/* border-radius: 15px; */
 	border: none;
@@ -40,16 +48,27 @@
 }
 
 #book-search-submit {
-	width: 20%;
 	max-width: 100px;
 	padding: calc(1em);
 	border: none;
 	background: red;
-	/* outline: none; */
 	cursor: pointer;
 	color: white;
 	font-weight: bolder;
 	margin-right: 1em;
+}
+
+@media only screen and (min-width: 500px) {
+	#book-search-submit {
+		min-width: 80px;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	#book-search-submit {
+		min-width: none;
+		width: 10px;
+	}
 }
 
 #error {
