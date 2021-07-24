@@ -16,8 +16,8 @@ export const experienceText: experienceTextInterface[] = [
     title: "CTF/Portfolio",
     desc:
       "Web application that serves as gateway to various APIs that are vulnerable to common attacks, including the OWASP top 10. Designed to be an introductory challenge to web application testing.",
-    placeholderImgIcon: "logo.svg",
-    imgIcon: "logo.svg",
+    placeholderImgIcon: "portfolio-placeholder.webp",
+    imgIcon: "portfolio.webp",
     imgIconAlt: "Portfolio Icon",
     placeholderImg: "logo.svg",
     img: "logo.svg",

@@ -54,7 +54,6 @@ const Portfolio = () => {
           src={require(`assets/sprites/${placeholderIcon}`).default}
           style={{
             visibility: isLoaded ? "hidden" : "visible",
-            height: "100%",
           }}
         />
         <img
@@ -62,7 +61,7 @@ const Portfolio = () => {
           alt={alt}
           src={require(`assets/sprites/${icon}`).default}
           onLoad={() => setIsLoaded(true)}
-          style={{ opacity: isLoaded ? 1 : 0, height: "100%" }}
+          style={{ opacity: isLoaded ? 1 : 0 }}
         />
       </div>
     );
@@ -71,28 +70,31 @@ const Portfolio = () => {
   const Experience = () => {
     return (
       <div id="experience">
-        {/* Python password generator */}
+        <Divider />
         {experienceText.map((e, key) => (
-          <div className="nav-row" key={key}>
-            <ProgressiveImageContainer
-              placeholderIcon={e.placeholderImgIcon}
-              icon={e.imgIcon}
-              alt={e.imgIconAlt}
-            />
-            <div className="proj-text">
-              <h4>{e.title}</h4>
-              <p>{e.desc}</p>
+          <React.Fragment key={key}>
+            <div className="nav-row">
+              <ProgressiveImageContainer
+                placeholderIcon={e.placeholderImgIcon}
+                icon={e.imgIcon}
+                alt={e.imgIconAlt}
+              />
+              <div className="proj-text">
+                <h4>{e.title}</h4>
+                <p>{e.desc}</p>
+              </div>
+              <div className="links">
+                {!!e.githubLink && (
+                  <GithubLink link={e.githubLink}>
+                    GitHub
+                    <Divider />
+                  </GithubLink>
+                )}
+                {!!e.url && <ExtLink link={e.url} />}
+              </div>
             </div>
-            <div className="links">
-              {!!e.githubLink && (
-                <GithubLink link={e.githubLink}>
-                  GitHub
-                  <Divider />
-                </GithubLink>
-              )}
-              {!!e.url && <ExtLink link={e.url} />}
-            </div>
-          </div>
+            <Divider />
+          </React.Fragment>
         ))}
       </div>
     );

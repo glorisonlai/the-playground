@@ -48,14 +48,17 @@ position is fixed here bc it screws everything else up
   width: 45vw;
 }
 
+.challenge-container {
+  padding: var(--chall-padding);
+  width: auto;
+  height: calc(75px + 4rem);
+  margin: 1rem;
+}
 
 /*Pads icons from each other*/
 .challenge {
-  padding: var(--chall-padding);
   width: 75px;
   height: 75px;
-  margin: 1rem;
-  box-shadow: #fff 0.5em;
 }
 
 /*
@@ -63,10 +66,11 @@ icons div, and flag div.
 Splits screen space in half
 */
 .table {
-  height: 50vh;
+  height: 80vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-content: flex-start;
   text-align: center;
   overflow-y: auto;
 }
@@ -74,6 +78,7 @@ Splits screen space in half
 /*Pads top of flag div. Honestly shouldn't be here*/
 .flag-col {
   padding-top: var(--chall-padding);
+  padding-right: 10px;
 }
 
 /*Flag div styling*/
@@ -107,11 +112,16 @@ Splits screen space in half
   color: white;
   width: calc(1.5 * var(--icon-width));
   font-size: 1.2rem;
+  height: auto;
 }
 
-@media only screen and (max-width: 701px){
+@media only screen and (max-width: 670px){
   .challenge-text {
     visibility: hidden;
+  }
+
+  .challenge-container {
+    height: 75px;
   }
 
   #menu-title {

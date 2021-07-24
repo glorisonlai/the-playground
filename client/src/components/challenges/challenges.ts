@@ -24,29 +24,29 @@ const Challenges: ChallengeInterface = {
   challengeArr: [
     {
       id: 0,
-      title: "Boring. Normie. Gross.",
-      logo: "bubbs.svg",
+      title: "Boring. Gross.",
+      logo: "nodes.svg",
       unsolvedDesc: `Seriously, stop using this background it's uncreative and unoriginal. And I know what you're thinking, "You're using it as well; you're just as bad as the rest of us." And that's true but-`,
       solvedDesc: "The journey begins!",
     },
     {
       id: 1,
       title: "Ground rules",
-      logo: "lines.webp",
+      logo: "lines.svg",
       unsolvedDesc: `Please fuzz for our Rules page for more information`,
       solvedDesc: "Thanks for reading - have fun!",
     },
     {
       id: 2,
       title: `WHY. WON'T. THIS. WORK?!`,
-      logo: "logo.svg",
+      logo: "boids.svg",
       unsolvedDesc: `FLAG{TH1S15TH3FL4G}`,
       solvedDesc: "We thank StackOverflow",
     },
     {
       id: 3,
       title: "Support Desk",
-      logo: "logo.svg",
+      logo: "orbit.svg",
       unsolvedDesc: "Please contact our Support team for the flag.",
       solvedDesc:
         "Fun fact: 50% of support chats are manned by bots. You've been flirting with a bot this whole time!",
@@ -54,7 +54,7 @@ const Challenges: ChallengeInterface = {
     {
       id: 4,
       title: "Book Store",
-      logo: "logo.svg",
+      logo: "eyes.svg",
       unsolvedDesc: "Just a collection of fine reads.",
       solvedDesc: "Do people really buy books from bookstores?",
     },

@@ -25,9 +25,9 @@ const boidConstants = {
  * TODO: Boids like to go to top-left corner and stay there. Something to do with cohesion/avoidance logic
  */
 class Boid {
-  id: number;
-  head: vector2dInterface;
-  direction: vector2dInterface;
+  id;
+  head;
+  direction;
 
   constructor(id: number, x: number, y: number, force: number) {
     this.id = id;

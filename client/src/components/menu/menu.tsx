@@ -84,12 +84,14 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
         return (
           <div
-            className={`challenge ${unlocked}`}
+            className={`challenge-container`}
             key={id}
             onClick={() => switchBgHandler(id)}
-            style={{ height: "50px", width: "auto" }}
           >
-            <ChallengeIcon className={`challenge ${focussed}`} imgStr={logo} />
+            <ChallengeIcon
+              className={`challenge ${focussed} ${unlocked}`}
+              imgStr={logo}
+            />
             <div className="challenge-text">{title}</div>
           </div>
         );

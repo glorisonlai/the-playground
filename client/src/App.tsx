@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import Background from "components/backgrounds/background";
 import Menu from "components/menu/menu";
 import Challenges from "components/challenges/challenges";
@@ -10,11 +9,11 @@ import { LoadingComps } from "./index";
  * Landing page, performs background checks before serving
  * @returns Loading animation, then portolio/website
  */
-function App({
+const App = ({
   loadedCallback,
 }: {
   loadedCallback: (loaded: boolean, component: LoadingComps) => void;
-}) {
+}) => {
   useEffect(() => {
     console.log(
       "%c" +
@@ -82,6 +81,6 @@ function App({
       />
     </div>
   );
-}
+};
 
 export default App;

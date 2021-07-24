@@ -1,7 +1,7 @@
 :root {
     --content-top: 25vh;
-    --train-width: 0.5rem * 100;
-    --animation-length: 4s;
+    --train-width: 50rem;
+    --animation-length: 4000ms;
     --animation-style: ease-in-out;
 }
 
@@ -19,34 +19,15 @@
     overflow: auto;
 }
 
-#container {
-    display: flex;
-    flex-direction: column;
-}
-
-#content {
-    clear: auto;
-}
-
 #footer {
     margin-top: auto;
 }
 
-/*Transform values are hardcoded, otherwise won't shift*/
-#train {
-    position: fixed;
-    top: 20vh;
-    text-align: left;
-    animation: shiftTrain var(--animation-length) var(--animation-style);
-    -webkit-animation: shiftTrain var(--animation-length) var(--animation-style);
-    transform: translateX(calc(0.5rem * -100));
-}
-
-#content.animate {
-    position: fixed;
-    width: 100vw;
-    animation: shiftContent var(--animation-length) var(--animation-style);
-    -webkit-animation: shiftContent var(--animation-length) var(--animation-style);
+#copyright {
+    position: absolute;
+    top: calc(100vh - 2.5rem);
+    left: calc(100vw - 10rem);
+    white-space: pre-line;
 }
 
 #start.animate {
@@ -54,18 +35,30 @@
     -webkit-animation: shiftCode var(--animation-length) var(--animation-style);
 }
 
+/*Transform values are hardcoded, otherwise won't shift for whatever reason               */
+#train {
+    transform: translateX(-50rem);
+    position: absolute;
+    top: 20vh;
+    text-align: left;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    animation: shiftTrain var(--animation-length) var(--animation-style);
+    -webkit-animation: shiftTrain var(--animation-length) var(--animation-style);
+}
+
+#content {
+    transform: translateX(0);
+}
+
+#content.animate {
+    animation: shiftContent var(--animation-length) var(--animation-style);
+    -webkit-animation: shiftContent var(--animation-length) var(--animation-style);
+}
+
 @keyframes shiftCode {
     from {transform: translateX(0)}
     to {transform: translateX(calc(0.5rem * -100 - 100vw));}
-}
-
-@keyframes shiftTrain {
-    from {transform: translateX(101vw);}
-}
-
-@keyframes shiftContent {
-    from {transform: translateX(calc(100vw + var(--train-width)));}
-    to {transform: translateX(0)}
 }
 
 @-webkit-keyframes shiftCode {
@@ -78,18 +71,39 @@
     }
 }
 
+@keyframes shiftTrain {
+    from {
+        transform: translateX(101vw);
+    }
+
+    to {
+        transform: translateX(-50rem);
+    }
+}
+
 @-webkit-keyframes shiftTrain {
     from {
         transform: translateX(101vw);
     }
+    to {
+        transform: translateX(-50rem);
+    }
 }
+
+@keyframes shiftContent {
+    from {transform: translateX(calc(101vw + var(--train-width)));}
+    to {
+        transform:translateX(0);
+    }
+}
+
+
 
 @-webkit-keyframes shiftContent {
     from {
-        transform: translateX(calc(100vw + var(--train-width)));
+        transform: translateX(calc(101vw + var(--train-width)));
     }
-
     to {
-        transform: translateX(0)
+        transform: translateX(0);
     }
 }
