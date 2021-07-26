@@ -17,7 +17,7 @@
 }
 
 .icons a:hover .tag{
-	opacity: 100%;
+	opacity: 1;
 }
 
 .tag {
@@ -27,7 +27,7 @@
 
 @media only screen and (min-width: 1025px) {
 	.tag {
-		opacity: 0%;
+		opacity: 0;
 		transition: opacity 0.5s ease-out
 	}
 }

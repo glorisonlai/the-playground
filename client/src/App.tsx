@@ -34,9 +34,9 @@ const App = ({
   // TODO: Make(?) button to switch from portfolio, to CTF
   // Switch website view from portfolio, to CTF
   // const [showPortfolio, setShowPortfolio] = useState(
-  //   view === "portfolio" ? true : false
+  //   view === "ctf" ? true : false
   // );
-  const showPortfolio = view === "portfolio" ? true : false;
+  const showPortfolio = view === "ctf" ? false : true;
 
   // Load all challenges
   Challenges.initialUnlock();
