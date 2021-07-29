@@ -6,22 +6,32 @@
 
 #support-header {
 	margin: auto;
-	padding-left: 4rem;
+	padding-left: 1rem;
 	padding-top: 0.5rem;
 	height: 2rem;
 	text-align: left;
 	background: var(--user-colour);
+	display: flex;
+	justify-content: flex-start;
+	overflow: hidden;
+}
+
+#support-name {
+	margin-left: 0.5em;
+	font-weight: bold;
 }
 
 .justify-right {
 	justify-content: flex-end;
 	padding-bottom: 0;
+	text-align: right;
 }
 
 .justify-left {
 	padding-bottom: 0;
 	padding-left: 2rem;
 	width: auto;
+	justify-content: flex-start;
 }
 
 #support-chat {
@@ -40,10 +50,12 @@
 }
 
 #support-msg-text {
-	width: 80%;
+	width: 88%;
 }
+
 #support-msg-submit {
-	width: 20%;
+	min-width: 37px;
+	width: 12%;
 	background-color: var(--user-colour);
 	color: var(--text-colour);
 	text-transform: uppercase;
@@ -98,8 +110,8 @@
 	position: absolute;
 	width: 0;
 	height: 0;
-	left: calc(90% - 1px);
-	right: 0;
+	right: calc(-1em + 1px);
+	left: auto;
 	top: 0px;
 	bottom: auto;
 	border: 1em solid;

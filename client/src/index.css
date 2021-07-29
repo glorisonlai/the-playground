@@ -7,6 +7,7 @@
   --bg-color: rgb(31, 31, 31);
   color: var(--text-color);
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   text-shadow: -1px 0 black,
   0 1px black,
   1px 0 black,
@@ -24,11 +25,12 @@ body {
   monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Hack fix to force parent content div to encapsulate children divs*/
   /* overflow-y: hidden; TODO: Ideally user should be able to scroll */
   background: var(--bg-color);
   user-select: none;
   -ms-user-select: none;
+  min-height: 100vh;
 }
 
 code {
@@ -52,6 +54,19 @@ h4 {
   padding: 0;
   margin: 0;
   font-size: 1.5rem;
+}
+
+a {
+  color: var(--text-color);
+}
+
+.app {
+  text-align: center;
+  display: grid;
+}
+
+.screen {
+  position: absolute;
 }
 
 #start {
@@ -78,12 +93,12 @@ Source: http: //www.java2s.com/example/html-css/css-animation/jumping-dots-anima
   animation: jump 1s infinite;
 }
 
-.loadingDots:nth-of-type(3) {
+.loadingDots:nth-of-type(2) {
   -webkit-animation-delay: 100ms;
   animation-delay: 100ms;
 }
 
-.loadingDots:nth-of-type(4) {
+.loadingDots:nth-of-type(3) {
   -webkit-animation-delay: 200ms;
   animation-delay: 200ms;
 }
@@ -92,4 +107,18 @@ Source: http: //www.java2s.com/example/html-css/css-animation/jumping-dots-anima
   0% {bottom: 0rem;}
   20% {bottom: 0.2rem;}
   40% {bottom: 0rem;}
+}
+
+@-webkit-keyframes jump {
+  0% {
+    bottom: 0rem;
+  }
+
+  20% {
+    bottom: 0.2rem;
+  }
+
+  40% {
+    bottom: 0rem;
+  }
 }

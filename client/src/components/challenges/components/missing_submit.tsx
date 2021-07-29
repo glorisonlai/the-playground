@@ -6,7 +6,7 @@ import React from "react";
  */
 const MissingSubmit = () => {
   return (
-    <form className="" onSubmit={(e) => e.preventDefault()}>
+    <form id="flag_form" onSubmit={(e) => e.preventDefault()}>
       <input
         className="flag"
         type="text"

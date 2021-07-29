@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import NormalForm from "../normal_form";
 import axios from "axios";
 import DOMPurify from "dompurify";
-import "./chat_app.css";
-import { SupportUser } from "assets/fontawesome";
-import SplitPane from "components/common/split-pane/split-pane";
+import "./chatApp.css";
+import { SupportUser } from "assets/icons";
 
 /**
  * Renders support chat app.
- * Sends messages to server to be delivered to appropriate challenge server
+ * Sends messages to server to be parsed
  * Renders normal flag form for submission
  * TODO: Make into websocket for better simulation?
  * @param id Challenge ID
  * @param callBack Switch background once completed
  * @returns Chat app component
  */
-const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
+const ChatApp = () => {
   // Prevent user from spamming submit
   const [loading, setLoading] = useState(false);
 
@@ -42,16 +40,19 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
     const el = createMsg(msg, "user");
     chat_box!.appendChild(el);
     setMsg("");
-    const { data } = await axios.post(
-      process.env.REACT_APP_API_URL + "/api/c3/chat",
-      { msg: msg }
-    );
-    const response = createMsg(data, "admin");
+    const res = await axios.post(process.env.REACT_APP_API_URL + "/c3/chat", {
+      msg: msg,
+    });
+    if (res.status !== 200) {
+      // Do error handling here
+      return;
+    }
+    const response = createMsg(res.data, "admin");
     chat_box!.appendChild(response);
     setLoading(false);
   };
 
-  // Securely creates new message component
+  // Securely creates new message component - apparently don't need to? but might as well
   const createMsg = (msg: string, user: string) => {
     const chat_row = document.createElement("div");
     chat_row.className = `row justify-${user === "admin" ? "right" : "left"}`;
@@ -62,31 +63,34 @@ const ChatApp = ({ id, callBack }: { id: number; callBack: Function }) => {
     return chat_row;
   };
 
+  const names = ["Mark", "Emily", "Tim", "Rebecca", "Augustus"];
+
+  const selectRandom = (arr: any[]) =>
+    arr[Math.floor(Math.random() * arr.length)];
+
   return (
-    <SplitPane>
-      <div id="support-pane" className="support">
-        {/* Blue header */}
-        <div id="support-header">
-          <SupportUser />
-          <>Tech Support</>
-        </div>
-        {/* Chat pane */}
-        <div id="support-chat" />
-        {/* Text Input */}
-        <form id="support-msg" onSubmit={sendMsg}>
-          <input
-            type="text"
-            id="support-msg-text"
-            name="flag"
-            placeholder="Type here..."
-            value={msg}
-            onChange={handleChange}
-          />
-          <input id="support-msg-submit" type="submit" value="Send" />
-        </form>
+    <div id="support-pane" className="support">
+      {/* Blue header */}
+      <div id="support-header">
+        <SupportUser />
+        <div id="support-name">{selectRandom(names)}</div>
       </div>
-      <NormalForm id={id} callBack={callBack} />
-    </SplitPane>
+      {/* Chat pane */}
+      <div id="support-chat" />
+      {/* Text Input */}
+      <form id="support-msg" onSubmit={sendMsg}>
+        <input
+          type="text"
+          id="support-msg-text"
+          name="flag"
+          placeholder="Type here..."
+          value={msg}
+          autoComplete="off"
+          onChange={handleChange}
+        />
+        <input id="support-msg-submit" type="submit" value="💌" />
+      </form>
+    </div>
   );
 };
 

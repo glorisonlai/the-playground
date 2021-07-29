@@ -6,8 +6,7 @@
   grid-row: 1;
   margin-left: 30px;
   margin-top: 39.84px;
-  border-color: #0f0f0f00;
-  border-style: solid;
+  border-style: none;
   z-index: 9;
   background: none;
   cursor: pointer;
@@ -29,7 +28,6 @@
 .menu-btn::after {
   position: absolute;
   content: '';
-  opacity: 0%;
   border-radius: 5px;
   transition: all 1.2s ease-in-out;
 }
@@ -50,7 +48,6 @@
 .cross::before,
 .cross::after {
   background: #fff;
-  opacity: 100%;
   width: 0.2em;
   height: 3rem;
 }

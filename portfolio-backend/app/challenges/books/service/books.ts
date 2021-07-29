@@ -1,7 +1,5 @@
-import { Model } from "mongoose";
-import { CreateBookDTO } from "../model/createBookDTO";
 
-export class BooksService {
+export const BooksService = {
   private books: Model<any>;
   constructor(books: Model<any>) {
     this.books = books;

@@ -1,40 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./menu.css";
 import Challenges from "../challenges/challenges";
 import ChallengeIcon from "./challengeIcon";
 import MenuButton from "./menu-button/menu-button";
-import Flag from "../challenges/challenge-comp/flag";
+import Flag from "../challenges/components/flag";
 
 /**
- * Hidden menu to access challenges.
+ * "Hidden" menu to access challenges.
  * @param bgId Current Background ID, mapping to challenge
  * @param unlock Callback function to switch background
  * @returns Challenge menu Component
  */
 const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
-  useEffect(() => {
-    /*
-    Continuously check window size for rerendering
-    TODO: Use CSS media queries instead
-    */
-    const handleWidthResize = () => {
-      setWidth(getWidth());
-    };
-
-    window.addEventListener("resize", handleWidthResize);
-    return () => {
-      window.removeEventListener("resize", handleWidthResize);
-    };
-  }, []);
-
-  // Feed current screen width to current state
-  const getWidth = () =>
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  const [width, setWidth] = useState(getWidth());
-
   // Sets challenge screen visibility
   const [visible, setVisible] = useState(false);
 
@@ -59,11 +36,15 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   };
 
   // Set custom description if Rules.html has not been read yet
-  const getChalDesc = (id: number, desc: string) => {
+  const getChalDesc = (
+    id: number,
+    unsolvedDesc: string,
+    solvedDesc: string
+  ) => {
     if (id > 1 && !Challenges.isFaqUnlocked()) {
       return "Please finish Ground Rules first";
     }
-    return desc;
+    return Challenges.isUnlockedFromId(id) ? solvedDesc : unsolvedDesc;
   };
 
   // Lock off challenges until Rules.html has been read
@@ -74,6 +55,28 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
       (id > 1 &&
         (!Challenges.isFaqUnlocked() || Challenges.isUnlockedFromId(id)))
     );
+  };
+
+  /**
+   * I am so sorry ;;
+   * Code toggles visibility state, which changes button shape
+   * Also removes scrolling for phones, and shifts view div rightward
+   * Will be fixed later when there are enough challenges to require scrolling lol
+   */
+  const toggleMenu = () => {
+    var view = document.getElementById("view");
+    var menu = document.getElementById("chal-menu");
+    if (view) {
+      view!.style.transform = visible ? "translateX(0)" : "translateX(100vw)";
+      visible
+        ? menu!.removeEventListener("touchmove", (e) => {
+            e.preventDefault();
+          })
+        : menu!.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+          });
+    }
+    setVisible((visible) => !visible);
   };
 
   /**
@@ -94,12 +97,14 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
         return (
           <div
-            className={`challenge ${unlocked}`}
+            className={`challenge-container`}
             key={id}
             onClick={() => switchBgHandler(id)}
-            style={{ height: "50px", width: "auto" }}
           >
-            <ChallengeIcon className={`challenge ${focussed}`} imgStr={logo} />
+            <ChallengeIcon
+              className={`challenge ${focussed} ${unlocked}`}
+              imgStr={logo}
+            />
             <div className="challenge-text">{title}</div>
           </div>
         );
@@ -107,13 +112,17 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     );
 
     return (
-      <div className="challengeMenu">
+      <div id="challengeMenu">
         <div className="table">{challengeArr}</div>
         {!!focussedBg && (
           <Flag
             id={focussedBg.id}
             title={focussedBg.title}
-            desc={getChalDesc(focussedBg.id, focussedBg.desc)}
+            desc={getChalDesc(
+              focussedBg.id,
+              focussedBg.unsolvedDesc,
+              focussedBg.solvedDesc
+            )}
             unlocked={isChalUnlocked(focussedBg.id)}
             callBack={(id: number) => switchBackground(id)}
           />
@@ -123,17 +132,13 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   };
 
   return (
-    <>
-      <div className={`cover flyout ${showState}`}>
+    <React.Fragment>
+      <div id="chal-menu" className={`cover flyout ${showState}`}>
         <h2 id="menu-title">Backgrounds</h2>
         <ChallengeMenu />
       </div>
-      <MenuButton
-        shape={visible}
-        bgId={bgId}
-        setVis={() => setVisible((prevVisible) => !prevVisible)}
-      />
-    </>
+      <MenuButton shape={visible} bgId={bgId} setVis={toggleMenu} />
+    </React.Fragment>
   );
 };
 

@@ -2,7 +2,6 @@ import axios from "axios";
 
 interface ChallengeInterface {
   challengeArr: Challenge[];
-  firstLoad: boolean;
   unlocked: Set<number>;
   initialUnlock: () => void;
   isFaqUnlocked: () => boolean;
@@ -17,38 +16,49 @@ interface Challenge {
   id: number;
   title: string;
   logo: any;
-  desc: string;
+  unsolvedDesc: string;
+  solvedDesc: string;
 }
 
 const Challenges: ChallengeInterface = {
   challengeArr: [
     {
       id: 0,
-      title: "Boring. Default. Gross.",
-      logo: "bubbs.svg",
-      desc: "The journey begins!",
+      title: "Boring. Gross.",
+      logo: "nodes.svg",
+      unsolvedDesc: `Seriously, stop using this background it's uncreative and unoriginal. And I know what you're thinking, "You're using it as well; you're just as bad as the rest of us." And that's true but-`,
+      solvedDesc: "The journey begins!",
     },
     {
       id: 1,
       title: "Ground rules",
-      logo: "lines.webp",
-      desc: `Please fuzz for our Rules page for more information`,
+      logo: "lines.svg",
+      unsolvedDesc: `Please fuzz for our Rules page for more information`,
+      solvedDesc: "Thanks for reading - have fun!",
     },
     {
       id: 2,
-      title: `WHY. WON'T. THIS. POST?!`,
-      logo: "logo.svg",
-      desc: `FLAG{TH1S15TH3FL4G}`,
+      title: `WHY. WON'T. THIS. WORK?!`,
+      logo: "boids.svg",
+      unsolvedDesc: `FLAG{TH1S15TH3FL4G}`,
+      solvedDesc: "Here's a business proposal: Postmates, but for dogs..?",
     },
     {
       id: 3,
       title: "Support Desk",
-      logo: "logo.svg",
-      desc: "Contact Support for the flag",
+      logo: "orbit.svg",
+      unsolvedDesc: "Please contact our Support team for the flag.",
+      solvedDesc:
+        "Fun fact: 50% of support chats are manned by bots. You've been flirting with a bot this whole time!",
+    },
+    {
+      id: 4,
+      title: "Book Store",
+      logo: "eyes.svg",
+      unsolvedDesc: "Just a collection of fine reads.",
+      solvedDesc: "Do people really buy books from bookstores?",
     },
   ],
-
-  firstLoad: true,
 
   unlocked: new Set([0]),
 

@@ -1,10 +1,6 @@
-import React, {
-  lazy,
-  Suspense,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { lazy, Suspense, useLayoutEffect, useState } from "react";
+import { LoadingComps } from "../../index";
+import "./background.css";
 
 // Challenges: 4
 // Backgrounds: 5
@@ -27,13 +23,15 @@ const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
-      return <BoidsBg />;
+      return <NodesBg />;
     case 1:
       return <LinesBg />;
     case 2:
-      return <OrbitBg />;
-    case 3:
       return <BoidsBg />;
+    case 3:
+      return <OrbitBg />;
+    case 4:
+      return <BubbleBg />;
     default:
       return <MissingBg />;
   }
@@ -49,12 +47,12 @@ const Background = ({
   bgCallback,
 }: {
   bg: number;
-  bgCallback: (loaded: boolean) => void;
+  bgCallback: (loaded: boolean, component: LoadingComps) => void;
 }) => {
   // Load background, call Callback function, then render
   const BackgroundLoader = () => {
     const background = renderBg(bg);
-    bgCallback(true);
+    bgCallback(true, "Bg");
     return background;
   };
 

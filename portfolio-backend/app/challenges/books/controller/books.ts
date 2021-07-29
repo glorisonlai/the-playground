@@ -1,14 +1,18 @@
-import { Context } from "aws-lambda";
-import { Model } from "mongoose";
 import { MessageUtil } from "../../../utils/message";
-import { BooksService } from "../service/books";
-import { CreateBookDTO } from "../model/createBookDTO";
 
-export class BooksController extends BooksService {
-  constructor(books: Model<any>) {
-    super(books);
+
+export const BooksController = {
+  async searchBookName(event: any) {
+    const req = JSON.parse(event.body)
+
+    try {
+      const values: string[] = [req.msg];
+      const query: string = 'SELECT * FROM books WHERE title LIKE $1'
+
+    } catch(err: ErrorEvent) {
+      return MessageUtil.error(err.code, err.message)
+    }
   }
-
   /**
    * Create book
    * @param {*} event
@@ -24,7 +28,7 @@ export class BooksController extends BooksService {
       });
 
       return MessageUtil.success(result);
-    } catch (err) {
+    } catch (err: Error) {
       console.error(err);
 
       return MessageUtil.error(err.code, err.message);

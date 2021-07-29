@@ -1,34 +1,30 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import Start from "./components/content/start";
 const App = lazy(() => import("./App"));
 
-const Index = () => {
-  const [chalsLoaded, setChalsLoaded] = useState(false);
-  const [bgLoaded, setBgLoaded] = useState(false);
+export type LoadingComps = "Chal" | "Bg";
 
-  const chalsLoadedHandler = (loaded: boolean): void => {
-    if (chalsLoaded) return;
-    setChalsLoaded(loaded);
+const Index = () => {
+  const loadingState: { [Property in LoadingComps]: boolean } = {
+    Chal: false,
+    Bg: false,
   };
 
-  const bgLoadedHandler = (loaded: boolean): void => {
-    if (bgLoaded) return;
-    setBgLoaded(loaded);
+  const loadedHandler = (loaded: boolean, component: LoadingComps): void => {
+    if (!loaded || loadingState[component]) return;
+    const loadingElem = document.getElementById(`loading${component}`);
+    if (loadingElem) loadingElem.innerHTML = "...DONE!";
+    loadingState[component] = loaded;
   };
 
   return (
     <Suspense
-      fallback={
-        <Start className="" chalLoaded={chalsLoaded} bgLoaded={bgLoaded} />
-      }
+      fallback={<Start className="" chalLoaded={false} bgLoaded={false} />}
     >
-      <App
-        chalLoadedCallback={chalsLoadedHandler}
-        bgLoadedCallback={bgLoadedHandler}
-      />
+      <App loadedCallback={loadedHandler} />
     </Suspense>
   );
 };

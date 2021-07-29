@@ -23,11 +23,12 @@ const boidGenerator = (width: number, height: number) => {
   const NUMBOIDS = 50;
 
   //Reset canvas, instantiate boids, and start drawing
-  const init = (): void => {
+  const init = () => {
     reset();
     canvasConstants.context = canvasConstants.canvas.getContext("2d")!;
     canvasConstants.boidsArr = createBoids(NUMBOIDS);
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
+    return reset;
   };
 
   //Cancels current drawing frame, and resets boid array
@@ -61,10 +62,9 @@ const boidGenerator = (width: number, height: number) => {
         const x = randNum(width);
         const y = randNum(height);
         const force = randNum(360);
-        return new Boid({ id, x, y, force });
+        return new Boid(id, x, y, force);
       }
     );
-    console.log(id_counter);
     return boidArr;
   };
 
@@ -85,7 +85,7 @@ const boidGenerator = (width: number, height: number) => {
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
   };
 
-  init();
+  return init();
 };
 
 export default boidGenerator;

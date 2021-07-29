@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import Background from "components/backgrounds/background";
 import Menu from "components/menu/menu";
 import Challenges from "components/challenges/challenges";
 import Content from "components/content/content";
+import { LoadingComps } from "./index";
 
 /**
  * Landing page, performs background checks before serving
  * @returns Loading animation, then portolio/website
  */
-function App({
-  chalLoadedCallback,
-  bgLoadedCallback,
+const App = ({
+  loadedCallback,
 }: {
-  chalLoadedCallback: (loaded: boolean) => void;
-  bgLoadedCallback: (loaded: boolean) => void;
-}) {
+  loadedCallback: (loaded: boolean, component: LoadingComps) => void;
+}) => {
   useEffect(() => {
     console.log(
       "%c" +
@@ -33,14 +31,16 @@ function App({
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get("view");
 
+  // TODO: Make(?) button to switch from portfolio, to CTF
   // Switch website view from portfolio, to CTF
-  const [showPortfolio, setShowPortfolio] = useState(
-    view === "portfolio" ? true : false
-  );
+  // const [showPortfolio, setShowPortfolio] = useState(
+  //   view === "ctf" ? true : false
+  // );
+  const showPortfolio = view === "ctf" ? false : true;
 
   // Load all challenges
   Challenges.initialUnlock();
-  chalLoadedCallback(true);
+  loadedCallback(true, "Chal");
 
   // Get initial background from localStorage
   const getBgId = (): number => {
@@ -64,10 +64,10 @@ function App({
     };
 
     return (
-      <>
-        <Background bg={bgId} bgCallback={bgLoadedCallback} />
+      <React.Fragment>
+        <Background bg={bgId} bgCallback={loadedCallback} />
         <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
-      </>
+      </React.Fragment>
     );
   };
 
@@ -75,12 +75,12 @@ function App({
     <div className="app">
       <BackgoundMenu />
       <Content
-        initScreen={showPortfolio}
+        showPortfolio={showPortfolio}
         unlocked={Challenges.getUnlocked()}
         total={Challenges.getAllChallenges().length}
       />
     </div>
   );
-}
+};
 
 export default App;

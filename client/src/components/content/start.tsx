@@ -23,29 +23,29 @@ const Start = ({
         <div className="row">
           <code>Checking challenges</code>
           {!chalLoaded ? (
-            <>
+            <code id="loadingChal">
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
-            </>
+            </code>
           ) : (
-            <>
+            <React.Fragment>
               <code>...DONE</code>
-            </>
+            </React.Fragment>
           )}
         </div>
         <div className="row">
           <code>Checking backgrounds</code>
           {!bgLoaded ? (
-            <>
+            <code id="loadingBg">
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
               <code className="loadingDots">.</code>
-            </>
+            </code>
           ) : (
-            <>
+            <React.Fragment>
               <code>...DONE</code>
-            </>
+            </React.Fragment>
           )}
         </div>
         {bgLoaded && chalLoaded && <code className="row">sl</code>}

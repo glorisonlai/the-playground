@@ -44,6 +44,7 @@ const generator = (width: number, height: number) => {
     canvasConstants.context.fillStyle = "white";
     canvasConstants.context.strokeStyle = "white";
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
+    return reset;
   };
 
   // Cancel previous draws
@@ -114,7 +115,7 @@ const generator = (width: number, height: number) => {
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
   };
 
-  init();
+  return init();
 };
 
 export default generator;

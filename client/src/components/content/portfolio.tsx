@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  GithubIcon,
-  ResumeIcon,
-  // TwitterIcon,
-  // BlogIcon,
-  MailIcon,
-} from "../../assets/fontawesome";
+  GithubLink,
+  ResumeLink,
+  // TwitterLink,
+  // BlogLink,
+  MailLink,
+  MediumLink,
+  ExtLink,
+} from "../../assets/icons";
 import "./portfolio.css";
 import "./content.css";
+import { experienceText } from "./experience";
 import { Divider } from "components/common/divider";
 
 /**
  * Portfolio website view
  * Contains main page, personal projects
- * TODO: Rewrite its a mess
  * @returns Portfolio view
  */
 const Portfolio = () => {
@@ -22,127 +24,116 @@ const Portfolio = () => {
   // const downArrowClass = screen ? "" : "hidden";
   // const upArrowClass = screen ? "hidden" : "";
 
-  const scrollTo = (scrollTo: number) => {
-    window.scrollTo(0, scrollTo);
-    // setScreen((screen) => !screen);
-  };
+  // const scrollTo = (scrollTo: number) => {
+  //   window.scrollTo(0, scrollTo);
+  //   setScreen((screen) => !screen);
+  // };
 
   /**
    * Lists experiences
    * Image right side, text, left side
    * @returns Experience component
    */
-  const Experience = () => (
-    <div id="experience">
-      {/* Python password generator */}
-      <div className={"nav-row"}>
+
+  const ProgressiveImageContainer = ({
+    icon,
+    placeholderIcon,
+    alt,
+  }: {
+    icon: string;
+    placeholderIcon: string;
+    alt: string;
+  }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    return (
+      <div className="image-container">
         <img
-          src={require("assets/sprites/logo.svg").default}
-          alt="Password Generator"
+          className="img thumb placeholder"
+          alt={alt}
+          src={require(`assets/sprites/${placeholderIcon}`).default}
+          style={{
+            visibility: isLoaded ? "hidden" : "visible",
+          }}
         />
-        <div>
-          <h4>Password Wordlist/Generator</h4>
-          <p>
-            A Python script that generates pronouneable passwords with Markov
-            chains. Intended for bruteforcing the weirder passwords. Includes
-            ruleset for including numbers at the end of syllables.
-          </p>
-        </div>
-      </div>
-      {/* Weather app */}
-      <div className={"nav-row"}>
         <img
-          src={require("assets/sprites/logo.svg").default}
-          alt="Weather App"
+          className="img thumb full"
+          alt={alt}
+          src={require(`assets/sprites/${icon}`).default}
+          onLoad={() => setIsLoaded(true)}
+          style={{ opacity: isLoaded ? 1 : 0 }}
         />
-        <div>
-          <h4>Weather Display</h4>
-          <p>
-            Weather web app that fetches data from OpenWeatherMap. Includes
-            search and autocomplete for any region listed in OpenWeather.
-          </p>
-        </div>
       </div>
-      {/* Chat app */}
-      <div className={"nav-row"}>
-        <img src={require("assets/sprites/logo.svg").default} alt="Chat App" />
-        <div>
-          <h4>Secure Chat app</h4>
-          <p>
-            Chat application utilising Diffie Hellman key exchange and public
-            key cryptography to securely store encrypted messages that are
-            visible only to group chat members. WIP
-          </p>
-        </div>
+    );
+  };
+
+  const Experience = () => {
+    return (
+      <div id="experience">
+        <Divider />
+        {experienceText.map((e, key) => (
+          <React.Fragment key={key}>
+            <div className="nav-row">
+              <ProgressiveImageContainer
+                placeholderIcon={e.placeholderImgIcon}
+                icon={e.imgIcon}
+                alt={e.imgIconAlt}
+              />
+              <div className="proj-text">
+                <h4>{e.title}</h4>
+                <p>{e.desc}</p>
+              </div>
+              <div className="links">
+                {!!e.githubLink && (
+                  <GithubLink link={e.githubLink}>
+                    GitHub
+                    <Divider />
+                  </GithubLink>
+                )}
+                {!!e.url && <ExtLink link={e.url} />}
+              </div>
+            </div>
+            <Divider />
+          </React.Fragment>
+        ))}
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
-    <div id="portfolio">
+    <div id="view">
       <div className="main screen">
         <h1 style={{ margin: 0 }}>Glorison Lai</h1>
         <code>Cyber-Security; Web Development;</code>
         <Divider />
         {/** Icon row */}
         <div className="icons">
-          {/* Github Icon */}
-          <a
-            href="https://www.github.com/glorisonlai"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <GithubIcon />
+          <GithubLink link="https://www.github.com/glorisonlai">
             <div className="line" />
             <div className="tag">GitHub</div>
-          </a>
-          {/* <Twitter Icon /> */}
-          {/* <a
-            href="https://twitter.com/Glorison3"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <TwitterIcon />
+          </GithubLink>
+          {/* <TwitterLink>
             <div className="line" />
             <div className="tag">Twitter</div>
-          </a> */}
-          {/* <Blog Icon /> */}
-          {/* <a
-            href="https://dev.to/glorisonlai"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <TwitterIcon />
+          </TwitterLink> */}
+          <MediumLink>
             <div className="line" />
-            <div className="tag">Blog Posts</div>
-          </a> */}
-          {/* Resume Icon */}
-          <a
-            href="resume.pdf"
-            download="Glorison_Lai_2021_Resume.pdf"
-            target="this"
-            rel="noreferrer"
-          >
-            <ResumeIcon />
+            <div className="tag">Posts</div>
+          </MediumLink>
+          <ResumeLink>
             <div className="line" />
             <div className="tag">Resume</div>
-          </a>
-          {/* Email Icon */}
-          <a
-            href="mailto:lai.glorison@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MailIcon />
+          </ResumeLink>
+          <MailLink>
             <div className="line" />
             <div className="tag">Contact</div>
-          </a>
+          </MailLink>
         </div>
       </div>
       {/** Scroll down button */}
       <footer
         id="footer-button"
-        // className={downArrowClass}
+        className={"scroll"}
         onClick={() => window.scrollTo(0, window.innerHeight)}
       >
         <code className="label">Projects</code>

@@ -25,21 +25,11 @@ const boidConstants = {
  * TODO: Boids like to go to top-left corner and stay there. Something to do with cohesion/avoidance logic
  */
 class Boid {
-  id: number;
-  head: vector2dInterface;
-  direction: vector2dInterface;
+  id;
+  head;
+  direction;
 
-  constructor({
-    id,
-    x,
-    y,
-    force,
-  }: {
-    id: number;
-    x: number;
-    y: number;
-    force: number;
-  }) {
+  constructor(id: number, x: number, y: number, force: number) {
     this.id = id;
     this.head = vector2d.create(x, y);
     this.direction = vector2d.resolveDegreesToUnitVector(force);
@@ -49,7 +39,7 @@ class Boid {
    * Draws boid shape onto canvas
    * @param ctx Canvas Context
    */
-  draw = (ctx: CanvasRenderingContext2D) => {
+  draw(ctx: CanvasRenderingContext2D) {
     const centre = vector2d.add(
       this.head,
       vector2d.reverse(
@@ -80,15 +70,16 @@ class Boid {
     ctx.closePath();
     ctx.fillStyle = "#FFFFFF";
     ctx.fill();
-  };
+  }
 
   /**
    * Calculates squared distance from this, to other boid
    * @param head Location of other boid
    * @returns Squared distance
    */
-  squaredDist = ({ head }: Boid) =>
-    (this.head.x - head.x) ** 2 + (this.head.y - head.y) ** 2;
+  squaredDist({ head }: Boid) {
+    return (this.head.x - head.x) ** 2 + (this.head.y - head.y) ** 2;
+  }
 
   /**
    * Simulates view cone of 200-ish degrees in front of boid
@@ -96,7 +87,7 @@ class Boid {
    * @param otherBoid Target boid
    * @returns True if in radius
    */
-  inView = (radius: number, otherBoid: Boid) => {
+  inView(radius: number, otherBoid: Boid) {
     if (otherBoid.id === this.id) return false;
     if (this.squaredDist(otherBoid) >= radius ** 2) return false;
     const toOtherBoidVector = vector2d.add(
@@ -105,7 +96,7 @@ class Boid {
     );
     const projection = vector2d.dotProd(this.direction, toOtherBoidVector);
     return projection >= -0.2 && projection <= radius ** 2;
-  };
+  }
 
   /**
    * Logic to figure out whether steeringRadian is closer to left of current directionRadian
@@ -113,12 +104,13 @@ class Boid {
    * @param directionRadian Current vector
    * @returns True if should turn anti-clockwise
    */
-  turnLeft = (steeringRadian: number, directionRadian: number): boolean =>
-    directionRadian >= 0
+  shouldTurnLeft(steeringRadian: number, directionRadian: number): boolean {
+    return directionRadian >= 0
       ? steeringRadian >= directionRadian ||
-        steeringRadian <= directionRadian - Math.PI
+          steeringRadian <= directionRadian - Math.PI
       : steeringRadian <= directionRadian + Math.PI &&
-        steeringRadian >= directionRadian;
+          steeringRadian >= directionRadian;
+  }
 
   /**
    * Return radians to steer boid after adjusting for boid behaviour
@@ -128,11 +120,11 @@ class Boid {
    * @param avoidanceVector How far to steer away from collision
    * @returns Steering radians
    */
-  steer = (
+  steer(
     alignmentVector: vector2dInterface,
     cohesionVector: vector2dInterface,
     avoidanceVector: vector2dInterface
-  ) => {
+  ) {
     const steeringVector = vector2d.create(0, 0);
     vector2d.accum(steeringVector, [
       this.direction,
@@ -142,7 +134,7 @@ class Boid {
     ]);
     const steeringRadians = vector2d.resolveVectorToRadians(steeringVector);
     const currVectorRadians = vector2d.resolveVectorToRadians(this.direction);
-    if (this.turnLeft(steeringRadians, currVectorRadians)) {
+    if (this.shouldTurnLeft(steeringRadians, currVectorRadians)) {
       // Go left
       // TODO: Messy logic
       if (
@@ -178,7 +170,7 @@ class Boid {
           : currVectorRadians - boidConstants.STEERING_LIMIT;
       }
     }
-  };
+  }
 
   /**
    * Looks at surroundings and updates direction and position
@@ -186,9 +178,9 @@ class Boid {
    * @param boundary Screen dimensions
    */
   update = (boidArr: Boid[], boundary: vector2dInterface) => {
-    const alignmentVector = { x: 0, y: 0 };
-    const cohesionVector = { x: 0, y: 0 };
-    const avoidanceVector = { x: 0, y: 0 };
+    const alignmentVector = vector2d.create(0, 0);
+    const cohesionVector = vector2d.create(0, 0);
+    const avoidanceVector = vector2d.create(0, 0);
     for (const otherBoid of boidArr) {
       if (this.inView(boidConstants.VIEWDIST, otherBoid)) {
         // Align direction with nearby boids
@@ -220,7 +212,6 @@ class Boid {
       vector2d.extend(this.direction, boidConstants.AVOIDWALL)
     );
     if (nextVector.x <= 0) {
-      // debugger;
       avoidanceVector.x += (boidConstants.WALL_WEIGHT * boundary.x) / 2;
       avoidanceVector.y += this.direction.y;
     } else if (nextVector.x >= boundary.x) {
@@ -228,11 +219,10 @@ class Boid {
       avoidanceVector.y += this.direction.y;
     }
     if (nextVector.y <= 0) {
-      // debugger;
       avoidanceVector.x += this.direction.x;
       avoidanceVector.y += (boidConstants.WALL_WEIGHT * boundary.y) / 2;
     } else if (nextVector.y >= boundary.y) {
-      avoidanceVector.x += boidConstants.WALL_WEIGHT * this.direction.x;
+      avoidanceVector.x += this.direction.x;
       avoidanceVector.y -= (boidConstants.WALL_WEIGHT * boundary.y) / 2;
     }
 
