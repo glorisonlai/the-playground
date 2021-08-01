@@ -1,4 +1,5 @@
 import axios from "axios";
+import Forge from "node-forge";
 
 interface ChallengeInterface {
   challengeArr: Challenge[];
@@ -9,7 +10,10 @@ interface ChallengeInterface {
   getUnlocked: () => number;
   getChallengeFromId: (id: number) => Challenge | undefined;
   isUnlockedFromId: (id: number) => boolean;
-  checkFlag: (id: number, flag: string) => Promise<boolean>;
+  checkKey: (id: number, key: string) => boolean;
+  submitFlag: (id: number, flag: string) => Promise<boolean>;
+  saveKey: (id: number, key: string) => void;
+  getKey: (id: number) => string | null;
 }
 
 interface Challenge {
@@ -64,9 +68,8 @@ const Challenges: ChallengeInterface = {
 
   initialUnlock() {
     this.challengeArr.forEach(({ id }) => {
-      if (
-        localStorage.getItem(`BG${id}`) === process.env[`REACT_APP_BG_${id}`]
-      ) {
+      const key = this.getKey(id);
+      if (!!key && this.checkKey(id, key)) {
         this.unlocked.add(id);
       }
     });
@@ -92,19 +95,48 @@ const Challenges: ChallengeInterface = {
     return this.unlocked.has(id);
   },
 
-  async checkFlag(id: number, flag: string) {
+  checkKey(id: number, key: string) {
+    const secret = process.env[`REACT_APP_BG_${id}_SECRET`];
+    const decoded_secret = process.env["REACT_APP_FLAG_SUCCESS"];
+    const keyBytes = Forge.util.createBuffer(key);
+
+    if (
+      typeof secret === "string" &&
+      typeof decoded_secret === "string" &&
+      keyBytes.length() === 32
+    ) {
+      const encrypted = Forge.util.hexToBytes(secret);
+      const decipher = Forge.cipher.createDecipher("AES-CBC", keyBytes);
+      decipher.start({ iv: keyBytes.data });
+
+      decipher.update(Forge.util.createBuffer(encrypted));
+      decipher.finish();
+      return decipher.output.toHex() === Forge.util.encodeUtf8(decoded_secret);
+    }
+    return false;
+  },
+
+  async submitFlag(id: number, flag: string) {
     const { data } = await axios.post(
-      process.env.REACT_APP_API_URL + "/check",
+      process.env.REACT_APP_API_URL + "/dev/check",
       {
         id: id,
         msg: flag,
       }
     );
-    if (!!data.code && data.data === process.env[`REACT_APP_BG_${id}`]) {
-      localStorage.setItem(`BG${id}`, data.secret);
+    if (!!data.code && this.checkKey(id, data.data)) {
+      this.saveKey(id, data.data);
       this.unlocked.add(id);
     }
     return data.code;
+  },
+
+  saveKey(id: number, key: string) {
+    localStorage.setItem(`BG${id}`, key);
+  },
+
+  getKey(id: number) {
+    return localStorage.getItem(`BG${id}`);
   },
 };
 

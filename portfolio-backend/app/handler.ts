@@ -1,4 +1,4 @@
-import { Handler, Context } from "aws-lambda";
+import { Handler } from "aws-lambda";
 import dotenv from "dotenv";
 import path from "path";
 const dotenvPath = path.join(
@@ -18,9 +18,8 @@ export const checkFlag: Handler = (event: any) =>
   FlagsController.checkFlag(event);
 
 // Book functions
-export const searchBookName: Handler = (event: any) => BooksController.searchBookName;
-
-export const searchBookCategory: Handler = (event: any) => 
+export const searchBook: Handler = (event: any) =>
+  BooksController.searchBook(event);
 
 // import { books } from "./books/model";
 // import { BooksController } from "./books/controller/books";

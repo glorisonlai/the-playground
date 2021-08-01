@@ -38,7 +38,7 @@ const NormalForm = ({
     if (loading) return;
     if (!flag) return;
     setLoading(true);
-    if (await Challenges.checkFlag(id, flag)) {
+    if (await Challenges.submitFlag(id, flag)) {
       callBack(id);
     }
     setFlag(initialVal);

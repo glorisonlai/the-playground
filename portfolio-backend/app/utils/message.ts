@@ -6,8 +6,8 @@ enum StatusCode {
 }
 
 enum DefaultMessages {
-  success = "success",
-  failed = "false",
+  success = "Success!",
+  failed = "Something went wrong!",
 }
 
 class Result {

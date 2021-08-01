@@ -1,8 +1,9 @@
 import { Client } from "pg";
 
-export const postgresClient = (dbName: string) => {
+export const postgresClient = async (dbName: string) => {
   const client = new Client({
-    connectionString: process.env.POSTGRES_DB_URI + dbName,
+    connectionString: "postgresql://postgres:9$2m2v42LqTL@localhost:5432",
   });
-  client.connect();
+  await client.connect();
+  return client;
 };

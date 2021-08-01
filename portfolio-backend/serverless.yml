@@ -36,16 +36,8 @@ functions:
 
   # Search book by name
   searchBookByName:
-    handler: app/handler.searchBookName
+    handler: app/handler.searchBook
     events:
       - http:
           method: POST
           path: /c4/searchbook
-
-  # Search book by category
-  searchBookByCategory:
-    handler: app/handler.searchBookCategory
-    events:
-      - http:
-          method: POST
-          path: /c4/searchcat

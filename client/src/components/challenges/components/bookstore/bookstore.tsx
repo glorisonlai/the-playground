@@ -35,6 +35,7 @@ interface BookInterface {
  */
 const BookStore = () => {
   const [search, setSearch] = useState("");
+  const [searchCat, setSearchCat] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState<BookInterface[]>([]);
   const [status, setStatus] = useState<statusCode>(2);
@@ -70,15 +71,14 @@ const BookStore = () => {
     return <div className="book-list">Search for some Books!</div>;
   };
 
-  const searchBookByName = async (e: React.FormEvent<HTMLFormElement>) => {
+  const searchBook = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(search, loading);
-    if (loading) return;
+    // if (loading) return;
     if (!search) return;
     setLoading(true);
     const res = await axios.post(
-      process.env.REACT_APP_API_URL + "/c4/searchbook",
-      { msg: search }
+      process.env.REACT_APP_API_URL + "/dev/c4/searchbook",
+      { name: search, categories: Array.from(searchCat) }
     );
     if (res.status !== 200) {
       // Do error handling here
@@ -86,31 +86,20 @@ const BookStore = () => {
       return;
     }
     setStatus(1);
+    console.log(res.data);
     setBooks(JSON.parse(res.data));
     setLoading(false);
   };
 
-  const searchBookByCategory = async (cat: string) => {
-    if (loading) return;
-    setLoading(true);
-    setSearch(`cat:${cat}`);
-    const res = await axios.post(
-      process.env.REACT_APP_API_URL + "/c4/searchcat",
-      { msg: cat }
-    );
-    if (res.status !== 200) {
-      // Error handling
-      setStatus(0);
-      return;
-    }
-    setStatus(1);
-    setBooks(JSON.parse(res.data));
-    setLoading(false);
+  const searchBookByCategory = (cat: string) => {
+    const newCatSearch = new Set(searchCat);
+    newCatSearch.has(cat) ? newCatSearch.delete(cat) : newCatSearch.add(cat);
+    setSearchCat(newCatSearch);
   };
 
   return (
     <div id="storefront">
-      <form id="book-search" onSubmit={searchBookByName}>
+      <form id="book-search" onSubmit={searchBook}>
         <div id="book-logo">📕 Books!</div>
         <input
           type="text"
@@ -123,21 +112,34 @@ const BookStore = () => {
         <input id="book-search-submit" type="submit" value="Search" />
       </form>
       <div className="icons categories">
-        <button onClick={() => searchBookByCategory(BookCategories.FUNNY.key)}>
+        {/* TODO: Make the buttons into a map for readability */}
+        <button
+          className={searchCat.has(BookCategories.FUNNY.key) ? "selected" : ""}
+          onClick={() => searchBookByCategory(BookCategories.FUNNY.key)}
+        >
           <div>{BookCategories.FUNNY.emoji}</div>
           {BookCategories.FUNNY.key}
         </button>
         <button
+          className={
+            searchCat.has(BookCategories.ROMANCE.key) ? "selected" : ""
+          }
           onClick={() => searchBookByCategory(BookCategories.ROMANCE.key)}
         >
           <div>{BookCategories.ROMANCE.emoji}</div>
           {BookCategories.ROMANCE.key}
         </button>
-        <button onClick={() => searchBookByCategory(BookCategories.SPOOKY.key)}>
+        <button
+          className={searchCat.has(BookCategories.SPOOKY.key) ? "selected" : ""}
+          onClick={() => searchBookByCategory(BookCategories.SPOOKY.key)}
+        >
           <div>{BookCategories.SPOOKY.emoji}</div>
           {BookCategories.SPOOKY.key}
         </button>
-        <button onClick={() => searchBookByCategory(BookCategories.FLAG.key)}>
+        <button
+          className={searchCat.has(BookCategories.FLAG.key) ? "selected" : ""}
+          onClick={() => searchBookByCategory(BookCategories.FLAG.key)}
+        >
           <div>{BookCategories.FLAG.emoji}</div>
           {BookCategories.FLAG.key}
         </button>
