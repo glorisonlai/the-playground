@@ -44,3 +44,5 @@ functions:
           path: /c4/searchbook
 
   # Php Challenge
+  # sendChatMessage:
+  #   runtime: php8.x
