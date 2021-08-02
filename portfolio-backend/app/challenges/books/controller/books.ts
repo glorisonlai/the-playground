@@ -12,7 +12,7 @@ export const BooksController = {
     try {
       const { name, categories } = req;
       const pgClient = await postgresClient(process.env["POSTGRES_BOOK_DB"]);
-      let query = `SELECT name FROM books WHERE name LIKE $1`;
+      let query = "SELECT id,name,category FROM books WHERE name LIKE $1";
       if (categories.length) {
         query += " AND false";
         for (const cat of categories) {
@@ -25,8 +25,7 @@ export const BooksController = {
           query += ` OR category='${cat}'`;
         }
       }
-      console.log(name);
-      const res = await pgClient.query(query, [name + "%"]);
+      const res = await pgClient.query(query, [!!name ? `${name}%` : "%"]);
       pgClient.end();
       console.log(res.rows);
       return MessageUtil.success(res.rows);

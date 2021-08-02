@@ -4,7 +4,6 @@ service: portfolio-backend
 
 provider:
   name: aws
-  runtime: nodejs12.x
   environment:
     NODE_ENV: dev
 
@@ -26,6 +25,7 @@ package:
 functions:
   # Main flag checking function
   checkFlag:
+    runtime: nodejs12.x
     handler: app/handler.checkFlag
     events:
       - http:
@@ -36,8 +36,11 @@ functions:
 
   # Search book by name
   searchBookByName:
+    runtime: nodejs12.x
     handler: app/handler.searchBook
     events:
       - http:
           method: POST
           path: /c4/searchbook
+
+  # Php Challenge

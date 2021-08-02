@@ -1,18 +1,32 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./bookstore.css";
+import { ObjectEnum } from "../../../common/ObjectEnum";
 
 /**
  * Class is an enum of all book categories
  */
-class BookCategories {
-  static readonly FUNNY = new BookCategories("Funny", "😆");
-  static readonly SPOOKY = new BookCategories("Spooky", "👻");
-  static readonly ROMANCE = new BookCategories("Romance", "💗");
-  static readonly FLAG = new BookCategories("Flag", "🚩");
+// class BookCategories {
+//   static readonly FACTS = new BookCategories("Facts", "🤓");
+//   static readonly FUNNY = new BookCategories("Funny", "😆");
+//   static readonly ROMANCE = new BookCategories("Romance", "💗");
+//   static readonly SPOOKY = new BookCategories("Spooky", "👻");
+//   static readonly FLAG = new BookCategories("Flag", "🚩");
 
-  private constructor(readonly key: string, readonly emoji: string) {}
+//   private constructor(readonly key: string, readonly emoji: string) {}
+// }
+interface BookCategoryInterface {
+  readonly name: string;
+  readonly icon: string;
 }
+
+const BookCategories: ObjectEnum<BookCategoryInterface> = {
+  FACTS: { name: "Facts", icon: "🤓" },
+  FUNNY: { name: "Funny", icon: "😆" },
+  ROMANCE: { name: "Romance", icon: "💗" },
+  SPOOKY: { name: "Spooky", icon: "👻" },
+  FLAG: { name: "Flag", icon: "🚩" },
+};
 
 enum statusCode {
   NORMAL = 0,
@@ -21,10 +35,9 @@ enum statusCode {
 }
 
 interface BookInterface {
-  id: number;
-  title: string;
-  price: number;
-  categories: string[];
+  readonly id: number;
+  readonly name: string;
+  readonly category: string;
 }
 
 /**
@@ -38,24 +51,26 @@ const BookStore = () => {
   const [searchCat, setSearchCat] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState<BookInterface[]>([]);
-  const [status, setStatus] = useState<statusCode>(2);
+  const [status, setStatus] = useState<statusCode>(statusCode.INITIAL);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
   const BookPane = () => {
+    console.log(status);
     if (status === statusCode.NORMAL) {
       if (books.length) {
         return (
           <div className="book-list">
-            {books.map((book) => (
-              <div>
-                {book.title}
-                <div className="book-cat">{book.categories.join(", ")}</div>
-                <div className="buy-btn">{book.price}</div>
-              </div>
-            ))}
+            {books
+              .sort((book1, book2) => book1.id - book2.id)
+              .map((book) => (
+                <div key={book.id}>
+                  {book.name}
+                  <div className="book-cat">{book.category}</div>
+                </div>
+              ))}
           </div>
         );
       }
@@ -73,21 +88,21 @@ const BookStore = () => {
 
   const searchBook = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (loading) return;
-    if (!search) return;
+    if (loading) return;
+    if (!search && !searchCat.size) return;
     setLoading(true);
     const res = await axios.post(
       process.env.REACT_APP_API_URL + "/dev/c4/searchbook",
       { name: search, categories: Array.from(searchCat) }
     );
+    console.log(res);
     if (res.status !== 200) {
       // Do error handling here
-      setStatus(0);
+      setStatus(statusCode.ERROR);
       return;
     }
-    setStatus(1);
-    console.log(res.data);
-    setBooks(JSON.parse(res.data));
+    setStatus(statusCode.NORMAL);
+    setBooks(res.data.data);
     setLoading(false);
   };
 
@@ -113,36 +128,18 @@ const BookStore = () => {
       </form>
       <div className="icons categories">
         {/* TODO: Make the buttons into a map for readability */}
-        <button
-          className={searchCat.has(BookCategories.FUNNY.key) ? "selected" : ""}
-          onClick={() => searchBookByCategory(BookCategories.FUNNY.key)}
-        >
-          <div>{BookCategories.FUNNY.emoji}</div>
-          {BookCategories.FUNNY.key}
-        </button>
-        <button
-          className={
-            searchCat.has(BookCategories.ROMANCE.key) ? "selected" : ""
-          }
-          onClick={() => searchBookByCategory(BookCategories.ROMANCE.key)}
-        >
-          <div>{BookCategories.ROMANCE.emoji}</div>
-          {BookCategories.ROMANCE.key}
-        </button>
-        <button
-          className={searchCat.has(BookCategories.SPOOKY.key) ? "selected" : ""}
-          onClick={() => searchBookByCategory(BookCategories.SPOOKY.key)}
-        >
-          <div>{BookCategories.SPOOKY.emoji}</div>
-          {BookCategories.SPOOKY.key}
-        </button>
-        <button
-          className={searchCat.has(BookCategories.FLAG.key) ? "selected" : ""}
-          onClick={() => searchBookByCategory(BookCategories.FLAG.key)}
-        >
-          <div>{BookCategories.FLAG.emoji}</div>
-          {BookCategories.FLAG.key}
-        </button>
+        {Object.keys(BookCategories).map((key) => (
+          <button
+            key={key}
+            className={
+              searchCat.has(BookCategories[key].name) ? "selected" : ""
+            }
+            onClick={() => searchBookByCategory(BookCategories[key].name)}
+          >
+            <div>{BookCategories[key].icon}</div>
+            {BookCategories[key].name}
+          </button>
+        ))}
       </div>
       <hr />
       <BookPane />
