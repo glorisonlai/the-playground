@@ -22,7 +22,6 @@ class agent {
     }
     if (this.pos.y < 0 || this.pos.y > boundary.y) {
       this.direction = -this.direction;
-      console.log(this.direction);
     }
     const newpos = vector2d.add(
       this.pos,

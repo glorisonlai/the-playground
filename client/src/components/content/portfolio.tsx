@@ -7,7 +7,7 @@ import {
   MailLink,
   MediumLink,
   ExtLink,
-} from "../../assets/icons";
+} from "./icons";
 import "./portfolio.css";
 import "./content.css";
 import { experienceText } from "./experience";

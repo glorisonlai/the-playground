@@ -1,8 +1,11 @@
+import { APIGatewayProxyEvent } from "aws-lambda";
 import { MessageUtil } from "../../utils/message";
 
 export const FlagsController = {
-  async checkFlag(event: any) {
+  async checkFlag(event: APIGatewayProxyEvent) {
     const { msg, id } = JSON.parse(event.body);
+    console.log(process.env);
+    console.log(process.env[`FLAG_${id}`]);
     try {
       if (
         !msg ||
@@ -15,7 +18,6 @@ export const FlagsController = {
       }
       if (msg === process.env[`FLAG_${id}`]) {
         const key = process.env[`KEY_${id}`];
-        console.log(key);
         return MessageUtil.success(key);
       }
       return MessageUtil.failed();

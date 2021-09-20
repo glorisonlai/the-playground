@@ -58,7 +58,6 @@ const BookStore = () => {
   };
 
   const BookPane = () => {
-    console.log(status);
     if (status === statusCode.NORMAL) {
       if (books.length) {
         return (
@@ -91,18 +90,16 @@ const BookStore = () => {
     if (loading) return;
     if (!search && !searchCat.size) return;
     setLoading(true);
-    const res = await axios.post(
-      process.env.REACT_APP_API_URL + "/dev/c4/searchbook",
-      { name: search, categories: Array.from(searchCat) }
-    );
-    console.log(res);
-    if (res.status !== 200) {
-      // Do error handling here
+    try {
+      const res = await axios.post(
+        process.env.REACT_APP_API_URL + "/dev/c4/searchbook",
+        { name: search, categories: Array.from(searchCat) }
+      );
+      setStatus(res.status === 200 ? statusCode.NORMAL : statusCode.ERROR);
+      setBooks(res.data.data);
+    } catch (err: any) {
       setStatus(statusCode.ERROR);
-      return;
     }
-    setStatus(statusCode.NORMAL);
-    setBooks(res.data.data);
     setLoading(false);
   };
 

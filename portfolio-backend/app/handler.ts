@@ -1,25 +1,22 @@
-import { Handler } from "aws-lambda";
-import dotenv from "dotenv";
-import path from "path";
-const dotenvPath = path.join(
-  __dirname,
-  "../",
-  `config/.env.${process.env.NODE_ENV}`
-);
-dotenv.config({
-  path: dotenvPath,
-});
+import {
+  APIGatewayProxyEvent,
+  APIGatewayProxyResult,
+  Handler,
+} from "aws-lambda";
 
 import { FlagsController } from "./flags/controller/flags";
 import { BooksController } from "./challenges/books/controller/books";
 
 // Main function
-export const checkFlag: Handler = (event: any) =>
-  FlagsController.checkFlag(event);
+export const checkFlag: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = (
+  event
+) => FlagsController.checkFlag(event);
 
 // Book functions
-export const searchBook: Handler = (event: any) =>
-  BooksController.searchBook(event);
+export const searchBook: Handler<
+  APIGatewayProxyEvent,
+  APIGatewayProxyResult
+> = (event) => BooksController.searchBook(event);
 
 // import { books } from "./books/model";
 // import { BooksController } from "./books/controller/books";

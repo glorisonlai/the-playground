@@ -64,7 +64,6 @@ export const MessageUtil = {
   error(code: number = 1000, message: string): ResponseVO {
     const result = new Result(StatusCode.error, code, message);
 
-    console.log(result.bodyToString());
     return result.bodyToString();
   },
 };
