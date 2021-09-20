@@ -13,6 +13,7 @@ const NodesBg = lazy(() => import("./nodes/nodesbg")); // DONE
 const SlimeBg = lazy(() => import("./slime/slimebg")); // INCOMPLETE
 const OrbitBg = lazy(() => import("./orbit/orbitbg")); // DONE
 const SnowflakeBg = lazy(() => import("./snowflakes/snowflakebg")); // INCOMPLETE
+const BlobBg = lazy(() => import("./blob/blobbg")); // INCOMPLETE
 const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 
 /**
@@ -23,7 +24,7 @@ const MissingBg = lazy(() => import("./missing/missingbg")); // DONE
 const renderBg = (bg: number): JSX.Element => {
   switch (bg) {
     case 0:
-      return <NodesBg />;
+      return <BlobBg />;
     case 1:
       return <LinesBg />;
     case 2:

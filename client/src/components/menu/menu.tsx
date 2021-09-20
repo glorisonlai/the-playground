@@ -64,8 +64,8 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
    * Will be fixed later when there are enough challenges to require scrolling lol
    */
   const toggleMenu = () => {
-    var view = document.getElementById("view");
-    var menu = document.getElementById("chal-menu");
+    const view = document.getElementById("view");
+    const menu = document.getElementById("chal-menu");
     if (view) {
       view!.style.transform = visible ? "translateX(0)" : "translateX(100vw)";
       visible

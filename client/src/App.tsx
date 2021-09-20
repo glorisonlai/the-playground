@@ -36,7 +36,7 @@ const App = ({
   // const [showPortfolio, setShowPortfolio] = useState(
   //   view === "ctf" ? true : false
   // );
-  const showPortfolio = view === "ctf" ? false : true;
+  const showPortfolio = view === "ctf" ? false : false;
 
   // Load all challenges
   Challenges.initialUnlock();

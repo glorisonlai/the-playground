@@ -52,13 +52,11 @@ const boidGenerator = (width: number, height: number) => {
    * @returns Array of boids
    */
   const createBoids = (numBoids: number): Boid[] => {
-    let id_counter = 0;
     const boidArr = Array.from(
       {
         length: numBoids,
       },
-      () => {
-        const id = id_counter++;
+      (_, id) => {
         const x = randNum(width);
         const y = randNum(height);
         const force = randNum(360);

@@ -23,6 +23,7 @@ export const experienceText: experienceTextInterface[] = [
     img: "logo.svg",
     imgAlt: "Portfolio",
     githubLink: "https://github.com/glorisonlai/the-playground",
+    url: "https://glorisonlai.tech",
   },
   // {
   //   title: "Password Wordlist/Generator",

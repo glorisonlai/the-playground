@@ -64,7 +64,7 @@ const Challenges: ChallengeInterface = {
     },
   ],
 
-  unlocked: new Set([0]),
+  unlocked: new Set([0, 1, 2, 3, 4]),
 
   initialUnlock() {
     this.challengeArr.forEach(({ id }) => {
