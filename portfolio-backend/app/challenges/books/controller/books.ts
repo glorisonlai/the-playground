@@ -1,20 +1,30 @@
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { QueryConfig } from "pg";
 import { MessageUtil } from "../../../utils/message";
-import { postgresClient } from "../model";
+import { postgresClient } from "../../../utils/postgres";
+import { BooksDocument, BookSearchReq } from "../model";
 
 export const BooksController = {
   /**
-   * Create book
+   * Search book
    * @param {*} event
    */
-  async searchBook(event: any) {
+  async searchBook(
+    event: APIGatewayProxyEvent
+  ): Promise<APIGatewayProxyResult> {
     const req = JSON.parse(event.body);
 
     try {
-      const { name, categories } = req;
-      const pgClient = await postgresClient(process.env["POSTGRES_BOOK_DB"]);
-      let query = "SELECT id,name,category FROM books WHERE name LIKE $1";
-      if (categories.length) {
-        query += " AND false";
+      const { name, categories } = req as BookSearchReq;
+      const pgClient = await postgresClient(process.env["POSTGRES_BOOK_URI"]);
+
+      const query: QueryConfig<string[]> = {
+        text: `SELECT id,name,category FROM books WHERE name LIKE $1`,
+        values: [!!name ? `${name}%` : "%"],
+      };
+
+      if (!!categories.length) {
+        query.text += " AND false";
         for (const cat of categories) {
           if (
             cat.length > 62 ||
@@ -22,14 +32,17 @@ export const BooksController = {
           ) {
             break;
           }
-          query += ` OR category='${cat}'`;
+          query.text += ` OR category='${cat}'`;
         }
       }
-      const res = await pgClient.query(query, [!!name ? `${name}%` : "%"]);
+
+      const res = await pgClient.query<BooksDocument>(query);
       pgClient.end();
+
       console.log(res.rows);
       return MessageUtil.success(res.rows);
-    } catch (err: any) {
+    } catch (err) {
+      console.log("blah");
       return MessageUtil.error(err.code, err.message);
     }
   },

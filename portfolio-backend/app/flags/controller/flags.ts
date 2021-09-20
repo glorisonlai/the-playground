@@ -1,7 +1,8 @@
+import { APIGatewayProxyEvent } from "aws-lambda";
 import { MessageUtil } from "../../utils/message";
 
 export const FlagsController = {
-  async checkFlag(event: any) {
+  async checkFlag(event: APIGatewayProxyEvent) {
     const { msg, id } = JSON.parse(event.body);
     try {
       if (

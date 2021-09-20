@@ -4,6 +4,7 @@ service: portfolio-backend
 
 provider:
   name: aws
+  region: ap-southeast-2
   environment:
     NODE_ENV: dev
 
@@ -16,11 +17,9 @@ custom:
     httpPort: 9000
 
 package:
-  exclude:
-    - config/.env.stg
-    - config/.env.pro
-  include:
-    - config/.env.dev
+  patterns:
+    - '!config/.env.**'
+    - '!config/.env.dev'
 
 functions:
   # Main flag checking function
