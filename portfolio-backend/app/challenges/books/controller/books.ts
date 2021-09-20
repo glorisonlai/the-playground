@@ -39,10 +39,8 @@ export const BooksController = {
       const res = await pgClient.query<BooksDocument>(query);
       pgClient.end();
 
-      console.log(res.rows);
       return MessageUtil.success(res.rows);
     } catch (err) {
-      console.log("blah");
       return MessageUtil.error(err.code, err.message);
     }
   },

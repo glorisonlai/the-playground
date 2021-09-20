@@ -16,7 +16,6 @@ export const FlagsController = {
       }
       if (msg === process.env[`FLAG_${id}`]) {
         const key = process.env[`KEY_${id}`];
-        console.log(key);
         return MessageUtil.success(key);
       }
       return MessageUtil.failed();
