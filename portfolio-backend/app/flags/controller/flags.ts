@@ -4,6 +4,8 @@ import { MessageUtil } from "../../utils/message";
 export const FlagsController = {
   async checkFlag(event: APIGatewayProxyEvent) {
     const { msg, id } = JSON.parse(event.body);
+    console.log(process.env);
+    console.log(process.env[`FLAG_${id}`]);
     try {
       if (
         !msg ||

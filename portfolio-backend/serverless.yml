@@ -1,6 +1,7 @@
 org: glo12345
 app: portfolio-backend
 service: portfolio-backend
+unresolvedVariablesNotificationMode: error
 
 provider:
   name: aws
@@ -9,17 +10,20 @@ provider:
     NODE_ENV: dev
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-plugin-typescript
   - serverless-offline
 
 custom:
+  dotenv:
+    path: config/.env
   serverless-offline:
     httpPort: 9000
 
 package:
   patterns:
     - '!config/.env.**'
-    - '!config/.env.dev'
+    - '!tests/**'
 
 functions:
   # Main flag checking function
