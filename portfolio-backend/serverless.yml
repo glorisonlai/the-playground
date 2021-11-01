@@ -4,6 +4,7 @@ service: portfolio-backend
 
 provider:
   name: aws
+  region: 'ap-southeast-2'
   environment:
     NODE_ENV: dev
 
