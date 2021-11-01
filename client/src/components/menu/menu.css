@@ -8,10 +8,10 @@
 .cover {
   grid-column: 1;
   grid-row: 1;
-  background-color: rgb(0,0,0,0.3);
+  background-color: rgb(0, 0, 0, 0.3);
   height: 100vh;
   width: 100vw;
-  overflow: hidden;   
+  overflow: hidden;
   position: fixed;
 }
 
@@ -26,11 +26,13 @@ Shifts menu screen out of view
 position is fixed here bc it screws everything else up
 */
 .hidden {
+  transition: transform 1s smooth; /* Change content.css container as well */
   transform: translateX(-100vw);
 }
 
 /*Shifts menu screen into view*/
 .visible {
+  transition: transform 1s smooth; /* Change content.css container as well */
   transform: translateX(0vw);
 }
 
@@ -116,7 +118,7 @@ Splits screen space in half
   height: auto;
 }
 
-@media only screen and (max-width: 670px){
+@media only screen and (max-width: 670px) {
   .challenge-text {
     visibility: hidden;
   }

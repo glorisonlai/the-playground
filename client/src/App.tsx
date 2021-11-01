@@ -45,7 +45,9 @@ const App = ({
   // Get initial background from localStorage
   const getBgId = (): number => {
     const id: number = Number(localStorage.getItem("bgId"));
-    return Challenges.isUnlockedFromId(id) ? id : 0;
+    const date = new Date();
+    return date.getDay() % 4;
+    // return Challenges.isUnlockedFromId(id) ? id : 0;
   };
 
   /**
