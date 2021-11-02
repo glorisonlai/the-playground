@@ -144,7 +144,7 @@ header:hover {
 
 .proj-text {
 	padding: 1rem;
-	font-size: var(--normal-text);
+	font-size: var($normal-text);
 	overflow-y: auto;
 	overflow-x: hidden;
 	text-overflow: ellipsis;

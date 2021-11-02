@@ -1,0 +1,57 @@
+/* Background */
+#bubbles {
+  z-index: -9;
+  transform: translateZ(-1);
+}
+
+/* Bubble */
+#bubbles li {
+  position: absolute;
+  list-style: none;
+  display: block;
+  background-color: transparent;
+  bottom: -100px;
+  animation: float 30s infinite;
+  -webkit-animation: float 30s infinite;
+  transition-timing-function: linear;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+
+}
+
+/* Inset shadow 
+ * Source: https: //www.youtube.com/watch?v=noC22oMVb44
+ */
+#bubbles li:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.25) translate(-260%, -70%);
+  background: radial-gradient(#fff, transparent);
+  border-radius: 50%;
+}
+
+/* Floating up animation */
+@keyframes float {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-150vh);
+    transform: translateY(-150vh);
+  }
+}
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    -webkit-transform: translateY(-150vh);
+    transform: translateY(-150vh);
+  }
+}

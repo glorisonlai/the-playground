@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useLayoutEffect, useState } from "react";
 import { LoadingComps } from "../../index";
-import "./background.css";
+import "styles/background.module.scss";
 
 // Challenges: 4
 // Backgrounds: 5

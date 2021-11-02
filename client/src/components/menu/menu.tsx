@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./menu.css";
+import { useState } from "react";
+import "./menu";
 import Challenges from "../challenges/challenges";
 import ChallengeIcon from "./challengeIcon";
 import MenuButton from "./menu-button/menu-button";
@@ -81,7 +81,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
   /**
    * Renders the challenge menu.
-   * All styling done in menu.css
+   * All styling done in menu.scss
    */
   const ChallengeMenu = () => {
     const challenges = Challenges.getAllChallenges();

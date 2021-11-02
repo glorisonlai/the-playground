@@ -1,0 +1,118 @@
+$admin-colour: rgb(83, 83, 83);
+$text-colour: white;
+$user-colour: rgb(36, 153, 248);
+
+#support-header {
+	margin: auto;
+	padding-left: 1rem;
+	padding-top: 0.5rem;
+	height: 2rem;
+	text-align: left;
+	background: $user-colour;
+	display: flex;
+	justify-content: flex-start;
+	overflow: hidden;
+}
+
+#support-name {
+	margin-left: 0.5em;
+	font-weight: bold;
+}
+
+.justify-right {
+	justify-content: flex-end;
+	padding-bottom: 0;
+	text-align: right;
+}
+
+.justify-left {
+	padding-bottom: 0;
+	padding-left: 2rem;
+	width: auto;
+	justify-content: flex-start;
+}
+
+#support-chat {
+	max-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+}
+
+#support-msg {
+	display: flex;
+	height: 2rem;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+#support-msg-text {
+	width: 88%;
+}
+
+#support-msg-submit {
+	min-width: 37px;
+	width: 12%;
+	background-color: $user-colour;
+	color: $text-colour;
+	text-transform: uppercase;
+}
+
+#support-pane {
+	position: relative;
+	width: 80%;
+	height: 40vh;
+	background-color: azure;
+}
+
+/**
+* Source: https: //codepen.io/kahboom/pen/bGpqPEw
+*/
+/* CSS talk bubble */
+.talk-bubble {
+	margin: 0.5em;
+	display: inline-block;
+	position: relative;
+	max-width: 200px;
+	padding: 0.5em;
+	overflow-wrap: break-word;
+	border-radius: 5px;
+}
+
+.user {
+	background-color: $user-colour;
+}
+
+.admin {
+	margin-right: 40px;
+	background-color: $admin-colour;
+}
+
+/* Right triangle placed top left flush. */
+.talk-bubble.user:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: calc(-1em + 1px);
+	right: auto;
+	top: 0px;
+	bottom: auto;
+	border: 1em solid;
+	border-color: $user-colour transparent transparent transparent;
+}
+
+.talk-bubble.admin:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	right: calc(-1em + 1px);
+	left: auto;
+	top: 0px;
+	bottom: auto;
+	border: 1em solid;
+	border-color: $admin-colour transparent transparent transparent;
+}
+

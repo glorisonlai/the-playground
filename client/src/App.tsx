@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Background from "components/backgrounds/background";
 import Menu from "components/menu/menu";
 import Challenges from "components/challenges/challenges";
@@ -66,10 +65,10 @@ const App = ({
     };
 
     return (
-      <React.Fragment>
+      <>
         <Background bg={bgId} bgCallback={loadedCallback} />
         <Menu bgId={bgId} unlock={(id: number) => changeBgId(id)} />
-      </React.Fragment>
+      </>
     );
   };
 

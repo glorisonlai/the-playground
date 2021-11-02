@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./split-pane.css";
+import "./split-pane.scss";
 
 const SplitPane = ({ children }: { children: JSX.Element[] }) => {
   const [screen, setScreen] = useState(0);

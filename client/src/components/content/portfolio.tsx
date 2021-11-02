@@ -7,9 +7,9 @@ import {
   MailLink,
   MediumLink,
   ExtLink,
-} from "../../assets/icons";
-import "./portfolio.css";
-import "./content.css";
+} from "../../components/icons";
+import "./portfolio.scss";
+import "./content.scss";
 import { experienceText } from "./experience";
 import { Divider } from "components/common/divider";
 
@@ -51,7 +51,7 @@ const Portfolio = () => {
         <img
           className="img thumb placeholder"
           alt={alt}
-          src={require(`assets/sprites/${placeholderIcon}`).default}
+          src={require(`public/${placeholderIcon}`).default}
           style={{
             visibility: isLoaded ? "hidden" : "visible",
           }}
@@ -59,7 +59,7 @@ const Portfolio = () => {
         <img
           className="img thumb full"
           alt={alt}
-          src={require(`assets/sprites/${icon}`).default}
+          src={require(`public/${icon}`).default}
           onLoad={() => setIsLoaded(true)}
           style={{ opacity: isLoaded ? 1 : 0 }}
         />

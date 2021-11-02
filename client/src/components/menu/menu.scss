@@ -1,7 +1,7 @@
 :root {
-  --top-diff: 2em;
-  --chall-padding: 0.2em;
-  --icon-width: 75px;
+  $top-diff: 2em;
+  $chall-padding: 0.2em;
+  $icon-width: 75px;
 }
 
 /*Sets filter for menu screen*/
@@ -51,7 +51,7 @@ position is fixed here bc it screws everything else up
 }
 
 .challenge-container {
-  padding: var(--chall-padding);
+  padding: $chall-padding);
   width: auto;
   height: calc(75px + 4rem);
   margin: 1rem;
@@ -79,7 +79,7 @@ Splits screen space in half
 
 /*Pads top of flag div. Honestly shouldn't be here*/
 .flag-col {
-  padding-top: var(--chall-padding);
+  padding-top: $chall-padding);
   padding-right: 10px;
   overflow-y: auto;
 }
@@ -113,7 +113,7 @@ Splits screen space in half
 .challenge-text {
   align-self: center;
   color: white;
-  width: calc(1.5 * var(--icon-width));
+  width: calc(1.5 * $icon-width));
   font-size: 1.2rem;
   height: auto;
 }

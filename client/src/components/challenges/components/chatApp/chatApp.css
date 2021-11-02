@@ -1,7 +1,7 @@
 .support {
-	--admin-colour: rgb(83, 83, 83);
-	--text-colour: white;
-	--user-colour: rgb(36, 153, 248);
+	$admin-colour: rgb(83, 83, 83);
+	$text-colour: white;
+	$user-colour: rgb(36, 153, 248);
 }
 
 #support-header {
@@ -10,7 +10,7 @@
 	padding-top: 0.5rem;
 	height: 2rem;
 	text-align: left;
-	background: var(--user-colour);
+	background: var($user-colour);
 	display: flex;
 	justify-content: flex-start;
 	overflow: hidden;
@@ -56,8 +56,8 @@
 #support-msg-submit {
 	min-width: 37px;
 	width: 12%;
-	background-color: var(--user-colour);
-	color: var(--text-colour);
+	background-color: var($user-colour);
+	color: var($text-colour);
 	text-transform: uppercase;
 }
 
@@ -83,12 +83,12 @@
 }
 
 .user {
-	background-color: var(--user-colour);
+	background-color: var($user-colour);
 }
 
 .admin {
 	margin-right: 40px;
-	background-color: var(--admin-colour);
+	background-color: var($admin-colour);
 }
 
 /* Right triangle placed top left flush. */
@@ -102,7 +102,7 @@
 	top: 0px;
 	bottom: auto;
 	border: 1em solid;
-	border-color: var(--user-colour) transparent transparent transparent;
+	border-color: var($user-colour) transparent transparent transparent;
 }
 
 .talk-bubble.admin:after {
@@ -115,6 +115,6 @@
 	top: 0px;
 	bottom: auto;
 	border: 1em solid;
-	border-color: var(--admin-colour) transparent transparent transparent;
+	border-color: var($admin-colour) transparent transparent transparent;
 }
 

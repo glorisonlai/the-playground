@@ -1,0 +1,23 @@
+{
+  "name": "app",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "next": "12.0.2",
+    "react": "^18.0.0-alpha-6bce0355c-20211031",
+    "react-dom": "^18.0.0-alpha-6bce0355c-20211031"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.6",
+    "@types/react": "17.0.33",
+    "eslint": "8.1.0",
+    "eslint-config-next": "12.0.2",
+    "typescript": "4.4.4"
+  }
+}

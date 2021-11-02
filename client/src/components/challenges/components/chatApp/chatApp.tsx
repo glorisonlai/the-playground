@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DOMPurify from "dompurify";
-import "./chatApp.css";
-import { SupportUser } from "assets/icons";
+import "styles/chatApp.module.scss";
+import { SupportUser } from "components/";
 
 /**
  * Renders support chat app.

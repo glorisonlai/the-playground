@@ -1,0 +1,107 @@
+ $content-top: 25vh;
+ $train-width: 50rem;
+ $animation-length: 4000ms;
+ $animation-style: ease-in-out;
+
+/* Used when menu screen is flipped up*/
+#view {
+    transition: transform 1s cubic-bezier(0.1, 0.52, 0, 1);
+}
+
+.main {
+    position: absolute;
+    top: $content-top;
+    padding-left: 10vw;
+    align-content: left;
+    text-align: left;
+    overflow: auto;
+}
+
+#footer {
+    margin-top: auto;
+}
+
+#copyright {
+    position: absolute;
+    top: calc(100vh - 2.5rem);
+    left: calc(100vw - 10rem);
+    white-space: pre-line;
+}
+
+#start.animate {
+    animation: shiftCode $animation-length $animation-style;
+    -webkit-animation: shiftCode $animation-length $animation-style;
+}
+
+/*Transform values are hardcoded, otherwise won't shift for whatever reason               */
+#train {
+    transform: translateX(-50rem);
+    position: absolute;
+    top: 20vh;
+    text-align: left;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    animation: shiftTrain $animation-length $animation-style;
+    -webkit-animation: shiftTrain $animation-length $animation-style;
+}
+
+#content {
+    transform: translateX(0);
+}
+
+#content.animate {
+    animation: shiftContent $animation-length $animation-style;
+    -webkit-animation: shiftContent $animation-length $animation-style;
+}
+
+@keyframes shiftCode {
+    from {transform: translateX(0)}
+    to {transform: translateX(calc(0.5rem * -100 - 100vw));}
+}
+
+@-webkit-keyframes shiftCode {
+    from {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(calc(0.5rem * -100 - 100vw));
+    }
+}
+
+@keyframes shiftTrain {
+    from {
+        transform: translateX(101vw);
+    }
+
+    to {
+        transform: translateX(-50rem);
+    }
+}
+
+@-webkit-keyframes shiftTrain {
+    from {
+        transform: translateX(101vw);
+    }
+    to {
+        transform: translateX(-50rem);
+    }
+}
+
+@keyframes shiftContent {
+    from {transform: translateX(calc(101vw + $train-width));}
+    to {
+        transform:translateX(0);
+    }
+}
+
+
+
+@-webkit-keyframes shiftContent {
+    from {
+        transform: translateX(calc(101vw + $train-width));
+    }
+    to {
+        transform: translateX(0);
+    }
+}

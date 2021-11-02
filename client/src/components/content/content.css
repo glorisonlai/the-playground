@@ -1,8 +1,8 @@
 :root {
-    --content-top: 25vh;
-    --train-width: 50rem;
-    --animation-length: 4000ms;
-    --animation-style: ease-in-out;
+    $content-top: 25vh;
+    $train-width: 50rem;
+    $animation-length: 4000ms;
+    $animation-style: ease-in-out;
 }
 
 /* Used when menu screen is flipped up*/
@@ -12,7 +12,7 @@
 
 .main {
     position: absolute;
-    top: var(--content-top);
+    top: var($content-top);
     padding-left: 10vw;
     align-content: left;
     text-align: left;
@@ -31,8 +31,8 @@
 }
 
 #start.animate {
-    animation: shiftCode var(--animation-length) var(--animation-style);
-    -webkit-animation: shiftCode var(--animation-length) var(--animation-style);
+    animation: shiftCode var($animation-length) var($animation-style);
+    -webkit-animation: shiftCode var($animation-length) var($animation-style);
 }
 
 /*Transform values are hardcoded, otherwise won't shift for whatever reason               */
@@ -43,8 +43,8 @@
     text-align: left;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    animation: shiftTrain var(--animation-length) var(--animation-style);
-    -webkit-animation: shiftTrain var(--animation-length) var(--animation-style);
+    animation: shiftTrain var($animation-length) var($animation-style);
+    -webkit-animation: shiftTrain var($animation-length) var($animation-style);
 }
 
 #content {
@@ -52,8 +52,8 @@
 }
 
 #content.animate {
-    animation: shiftContent var(--animation-length) var(--animation-style);
-    -webkit-animation: shiftContent var(--animation-length) var(--animation-style);
+    animation: shiftContent var($animation-length) var($animation-style);
+    -webkit-animation: shiftContent var($animation-length) var($animation-style);
 }
 
 @keyframes shiftCode {
@@ -91,7 +91,7 @@
 }
 
 @keyframes shiftContent {
-    from {transform: translateX(calc(101vw + var(--train-width)));}
+    from {transform: translateX(calc(101vw + var($train-width)));}
     to {
         transform:translateX(0);
     }
@@ -101,7 +101,7 @@
 
 @-webkit-keyframes shiftContent {
     from {
-        transform: translateX(calc(101vw + var(--train-width)));
+        transform: translateX(calc(101vw + var($train-width)));
     }
     to {
         transform: translateX(0);

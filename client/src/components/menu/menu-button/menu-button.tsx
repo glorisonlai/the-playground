@@ -1,5 +1,5 @@
 import React from "react";
-import "./menu-button.css";
+import "./menu-button.scss";
 import Challenges from "../../challenges/challenges";
 
 const MenuButton = ({
@@ -18,7 +18,7 @@ const MenuButton = ({
     return (
       <img
         className="bg-sprite"
-        src={require(`assets/sprites/${challenge.logo}`).default} // .default fixes webpack bug not referencing img
+        src={require(`public/${challenge.logo}`).default} // .default fixes webpack bug not referencing img
         alt=""
       />
     );
