@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useScreenSize } from "../background";
+import useScreenSize from "lib/hooks/screenSizeObserver";
 import generator from "./generator";
 
 const Blob = () => {

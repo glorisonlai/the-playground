@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import generator from "./generator";
-import { useScreenSize } from "../background";
+import useScreenSize from "lib/hooks/screenSizeObserver";
 
 /**
  * Background to simulate boid flocking behaviour

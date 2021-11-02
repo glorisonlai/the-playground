@@ -25,8 +25,8 @@ const Home: NextPage = () => {
 
   return (
     <div className="app">
-      <Background bg={bgId} />
-      <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
+      {/* <Background bg={bgId} />
+      <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} /> */}
       <Content />
     </div>
   );
