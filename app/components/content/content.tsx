@@ -25,7 +25,7 @@ const Content = () => {
         <Portfolio />
       ) : (
         <Pitch
-          unlocked={Challenges.unlocked.size}
+          unlocked={Challenges.getUnlocked()}
           total={Challenges.getAllChallenges().length}
         />
       )}

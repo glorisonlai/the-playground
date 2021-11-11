@@ -19,7 +19,7 @@ const Boids = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [width]);
     return (
-      <canvas width={width} height={height} id={"boidCanvas"}>
+      <canvas width={width} height={height} id={"canvas"}>
         {/* Fallback message */}
         <h1 style={{ alignContent: "center" }}>
           Sorry!

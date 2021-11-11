@@ -1,4 +1,4 @@
-import React from "react";
+import styles from "styles/flag.module.scss";
 
 /**
  * Form that doesn't do anything. Requires user to manually send request
@@ -6,9 +6,13 @@ import React from "react";
  */
 const MissingSubmit = () => {
   return (
-    <form id="flag_form" onSubmit={(e) => e.preventDefault()}>
+    <form
+      id="flag_form"
+      className={styles.flag}
+      onSubmit={(e) => e.preventDefault()}
+    >
       <input
-        className="flag"
+        className={styles.flag}
         type="text"
         id="flag"
         name="flag"

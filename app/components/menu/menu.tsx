@@ -38,7 +38,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     unsolvedDesc: string,
     solvedDesc: string
   ) => {
-    if (id > 1 && !Challenges.isFaqUnlocked()) {
+    if (id > 1 && !Challenges.isFaqSolved()) {
       return "Please finish Ground Rules first";
     }
     return Challenges.isUnlockedFromId(id) ? solvedDesc : unsolvedDesc;
@@ -47,8 +47,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   // Lock off challenges until FAQ has been read
   const isChalUnlocked = (id: number) => {
     return (
-      id === 0 || // First challenge is always unlocked
-      (Challenges.isFaqUnlocked() && Challenges.isUnlockedFromId(id)) // Challenges are locked if Ground Rules is locked
+      Challenges.isUnlockedFromId(id) || (id > 1 && !Challenges.isFaqSolved())
     );
   };
 

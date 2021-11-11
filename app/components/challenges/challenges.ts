@@ -4,15 +4,15 @@ import Forge from "node-forge";
 interface ChallengeInterface {
   challengeArr: Challenge[];
   initialUnlock: () => void;
-  isFaqUnlocked: () => boolean;
+  isFaqSolved: () => boolean;
   getAllChallenges: () => Challenge[];
   getUnlocked: () => number;
   getChallengeFromId: (id: number) => Challenge | undefined;
   isUnlockedFromId: (id: number) => boolean;
-  checkKey: (id: number, key: string) => boolean;
+  checkKey: (key: string) => boolean; // TODO: Make API to check keys
   submitFlag: (id: number, flag: string) => Promise<boolean>;
   saveKey: (id: number, key: string) => void;
-  getKey: (id: number) => string | null;
+  getSavedKey: (id: number) => string | null;
 }
 
 interface Challenge {
@@ -32,7 +32,7 @@ const Challenges: ChallengeInterface = {
       logo: "nodes.svg",
       unsolvedDesc: `Seriously, stop using this background it's uncreative and unoriginal. And I know what you're thinking, "You're using it as well; you're just as bad as the rest of us." And that's true but-`,
       solvedDesc: "The journey begins!",
-      savedKey: "",
+      savedKey: "bg1",
     },
     {
       id: 1,
@@ -40,7 +40,7 @@ const Challenges: ChallengeInterface = {
       logo: "lines.svg",
       unsolvedDesc: `Please fuzz for our Rules page for more information`,
       solvedDesc: "Thanks for reading - have fun!",
-      savedKey: "",
+      savedKey: "bg2",
     },
     {
       id: 2,
@@ -72,16 +72,16 @@ const Challenges: ChallengeInterface = {
   initialUnlock() {
     this.challengeArr.forEach((chal) => {
       const { id } = chal;
-      const key = this.getKey(id) || chal.savedKey;
-      if (this.checkKey(id, key)) {
+      const key = this.getSavedKey(id) || chal.savedKey;
+      if (this.checkKey(key)) {
         chal.savedKey = key;
       }
     });
   },
 
-  isFaqUnlocked() {
+  isFaqSolved() {
     const faqId = 1;
-    return this.checkKey(faqId, this.challengeArr[faqId].savedKey);
+    return this.checkKey(this.challengeArr[faqId].savedKey);
   },
 
   getAllChallenges(): Challenge[] {
@@ -90,7 +90,7 @@ const Challenges: ChallengeInterface = {
 
   getUnlocked(): number {
     return this.challengeArr.reduce(
-      (acc, { id, savedKey }) => acc + (this.checkKey(id, savedKey) ? 1 : 0),
+      (acc, { savedKey }) => acc + (this.checkKey(savedKey) ? 1 : 0),
       0
     );
   },
@@ -101,28 +101,11 @@ const Challenges: ChallengeInterface = {
 
   isUnlockedFromId(id: number) {
     const chal = this.getChallengeFromId(id);
-    return !!chal ? this.checkKey(id, chal.savedKey) : false;
+    return !!chal ? this.checkKey(chal.savedKey) : false;
   },
 
-  checkKey(id: number, key: string) {
-    const secret = process.env[`REACT_APP_BG_${id}_SECRET`];
-    const decoded_secret = process.env["REACT_APP_FLAG_SUCCESS"];
-    const keyBytes = Forge.util.createBuffer(key);
-
-    if (
-      typeof secret === "string" &&
-      typeof decoded_secret === "string" &&
-      keyBytes.length() === 32
-    ) {
-      const encrypted = Forge.util.hexToBytes(secret);
-      const decipher = Forge.cipher.createDecipher("AES-CBC", keyBytes);
-      decipher.start({ iv: keyBytes.data });
-
-      decipher.update(Forge.util.createBuffer(encrypted));
-      decipher.finish();
-      return decipher.output.toHex() === Forge.util.encodeUtf8(decoded_secret);
-    }
-    return false;
+  checkKey(key: string) {
+    return !!key;
   },
 
   async submitFlag(id: number, flag: string) {
@@ -133,21 +116,22 @@ const Challenges: ChallengeInterface = {
         msg: flag,
       }
     );
-    if (!!data.code && this.checkKey(id, data.data)) {
+    if (!!data.code && this.checkKey(data.data)) {
       this.saveKey(id, data.data);
       const chal = this.getChallengeFromId(id);
       if (!!chal) {
         chal.savedKey = data.data;
+        return true;
       }
     }
-    return data.code;
+    return false;
   },
 
   saveKey(id: number, key: string) {
     localStorage.setItem(`BG${id}`, key);
   },
 
-  getKey(id: number) {
+  getSavedKey(id: number) {
     return localStorage.getItem(`BG${id}`);
   },
 };

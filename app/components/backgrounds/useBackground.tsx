@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useScreenSize from "lib/hooks/screenSizeObserver";
 import { BackgroundGenerator } from "./helper-functions/background";
+import styles from "styles/background.module.scss";
 
 /**
  * Background to simulate boid flocking behaviour
@@ -8,11 +9,7 @@ import { BackgroundGenerator } from "./helper-functions/background";
  * TODO: Make fallback background
  * @returns Boids background
  */
-const UseCanvasBackground = ({
-  generator,
-}: {
-  generator: BackgroundGenerator;
-}) => {
+export const NoSSRCanvasBackground = (generator: BackgroundGenerator) => () => {
   const { width, height } = useScreenSize();
   useEffect(() => {
     const reset = generator(width, height);
@@ -22,7 +19,7 @@ const UseCanvasBackground = ({
   }, [width]);
 
   return (
-    <canvas width={width} height={height} id={"canvas"}>
+    <canvas width={width} height={height} className={styles.bg} id={"canvas"}>
       {/* Fallback message */}
       <h1 style={{ alignContent: "center" }}>
         Sorry!
@@ -32,5 +29,3 @@ const UseCanvasBackground = ({
     </canvas>
   );
 };
-
-export default UseCanvasBackground;

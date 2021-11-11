@@ -8,6 +8,7 @@ import "styles/Home.module.scss";
 
 const Home: NextPage = () => {
   useEffect(() => {
+    //eslint-disable-next-line
     console.log(
       "%c" +
         "-------------------------------------------------------\n" +
@@ -24,7 +25,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="app">
-      <Background bg={bgId} />
+      <Background bgId={bgId} />
       <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
       {/* <Content /> */}
     </div>

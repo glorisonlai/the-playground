@@ -1,6 +1,10 @@
 import boidGenerator from "components/backgrounds/boids/generator";
-import UseCanvasBackground from "components/backgrounds/useBackground";
+import { NoSSRCanvasBackground } from "components/backgrounds/useBackground";
+import dynamic from "next/dynamic";
 
-const Boids = () => <UseCanvasBackground generator={boidGenerator} />;
-
-export default Boids;
+export default dynamic(
+  () => Promise.resolve(NoSSRCanvasBackground(boidGenerator)),
+  {
+    ssr: false,
+  }
+);

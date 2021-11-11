@@ -1,3 +1,4 @@
+import Challenges from "components/challenges/challenges";
 import React, { Suspense } from "react";
 import style from "styles/background.module.scss";
 
@@ -7,7 +8,7 @@ import style from "styles/background.module.scss";
  * @returns Background
  */
 const renderBg = (uri: string): JSX.Element => (
-  <iframe className={style.bg} src={`/backgrounds/bg1`} />
+  <iframe className={style.bg} src={`/backgrounds/${uri}`} />
 );
 
 /**
@@ -15,7 +16,8 @@ const renderBg = (uri: string): JSX.Element => (
  * @param bg Background ID
  * @returns Background
  */
-const Background = ({ uri }: { uri: string }) => {
+const Background = ({ bgId }: { bgId: number }) => {
+  const uri = Challenges.getChallengeFromId(bgId)?.savedKey || "";
   return (
     <Suspense fallback={<div className={style.bg} />}>{renderBg(uri)}</Suspense>
   );

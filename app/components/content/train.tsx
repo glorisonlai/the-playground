@@ -8,10 +8,10 @@ const Train = () => {
     const train = {
       counter: 0,
       start() {
-        const train_dom = document.getElementById(trainId)!;
-        return setInterval(() => {
-          this.drawTrain(this.counter++, train_dom);
-        }, 250);
+        // const train_dom = document.getElementById(trainId)!;
+        // return setInterval(() => {
+        //   this.drawTrain(this.counter++, train_dom);
+        // }, 250);
       },
 
       trainSmoke: [

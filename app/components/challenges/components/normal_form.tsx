@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import Challenges from "../challenges";
-import "styles/flag.module.scss";
+import styles from "styles/flag.module.scss";
 
 /**
  * Default flag form component. Allows user to submit form to be checked by server
@@ -46,9 +46,9 @@ const NormalForm = ({
   };
 
   return (
-    <form id="flag-form" onSubmit={submitFlag}>
+    <form id="flag-form" className={styles.flag} onSubmit={submitFlag}>
       <input
-        className="flag"
+        className={styles.flag}
         type="text"
         id="flag-input"
         name="flag"
@@ -57,7 +57,12 @@ const NormalForm = ({
         value={flag}
         onChange={handleChange}
       />
-      <input id="flag-submit" className="flag" type="submit" value="Submit" />
+      <input
+        id="flag-submit"
+        className={styles.flag}
+        type="submit"
+        value="Submit"
+      />
     </form>
   );
 };

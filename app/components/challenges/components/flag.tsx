@@ -1,10 +1,9 @@
-import React, { lazy, Suspense } from "react";
 import SplitPane from "components/common/splitPane/splitPane";
-
-const NormalFlag = lazy(() => import("./normal_form"));
-const MissingSubmit = lazy(() => import("./missing_submit"));
-const ChatApp = lazy(() => import("./chatApp/chatApp"));
-const BookStore = lazy(() => import("./bookstore/bookstore"));
+import NormalForm from "./normal_form";
+import MissingSubmit from "./missing_submit";
+import ChatApp from "./chatApp/chatApp";
+import BookStore from "./bookstore/bookstore";
+import styles from "styles/flag.module.scss";
 
 /**
  * Renders appropriate flag form. If challenge is locked, form will not appear
@@ -37,28 +36,28 @@ const Flag = ({
     switch (id) {
       case 0:
         return (
-          <NormalFlag
+          <NormalForm
             id={0}
             callBack={callBack}
             initialVal={"FLAG{HelloWorld!}"}
           />
         );
       case 1:
-        return <NormalFlag id={1} callBack={callBack} />;
+        return <NormalForm id={1} callBack={callBack} />;
       case 2:
         return <MissingSubmit />;
       case 3:
         return (
           <SplitPane>
             <ChatApp />
-            <NormalFlag id={3} callBack={callBack} />
+            <NormalForm id={3} callBack={callBack} />
           </SplitPane>
         );
       case 4:
         return (
           <SplitPane>
             <BookStore />
-            <NormalFlag id={4} callBack={callBack} />
+            <NormalForm id={4} callBack={callBack} />
           </SplitPane>
         );
       default:
@@ -69,18 +68,12 @@ const Flag = ({
 
   return (
     <div className="flag-col">
-      <label className="flag title" htmlFor="flag">
-        <h2>
-          <strong>{title}</strong>
-        </h2>
-      </label>
-      <code>{desc}</code>
+      <h2 className={styles.flag}>
+        <strong>{title}</strong>
+      </h2>
+      <code className={styles.flag}>{desc}</code>
       <div>&nbsp;</div>
-      {!unlocked && (
-        <Suspense fallback={<div className="bg"></div>}>
-          {renderFlag(id)}
-        </Suspense>
-      )}
+      {!unlocked && renderFlag(id)}
     </div>
   );
 };
