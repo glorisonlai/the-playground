@@ -1,5 +1,8 @@
 import Boid from "./boid";
-import { CanvasInterface } from "../helper-functions/background";
+import {
+  BackgroundGenerator,
+  CanvasInterface,
+} from "../helper-functions/background";
 
 interface BoidInterface extends CanvasInterface {
   boidsArr: Boid[];
@@ -8,12 +11,12 @@ interface BoidInterface extends CanvasInterface {
 /**
  * Function to start drawing boids onto canvas
  */
-const boidGenerator = (width: number, height: number) => {
+const boidGenerator: BackgroundGenerator = (width: number, height: number) => {
   /**
    * Instantiate canvas context
    */
   const canvasConstants: BoidInterface = {
-    canvas: document.getElementById("boidCanvas") as HTMLCanvasElement,
+    canvas: document.getElementById("canvas") as HTMLCanvasElement,
     context: {} as CanvasRenderingContext2D,
     boidsArr: [],
     lastDraw: 0,

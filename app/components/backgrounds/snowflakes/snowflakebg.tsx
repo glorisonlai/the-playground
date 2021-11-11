@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import generator from "./generator";
 import useScreenSize from "lib/hooks/screenSizeObserver";
+import styles from "styles/background.module.scss";
 
 /**
  * Fading snowflakes
@@ -20,7 +21,7 @@ const Orbit = () => {
   };
 
   return (
-    <div className="bg">
+    <div className={styles.bg}>
       <Canvas />
     </div>
   );

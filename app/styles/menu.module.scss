@@ -35,7 +35,7 @@ position is fixed here bc it screws everything else up
 }
 
 /* Div containing both icons and flag*/
-#challengeMenu {
+.challengeMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -44,11 +44,11 @@ position is fixed here bc it screws everything else up
 }
 
 /* Set immediate children width to be the same*/
-#challengeMenu > div {
+.challengeMenu > div {
   width: 45vw;
 }
 
-.challenge-container {
+.challengeContainer {
   padding: $chall-padding;
   width: auto;
   height: calc(75px + 4rem);
@@ -76,14 +76,14 @@ Splits screen space in half
 }
 
 /*Pads top of flag div. Honestly shouldn't be here*/
-.flag-col {
+.flagCol {
   padding-top: $chall-padding;
   padding-right: 10px;
   overflow-y: auto;
 }
 
 /*Flag div styling*/
-.flag-form {
+.flagForm {
   flex-direction: column;
   height: 60vh;
   align-items: center;
@@ -107,8 +107,13 @@ Splits screen space in half
   filter: grayscale(100%);
 }
 
+.unlocked {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
 /*Text underneath each challenge icon*/
-.challenge-text {
+.challengeText {
   align-self: center;
   color: white;
   width: calc(1.5 * $icon-width);
@@ -117,15 +122,15 @@ Splits screen space in half
 }
 
 @media only screen and (max-width: 670px) {
-  .challenge-text {
+  .challengeText {
     visibility: hidden;
   }
 
-  .challenge-container {
+  .challengeContainer {
     height: 75px;
   }
 
-  #menu-title {
+  .menuTitle {
     visibility: hidden;
   }
 }

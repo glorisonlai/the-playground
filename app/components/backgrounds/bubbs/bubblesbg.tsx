@@ -1,6 +1,8 @@
 import React from "react";
-import "styles/bubbles.module.scss";
+import bubbleStyle from "styles/bubbles.module.scss";
 import * as CSS from "csstype";
+import styles from "styles/background.module.scss";
+import { BackgroundGenerator } from "../helper-functions/background";
 
 /**
  * Floating bubbles animation
@@ -35,7 +37,7 @@ const Bubbles = () => {
       .map((e, i) => <li key={i} style={randomCss()} />);
   };
   return (
-    <div className="bg">
+    <div className={styles.bg}>
       <ul id="bubbles">{bubbleArray(100)}</ul>
     </div>
   );

@@ -1,0 +1,38 @@
+$bg: 'bg';
+$text: 'text';
+
+$themes: (
+	default: (
+		// Dark theme
+		bg: rgb(31, 31, 31),
+		text: rgb(255,255,255)
+	),
+	light: (
+		// Light theme
+		bg: rgb(255,255,255),
+		text: rgb(0,0,0)
+	)
+);
+
+@mixin themed() {
+
+	@each $theme,
+	$map in $themes {
+		.theme--#{$theme} & {
+			$theme-map: () !global;
+
+			@each $key,
+			$submap in $map {
+				$value: map-get(map-get($themes, $theme), '#{$key}');
+				$theme-map: map-merge($theme-map, ($key: $value)) !global;
+			}
+
+			@content;
+			$theme-map: null !global;
+		}
+	}
+}
+
+@function use-theme($key) {
+	@return map-get($theme-map, $key);
+}

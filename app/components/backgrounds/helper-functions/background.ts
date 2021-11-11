@@ -9,3 +9,5 @@ export interface CanvasInterface {
   context: CanvasRenderingContext2D;
   lastDraw: number;
 }
+
+export type BackgroundGenerator = (width: number, height: number) => () => void;

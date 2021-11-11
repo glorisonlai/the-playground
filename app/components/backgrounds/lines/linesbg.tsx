@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import generator from "./generator";
 import useScreenSize from "lib/hooks/screenSizeObserver";
+import bgStyle from "styles/background.module.scss";
 
 /**
  * Animates drawing lines based on sine waves
@@ -31,7 +32,7 @@ const Lines = () => {
   };
 
   return (
-    <div className="bg">
+    <div className={bgStyle.bg}>
       <Canvas />
     </div>
   );

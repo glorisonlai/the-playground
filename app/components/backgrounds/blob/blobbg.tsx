@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useScreenSize from "lib/hooks/screenSizeObserver";
 import generator from "./generator";
+import styles from "styles/background.module.scss";
 
 const Blob = () => {
   const Canvas = () => {
@@ -24,7 +25,7 @@ const Blob = () => {
   };
 
   return (
-    <div className="bg">
+    <div className={styles.bg}>
       <Canvas />
     </div>
   );

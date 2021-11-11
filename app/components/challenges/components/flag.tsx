@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import SplitPane from "components/common/split-pane/split-pane";
+import SplitPane from "components/common/splitPane/splitPane";
 
 const NormalFlag = lazy(() => import("./normal_form"));
 const MissingSubmit = lazy(() => import("./missing_submit"));

@@ -51,7 +51,7 @@ const Portfolio = () => {
         <img
           className="img thumb placeholder"
           alt={alt}
-          src={require(`public/${placeholderIcon}`).default}
+          src={`/${placeholderIcon}`}
           style={{
             visibility: isLoaded ? "hidden" : "visible",
           }}
@@ -59,7 +59,7 @@ const Portfolio = () => {
         <img
           className="img thumb full"
           alt={alt}
-          src={require(`public/${icon}`).default}
+          src={`/${icon}`}
           onLoad={() => setIsLoaded(true)}
           style={{ opacity: isLoaded ? 1 : 0 }}
         />
@@ -72,29 +72,26 @@ const Portfolio = () => {
       <div id="experience">
         <Divider />
         {experienceText.map((e, key) => (
-          <React.Fragment key={key}>
-            <div className="nav-row">
-              <ProgressiveImageContainer
-                placeholderIcon={e.placeholderImgIcon}
-                icon={e.imgIcon}
-                alt={e.imgIconAlt}
-              />
-              <div className="proj-text">
-                <h4>{e.title}</h4>
-                <p>{e.desc}</p>
-              </div>
-              <div className="links">
-                {!!e.githubLink && (
-                  <GithubLink link={e.githubLink}>
-                    GitHub
-                    <Divider />
-                  </GithubLink>
-                )}
-                {!!e.url && <ExtLink link={e.url} />}
-              </div>
+          <div className="nav-row" key={key}>
+            <ProgressiveImageContainer
+              placeholderIcon={e.placeholderImgIcon}
+              icon={e.imgIcon}
+              alt={e.imgIconAlt}
+            />
+            <div className="proj-text">
+              <h4>{e.title}</h4>
+              <p>{e.desc}</p>
             </div>
-            <Divider />
-          </React.Fragment>
+            <div className="links">
+              {!!e.githubLink && (
+                <GithubLink link={e.githubLink}>
+                  GitHub
+                  <Divider />
+                </GithubLink>
+              )}
+              {!!e.url && <ExtLink link={e.url} />}
+            </div>
+          </div>
         ))}
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import "styles/eyes.module.scss";
+import eyeStyle from "styles/eyes.module.scss";
 import * as CSS from "csstype";
+import styles from "styles/background.module.scss";
 
 type EyeColour = "red" | "blue" | "purple" | "white";
 type irisColourInterface = {
@@ -59,7 +60,7 @@ const Eyes = () => {
   };
 
   return (
-    <div className="bg">
+    <div className={styles.bg}>
       {/* <Eye className="med" /> */}
       <Eye size="small" colour="blue" />
     </div>

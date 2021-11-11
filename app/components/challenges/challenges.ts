@@ -3,7 +3,6 @@ import Forge from "node-forge";
 
 interface ChallengeInterface {
   challengeArr: Challenge[];
-  unlocked: Set<number>;
   initialUnlock: () => void;
   isFaqUnlocked: () => boolean;
   getAllChallenges: () => Challenge[];
@@ -22,6 +21,7 @@ interface Challenge {
   logo: any;
   unsolvedDesc: string;
   solvedDesc: string;
+  savedKey: string;
 }
 
 const Challenges: ChallengeInterface = {
@@ -32,6 +32,7 @@ const Challenges: ChallengeInterface = {
       logo: "nodes.svg",
       unsolvedDesc: `Seriously, stop using this background it's uncreative and unoriginal. And I know what you're thinking, "You're using it as well; you're just as bad as the rest of us." And that's true but-`,
       solvedDesc: "The journey begins!",
+      savedKey: "",
     },
     {
       id: 1,
@@ -39,6 +40,7 @@ const Challenges: ChallengeInterface = {
       logo: "lines.svg",
       unsolvedDesc: `Please fuzz for our Rules page for more information`,
       solvedDesc: "Thanks for reading - have fun!",
+      savedKey: "",
     },
     {
       id: 2,
@@ -46,6 +48,7 @@ const Challenges: ChallengeInterface = {
       logo: "boids.svg",
       unsolvedDesc: `FLAG{TH1S15TH3FL4G}`,
       solvedDesc: "Here's a business proposal: Postmates, but for dogs..?",
+      savedKey: "",
     },
     {
       id: 3,
@@ -54,6 +57,7 @@ const Challenges: ChallengeInterface = {
       unsolvedDesc: "Please contact our Support team for the flag.",
       solvedDesc:
         "Fun fact: 50% of support chats are manned by bots. You've been flirting with a bot this whole time!",
+      savedKey: "",
     },
     {
       id: 4,
@@ -61,22 +65,23 @@ const Challenges: ChallengeInterface = {
       logo: "eyes.svg",
       unsolvedDesc: "Just a collection of fine reads.",
       solvedDesc: "Do people really buy books from bookstores?",
+      savedKey: "",
     },
   ],
 
-  unlocked: new Set([0, 1, 2, 3, 4]),
-
   initialUnlock() {
-    this.challengeArr.forEach(({ id }) => {
-      const key = this.getKey(id);
-      if (!!key && this.checkKey(id, key)) {
-        this.unlocked.add(id);
+    this.challengeArr.forEach((chal) => {
+      const { id } = chal;
+      const key = this.getKey(id) || chal.savedKey;
+      if (this.checkKey(id, key)) {
+        chal.savedKey = key;
       }
     });
   },
 
   isFaqUnlocked() {
-    return this.unlocked.has(1);
+    const faqId = 1;
+    return this.checkKey(faqId, this.challengeArr[faqId].savedKey);
   },
 
   getAllChallenges(): Challenge[] {
@@ -84,7 +89,10 @@ const Challenges: ChallengeInterface = {
   },
 
   getUnlocked(): number {
-    return this.unlocked.size;
+    return this.challengeArr.reduce(
+      (acc, { id, savedKey }) => acc + (this.checkKey(id, savedKey) ? 1 : 0),
+      0
+    );
   },
 
   getChallengeFromId(id: number): Challenge | undefined {
@@ -92,7 +100,8 @@ const Challenges: ChallengeInterface = {
   },
 
   isUnlockedFromId(id: number) {
-    return this.unlocked.has(id);
+    const chal = this.getChallengeFromId(id);
+    return !!chal ? this.checkKey(id, chal.savedKey) : false;
   },
 
   checkKey(id: number, key: string) {
@@ -126,7 +135,10 @@ const Challenges: ChallengeInterface = {
     );
     if (!!data.code && this.checkKey(id, data.data)) {
       this.saveKey(id, data.data);
-      this.unlocked.add(id);
+      const chal = this.getChallengeFromId(id);
+      if (!!chal) {
+        chal.savedKey = data.data;
+      }
     }
     return data.code;
   },

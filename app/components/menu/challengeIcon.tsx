@@ -1,5 +1,4 @@
-import React from "react";
-
+import styles from "styles/menu.module.scss";
 /**
  * Grabs appropriate image for challenge
  * @param imgStr Image path
@@ -7,18 +6,20 @@ import React from "react";
  */
 const ChallengeIcon = ({
   imgStr,
-  className,
+  unlocked,
+  focussed,
 }: {
   imgStr: string;
-  className: string;
-}) => {
-  return (
-    <img
-      className={className}
-      alt={imgStr}
-      src={require(`public/${imgStr}`).default}
-    />
-  );
-};
+  unlocked: boolean;
+  focussed: boolean;
+}) => (
+  <img
+    className={`${styles.challenge} 
+      ${unlocked ? styles.unlocked : styles.locked} 
+      ${focussed ? styles.focussed : styles.unfocussed}`}
+    alt={imgStr}
+    src={`/${imgStr}`}
+  />
+);
 
 export default ChallengeIcon;

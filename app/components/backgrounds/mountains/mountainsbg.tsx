@@ -1,7 +1,8 @@
 import React from "react";
 // import { ScreenConstants } from "../background";
 // import Tree from "./tree";
-import "styles/mountains.module.scss";
+import bgStyle from "styles/mountains.module.scss";
+import styles from "styles/background.module.scss";
 
 const Mountains = () => {
   const ForeGround = () => (
@@ -142,7 +143,7 @@ const Mountains = () => {
   );
 
   return (
-    <div className="bg tracker">
+    <div className={`${styles.bg} ${bgStyle.tracker}`}>
       <Clouds />
       <MidGround />
       <BackGround />

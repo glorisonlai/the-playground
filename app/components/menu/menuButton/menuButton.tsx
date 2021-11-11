@@ -1,6 +1,6 @@
 import React from "react";
-import "./menu-button";
 import Challenges from "../../challenges/challenges";
+import styles from "styles/MenuButton.module.scss";
 
 const MenuButton = ({
   shape,
@@ -16,27 +16,25 @@ const MenuButton = ({
     if (!challenge) return;
 
     return (
-      <img
-        className="bg-sprite"
-        src={require(`public/${challenge.logo}`).default} // .default fixes webpack bug not referencing img
-        alt=""
-      />
+      <img className={styles.bgSprite} src={`/${challenge.logo}`} alt="" />
     );
   };
 
-  const buttonClass = shape ? "right" : "left";
+  const buttonClass = shape ? styles.right : styles.left;
 
-  const menuClass = shape ? "cross" : "";
+  const menuClass = shape ? styles.cross : "";
 
   return (
     <button
-      className={`btn flyout ${buttonClass}`}
+      className={`${styles.btn} ${styles.flyout} ${buttonClass}`}
       aria-label="menu"
       onClick={() => {
         setVis();
       }}
     >
-      <div className={`glowy menu-btn ${menuClass}`}>{!shape && Svg(bgId)}</div>
+      <div className={`${styles.glowy} ${styles.menuBtn} ${menuClass}`}>
+        {!shape && Svg(bgId)}
+      </div>
     </button>
   );
 };

@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.menu-btn {
+.menuBtn {
   position: fixed;
   border-radius: 50%;
   width: 5vw;
@@ -24,19 +24,24 @@
   transition: all 1.2s ease-in-out;
 }
 
-.menu-btn::before,
-.menu-btn::after {
+.bgSprite {
+  width: 100%;
+  height:auto;
+}
+
+.menuBtn::before,
+.menuBtn::after {
   position: absolute;
   content: '';
   border-radius: 5px;
   transition: all 1.2s ease-in-out;
 }
 
-.menu-btn::before {
+.menuBtn::before {
   transform: rotate(90deg) translateY(0.3em);
 }
 
-.menu-btn::after {
+.menuBtn::after {
   transform: translateX(-0.3em);
 }
 
@@ -60,7 +65,7 @@
   transform: rotate(45deg);
 }
 
-.bg-sprite {
+.bgBprite {
   height: 100%;
   width: 100%;
 }

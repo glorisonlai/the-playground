@@ -1,5 +1,6 @@
 import React from "react";
 // import Particles from "react-particles-js";
+import styles from "styles/background.module.scss";
 
 /**
  * Uses particles.js script to create THE developer background
@@ -8,7 +9,9 @@ import React from "react";
  */
 const Nodes = () => {
   return (
-    <div className="bg">{/* <Particles height="100vh" width="100vw" /> */}</div>
+    <div className={styles.bg}>
+      {/* <Particles height="100vh" width="100vw" /> */}
+    </div>
   );
 };
 

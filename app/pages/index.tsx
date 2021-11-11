@@ -4,8 +4,7 @@ import Background from "../components/backgrounds/background";
 import Menu from "../components/menu/menu";
 import Content from "../components/content/content";
 import useBackgroundState from "lib/hooks/backgroundObserver";
-import BackgroundContext from "lib/context/backgroundContext";
-import Challenges from "components/challenges/challenges";
+import "styles/Home.module.scss";
 
 const Home: NextPage = () => {
   useEffect(() => {
@@ -25,9 +24,9 @@ const Home: NextPage = () => {
 
   return (
     <div className="app">
-      {/* <Background bg={bgId} />
-      <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} /> */}
-      <Content />
+      <Background bg={bgId} />
+      <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
+      {/* <Content /> */}
     </div>
   );
 };

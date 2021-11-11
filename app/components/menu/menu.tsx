@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "styles/menu.module.scss";
+import { useState } from "react";
+import styles from "styles/menu.module.scss";
 import Challenges from "../challenges/challenges";
 import ChallengeIcon from "./challengeIcon";
-import MenuButton from "./menu-button/menu-button";
+import MenuButton from "./menuButton/menuButton";
 import Flag from "../challenges/components/flag";
 
 /**
@@ -17,9 +17,6 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
 
   // Current flag component to render
   const [focussedId, setFocussedId] = useState(bgId);
-
-  // Classname for challenge screen
-  const showState = visible ? "visible" : "hidden";
 
   // If unlocked, switch background, or just set new focus
   const switchBgHandler = (id: number) => {
@@ -47,36 +44,12 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     return Challenges.isUnlockedFromId(id) ? solvedDesc : unsolvedDesc;
   };
 
-  // Lock off challenges until Rules.html has been read
+  // Lock off challenges until FAQ has been read
   const isChalUnlocked = (id: number) => {
     return (
-      id === 0 ||
-      (id === 1 && Challenges.isUnlockedFromId(id)) ||
-      (id > 1 &&
-        (!Challenges.isFaqUnlocked() || Challenges.isUnlockedFromId(id)))
+      id === 0 || // First challenge is always unlocked
+      (Challenges.isFaqUnlocked() && Challenges.isUnlockedFromId(id)) // Challenges are locked if Ground Rules is locked
     );
-  };
-
-  /**
-   * I am so sorry ;;
-   * Code toggles visibility state, which changes button shape
-   * Also removes scrolling for phones, and shifts view div rightward
-   * Will be fixed later when there are enough challenges to require scrolling lol
-   */
-  const toggleMenu = () => {
-    const view = document.getElementById("view");
-    const menu = document.getElementById("chal-menu");
-    if (view) {
-      view!.style.transform = visible ? "translateX(0)" : "translateX(100vw)";
-      visible
-        ? menu!.removeEventListener("touchmove", (e) => {
-            e.preventDefault();
-          })
-        : menu!.addEventListener("touchmove", (e) => {
-            e.preventDefault();
-          });
-    }
-    setVisible((visible) => !visible);
   };
 
   /**
@@ -90,30 +63,30 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
     // Renders all available challenges into tiles
     const challengeArr = challenges.map(
       ({ id, title, logo }: { id: number; title: string; logo: string }) => {
-        const unlocked = Challenges.isUnlockedFromId(id)
-          ? "unlocked"
-          : "locked";
-        const focussed = id === focussedId ? "focussed" : "unfocussed";
-
         return (
           <div
-            className={`challenge-container`}
+            className={styles.challengeContainer}
             key={id}
             onClick={() => switchBgHandler(id)}
           >
             <ChallengeIcon
-              className={`challenge ${focussed} ${unlocked}`}
               imgStr={logo}
+              unlocked={Challenges.isUnlockedFromId(id)}
+              focussed={id === focussedId}
             />
-            <div className="challenge-text">{title}</div>
+            <div className={`${styles.challengeText}`}>{title}</div>
           </div>
         );
       }
     );
 
     return (
-      <div id="challengeMenu">
-        <div className="table">{challengeArr}</div>
+      <div
+        className={`${styles.challengeMenu} ${
+          visible ? styles.visible : styles.hidden
+        }`}
+      >
+        <div className={`${styles.table}`}>{challengeArr}</div>
         {!!focussedBg && (
           <Flag
             id={focussedBg.id}
@@ -132,13 +105,29 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   };
 
   return (
-    <React.Fragment>
-      <div id="chal-menu" className={`cover flyout ${showState}`}>
-        <h2 id="menu-title">Backgrounds</h2>
+    <>
+      <div
+        className={`${styles.cover} ${styles.flyout} ${
+          visible ? styles.visible : styles.hidden
+        }`}
+      >
+        <h2
+          className={`${styles.menuTitle} ${
+            visible ? styles.visible : styles.hidden
+          }`}
+        >
+          Backgrounds
+        </h2>
         <ChallengeMenu />
       </div>
-      <MenuButton shape={visible} bgId={bgId} setVis={toggleMenu} />
-    </React.Fragment>
+      <MenuButton
+        shape={visible}
+        bgId={bgId}
+        setVis={() => {
+          setVisible((visible) => !visible);
+        }}
+      />
+    </>
   );
 };
 

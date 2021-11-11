@@ -2,15 +2,13 @@ import Agent from "./slime-agent";
 
 interface CanvasConstantsInterface {
   canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
-  canvasData: ImageData;
+  gl: WebGLRenderingContext;
   slimeArr: Agent[];
   lastDraw: number;
   blurPixels: number[];
 }
 
 /**
- * ** TRASHED ** - Iterating over all pixes takes way to much time synchronously
  * TODO: Find a way to make calculations in parallel
  * Function to iterate over canvas pixels and simulate slime movement
  */
@@ -19,9 +17,8 @@ const slimeGenerator = (width: number, height: number) => {
    * Instantiate canvas context
    */
   const canvasConstants: CanvasConstantsInterface = {
-    canvas: document.getElementById("boidCanvas") as HTMLCanvasElement,
-    context: {} as CanvasRenderingContext2D,
-    canvasData: {} as ImageData,
+    canvas: document.getElementById("slimeCanvas") as HTMLCanvasElement,
+    gl: {} as WebGLRenderingContext,
     slimeArr: [],
     lastDraw: 0,
     blurPixels: [],
@@ -32,17 +29,12 @@ const slimeGenerator = (width: number, height: number) => {
   let i = 0;
 
   //Reset canvas, instantiate boids, and start drawing
-  const init = (): void => {
+  const init = () => {
     reset();
-    canvasConstants.context = canvasConstants.canvas.getContext("2d")!;
-    canvasConstants.canvasData = canvasConstants.context.getImageData(
-      0,
-      0,
-      canvasConstants.canvas.width,
-      canvasConstants.canvas.height
-    );
+    canvasConstants.gl = canvasConstants.canvas.getContext("webgl")!;
     canvasConstants.slimeArr = createSlime(NUMAGENTS);
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
+    return reset;
   };
 
   //Cancels current drawing frame, and resets boid array
@@ -86,27 +78,12 @@ const slimeGenerator = (width: number, height: number) => {
    * Every frame, clear the canvas, update and draw each boid onto canvas
    */
   const draw = () => {
-    const { context, canvasData, canvas } = canvasConstants;
-    canvasConstants.slimeArr.forEach((slime) => {
-      slime.update({
-        x: canvas.width,
-        y: canvas.height,
-      });
-      const canvasIndex = (slime.pos.x + slime.pos.y * canvas.width) * 4;
-      canvasData.data[canvasIndex] = 255;
-      canvasData.data[canvasIndex + 1] = 255;
-      canvasData.data[canvasIndex + 2] = 255;
-      canvasData.data[canvasIndex + 3] = 255;
-    });
-
-    context.putImageData(canvasData, 0, 0);
-    while (i < 20) {
-      canvasConstants.lastDraw = window.requestAnimationFrame(draw);
-      i++;
-    }
+    const { gl, canvas } = canvasConstants;
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
   };
 
-  init();
+  return init();
 };
 
 export default slimeGenerator;

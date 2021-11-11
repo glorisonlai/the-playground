@@ -1,5 +1,8 @@
 import vector2d, { vector2dInterface } from "../helper-functions/vector2d";
-import { CanvasInterface } from "../helper-functions/background";
+import {
+  BackgroundGenerator,
+  CanvasInterface,
+} from "../helper-functions/background";
 
 type VectorList = vector2dInterface[];
 
@@ -18,7 +21,7 @@ interface BlobInterface extends CanvasInterface {
   bezierPairs: BezierPair[];
 }
 
-const blobGenerator = (width: number, height: number) => {
+const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
   /**
    * Instantiate canvas context
    */
