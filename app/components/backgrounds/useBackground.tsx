@@ -9,7 +9,7 @@ import styles from "styles/background.module.scss";
  * TODO: Make fallback background
  * @returns Boids background
  */
-export const NoSSRCanvasBackground = (generator: BackgroundGenerator) => () => {
+export const CanvasBackground = (generator: BackgroundGenerator) => () => {
   const { width, height } = useScreenSize();
   useEffect(() => {
     const reset = generator(width, height);

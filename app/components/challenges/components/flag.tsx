@@ -4,6 +4,7 @@ import MissingSubmit from "./missing_submit";
 import ChatApp from "./chatApp/chatApp";
 import BookStore from "./bookstore/bookstore";
 import styles from "styles/flag.module.scss";
+import menuStyles from "styles/menu.module.scss";
 
 /**
  * Renders appropriate flag form. If challenge is locked, form will not appear
@@ -67,11 +68,11 @@ const Flag = ({
   };
 
   return (
-    <div className="flag-col">
-      <h2 className={styles.flag}>
+    <div className={`${menuStyles.flagCol} ${styles.flag}`}>
+      <h2>
         <strong>{title}</strong>
       </h2>
-      <code className={styles.flag}>{desc}</code>
+      <code>{desc}</code>
       <div>&nbsp;</div>
       {!unlocked && renderFlag(id)}
     </div>

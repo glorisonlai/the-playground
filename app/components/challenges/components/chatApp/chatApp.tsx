@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DOMPurify from "dompurify";
-import "styles/chatApp.module.scss";
+import styles from "styles/chatApp.module.scss";
 import { SupportUser } from "components/icons";
 
 /**
@@ -20,9 +20,14 @@ const ChatApp = () => {
   // Updates form message
   const [msg, setMsg] = useState("");
 
+  enum MessageType {
+    Admin = "admin",
+    User = "user",
+  }
+
   useEffect(() => {
-    const chat_box = document.getElementById("support-chat");
-    const el = createMsg("Hi! How can I help?", "admin");
+    const chat_box = document.getElementById("supportChat");
+    const el = createMsg("Hi! How can I help?", MessageType.Admin);
     chat_box!.appendChild(el);
   }, []);
 
@@ -36,8 +41,8 @@ const ChatApp = () => {
     if (loading) return;
     if (!msg) return;
     setLoading(true);
-    const chat_box = document.getElementById("support-chat");
-    const el = createMsg(msg, "user");
+    const chat_box = document.getElementById("supportChat");
+    const el = createMsg(msg, MessageType.User);
     chat_box!.appendChild(el);
     setMsg("");
     const res = await axios.post(process.env.REACT_APP_API_URL + "/c3/chat", {
@@ -47,7 +52,7 @@ const ChatApp = () => {
       // Do error handling here
       return;
     }
-    const response = createMsg(res.data, "admin");
+    const response = createMsg(res.data, MessageType.Admin);
     chat_box!.appendChild(response);
     setLoading(false);
   };
@@ -55,10 +60,11 @@ const ChatApp = () => {
   // Securely creates new message component - apparently don't need to? but might as well
   const createMsg = (msg: string, user: string) => {
     const chat_row = document.createElement("div");
-    chat_row.className = `row justify-${user === "admin" ? "right" : "left"}`;
+    chat_row.className =
+      user === MessageType.Admin ? styles.justifyRight : styles.justifyLeft;
     const chat_bubble = document.createElement("div");
     chat_bubble.innerHTML = DOMPurify.sanitize(msg);
-    chat_bubble.className = `talk-bubble ${user}`;
+    chat_bubble.className = `${styles.talkBubble} ${user}`;
     chat_row.appendChild(chat_bubble);
     return chat_row;
   };
@@ -69,26 +75,26 @@ const ChatApp = () => {
     arr[Math.floor(Math.random() * arr.length)];
 
   return (
-    <div id="support-pane" className="support">
+    <div className={styles.supportPane}>
       {/* Blue header */}
-      <div id="support-header">
+      <div className={styles.supportHeader}>
         <SupportUser />
-        <div id="support-name">{selectRandom(names)}</div>
+        <div className={styles.supportName}>{selectRandom(names)}</div>
       </div>
       {/* Chat pane */}
-      <div id="support-chat" />
+      <div id="supportChat" className={styles.supportChat} />
       {/* Text Input */}
-      <form id="support-msg" onSubmit={sendMsg}>
+      <form className={styles.supportMsg} onSubmit={sendMsg}>
         <input
           type="text"
-          id="support-msg-text"
+          className={styles.supportMsgText}
           name="flag"
           placeholder="Type here..."
           value={msg}
           autoComplete="off"
           onChange={handleChange}
         />
-        <input id="support-msg-submit" type="submit" value="💌" />
+        <input className={styles.supportMsgSubmit} type="submit" value="💌" />
       </form>
     </div>
   );

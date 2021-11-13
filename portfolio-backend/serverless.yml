@@ -34,7 +34,6 @@ functions:
           path: /check
 
   # Book Challenge functions
-
   # Search book by name
   searchBookByName:
     runtime: nodejs12.x

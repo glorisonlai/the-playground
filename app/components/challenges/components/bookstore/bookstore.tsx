@@ -58,7 +58,6 @@ const BookStore = () => {
   };
 
   const BookPane = () => {
-    console.log(status);
     if (status === statusCode.NORMAL) {
       if (books.length) {
         return (

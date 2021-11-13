@@ -27,7 +27,7 @@ const orbitConstants = {
 const generator = (width: number, height: number) => {
   // Initialize canvas
   const canvasConstants: OrbitCanvasInterface = {
-    canvas: document.getElementById("orbitCanvas") as HTMLCanvasElement,
+    canvas: document.getElementById("canvas") as HTMLCanvasElement,
     context: {} as CanvasRenderingContext2D,
     lastDraw: 0,
     orbitArr: [],

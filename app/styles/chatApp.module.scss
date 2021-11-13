@@ -1,45 +1,45 @@
-$admin-colour: rgb(83, 83, 83);
-$text-colour: white;
-$user-colour: rgb(36, 153, 248);
+$adminColour: rgb(83, 83, 83);
+$textColour: white;
+$userColour: rgb(36, 153, 248);
 
-#support-header {
+.supportHeader {
 	margin: auto;
 	padding-left: 1rem;
 	padding-top: 0.5rem;
 	height: 2rem;
 	text-align: left;
-	background: $user-colour;
+	background: $userColour;
 	display: flex;
 	justify-content: flex-start;
 	overflow: hidden;
 }
 
-#support-name {
+.supportName {
 	margin-left: 0.5em;
 	font-weight: bold;
 }
 
-.justify-right {
+.justifyRight {
 	justify-content: flex-end;
 	padding-bottom: 0;
 	text-align: right;
 }
 
-.justify-left {
+.justifyLeft {
 	padding-bottom: 0;
 	padding-left: 2rem;
 	width: auto;
 	justify-content: flex-start;
 }
 
-#support-chat {
+.supportChat {
 	max-height: 100%;
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
 }
 
-#support-msg {
+.supportMsg {
 	display: flex;
 	height: 2rem;
 	width: 100%;
@@ -47,19 +47,19 @@ $user-colour: rgb(36, 153, 248);
 	bottom: 0;
 }
 
-#support-msg-text {
+.supportMsgText {
 	width: 88%;
 }
 
-#support-msg-submit {
+.supportMsgSubmit {
 	min-width: 37px;
 	width: 12%;
-	background-color: $user-colour;
-	color: $text-colour;
+	background-color: $userColour;
+	color: $textColour;
 	text-transform: uppercase;
 }
 
-#support-pane {
+.supportPane {
 	position: relative;
 	width: 80%;
 	height: 40vh;
@@ -70,7 +70,7 @@ $user-colour: rgb(36, 153, 248);
 * Source: https: //codepen.io/kahboom/pen/bGpqPEw
 */
 /* CSS talk bubble */
-.talk-bubble {
+.talkBubble {
 	margin: 0.5em;
 	display: inline-block;
 	position: relative;
@@ -81,16 +81,16 @@ $user-colour: rgb(36, 153, 248);
 }
 
 .user {
-	background-color: $user-colour;
+	background-color: $userColour;
 }
 
 .admin {
 	margin-right: 40px;
-	background-color: $admin-colour;
+	background-color: $adminColour;
 }
 
 /* Right triangle placed top left flush. */
-.talk-bubble.user:after {
+.user:after {
 	content: ' ';
 	position: absolute;
 	width: 0;
@@ -100,10 +100,10 @@ $user-colour: rgb(36, 153, 248);
 	top: 0px;
 	bottom: auto;
 	border: 1em solid;
-	border-color: $user-colour transparent transparent transparent;
+	border-color: $userColour transparent transparent transparent;
 }
 
-.talk-bubble.admin:after {
+.admin:after {
 	content: ' ';
 	position: absolute;
 	width: 0;
@@ -113,6 +113,6 @@ $user-colour: rgb(36, 153, 248);
 	top: 0px;
 	bottom: auto;
 	border: 1em solid;
-	border-color: $admin-colour transparent transparent transparent;
+	border-color: $adminColour transparent transparent transparent;
 }
 
