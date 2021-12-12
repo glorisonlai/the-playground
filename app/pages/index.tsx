@@ -27,7 +27,7 @@ const Home: NextPage = () => {
     <div className="app">
       <Background bgId={bgId} />
       <Menu bgId={bgId} unlock={(id: number) => setBgId(id)} />
-      {/* <Content /> */}
+      <Content />
     </div>
   );
 };

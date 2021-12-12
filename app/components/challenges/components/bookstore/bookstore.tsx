@@ -1,20 +1,7 @@
-import axios from "axios";
-import React, { useState } from "react";
-import "styles/bookstore.module.scss";
+import { useState } from "react";
+import styles from "styles/bookstore.module.scss";
 import { ObjectEnum } from "../../../common/ObjectEnum";
 
-/**
- * Class is an enum of all book categories
- */
-// class BookCategories {
-//   static readonly FACTS = new BookCategories("Facts", "🤓");
-//   static readonly FUNNY = new BookCategories("Funny", "😆");
-//   static readonly ROMANCE = new BookCategories("Romance", "💗");
-//   static readonly SPOOKY = new BookCategories("Spooky", "👻");
-//   static readonly FLAG = new BookCategories("Flag", "🚩");
-
-//   private constructor(readonly key: string, readonly emoji: string) {}
-// }
 interface BookCategoryInterface {
   readonly name: string;
   readonly icon: string;
@@ -61,28 +48,28 @@ const BookStore = () => {
     if (status === statusCode.NORMAL) {
       if (books.length) {
         return (
-          <div className="book-list">
+          <div className={styles.bookList}>
             {books
               .sort((book1, book2) => book1.id - book2.id)
               .map((book) => (
                 <div key={book.id}>
                   {book.name}
-                  <div className="book-cat">{book.category}</div>
+                  <div className={styles.categories}>{book.category}</div>
                 </div>
               ))}
           </div>
         );
       }
       return (
-        <div className="book-list">
+        <div className={styles.bookList}>
           No Books found! Try searching for something else?
         </div>
       );
     }
     if (status === statusCode.ERROR) {
-      return <div id="error">Something wrong happened!</div>;
+      return <div className={styles.error}>Something wrong happened!</div>;
     }
-    return <div className="book-list">Search for some Books!</div>;
+    return <div className={styles.bookList}>Search for some Books!</div>;
   };
 
   const searchBook = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -90,9 +77,18 @@ const BookStore = () => {
     if (loading) return;
     if (!search && !searchCat.size) return;
     setLoading(true);
-    const res = await axios.post(
+    const res = await fetch(
       process.env.REACT_APP_API_URL + "/dev/c4/searchbook",
-      { name: search, categories: Array.from(searchCat) }
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: search,
+          categories: Array.from(searchCat),
+        }),
+      }
     );
     console.log(res);
     if (res.status !== 200) {
@@ -101,7 +97,7 @@ const BookStore = () => {
       return;
     }
     setStatus(statusCode.NORMAL);
-    setBooks(res.data.data);
+    setBooks(await res.json());
     setLoading(false);
   };
 
@@ -112,26 +108,30 @@ const BookStore = () => {
   };
 
   return (
-    <div id="storefront">
-      <form id="book-search" onSubmit={searchBook}>
-        <div id="book-logo">📕 Books!</div>
+    <div className={styles.storefront}>
+      <form className={styles.bookSearch} onSubmit={searchBook}>
+        <div className={styles.bookLogo}>📕 Books!</div>
         <input
           type="text"
-          id="book-search-text"
+          className={styles.bookSearchInput}
           name="book-title"
           placeholder="Search books"
           value={search}
           onChange={handleChange}
         />
-        <input id="book-search-submit" type="submit" value="Search" />
+        <input
+          className={styles.bookSearchSubmit}
+          type="submit"
+          value="Search"
+        />
       </form>
-      <div className="icons categories">
+      <div className={styles.categories}>
         {/* TODO: Make the buttons into a map for readability */}
         {Object.keys(BookCategories).map((key) => (
           <button
             key={key}
             className={
-              searchCat.has(BookCategories[key].name) ? "selected" : ""
+              searchCat.has(BookCategories[key].name) ? styles.selected : ""
             }
             onClick={() => searchBookByCategory(BookCategories[key].name)}
           >

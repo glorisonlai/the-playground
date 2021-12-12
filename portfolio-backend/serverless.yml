@@ -5,6 +5,7 @@ service: portfolio-backend
 provider:
   name: aws
   region: 'ap-southeast-2'
+  lambdaHashingVersion: '20201221'
   environment:
     NODE_ENV: dev
 
@@ -17,31 +18,41 @@ custom:
     httpPort: 9000
 
 package:
-  exclude:
-    - config/.env.stg
-    - config/.env.pro
-  include:
-    - config/.env.dev
+  patterns:
+    - '!config/.env*'
+    - 'config/.env.dev'
 
 functions:
   # Main flag checking function
   checkFlag:
-    runtime: nodejs12.x
+    runtime: nodejs14.x
     handler: app/handler.checkFlag
     events:
       - http:
           method: POST
-          path: /check
+          path: /checkFlag
+
+  checkRoute:
+    runtime: nodejs14.x
+    handler: app/handler.checkRoute
+    events:
+      - http:
+          method: GET
+          path: /checkRoute
+          cors: true
 
   # Book Challenge functions
   # Search book by name
   searchBookByName:
-    runtime: nodejs12.x
+    runtime: nodejs14.x
     handler: app/handler.searchBook
     events:
       - http:
           method: POST
           path: /c4/searchbook
+          cors: true
+
+  
 
   # Php Challenge
   # sendChatMessage:

@@ -1,4 +1,4 @@
-import SplitPane from "components/common/splitPane/splitPane";
+import SplitPane from "components/common/splitPane";
 import NormalForm from "./normal_form";
 import MissingSubmit from "./missing_submit";
 import ChatApp from "./chatApp/chatApp";

@@ -2,11 +2,11 @@
   "name": "the-playground",
   "version": "1.0.0",
   "description": "Website to showcase/test projects",
-  "main": "client/src/index.js",
+  "main": "app/src/index.js",
   "scripts": {
-    "postinstall": "cd client && npm install && cd ../portfolio-backend && npm install",
-    "dev": "concurrently --kill-others \"cd client && npm start\" \"cd portfolio-backend && serverless offline\"",
-    "prod": "npm install && cd client && npm run build"
+    "postinstall": "cd app && npm install && cd ../portfolio-backend && npm install",
+    "dev": "concurrently --kill-others \"cd app && npm run dev\" \"cd portfolio-backend && serverless offline\"",
+    "prod": "npm install && concurrently \"cd app && npm run build\" \"cd portfolio-backend && sls deploy\""
   },
   "repository": {
     "type": "git",

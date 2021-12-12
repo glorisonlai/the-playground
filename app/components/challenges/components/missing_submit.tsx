@@ -7,14 +7,12 @@ import styles from "styles/flag.module.scss";
 const MissingSubmit = () => {
   return (
     <form
-      id="flag_form"
-      className={styles.flag}
+      className={`${styles.flag} ${styles.flagForm}`}
       onSubmit={(e) => e.preventDefault()}
     >
       <input
-        className={styles.flag}
+        className={`${styles.flagInput}`}
         type="text"
-        id="flag"
         name="flag"
         placeholder="FLAG{ ... }"
       />

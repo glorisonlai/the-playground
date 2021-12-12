@@ -15,6 +15,8 @@ $userColour: rgb(36, 153, 248);
 }
 
 .supportName {
+	position: relative;
+	bottom: 0.25rem;
 	margin-left: 0.5em;
 	font-weight: bold;
 }
@@ -27,9 +29,10 @@ $userColour: rgb(36, 153, 248);
 
 .justifyLeft {
 	padding-bottom: 0;
-	padding-left: 2rem;
+	padding-left: 1rem;
 	width: auto;
 	justify-content: flex-start;
+	text-align: left;
 }
 
 .supportChat {
@@ -37,6 +40,7 @@ $userColour: rgb(36, 153, 248);
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
+	font-size: 1rem;
 }
 
 .supportMsg {
@@ -49,6 +53,7 @@ $userColour: rgb(36, 153, 248);
 
 .supportMsgText {
 	width: 88%;
+	color: black;
 }
 
 .supportMsgSubmit {
@@ -82,10 +87,11 @@ $userColour: rgb(36, 153, 248);
 
 .user {
 	background-color: $userColour;
+	position: relative;
 }
 
 .admin {
-	margin-right: 40px;
+	margin-right: 1.5rem;
 	background-color: $adminColour;
 }
 

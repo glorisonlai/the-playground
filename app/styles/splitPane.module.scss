@@ -3,6 +3,16 @@
 	display: flex;
 }
 
+.splitBtn {
+	height: 100px;
+	background: none;
+	border: 1px solid #fff;
+}
+
+.splitBtn:hover {
+	background: lighten(#000, 0.5);
+}
+
 .panel {
 	display: flex;
 	justify-content: center;

@@ -51,7 +51,7 @@ h6 {
 	margin: 0;
 }
 
-#main {
+.main {
 	position: relative;
 }
 
@@ -90,7 +90,7 @@ footer {
 	position: absolute;
 }
 
-#labelup {
+.labelup {
 	top: 35px;
 }
 
@@ -130,7 +130,7 @@ header:hover {
 	transform: rotate(45deg)
 }
 
-.nav-row {
+.navRow {
 	position: relative;
 	margin: 2vw;
 	padding: 2vw;
@@ -142,7 +142,7 @@ header:hover {
 	grid-template-columns: 25% 58% 17%;
 }
 
-.proj-text {
+.projText {
 	padding: 1rem;
 	font-size: $normal-text;
 	overflow-y: auto;
@@ -152,7 +152,7 @@ header:hover {
 	border-right: 2px solid #4e4e4e;
 }
 
-#experience {
+.experience {
 	position: relative;
 	top: 100vh;
 	min-height: 100vh;	
@@ -168,7 +168,7 @@ header:hover {
 	transition: opacity 400ms ease 0ms;
 }
 
-.image-container {
+.imageContainer {
 	position: relative;
 	overflow: hidden;
 	border: 1px solid #f5f5f5;

@@ -8,8 +8,8 @@ import {
   MediumLink,
   ExtLink,
 } from "../../components/icons";
-import "styles/portfolio.module.scss";
-import "styles/content.module.scss";
+import styles from "styles/portfolio.module.scss";
+import contentStyles from "styles/content.module.scss";
 import { experienceText } from "./experience";
 import { Divider } from "components/common/divider";
 
@@ -47,9 +47,9 @@ const Portfolio = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     return (
-      <div className="image-container">
+      <div className={styles.imageContainer}>
         <img
-          className="img thumb placeholder"
+          className={`${styles.img} ${styles.thumb} ${styles.placeholder}`}
           alt={alt}
           src={`/${placeholderIcon}`}
           style={{
@@ -57,7 +57,7 @@ const Portfolio = () => {
           }}
         />
         <img
-          className="img thumb full"
+          className={`${styles.img} ${styles.thumb} ${styles.full}`}
           alt={alt}
           src={`/${icon}`}
           onLoad={() => setIsLoaded(true)}
@@ -69,20 +69,20 @@ const Portfolio = () => {
 
   const Experience = () => {
     return (
-      <div id="experience">
+      <div className={styles.experience}>
         <Divider />
         {experienceText.map((e, key) => (
-          <div className="nav-row" key={key}>
+          <div className={styles.navRow} key={key}>
             <ProgressiveImageContainer
               placeholderIcon={e.placeholderImgIcon}
               icon={e.imgIcon}
               alt={e.imgIconAlt}
             />
-            <div className="proj-text">
+            <div className={styles.projText}>
               <h4>{e.title}</h4>
               <p>{e.desc}</p>
             </div>
-            <div className="links">
+            <div className={styles.links}>
               {!!e.githubLink && (
                 <GithubLink link={e.githubLink}>
                   GitHub
@@ -98,43 +98,42 @@ const Portfolio = () => {
   };
 
   return (
-    <div id="view">
-      <div className="main screen">
-        <h1 style={{ margin: 0 }}>Glorison Lai</h1>
+    <div className={contentStyles.view}>
+      <div className={`${contentStyles.main} ${styles.screen}`}>
+        <h1 className={styles.title}>Glorison Lai</h1>
         <code>Cyber-Security; Web Development;</code>
         <Divider />
         {/** Icon row */}
-        <div className="icons">
+        <div className={styles.icons}>
           <GithubLink link="https://www.github.com/glorisonlai">
-            <div className="line" />
-            <div className="tag">GitHub</div>
+            <div className={styles.line} />
+            <div className={styles.tag}>GitHub</div>
           </GithubLink>
           {/* <TwitterLink>
-            <div className="line" />
-            <div className="tag">Twitter</div>
+            <div className={`${styles.line}`} />
+            <div className={`${styles.tag}`}>Twitter</div>
           </TwitterLink> */}
           <MediumLink>
-            <div className="line" />
-            <div className="tag">Posts</div>
+            <div className={`${styles.line}`} />
+            <div className={`${styles.tag}`}>Posts</div>
           </MediumLink>
           <ResumeLink>
-            <div className="line" />
-            <div className="tag">Resume</div>
+            <div className={`${styles.line}`} />
+            <div className={`${styles.tag}`}>Resume</div>
           </ResumeLink>
           <MailLink>
-            <div className="line" />
-            <div className="tag">Contact</div>
+            <div className={`${styles.line}`} />
+            <div className={`${styles.tag}`}>Contact</div>
           </MailLink>
         </div>
       </div>
       {/** Scroll down button */}
       <footer
-        id="footer-button"
-        className={"scroll"}
+        className={styles.scroll}
         onClick={() => window.scrollTo(0, window.innerHeight)}
       >
-        <code className="label">Projects</code>
-        <div className={`arrow down`} />
+        <code className={styles.label}>Projects</code>
+        <div className={`${styles.arrow} ${styles.down}`} />
       </footer>
       {/** Scroll up button */}
       {/* <header className={upArrowClass} onClick={() => scrollTo(0)}>
@@ -143,7 +142,7 @@ const Portfolio = () => {
           Home
         </code>
       </header> */}
-      <Experience />
+      {/* <Experience /> */}
     </div>
   );
 };

@@ -1,6 +1,3 @@
-import axios from "axios";
-import Forge from "node-forge";
-
 interface ChallengeInterface {
   challengeArr: Challenge[];
   initialUnlock: () => void;
@@ -11,6 +8,7 @@ interface ChallengeInterface {
   isUnlockedFromId: (id: number) => boolean;
   checkKey: (key: string) => boolean; // TODO: Make API to check keys
   submitFlag: (id: number, flag: string) => Promise<boolean>;
+  getBgTemplate: (id: number) => string;
   saveKey: (id: number, key: string) => void;
   getSavedKey: (id: number) => string | null;
 }
@@ -46,7 +44,7 @@ const Challenges: ChallengeInterface = {
       id: 2,
       title: `WHY. WON'T. THIS. WORK?!`,
       logo: "boids.svg",
-      unsolvedDesc: `FLAG{TH1S15TH3FL4G}`,
+      unsolvedDesc: `👉 FLAG{TH1S15TH3FL4G} 👈`,
       solvedDesc: "Here's a business proposal: Postmates, but for dogs..?",
       savedKey: "",
     },
@@ -109,13 +107,12 @@ const Challenges: ChallengeInterface = {
   },
 
   async submitFlag(id: number, flag: string) {
-    const { data } = await axios.post(
-      process.env.REACT_APP_API_URL + "/dev/check",
-      {
-        id: id,
-        msg: flag,
-      }
-    );
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/checkFlag", {
+      method: "POST",
+      body: JSON.stringify({ id: id, flag: flag }),
+    });
+    const { data } = res;
+    console.log(data, res, res.body);
     if (!!data.code && this.checkKey(data.data)) {
       this.saveKey(id, data.data);
       const chal = this.getChallengeFromId(id);
@@ -127,12 +124,16 @@ const Challenges: ChallengeInterface = {
     return false;
   },
 
+  getBgTemplate(id: number) {
+    return `BG${id}`;
+  },
+
   saveKey(id: number, key: string) {
-    localStorage.setItem(`BG${id}`, key);
+    localStorage.setItem(this.getBgTemplate(id), key);
   },
 
   getSavedKey(id: number) {
-    return localStorage.getItem(`BG${id}`);
+    return localStorage.getItem(this.getBgTemplate(id));
   },
 };
 

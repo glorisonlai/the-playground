@@ -33,6 +33,10 @@ class Result {
    */
   bodyToString() {
     return {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
       statusCode: this.statusCode,
       body: JSON.stringify({
         code: this.code,

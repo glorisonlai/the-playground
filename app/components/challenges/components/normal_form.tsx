@@ -46,23 +46,17 @@ const NormalForm = ({
   };
 
   return (
-    <form id="flag-form" className={styles.flag} onSubmit={submitFlag}>
+    <form className={`${styles.flag} ${styles.flagForm}`} onSubmit={submitFlag}>
       <input
-        className={styles.flag}
+        className={`${styles.flagInput}`}
         type="text"
-        id="flag-input"
         name="flag"
         placeholder="FLAG{ ... }"
         aria-placeholder="FLAG{ ... }"
         value={flag}
         onChange={handleChange}
       />
-      <input
-        id="flag-submit"
-        className={styles.flag}
-        type="submit"
-        value="Submit"
-      />
+      <input className={`${styles.flagSubmit}`} type="submit" value="SUBMIT" />
     </form>
   );
 };

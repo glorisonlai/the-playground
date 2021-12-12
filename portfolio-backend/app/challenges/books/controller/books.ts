@@ -29,7 +29,7 @@ export const BooksController = {
       pgClient.end();
       console.log(res.rows);
       return MessageUtil.success(res.rows);
-    } catch (err: any) {
+    } catch (err) {
       return MessageUtil.error(err.code, err.message);
     }
   },

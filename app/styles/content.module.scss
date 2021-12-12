@@ -4,7 +4,7 @@
  $animation-style: ease-in-out;
 
 /* Used when menu screen is flipped up*/
-#view {
+.view {
     transition: transform 1s cubic-bezier(0.1, 0.52, 0, 1);
 }
 
@@ -17,24 +17,24 @@
     overflow: auto;
 }
 
-#footer {
+.footer {
     margin-top: auto;
 }
 
-#copyright {
+.copyright {
     position: absolute;
     top: calc(100vh - 2.5rem);
     left: calc(100vw - 10rem);
     white-space: pre-line;
 }
 
-#start.animate {
+.start.animate {
     animation: shiftCode $animation-length $animation-style;
     -webkit-animation: shiftCode $animation-length $animation-style;
 }
 
 /*Transform values are hardcoded, otherwise won't shift for whatever reason               */
-#train {
+.train {
     transform: translateX(-50rem);
     position: absolute;
     top: 20vh;
@@ -45,11 +45,11 @@
     -webkit-animation: shiftTrain $animation-length $animation-style;
 }
 
-#content {
+.content {
     transform: translateX(0);
 }
 
-#content.animate {
+.content.animate {
     animation: shiftContent $animation-length $animation-style;
     -webkit-animation: shiftContent $animation-length $animation-style;
 }

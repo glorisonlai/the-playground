@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const Train = () => {
+const Train = ({ callBack }: { callBack: () => void }) => {
   const trainId = "train";
   const animationTime = 3900;
 
@@ -8,10 +8,10 @@ const Train = () => {
     const train = {
       counter: 0,
       start() {
-        // const train_dom = document.getElementById(trainId)!;
-        // return setInterval(() => {
-        //   this.drawTrain(this.counter++, train_dom);
-        // }, 250);
+        const train_dom = document.getElementById(trainId)!;
+        return setInterval(() => {
+          this.drawTrain(this.counter++, train_dom);
+        }, 250);
       },
 
       trainSmoke: [
@@ -92,6 +92,7 @@ const Train = () => {
     const interval = train.start();
     setTimeout(() => {
       clearInterval(interval);
+      callBack();
     }, animationTime);
   }, []);
 
