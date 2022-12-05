@@ -1,0 +1,124 @@
+$adminColour: rgb(83, 83, 83);
+$textColour: white;
+$userColour: rgb(36, 153, 248);
+
+.supportHeader {
+	margin: auto;
+	padding-left: 1rem;
+	padding-top: 0.5rem;
+	height: 2rem;
+	text-align: left;
+	background: $userColour;
+	display: flex;
+	justify-content: flex-start;
+	overflow: hidden;
+}
+
+.supportName {
+	position: relative;
+	bottom: 0.25rem;
+	margin-left: 0.5em;
+	font-weight: bold;
+}
+
+.justifyRight {
+	justify-content: flex-end;
+	padding-bottom: 0;
+	text-align: right;
+}
+
+.justifyLeft {
+	padding-bottom: 0;
+	padding-left: 1rem;
+	width: auto;
+	justify-content: flex-start;
+	text-align: left;
+}
+
+.supportChat {
+	max-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	font-size: 1rem;
+}
+
+.supportMsg {
+	display: flex;
+	height: 2rem;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+.supportMsgText {
+	width: 88%;
+	color: black;
+}
+
+.supportMsgSubmit {
+	min-width: 37px;
+	width: 12%;
+	background-color: $userColour;
+	color: $textColour;
+	text-transform: uppercase;
+}
+
+.supportPane {
+	position: relative;
+	width: 80%;
+	height: 40vh;
+	background-color: azure;
+}
+
+/**
+* Source: https: //codepen.io/kahboom/pen/bGpqPEw
+*/
+/* CSS talk bubble */
+.talkBubble {
+	margin: 0.5em;
+	display: inline-block;
+	position: relative;
+	max-width: 200px;
+	padding: 0.5em;
+	overflow-wrap: break-word;
+	border-radius: 5px;
+}
+
+.user {
+	background-color: $userColour;
+	position: relative;
+}
+
+.admin {
+	margin-right: 1.5rem;
+	background-color: $adminColour;
+}
+
+/* Right triangle placed top left flush. */
+.user:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: calc(-1em + 1px);
+	right: auto;
+	top: 0px;
+	bottom: auto;
+	border: 1em solid;
+	border-color: $userColour transparent transparent transparent;
+}
+
+.admin:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	right: calc(-1em + 1px);
+	left: auto;
+	top: 0px;
+	bottom: auto;
+	border: 1em solid;
+	border-color: $adminColour transparent transparent transparent;
+}
+

@@ -1,0 +1,100 @@
+.storefront {
+	position: relative;
+	width: 80%;
+	height: 40vh;
+	background-color: whitesmoke;
+}
+
+.categories {
+	display: flex;
+	padding: 0.2em;
+	justify-content: flex-start;
+	flex-wrap: nowrap;
+	background-color: whitesmoke;
+	overflow-x: auto;
+}
+
+.categories button {
+	outline: none;
+	border: none;
+	cursor: pointer;
+	margin: 10px;
+	color: black;
+}
+
+.bookLogo {
+	font-size: 1.5em;
+	font-weight: bolder;
+	color: black;
+	margin: auto;
+	text-shadow: none;
+	padding: 0.5rem;
+}
+
+@media only screen and (max-width: 1025px) {
+	.bookLogo {
+		display: none;
+	}
+}
+
+
+.bookSearch {
+	margin-left: 5px;
+	margin-top: 0.5em;
+	display: flex;
+	border-radius: 5px;
+}
+
+.bookSearchInput {
+	width: 80%;
+	background: lightgray;
+	/* border-radius: 15px; */
+	border: none;
+	padding: 1em;
+	border-radius: 5px 0px 0px 5px;
+	color: black;
+	font-size: 100%;
+}
+
+.bookSearchSubmit {
+	max-width: 100px;
+	padding: calc(1em);
+	border: none;
+	background: red;
+	cursor: pointer;
+	color: white;
+	font-weight: bolder;
+	margin-right: 1em;
+	border-radius: 0px 5px 5px 0px;
+}
+
+@media only screen and (min-width: 500px) {
+	.bookSearchSubmit {
+		min-width: 80px;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.bookSearchSubmit {
+		min-width: none;
+		width: 10px;
+	}
+}
+
+.error {
+	background-color: rgb(253, 76, 63);
+	border: red;
+}
+
+.bookList {
+	color: black;
+	text-shadow: none;
+	// max-height: 20vh;
+	text-overflow: ellipsis;
+	overflow-y: auto;
+	height: 50%;
+}
+
+.selected {
+	background: rgb(253, 76, 63, 0.5);
+}

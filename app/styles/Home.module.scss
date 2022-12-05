@@ -1,0 +1,7 @@
+@import '_colorThemes';
+
+.base {
+  @include themed() {
+    color: t($text);
+  }
+}
