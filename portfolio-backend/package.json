@@ -31,7 +31,7 @@
     "cross-env": "^7.0.2",
     "istanbul": "^0.4.5",
     "lambda-tester": "^4.0.1",
-    "mocha": "^7.1.2",
+    "mocha": "^10.1.0",
     "nyc": "^15.0.1",
     "serverless-offline": "^7.0.0",
     "serverless-plugin-typescript": "^1.1.9",
