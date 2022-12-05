@@ -11,7 +11,7 @@
     "axios": "^0.21.2",
     "dompurify": "^2.2.9",
     "dotenv": "^10.0.0",
-    "modernizr": "^3.11.7",
+    "modernizr": "^3.12.0",
     "node-forge": "^0.10.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
