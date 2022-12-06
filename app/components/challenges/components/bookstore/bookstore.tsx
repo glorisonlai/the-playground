@@ -77,16 +77,6 @@ const BookStore = () => {
     if (loading) return;
     if (!search && !searchCat.size) return;
     setLoading(true);
-<<<<<<< HEAD:client/src/components/challenges/components/bookstore/bookstore.tsx
-    try {
-      const res = await axios.post(
-        process.env.REACT_APP_API_URL + "/dev/c4/searchbook",
-        { name: search, categories: Array.from(searchCat) }
-      );
-      setStatus(res.status === 200 ? statusCode.NORMAL : statusCode.ERROR);
-      setBooks(res.data.data);
-    } catch (err: any) {
-=======
     const res = await fetch(
       process.env.REACT_APP_API_URL + "/dev/c4/searchbook",
       {
@@ -103,14 +93,10 @@ const BookStore = () => {
     console.log(res);
     if (res.status !== 200) {
       // Do error handling here
->>>>>>> backgrounds/challenges:app/components/challenges/components/bookstore/bookstore.tsx
-      setStatus(statusCode.ERROR);
+      return setStatus(statusCode.ERROR);
     }
-<<<<<<< HEAD:client/src/components/challenges/components/bookstore/bookstore.tsx
-=======
     setStatus(statusCode.NORMAL);
     setBooks(await res.json());
->>>>>>> backgrounds/challenges:app/components/challenges/components/bookstore/bookstore.tsx
     setLoading(false);
   };
 
