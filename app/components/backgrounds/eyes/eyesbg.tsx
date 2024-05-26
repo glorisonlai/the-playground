@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import eyeStyle from "styles/eyes.module.scss";
-import * as CSS from "csstype";
 import styles from "styles/background.module.scss";
 
 type EyeColour = "red" | "blue" | "purple" | "white";
@@ -32,7 +31,7 @@ const Eyes = () => {
       white: "#CDD1CF",
     };
 
-    const EyeSize: CSS.Properties = {
+    const EyeSize = {
       width: `${eyeSize}em`,
       height: `${eyeSize}em`,
     };
@@ -43,7 +42,7 @@ const Eyes = () => {
     const pupilLeftOffset =
       Math.random() * width_range + (pupilSize - pupilTopOffset);
 
-    const pupilColorAndSize: CSS.Properties = {
+    const pupilColorAndSize = {
       boxShadow: `0px 0px ${pupilSize}em ${irisSize} ${irisColor[colour]}`,
       height: `${pupilSize}0em`,
       width: `${pupilSize}em`,
