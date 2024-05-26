@@ -36,7 +36,7 @@ const Challenges: ChallengeInterface = {
       id: 1,
       title: "Ground rules",
       logo: "lines.svg",
-      unsolvedDesc: `Please fuzz for our Rules page for more information`,
+      unsolvedDesc: `Please read our Rules page for more information`,
       solvedDesc: "Thanks for reading - have fun!",
       savedKey: "bg2",
     },
@@ -89,7 +89,7 @@ const Challenges: ChallengeInterface = {
   getUnlocked(): number {
     return this.challengeArr.reduce(
       (acc, { savedKey }) => acc + (this.checkKey(savedKey) ? 1 : 0),
-      0
+      0,
     );
   },
 
@@ -111,8 +111,7 @@ const Challenges: ChallengeInterface = {
       method: "POST",
       body: JSON.stringify({ id: id, flag: flag }),
     });
-    const { data } = res;
-    console.log(data, res, res.body);
+    const { data } = await res.json();
     if (!!data.code && this.checkKey(data.data)) {
       this.saveKey(id, data.data);
       const chal = this.getChallengeFromId(id);
