@@ -1,6 +1,5 @@
 import React from "react";
 import bubbleStyle from "styles/bubbles.module.scss";
-import * as CSS from "csstype";
 import styles from "styles/background.module.scss";
 import { BackgroundGenerator } from "../helper-functions/background";
 
@@ -14,7 +13,7 @@ const Bubbles = () => {
    * Animation time scales with bubble size
    * @returns CSS styling for individual bubble
    */
-  const randomCss = (seed: number = Math.random()): CSS.Properties => {
+  const randomCss = (seed: number = Math.random()) => {
     return {
       width: `${seed * 50 + 10}px`,
       height: `${seed * 50 + 10}px`,
@@ -29,12 +28,11 @@ const Bubbles = () => {
    * @param bubbles How many bubbles to render
    * @returns array of list elements with bubble CSS
    */
-  const bubbleArray = (bubbles: Number) => {
-    if (bubbles < 0) return null;
-    if (bubbles > 100) return null;
+  const bubbleArray = (bubbles: number) => {
+    if (bubbles < 0 || bubbles > 10) return null;
     return Array(bubbles)
       .fill(0)
-      .map((e, i) => <li key={i} style={randomCss()} />);
+      .map((_, i) => <li key={i} style={randomCss()} />);
   };
   return (
     <div className={styles.bg}>
