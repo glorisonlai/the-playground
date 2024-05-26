@@ -13,7 +13,7 @@ import Flag from "../challenges/components/flag";
  */
 const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   // Sets challenge screen visibility
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   // Current flag component to render
   const [focussedId, setFocussedId] = useState(bgId);
@@ -36,7 +36,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   const getChalDesc = (
     id: number,
     unsolvedDesc: string,
-    solvedDesc: string
+    solvedDesc: string,
   ) => {
     if (id > 1 && !Challenges.isFaqSolved()) {
       return "Please finish Ground Rules first";
@@ -76,14 +76,13 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
             <div className={`${styles.challengeText}`}>{title}</div>
           </div>
         );
-      }
+      },
     );
 
     return (
       <div
-        className={`${styles.challengeMenu} ${
-          visible ? styles.visible : styles.hidden
-        }`}
+        className={`${styles.challengeMenu} ${visible ? styles.visible : styles.hidden
+          }`}
       >
         <div className={`${styles.table}`}>{challengeArr}</div>
         {!!focussedBg && (
@@ -93,7 +92,7 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
             desc={getChalDesc(
               focussedBg.id,
               focussedBg.unsolvedDesc,
-              focussedBg.solvedDesc
+              focussedBg.solvedDesc,
             )}
             unlocked={isChalUnlocked(focussedBg.id)}
             callBack={(id: number) => switchBackground(id)}
@@ -106,17 +105,13 @@ const Menu = ({ bgId, unlock }: { bgId: number; unlock: Function }) => {
   return (
     <>
       <div
-        className={`${styles.cover} ${styles.flyout} ${
-          visible ? styles.visible : styles.hidden
-        }`}
+        className={`${styles.cover} ${styles.flyout} ${visible ? styles.visible : styles.hidden
+          }`}
       >
         <h2
-          className={`${styles.menuTitle} ${
-            visible ? styles.visible : styles.hidden
-          }`}
-        >
-          Backgrounds
-        </h2>
+          className={`${styles.menuTitle} ${visible ? styles.visible : styles.hidden
+            }`}
+        ></h2>
         <ChallengeMenu />
       </div>
       <MenuButton

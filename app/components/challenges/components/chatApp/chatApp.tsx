@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import DOMPurify from "dompurify";
 import styles from "styles/chatApp.module.scss";
 import { SupportUser } from "components/icons";
 
@@ -70,7 +69,7 @@ const ChatApp = () => {
         user === MessageType.Admin ? styles.justifyRight : styles.justifyLeft;
       const userClass = user === MessageType.Admin ? styles.admin : styles.user;
       const chat_bubble = document.createElement("div");
-      chat_bubble.innerHTML = DOMPurify.sanitize(msg);
+      chat_bubble.innerHTML = msg;
       chat_bubble.className = `${styles.talkBubble} ${userClass}`;
       chat_row.appendChild(chat_bubble);
       return chat_row;

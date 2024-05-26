@@ -1,6 +1,6 @@
 import React from "react";
 import Challenges from "../../challenges/challenges";
-import styles from "styles/MenuButton.module.scss";
+import styles from "styles/menuButton.module.scss";
 
 const MenuButton = ({
   shape,
