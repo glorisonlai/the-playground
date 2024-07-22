@@ -1,10 +1,10 @@
-import vector2d, { vector2dInterface } from "../helper-functions/vector2d";
+import vector2d, { Vector2dInterface } from "../helper-functions/vector2d";
 import {
   BackgroundGenerator,
   CanvasInterface,
 } from "../helper-functions/background";
 
-type VectorList = vector2dInterface[];
+type VectorList = Vector2dInterface[];
 
 type BezierPoint = {
   radians: number;
@@ -38,7 +38,7 @@ const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
 
   const NUMPOINTS = Math.max(4, Math.floor(Math.min(width, height) / 100));
   const RADIUS = Math.floor(Math.min(width, height) / 3);
-  const CENTRE = { x: width / 2, y: height / 2 } as vector2dInterface;
+  const CENTRE = { x: width / 2, y: height / 2 } as Vector2dInterface;
 
   //Reset canvas, instantiate boids, and start drawing
   const init = () => {
@@ -47,7 +47,7 @@ const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
     console.log(NUMPOINTS);
     canvasConstants.circlePoints = createCirclePoints(NUMPOINTS);
     canvasConstants.bezierPairs = createBezierPairs(
-      canvasConstants.circlePoints
+      canvasConstants.circlePoints,
     );
     console.log(canvasConstants.bezierPairs);
     canvasConstants.lastDraw = window.requestAnimationFrame(draw);
@@ -60,7 +60,7 @@ const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
     context.fillStyle = "#FFFFFF";
     context.strokeStyle = "#FFFFFF";
     context.beginPath();
-    circlePoints.forEach((startV: vector2dInterface, index, arr) => {
+    circlePoints.forEach((startV: Vector2dInterface, index, arr) => {
       const nextPointV = Object.is(arr.length - 1, index)
         ? arr[0]
         : arr[index + 1];
@@ -72,15 +72,15 @@ const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
         CENTRE,
         vector2d.extend(
           vector2d.resolveRadiansToUnitVector(bottom.radians),
-          bottom.radius
-        )
+          bottom.radius,
+        ),
       );
       const topPoint = vector2d.add(
         CENTRE,
         vector2d.extend(
           vector2d.resolveRadiansToUnitVector(top.radians),
-          top.radius
-        )
+          top.radius,
+        ),
       );
 
       context.lineTo(CENTRE.x, CENTRE.y);
@@ -91,7 +91,7 @@ const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
         topPoint.x,
         topPoint.y,
         nextPoint.x,
-        nextPoint.y
+        nextPoint.y,
       );
       // context.lineTo(nextPoint.x, nextPoint.y);
       context.lineTo(CENTRE.x, CENTRE.y);
@@ -105,15 +105,15 @@ const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
         CENTRE,
         vector2d.extend(
           vector2d.resolveRadiansToUnitVector(bottom.radians),
-          bottom.radius
-        )
+          bottom.radius,
+        ),
       );
       const topPoint = vector2d.add(
         CENTRE,
         vector2d.extend(
           vector2d.resolveRadiansToUnitVector(top.radians),
-          top.radius
-        )
+          top.radius,
+        ),
       );
       context.fillStyle = "red";
       context.beginPath();
@@ -147,9 +147,9 @@ const blobGenerator: BackgroundGenerator = (width: number, height: number) => {
         {
           x: Math.cos(index * portionedRadians),
           y: Math.sin(index * portionedRadians),
-        } as vector2dInterface,
-        RADIUS
-      )
+        } as Vector2dInterface,
+        RADIUS,
+      ),
     );
   };
 

@@ -10,4 +10,9 @@ export interface CanvasInterface {
   lastDraw: number;
 }
 
-export type BackgroundGenerator = (width: number, height: number) => () => void;
+type ResetFunction = () => void;
+
+export type BackgroundGenerator = (
+  width: number,
+  height: number,
+) => ResetFunction;

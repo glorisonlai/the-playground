@@ -19,13 +19,16 @@ export const CanvasBackground = (generator: BackgroundGenerator) => () => {
   }, [width]);
 
   return (
-    <canvas width={width} height={height} className={styles.bg} id={"canvas"}>
-      {/* Fallback message */}
-      <h1 style={{ alignContent: "center" }}>
-        Sorry!
-        <br />
-        Canvas not Supported in this Browser!
-      </h1>
-    </canvas>
+    <div>
+      <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+      <canvas width={width} height={height} className={styles.bg} id={"canvas"}>
+        {/* Fallback message */}
+        <h1 style={{ alignContent: "center" }}>
+          Sorry!
+          <br />
+          Canvas not Supported in this Browser!
+        </h1>
+      </canvas>
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import vector2d, { vector2dInterface } from "../helper-functions/vector2d";
+import vector2d, { Vector2dInterface } from "../helper-functions/vector2d";
 
 // Constants to change steering bias
 const boidConstants = {
@@ -43,8 +43,8 @@ class Boid {
     const centre = vector2d.add(
       this.head,
       vector2d.reverse(
-        vector2d.extend(this.direction, boidConstants.BIRD_LENGTH)
-      )
+        vector2d.extend(this.direction, boidConstants.BIRD_LENGTH),
+      ),
     );
     // Get 'tail' of boid, rotate left and right to get wing tips
     // TODO: Can be optimised to avoid expensive radian conversion
@@ -59,12 +59,12 @@ class Boid {
     ctx.moveTo(this.head.x, this.head.y);
     ctx.lineTo(
       this.head.x + tailRight.x * boidConstants.BIRD_WING,
-      this.head.y + tailRight.y * boidConstants.BIRD_WING
+      this.head.y + tailRight.y * boidConstants.BIRD_WING,
     );
     ctx.lineTo(centre.x, centre.y);
     ctx.lineTo(
       this.head.x + tailLeft.x * boidConstants.BIRD_WING,
-      this.head.y + tailLeft.y * boidConstants.BIRD_WING
+      this.head.y + tailLeft.y * boidConstants.BIRD_WING,
     );
     ctx.lineTo(this.head.x, this.head.y);
     ctx.closePath();
@@ -92,7 +92,7 @@ class Boid {
     if (this.squaredDist(otherBoid) >= radius ** 2) return false;
     const toOtherBoidVector = vector2d.add(
       otherBoid.head,
-      vector2d.reverse(this.head)
+      vector2d.reverse(this.head),
     );
     const projection = vector2d.dotProd(this.direction, toOtherBoidVector);
     return projection >= -0.2 && projection <= radius ** 2;
@@ -107,9 +107,9 @@ class Boid {
   shouldTurnLeft(steeringRadian: number, directionRadian: number): boolean {
     return directionRadian >= 0
       ? steeringRadian >= directionRadian ||
-          steeringRadian <= directionRadian - Math.PI
+      steeringRadian <= directionRadian - Math.PI
       : steeringRadian <= directionRadian + Math.PI &&
-          steeringRadian >= directionRadian;
+      steeringRadian >= directionRadian;
   }
 
   /**
@@ -121,9 +121,9 @@ class Boid {
    * @returns Steering radians
    */
   steer(
-    alignmentVector: vector2dInterface,
-    cohesionVector: vector2dInterface,
-    avoidanceVector: vector2dInterface
+    alignmentVector: Vector2dInterface,
+    cohesionVector: Vector2dInterface,
+    avoidanceVector: Vector2dInterface,
   ) {
     const steeringVector = vector2d.create(0, 0);
     vector2d.accum(steeringVector, [
@@ -177,7 +177,7 @@ class Boid {
    * @param boidArr Every boid
    * @param boundary Screen dimensions
    */
-  update = (boidArr: Boid[], boundary: vector2dInterface) => {
+  update = (boidArr: Boid[], boundary: Vector2dInterface) => {
     const alignmentVector = vector2d.create(0, 0);
     const cohesionVector = vector2d.create(0, 0);
     const avoidanceVector = vector2d.create(0, 0);
@@ -191,15 +191,15 @@ class Boid {
           vector2d.normalize(
             vector2d.add(
               vector2d.extend(otherBoid.direction, boidConstants.SPEED),
-              vector2d.reverse(this.head)
-            )
+              vector2d.reverse(this.head),
+            ),
           ),
         ]);
         // Avoid collisions
         if (this.inView(boidConstants.AVOIDDIST, otherBoid)) {
           vector2d.accum(avoidanceVector, [
             vector2d.normalize(
-              vector2d.add(vector2d.reverse(otherBoid.head), this.head)
+              vector2d.add(vector2d.reverse(otherBoid.head), this.head),
             ),
           ]);
         }
@@ -209,7 +209,7 @@ class Boid {
     // Wall Collision detection - Ideally would integrated with collision detection above
     const nextVector = vector2d.add(
       this.head,
-      vector2d.extend(this.direction, boidConstants.AVOIDWALL)
+      vector2d.extend(this.direction, boidConstants.AVOIDWALL),
     );
     if (nextVector.x <= 0) {
       avoidanceVector.x += (boidConstants.WALL_WEIGHT * boundary.x) / 2;
@@ -240,13 +240,13 @@ class Boid {
 
     // Steer boid
     const steeringVector = vector2d.resolveRadiansToUnitVector(
-      this.steer(alignmentVector, cohesionVector, avoidanceVector)
+      this.steer(alignmentVector, cohesionVector, avoidanceVector),
     );
     // Update boid location
     this.direction = steeringVector;
     this.head = vector2d.add(
       this.head,
-      vector2d.extend(this.direction, boidConstants.SPEED)
+      vector2d.extend(this.direction, boidConstants.SPEED),
     );
   };
 }

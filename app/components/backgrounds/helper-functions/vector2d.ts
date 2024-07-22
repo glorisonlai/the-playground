@@ -1,26 +1,26 @@
-interface vector2dInterface {
+interface Vector2dInterface {
   x: number;
   y: number;
 }
 
-interface vector2dMethods {
-  create(x: number, y: number): vector2dInterface;
+interface Vector2dMethods {
+  create(x: number, y: number): Vector2dInterface;
   add(
-    vector1: vector2dInterface,
-    vector2: vector2dInterface
-  ): vector2dInterface;
-  accum(vector1: vector2dInterface, vectors: vector2dInterface[]): void;
-  reverse(vector: vector2dInterface): vector2dInterface;
-  normalize(vector: vector2dInterface): vector2dInterface;
-  extend(vector: vector2dInterface, extension: number): vector2dInterface;
-  resolveDegreesToUnitVector(degrees: number): vector2dInterface;
-  resolveVectorToRadians(vector: vector2dInterface): number;
-  resolveRadiansToUnitVector(radians: number): vector2dInterface;
-  dotProd(v1: vector2dInterface, v2: vector2dInterface): number;
+    vector1: Vector2dInterface,
+    vector2: Vector2dInterface,
+  ): Vector2dInterface;
+  accum(vector1: Vector2dInterface, vectors: Vector2dInterface[]): void;
+  reverse(vector: Vector2dInterface): Vector2dInterface;
+  normalize(vector: Vector2dInterface): Vector2dInterface;
+  extend(vector: Vector2dInterface, extension: number): Vector2dInterface;
+  resolveDegreesToUnitVector(degrees: number): Vector2dInterface;
+  resolveVectorToRadians(vector: Vector2dInterface): number;
+  resolveRadiansToUnitVector(radians: number): Vector2dInterface;
+  dotProd(v1: Vector2dInterface, v2: Vector2dInterface): number;
 }
 
 // Helper functions to work with 2d vectors
-const vector2d: vector2dMethods = {
+const vector2d: Vector2dMethods = {
   /**
    * Creates new vector off of coordinates
    * @param x x component
@@ -132,6 +132,6 @@ const vector2d: vector2dMethods = {
   },
 };
 
-export type { vector2dInterface };
+export type { Vector2dInterface };
 
 export default vector2d;
