@@ -1,0 +1,13 @@
+{
+  "name": "books",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "pg": "^8.12.0"
+  }
+}
