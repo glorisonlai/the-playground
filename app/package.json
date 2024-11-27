@@ -2,7 +2,7 @@
   "name": "app",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,16 +13,20 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "next": "14.2.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sass": "^1.77.2"
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "sass": "^1.77.2",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "16.11.6",
-    "@types/react": "17.0.33",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
     "eslint": "8.1.0",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "15.0.3",
     "typescript": "5.4.5"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-rc.1"
   }
 }

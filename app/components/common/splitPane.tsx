@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, type JSX } from "react";
 import styles from "styles/splitPane.module.scss";
 
 const SplitPane = ({ children }: { children: JSX.Element[] }) => {

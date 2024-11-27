@@ -1,7 +1,5 @@
-@import '_colorThemes';
+@import 'palette';
 
 .base {
-  @include themed() {
-    color: t($text);
-  }
+  color: $white;
 }

@@ -1,4 +1,5 @@
 import vector2d, { vector2dInterface } from "../helper-functions/vector2d";
+import {palette} from "styles/palette";
 
 // Constants to change steering bias
 const boidConstants = {
@@ -68,7 +69,7 @@ class Boid {
     );
     ctx.lineTo(this.head.x, this.head.y);
     ctx.closePath();
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = palette.white;
     ctx.fill();
   }
 

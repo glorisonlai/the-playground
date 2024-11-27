@@ -1,6 +1,6 @@
-import Challenges from "components/challenges/challenges";
-import React, { Suspense, type JSX } from "react";
-import style from "styles/background.module.scss";
+import useStore from "@/stores/useStore";
+import useBackground from "@/stores/useBackground";
+import style from "@/styles/background.module.scss";
 
 /**
  * Current available backgrounds. Will be updated!
@@ -16,10 +16,11 @@ const renderBg = (uri: string): JSX.Element => (
  * @param bg Background ID
  * @returns Background
  */
-const Background = ({ bgId }: { bgId: number }) => {
-  const uri = Challenges.getChallengeFromId(bgId)?.savedKey || "";
+const Background = () => {
+  const bgId = useStore(useBackground, (state) => state.bgId)
+
   return (
-    <Suspense fallback={<div className={style.bg} />}>{renderBg(uri)}</Suspense>
+    <Suspense fallback={<div className={style.bg} />}>{renderBg(bgId)}</Suspense>
   );
 };
 
